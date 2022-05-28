@@ -99,6 +99,7 @@ const Sensor = () => {
   const handleDiscoverPeripheral = (peripheral) => {
 
     if(peripheral.name == "Flower care"){
+      console.log(peripheral)
 
       if (peripherals.size == 0){
         console.log(peripheral)
