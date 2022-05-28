@@ -17,6 +17,23 @@ const Sensor = () => {
   const [flower_care, setFlowerCare] = useState([]);
   const peripherals = new Map();
 
+  async function getBluetoothScanPermission() {
+    const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
+      {
+        title: 'Bluetooth Permission',
+        message: 
+          'In the next dialogue, Android will ask for permission for this ' +
+          'App to access your location. This is needed for being able to ' +
+          'use Bluetooth to scan your environment for peripherals.',
+        buttonPositive: 'OK'
+        },
+    )
+    if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
+      console.log('BleManager.scan will *NOT* detect any peripherals!')
+    }
+  }
+
 
 
   //funkcja obsługująca wyszukiwanie urządzeń
@@ -89,8 +106,8 @@ const Sensor = () => {
     console.log("started")
     await BleManager.start( { forceLegacy: true } )
 
-    //console.log("check location access permission")
-    //await getBluetoothScanPermission()
+    console.log("check location access permission")
+    await getBluetoothScanPermission()
 
     await BleManager.scan([], 2).then(() => {
       console.log('Scanning...');
