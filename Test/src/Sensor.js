@@ -19,6 +19,41 @@ const Sensor = () => {
 
   async function getBluetoothScanPermission() {
     const granted = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.BLUETOOTH_SCAN,
+      {
+        title: 'Bluetooth Permission',
+        message: 
+          'In the next dialogue, Android will ask for permission for this ' +
+          'App to access your location. This is needed for being able to ' +
+          'use Bluetooth to scan your environment for peripherals.',
+        buttonPositive: 'OK'
+        },
+    )
+    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      console.log("You can scan");
+    } else {
+      console.log("scan permission denied");
+    }
+
+
+    const connect = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.BLUETOOTH_CONNECT,
+      {
+        title: 'Bluetooth Permission',
+        message: 
+          'In the next dialogue, Android will ask for permission for this ' +
+          'App to access your location. This is needed for being able to ' +
+          'use Bluetooth to scan your environment for peripherals.',
+        buttonPositive: 'OK'
+        },
+    )
+    if (connect === PermissionsAndroid.RESULTS.GRANTED) {
+      console.log("You can connect");
+    } else {
+      console.log("connect permission denied");
+    }
+
+    const location = await PermissionsAndroid.request(
       PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
       {
         title: 'Bluetooth Permission',
@@ -29,18 +64,44 @@ const Sensor = () => {
         buttonPositive: 'OK'
         },
     )
-    if (granted !== PermissionsAndroid.RESULTS.GRANTED) {
-      console.log('BleManager.scan will *NOT* detect any peripherals!')
+    if (location === PermissionsAndroid.RESULTS.GRANTED) {
+      console.log("You can connect");
+    } else {
+      console.log("connect permission denied");
     }
+
+    const location2 = await PermissionsAndroid.request(
+      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+      {
+        title: 'Bluetooth Permission',
+        message: 
+          'In the next dialogue, Android will ask for permission for this ' +
+          'App to access your location. This is needed for being able to ' +
+          'use Bluetooth to scan your environment for peripherals.',
+        buttonPositive: 'OK'
+        },
+    )
+    if (location2 === PermissionsAndroid.RESULTS.GRANTED) {
+      console.log("You can connect");
+    } else {
+      console.log("connect permission denied");
+    }
+    
+    
+    
+    
+
   }
 
 
 
   //funkcja obsługująca wyszukiwanie urządzeń
   const handleDiscoverPeripheral = (peripheral) => {
+
     if(peripheral.name == "Flower care"){
 
       if (peripherals.size == 0){
+        console.log(peripheral)
         peripherals.set(peripheral.id, peripheral);
         setFlowerCare(peripheral);
       }
@@ -103,14 +164,28 @@ const Sensor = () => {
   const scan = async () => { 
 
   
-    console.log("started")
+    console.log("starteddd")
     await BleManager.start( { forceLegacy: true } )
 
     console.log("check location access permission")
     await getBluetoothScanPermission()
 
+    /*
+    await BleManager.enableBluetooth()
+    .then(() => {
+        // Success code
+        console.log("The bluetooth is already enabled or the user confirm");
+    })
+    .catch((error) => {
+        // Failure code
+        console.log("The user refuse to enable bluetooth");
+    }); */
+
     await BleManager.scan([], 2).then(() => {
       console.log('Scanning...');
+    })
+    .catch((e) => {
+      console.log(error)
     })
 
 
