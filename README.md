@@ -55,7 +55,7 @@ It's hidden in your home folder, so you need to press cmd + shift + . to unhide 
 >adb devices
 
 ### Errors
-<p>In case of spawnSync ./gradlew EACCES you need to type</p>
+In case of spawnSync ./gradlew EACCES you need to type
 >chmod 755 android/gradlew 
-<p>in your terminal</p>
+in your terminal
 
