@@ -1,12 +1,18 @@
 # Home Grower
 
-<p>Projekt inżynierski grupy studentów Uniwersytetu Adama Mickiewicza w Poznaniu, Wydziału Matematyki i Informatyki</p>
+<p>Engineering project of students at Adam Mickiewicz University Faculty of Mathematics and Computer Science.</p>
 
-### Jira: 
->https://wikbos.atlassian.net/jira/software/projects/EN/boards/1/backlog
+### Our Jira: 
+<p>https://wikbos.atlassian.net/jira/software/projects/EN/boards/1/backlog</p>
 
-### Biblioteka umożliwiająca łączność z urządzeniem: 
-> https://github.com/basnijholt/miflora
+### miflora - Library for Xiaomi Mi plant sensor
+<p>https://github.com/basnijholt/miflora</p>
+
+### Authors
+- Bosiacka Wiktoria
+- Rebelski Gabriel
+- Roszyk Aleks
+- Wojciechowska Agata
 
 ## macOS environment configuration
 
@@ -21,12 +27,12 @@
 >brew install --cask zulu11
 
 ### Android Studio
+<p>In android studio:</p>
 >Android Studio->Preferences->Appeareance & Behavior->System Settings->Android SDK
->
->Choose & download 30 API SDK
+<p>Choose & download 30 API SDK</p>
 
 ### $HOME/.bash_profile file
-It's hidden in your home folder, so you need to press cmd + shift + . to unhide it. Inside you need to type
+<p>It's hidden in your home folder, so you need to press cmd + shift + . to unhide it. Inside you need to type</p>
 >export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
 >
 >export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
@@ -49,6 +55,7 @@ It's hidden in your home folder, so you need to press cmd + shift + . to unhide 
 >adb devices
 
 ### Errors
-In case of spawnSync ./gradlew EACCES you need to type
+<p>In case of spawnSync ./gradlew EACCES you need to type</p>
 >chmod 755 android/gradlew 
-in your terminal
+<p>in your terminal</p>
+
