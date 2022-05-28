@@ -27,12 +27,12 @@
 >brew install --cask zulu11
 
 ### Android Studio
-<p>In android studio:</p>
 >Android Studio->Preferences->Appeareance & Behavior->System Settings->Android SDK
-<p>Choose & download 30 API SDK</p>
+
+Choose & download 30 API SDK
 
 ### $HOME/.bash_profile file
-<p>It's hidden in your home folder, so you need to press cmd + shift + . to unhide it. Inside you need to type</p>
+It's hidden in your home folder, so you need to press cmd + shift + . to unhide it. Inside you need to type
 >export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
 >
 >export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
