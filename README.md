@@ -57,5 +57,6 @@ It's hidden in your home folder, so you need to press cmd + shift + . to unhide 
 ### Errors
 In case of spawnSync ./gradlew EACCES you need to type
 >chmod 755 android/gradlew 
+
 in your terminal
 
