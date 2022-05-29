@@ -6,7 +6,6 @@ import getBluetoothScanPermission from './Permissions';
 
 const BleManagerModule = NativeModules.BleManager;
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
-//let peripheralFlower = undefined
 
 
 
@@ -16,8 +15,6 @@ const Sensor = () => {
 
   const [flower_care, setFlowerCare] = useState([]);
   const [datas, setDatas] = useState();
-  const [flowerdata, setFlowerData] = useState([]);
-
   const peripherals = new Map();
 
   
@@ -30,16 +27,10 @@ const Sensor = () => {
     if(peripheral.name == "Flower care"){
 
       if (flower_care.length == 0){
-        //console.log(peripheral);
-        console.log(`lista ${flower_care}`)
-        console.log(flower_care.length)
         peripherals.set(peripheral.id, peripheral);
-        
         setFlowerCare(peripheral);
-        console.log(`lista ${flower_care}`)
-        console.log(flower_care)
+
         BleManager.stopScan().then(() => {
-            // Success code
             console.log("Scan stopped");
           });
       }
@@ -56,13 +47,6 @@ const Sensor = () => {
   //funkcja obsługująca odłączenie urządzenia, jeszcze nie skonfigurowany
   const handleDisconnectedPeripheral = (data) => {
     console.log("handleDisconnectedPeripheral")
-    let peripheral = peripherals.get(data.peripheral);
-    if (peripheral) {
-      peripheral.connected = false;
-      peripherals.set(peripheral.id, peripheral);
-      setFlowerCare(Array.from(peripherals.values()));
-    }
-    console.log('Disconnected from ' + data.peripheral);
   }
 
   
@@ -107,24 +91,13 @@ const Sensor = () => {
 
     const OsVer = Platform.constants['Release'];
   
-    console.log("starteddd")
+    console.log("started")
     await BleManager.start( { forceLegacy: true } )
 
     if(OsVer >= 12){
         console.log("check location access permission")
         await getBluetoothScanPermission()
       }
-
-    /*
-    await BleManager.enableBluetooth()
-    .then(() => {
-        // Success code
-        console.log("The bluetooth is already enabled or the user confirm");
-    })
-    .catch((error) => {
-        // Failure code
-        console.log("The user refuse to enable bluetooth");
-    }); */
 
     await BleManager.scan([], 2).then(() => {
       console.log('Scanning...');
