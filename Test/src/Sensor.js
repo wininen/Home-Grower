@@ -1,9 +1,8 @@
-import React from 'react';
-import {View, Text, StyleSheet, Button} from 'react-native';
+import React, {useState} from 'react';
+import {View, Text, StyleSheet, Button, FlatList,TouchableHighlight, TouchableOpacity, Platform, NativeModules, NativeEventEmitter } from 'react-native';
 import BleManager from "react-native-ble-manager";
-import {useState} from 'react';
-import {PermissionsAndroid, NativeModules, NativeEventEmitter } from 'react-native';
 import {Buffer} from 'buffer';
+import getBluetoothScanPermission from './Permissions';
 
 const BleManagerModule = NativeModules.BleManager;
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
@@ -12,86 +11,16 @@ const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 
 
 
+
 const Sensor = () => {
 
   const [flower_care, setFlowerCare] = useState([]);
+  const [datas, setDatas] = useState();
+  const [flowerdata, setFlowerData] = useState([]);
+
   const peripherals = new Map();
 
-  async function getBluetoothScanPermission() {
-    const granted = await PermissionsAndroid.request(
-      PermissionsAndroid.PERMISSIONS.BLUETOOTH_SCAN,
-      {
-        title: 'Bluetooth Permission',
-        message: 
-          'In the next dialogue, Android will ask for permission for this ' +
-          'App to access your location. This is needed for being able to ' +
-          'use Bluetooth to scan your environment for peripherals.',
-        buttonPositive: 'OK'
-        },
-    )
-    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-      console.log("You can scan");
-    } else {
-      console.log("scan permission denied");
-    }
-
-
-    const connect = await PermissionsAndroid.request(
-      PermissionsAndroid.PERMISSIONS.BLUETOOTH_CONNECT,
-      {
-        title: 'Bluetooth Permission',
-        message: 
-          'In the next dialogue, Android will ask for permission for this ' +
-          'App to access your location. This is needed for being able to ' +
-          'use Bluetooth to scan your environment for peripherals.',
-        buttonPositive: 'OK'
-        },
-    )
-    if (connect === PermissionsAndroid.RESULTS.GRANTED) {
-      console.log("You can connect");
-    } else {
-      console.log("connect permission denied");
-    }
-
-    const location = await PermissionsAndroid.request(
-      PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
-      {
-        title: 'Bluetooth Permission',
-        message: 
-          'In the next dialogue, Android will ask for permission for this ' +
-          'App to access your location. This is needed for being able to ' +
-          'use Bluetooth to scan your environment for peripherals.',
-        buttonPositive: 'OK'
-        },
-    )
-    if (location === PermissionsAndroid.RESULTS.GRANTED) {
-      console.log("You can connect");
-    } else {
-      console.log("connect permission denied");
-    }
-
-    const location2 = await PermissionsAndroid.request(
-      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-      {
-        title: 'Bluetooth Permission',
-        message: 
-          'In the next dialogue, Android will ask for permission for this ' +
-          'App to access your location. This is needed for being able to ' +
-          'use Bluetooth to scan your environment for peripherals.',
-        buttonPositive: 'OK'
-        },
-    )
-    if (location2 === PermissionsAndroid.RESULTS.GRANTED) {
-      console.log("You can connect");
-    } else {
-      console.log("connect permission denied");
-    }
-    
-    
-    
-    
-
-  }
+  
 
 
 
@@ -100,10 +29,19 @@ const Sensor = () => {
 
     if(peripheral.name == "Flower care"){
 
-      if (peripherals.size == 0){
-        console.log(peripheral)
+      if (flower_care.length == 0){
+        //console.log(peripheral);
+        console.log(`lista ${flower_care}`)
+        console.log(flower_care.length)
         peripherals.set(peripheral.id, peripheral);
+        
         setFlowerCare(peripheral);
+        console.log(`lista ${flower_care}`)
+        console.log(flower_care)
+        BleManager.stopScan().then(() => {
+            // Success code
+            console.log("Scan stopped");
+          });
       }
       
     }
@@ -111,7 +49,7 @@ const Sensor = () => {
 
 
   const handleStopScan  = () => {
-    console.log("done")
+    console.log("done!")
   }
 
 
@@ -142,8 +80,12 @@ const Sensor = () => {
     fertility = inputData.readUint16LE(8)
 
     console.log("\n")
+    const fetchedData = [{ id: "temperature", title: temperature}, { id: "light", title: light}, { id: "moist", title: moist}, { id: "fertility", title: fertility}]
+    setDatas(fetchedData)
+    console.log(datas)
     
-    console.log(`Recieved for characteristic! ${data.characteristic}  temperature: ${temperature}  light: ${light}   moist: ${moist}  fertility: ${fertility}`);
+    
+    //console.log(`Recieved for characteristic! ${data.characteristic}  temperature: ${temperature}  light: ${light}   moist: ${moist}  fertility: ${fertility}`);
     console.log("\n");
   }
 
@@ -163,12 +105,15 @@ const Sensor = () => {
   //funkcja skanująca urządzenia
   const scan = async () => { 
 
+    const OsVer = Platform.constants['Release'];
   
     console.log("starteddd")
     await BleManager.start( { forceLegacy: true } )
 
-    console.log("check location access permission")
-    await getBluetoothScanPermission()
+    if(OsVer >= 12){
+        console.log("check location access permission")
+        await getBluetoothScanPermission()
+      }
 
     /*
     await BleManager.enableBluetooth()
@@ -201,6 +146,7 @@ const Sensor = () => {
 
     console.log("trying to connect:")
     console.log(peripheral.id)
+    console.log(datas)
 
 
       //połącz się z czujnikiem      
@@ -248,6 +194,21 @@ const Sensor = () => {
 
 
 
+
+
+const renderItem = (item) => {
+    //const color = item.connected ? 'green' : '#fff';
+
+    console.log("render")
+    return (
+      <TouchableHighlight>
+          <Text style={{fontSize: 24, textAlign: 'center', color: '#333333', padding: 10}}>{item.title}</Text>
+      </TouchableHighlight>
+    );
+  }
+
+
+
   
   return (
     <View style={styles.container}>
@@ -255,17 +216,35 @@ const Sensor = () => {
         onPress={scan}
       title="Wyszukaj urządzenie"
         color="#841584"
-        accessibilityLabel="Learn more about this purple button"
+        accessibilityLabel="Wyszukaj urządzenie"
       />
       <Text></Text>
 
-      <Button style = {{ width : 150, height : 150, marginLeft : 370 }}
+      <Button style = {{margin: 20}}
               onPress={() => connect(flower_care)}
               //onPress={connectAndPrepare}
               title="połącz"
               color="#841584"
-              accessibilityLabel="Learn more about this purple button"
+              accessibilityLabel="połącz"
         />
+
+
+        <FlatList
+            numColumns={4}
+            keyExtractor={(item) => item.id}
+            data={datas}
+            renderItem={({item}) => (
+                <TouchableOpacity>
+                <View>
+                <Text style={styles.id}>{item.id}</Text>
+                <Text style={styles.item}>{item.title}</Text>
+                </View>
+                </TouchableOpacity>
+            )}
+            
+        />
+
+
     </View>
   );
 }
@@ -274,10 +253,20 @@ const styles = StyleSheet.create({
   container: {
       backgroundColor: '#fff',
       paddingTop: Platform.OS === "android" ? 300 : 0,
-      paddingBottom:300,
       alignItems: 'center',
       justifyContent: 'center'
   },
+  item: {
+    backgroundColor: 'pink',
+    padding: 30,
+    fontSize: 24,
+    marginTop: 20
+},
+id: {
+    fontSize: 12,
+    marginTop: 20,
+    marginLeft: 15
+},
 
 });
 
