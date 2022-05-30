@@ -192,7 +192,7 @@ const renderItem = (item) => {
     <View style={styles.container}>
       <Button
         onPress={scan}
-      title="Wyszukaj urządzenie"
+        title="Wyszukaj urządzenie"
         color="#841584"
         accessibilityLabel="Wyszukaj urządzenie"
       />
@@ -207,7 +207,7 @@ const renderItem = (item) => {
         />
 
 
-        <FlatList
+        <FlatList 
             numColumns={4}
             keyExtractor={(item) => item.id}
             data={datas}
@@ -238,14 +238,19 @@ const styles = StyleSheet.create({
     backgroundColor: 'pink',
     padding: 30,
     fontSize: 24,
-    marginTop: 20
-},
-id: {
-    fontSize: 12,
     marginTop: 20,
-    marginLeft: 15
-},
-
+    borderWidth: 1,
+    borderColor: "#a83264",
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20
+  },
+  id: {
+      fontSize: 12,
+      marginTop: 20,
+      marginLeft: 15
+  }
 });
 
 export default Sensor;
