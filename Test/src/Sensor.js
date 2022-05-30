@@ -22,26 +22,22 @@ const Sensor = () => {
 
 
 
-  //funkcja obsługująca wyszukiwanie urządzeń
+  // funkcja obsługująca wyszukiwanie urządzeń
   const handleDiscoverPeripheral = (peripheral) => {
 
     if(peripheral.name == "Flower care"){
       console.log(peripheral)
 
-      //Powiadomienie wskazujące na połączenie się z czujnikiem
+      // powiadomienie wskazujące na połączenie się z czujnikiem
       ToastAndroid.showWithGravity("Połączono z urządzeniem o adresie MAC: " + peripheral.id, ToastAndroid.SHORT, ToastAndroid.BOTTOM);
       
-
-
       if (flower_care.length == 0){
         peripherals.set(peripheral.id, peripheral);
         setFlowerCare(peripheral);
-
         BleManager.stopScan().then(() => {
             console.log("Scan stopped");
           });
       }
-      
     }
   }
 
@@ -51,18 +47,15 @@ const Sensor = () => {
   }
 
 
-  //funkcja obsługująca odłączenie urządzenia, jeszcze nie skonfigurowany
+  // funkcja obsługująca odłączenie urządzenia, jeszcze nie skonfigurowana
   const handleDisconnectedPeripheral = (data) => {
     console.log("handleDisconnectedPeripheral")
   }
 
   
-  //funkcja obsługująca rejestrowanie nowych wartości konkretnej "characteristics"
+  // funkcja obsługująca rejestrowanie nowych wartości konkretnej "characteristics"
   const handleUpdateValueForCharacteristic = (data) => {
-
-    
     const inputData = Buffer.from(data.value);
-
     //odkodowuje bity
     temperature = inputData.readUint16LE(0) / 10
     light = inputData.readIntLE(3,4)
@@ -79,7 +72,6 @@ const Sensor = () => {
   }
 
 
-
   //bleManagerEmmiter obsługuje eventy
   bleManagerEmitter.addListener('BleManagerDiscoverPeripheral', handleDiscoverPeripheral)
 
@@ -90,8 +82,7 @@ const Sensor = () => {
   //bleManagerEmitter.addListener('BleManagerDisconnectPeripheral', handleDisconnectedPeripheral );
 
 
-
-  //funkcja skanująca urządzenia
+  // funkcja skanująca urządzenia
   const scan = async () => { 
 
     const OsVer = Platform.constants['Release'];
@@ -111,9 +102,6 @@ const Sensor = () => {
       console.log(error)
     })
 
-
-      
-  
   }
 
 
@@ -126,8 +114,7 @@ const Sensor = () => {
     console.log(peripheral.id)
     console.log(datas)
 
-
-      //połącz się z czujnikiem      
+      // połącz się z czujnikiem      
       await BleManager.connect(peripheral.id).then(() => {
         console.log('Connected to ' + peripheral.id);
       })
@@ -135,18 +122,16 @@ const Sensor = () => {
         console.log(error);
       });
       
-
-      //odnajduje services i characteristics danego urządzenia
-      //trzeba zawsze uruchomić najpierw przed uruchomieniem metod write, read i start notification 
+      // odnajduje services i characteristics danego urządzenia
+      // trzeba zawsze uruchomić najpierw przed uruchomieniem metod write, read i start notification 
       await BleManager.retrieveServices(peripheral.id).then((peripheralData) => {
         console.log('Retrieved peripheral services'); 
       })
       .catch((error) => {
         console.log(error);
       });
-
       
-      //Wpsijemu wartość [0xa0, 0x1f] do characteristics "charwrite" żeby uruchomić odczytywanie w czasie rzeczywistym
+      // wpijemy wartość [0xa0, 0x1f] do characteristics "charwrite" żeby uruchomić odczytywanie w czasie rzeczywistym
       await BleManager.write(peripheral.id, service, charwrite, [0xa0, 0x1f])
       .then(() => {
           console.log("Enabled real-time data!");
@@ -166,12 +151,7 @@ const Sensor = () => {
       .catch((error) => {
           console.log(error);
       });
-        
-
 }
-
-
-
 
 
 const renderItem = (item) => {
@@ -185,29 +165,27 @@ const renderItem = (item) => {
     );
   }
 
-
-
-  
+// GENEROWANIE PRZYCISKÓW
   return (
-    <View style={styles.container}>
+    <View style = {styles.container}>
       <Button
         onPress={scan}
         title="Wyszukaj urządzenie"
         color="#841584"
         accessibilityLabel="Wyszukaj urządzenie"
       />
+
       <Text></Text>
 
-      <Button style = {{margin: 20}}
+      <Button
               onPress={() => connect(flower_care)}
               //onPress={connectAndPrepare}
-              title="połącz"
+              title="Połącz"
               color="#841584"
-              accessibilityLabel="połącz"
+              accessibilityLabel="Połącz"
         />
 
-
-        <FlatList 
+        <FlatList style = {styles.data_table}
             numColumns={4}
             keyExtractor={(item) => item.id}
             data={datas}
@@ -218,38 +196,38 @@ const renderItem = (item) => {
                 <Text style={styles.item}>{item.title}</Text>
                 </View>
                 </TouchableOpacity>
-            )}
-            
+            )} 
         />
-
-
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-      backgroundColor: '#fff',
-      paddingTop: Platform.OS === "android" ? 300 : 0,
-      alignItems: 'center',
-      justifyContent: 'center'
+    backgroundColor: '#fff',
+    padding: 0,
+    margin: 0,
+    paddingTop: Platform.OS === "android" ? 300 : 0,
+    paddingBottom: Platform.OS === "android" ? 300 : 0,
+    alignItems: 'center',
+    alignContent: 'space-between'
+  },
+  data_table: {
+    marginTop: 20
   },
   item: {
     backgroundColor: 'pink',
     padding: 30,
+    margin: 1,
     fontSize: 24,
-    marginTop: 20,
     borderWidth: 1,
     borderColor: "#a83264",
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20
+    borderRadius: 10
   },
   id: {
       fontSize: 12,
-      marginTop: 20,
-      marginLeft: 15
+      textAlign: 'center',
+      textAlignVertical: 'center'
   }
 });
 
