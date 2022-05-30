@@ -17,7 +17,9 @@
     "react-native": "0.68.1",
     "react-native-base64": "^0.2.1",
     "react-native-ble-manager": "^8.1.0",
-    "react-native-ble-plx": "^2.0.3"
+    "react-native-ble-plx": "^2.0.3",
+    "react-native-fs": "^2.20.0",
+    "react-native-simple-toast": "^1.1.3"
   },
   "devDependencies": {
     "@babel/core": "7.17.9",

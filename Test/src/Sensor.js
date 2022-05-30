@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, Button, FlatList,TouchableHighlight, TouchableOpacity, Platform, NativeModules, NativeEventEmitter } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, Text, StyleSheet, Button, FlatList,TouchableHighlight, TouchableOpacity, Platform, NativeModules, NativeEventEmitter, ToastAndroid, StatusBar } from 'react-native';
 import BleManager from "react-native-ble-manager";
 import {Buffer} from 'buffer';
 import getBluetoothScanPermission from './Permissions';
+import RNFS from 'react-native-fs';
 
 const BleManagerModule = NativeModules.BleManager;
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
@@ -26,6 +27,11 @@ const Sensor = () => {
 
     if(peripheral.name == "Flower care"){
       console.log(peripheral)
+
+      
+      ToastAndroid.showWithGravity("Połączono z urządzeniem o adresie MAC: " + peripheral.id, ToastAndroid.SHORT, ToastAndroid.BOTTOM);
+      
+
 
       if (flower_care.length == 0){
         peripherals.set(peripheral.id, peripheral);
@@ -67,9 +73,21 @@ const Sensor = () => {
     console.log("\n")
     const fetchedData = [{ id: "temperature", title: temperature}, { id: "light", title: light}, { id: "moist", title: moist}, { id: "fertility", title: fertility}]
     setDatas(fetchedData)
+
     console.log(datas)
     
-    
+    const [downloadsFolder, setDownloadsFolder] = useState('');
+
+    useEffect(() => {
+      //get user's file paths from react-native-fs
+      setDownloadsFolder(RNFS.DownloadDirectoryPath);
+    }, []);
+    return (
+      <SafeAreaView>
+        <Text> Downloads Folder: {downloadsFolder}</Text>
+      </SafeAreaView>
+    );
+
     //console.log(`Recieved for characteristic! ${data.characteristic}  temperature: ${temperature}  light: ${light}   moist: ${moist}  fertility: ${fertility}`);
     console.log("\n");
   }
