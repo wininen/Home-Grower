@@ -28,7 +28,7 @@ const Sensor = () => {
     if(peripheral.name == "Flower care"){
       console.log(peripheral)
 
-      
+      //Powiadomienie wskazujące na połączenie się z czujnikiem
       ToastAndroid.showWithGravity("Połączono z urządzeniem o adresie MAC: " + peripheral.id, ToastAndroid.SHORT, ToastAndroid.BOTTOM);
       
 
@@ -74,22 +74,8 @@ const Sensor = () => {
     const fetchedData = [{ id: "temperature", title: temperature}, { id: "light", title: light}, { id: "moist", title: moist}, { id: "fertility", title: fertility}]
     setDatas(fetchedData)
 
-    console.log(datas)
-    
-    const [downloadsFolder, setDownloadsFolder] = useState('');
-
-    useEffect(() => {
-      //get user's file paths from react-native-fs
-      setDownloadsFolder(RNFS.DownloadDirectoryPath);
-    }, []);
-    return (
-      <SafeAreaView>
-        <Text> Downloads Folder: {downloadsFolder}</Text>
-      </SafeAreaView>
-    );
-
+    console.log(datas+"\n")
     //console.log(`Recieved for characteristic! ${data.characteristic}  temperature: ${temperature}  light: ${light}   moist: ${moist}  fertility: ${fertility}`);
-    console.log("\n");
   }
 
 
