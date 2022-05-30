@@ -74,8 +74,8 @@ const Sensor = () => {
     const fetchedData = [{ id: "temperature", title: temperature}, { id: "light", title: light}, { id: "moist", title: moist}, { id: "fertility", title: fertility}]
     setDatas(fetchedData)
 
-    console.log(datas+"\n")
-    //console.log(`Recieved for characteristic! ${data.characteristic}  temperature: ${temperature}  light: ${light}   moist: ${moist}  fertility: ${fertility}`);
+    //console.log(datas+"\n")
+    console.log(`Recieved for characteristic! ${data.characteristic}  temperature: ${temperature}  light: ${light}   moist: ${moist}  fertility: ${fertility}`);
   }
 
 
@@ -89,6 +89,22 @@ const Sensor = () => {
 
   //bleManagerEmitter.addListener('BleManagerDisconnectPeripheral', handleDisconnectedPeripheral );
 
+
+
+  /*
+  useEffect(()=> {
+    bleManagerEmitter.addListener('BleManagerDiscoverPeripheral', handleDiscoverPeripheral)
+    bleManagerEmitter.addListener( 'BleManagerStopScan',handleStopScan)
+    bleManagerEmitter.addListener('BleManagerDidUpdateValueForCharacteristic', handleUpdateValueForCharacteristic );
+  return () => {
+    //eventy do usunięcia
+
+    bleManagerEmitter.removeListener('BleManagerDiscoverPeripheral', handleDiscoverPeripheral)
+    bleManagerEmitter.addListener( 'BleManagerStopScan',handleStopScan)
+    bleManagerEmitter.addListener('BleManagerDidUpdateValueForCharacteristic', handleUpdateValueForCharacteristic );
+    bleManagerEmitter.r
+  }
+  }, []) */
 
 
   //funkcja skanująca urządzenia
@@ -237,8 +253,14 @@ const styles = StyleSheet.create({
   item: {
     backgroundColor: 'pink',
     padding: 30,
-    fontSize: 24,
-    marginTop: 20
+    fontSize: 20,
+    marginTop: 20,
+    borderWidth: 1,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    borderColor: "#a83264"
 },
 id: {
     fontSize: 12,
