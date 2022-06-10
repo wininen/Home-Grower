@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 import {View, Text, StyleSheet, Button, FlatList,TouchableHighlight, TouchableOpacity, Platform, NativeModules, NativeEventEmitter, ToastAndroid, StatusBar } from 'react-native';
 import BleManager from "react-native-ble-manager";
 import {Buffer} from 'buffer';
@@ -12,12 +12,23 @@ const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 
 
 
-const Sensor = () => {
+const Sensor = forwardRef((props, ref) => {
 
   const [flower_care, setFlowerCare] = useState([]);
   const [datas, setDatas] = useState();
   const peripherals = new Map();
 
+  useImperativeHandle(ref, () => ({
+    createConnection
+  }));
+
+  const createConnection = async () => {
+    await scan();
+    setTimeout(
+      connect,
+      5000
+    );
+  }
   
 
 
@@ -34,9 +45,9 @@ const Sensor = () => {
       if (flower_care.length == 0){
         peripherals.set(peripheral.id, peripheral);
         setFlowerCare(peripheral);
-        BleManager.stopScan().then(() => {
-            console.log("Scan stopped");
-          });
+        //BleManager.stopScan().then(() => {
+        //   console.log("Scan stopped");
+        //  });
       }
     }
   }
@@ -73,17 +84,7 @@ const Sensor = () => {
 
 
   //bleManagerEmmiter obsługuje eventy
-  bleManagerEmitter.addListener('BleManagerDiscoverPeripheral', handleDiscoverPeripheral)
-
-  bleManagerEmitter.addListener( 'BleManagerStopScan',handleStopScan)
-
-  bleManagerEmitter.addListener('BleManagerDidUpdateValueForCharacteristic', handleUpdateValueForCharacteristic );
-
-  //bleManagerEmitter.addListener('BleManagerDisconnectPeripheral', handleDisconnectedPeripheral );
-
-
-
-  /*
+  //bleManagerEmitter.addListener('BleManagerDisconnectPeripheral', handleDisconnectedPeripheral ); 
   useEffect(()=> {
     bleManagerEmitter.addListener('BleManagerDiscoverPeripheral', handleDiscoverPeripheral)
     bleManagerEmitter.addListener( 'BleManagerStopScan',handleStopScan)
@@ -91,12 +92,11 @@ const Sensor = () => {
   return () => {
     //eventy do usunięcia
 
-    bleManagerEmitter.removeListener('BleManagerDiscoverPeripheral', handleDiscoverPeripheral)
-    bleManagerEmitter.addListener( 'BleManagerStopScan',handleStopScan)
-    bleManagerEmitter.addListener('BleManagerDidUpdateValueForCharacteristic', handleUpdateValueForCharacteristic );
-    bleManagerEmitter.r
+    bleManagerEmitter.remove('BleManagerDiscoverPeripheral', handleDiscoverPeripheral)
+    bleManagerEmitter.remove( 'BleManagerStopScan',handleStopScan)
+    bleManagerEmitter.remove('BleManagerDidUpdateValueForCharacteristic', handleUpdateValueForCharacteristic );
   }
-  }, []) */
+  }, []) 
 
 
   //funkcja skanująca urządzenia
@@ -112,7 +112,7 @@ const Sensor = () => {
         await getBluetoothScanPermission()
       }
 
-    await BleManager.scan([], 2).then(() => {
+    await BleManager.scan([], 5).then(() => {
       console.log('Scanning...');
     })
     .catch((e) => {
@@ -171,16 +171,12 @@ const Sensor = () => {
 }
 
 
-const renderItem = (item) => {
-    //const color = item.connected ? 'green' : '#fff';
 
-    console.log("render")
-    return (
-      <TouchableHighlight>
-          <Text style={{fontSize: 24, textAlign: 'center', color: '#333333', padding: 10}}>{item.title}</Text>
-      </TouchableHighlight>
-    );
-  }
+
+
+
+
+
 
 // GENEROWANIE PRZYCISKÓW
   return (
@@ -217,7 +213,7 @@ const renderItem = (item) => {
         />
     </View>
   );
-}
+})
 
 const styles = StyleSheet.create({
   container: {
