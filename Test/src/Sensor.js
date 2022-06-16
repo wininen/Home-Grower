@@ -3,7 +3,6 @@ import {View, Text, StyleSheet, Button, FlatList,TouchableHighlight, TouchableOp
 import BleManager from "react-native-ble-manager";
 import {Buffer} from 'buffer';
 import getBluetoothScanPermission from './Permissions';
-import RNFS from 'react-native-fs';
 
 const BleManagerModule = NativeModules.BleManager;
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
@@ -12,15 +11,11 @@ const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 
 
 
-const Sensor = forwardRef((props, ref) => {
+const Sensor = () => {
 
   const [flower_care, setFlowerCare] = useState([]);
   const [datas, setDatas] = useState();
   const peripherals = new Map();
-
-  useImperativeHandle(ref, () => ({
-    createConnection
-  }));
 
   const createConnection = async () => {
     await scan();
@@ -39,10 +34,13 @@ const Sensor = forwardRef((props, ref) => {
     if(peripheral.name == "Flower care"){
       console.log(peripheral)
 
-      // powiadomienie wskazujące na połączenie się z czujnikiem
-      ToastAndroid.showWithGravity("Połączono z urządzeniem o adresie MAC: " + peripheral.id, ToastAndroid.SHORT, ToastAndroid.BOTTOM);
       
       if (flower_care.length == 0){
+        // powiadomienie wskazujące na połączenie się z czujnikiem
+      ToastAndroid.showWithGravity("Połączono z urządzeniem o adresie MAC: " + peripheral.id, ToastAndroid.SHORT, ToastAndroid.BOTTOM);
+      console.log("si")
+      
+
         peripherals.set(peripheral.id, peripheral);
         setFlowerCare(peripheral);
         //BleManager.stopScan().then(() => {
@@ -86,15 +84,17 @@ const Sensor = forwardRef((props, ref) => {
   //bleManagerEmmiter obsługuje eventy
   //bleManagerEmitter.addListener('BleManagerDisconnectPeripheral', handleDisconnectedPeripheral ); 
   useEffect(()=> {
-    bleManagerEmitter.addListener('BleManagerDiscoverPeripheral', handleDiscoverPeripheral)
-    bleManagerEmitter.addListener( 'BleManagerStopScan',handleStopScan)
-    bleManagerEmitter.addListener('BleManagerDidUpdateValueForCharacteristic', handleUpdateValueForCharacteristic );
+    const subs_discover = bleManagerEmitter.addListener('BleManagerDiscoverPeripheral', handleDiscoverPeripheral)
+    const subs_stopScan = bleManagerEmitter.addListener( 'BleManagerStopScan',handleStopScan)
+    const subs_updateVal = bleManagerEmitter.addListener('BleManagerDidUpdateValueForCharacteristic', handleUpdateValueForCharacteristic );
   return () => {
     //eventy do usunięcia
 
-    bleManagerEmitter.remove('BleManagerDiscoverPeripheral', handleDiscoverPeripheral)
-    bleManagerEmitter.remove( 'BleManagerStopScan',handleStopScan)
-    bleManagerEmitter.remove('BleManagerDidUpdateValueForCharacteristic', handleUpdateValueForCharacteristic );
+    subs_discover.remove()
+    subs_stopScan.remove()
+    subs_updateVal.remove()
+    //bleManagerEmitter.remove('BleManagerStopScan',handleStopScan)
+    //bleManagerEmitter.remove('BleManagerDidUpdateValueForCharacteristic', handleUpdateValueForCharacteristic );
   }
   }, []) 
 
@@ -157,6 +157,7 @@ const Sensor = forwardRef((props, ref) => {
           console.log(error);
       });
 
+      
 
       //Start the notification on the specified characteristic, you need to call retrieveServices method before. 
       //The buffer will collect a number or messages from the server and then emit once the buffer count it reached. 
@@ -168,6 +169,71 @@ const Sensor = forwardRef((props, ref) => {
       .catch((error) => {
           console.log(error);
       });
+
+
+
+}
+
+const getHistory = async (peripheral, service ="00001206-0000-1000-8000-00805f9b34fb", characteristic = "00001a11-0000-1000-8000-00805f9b34fb") => { 
+
+  const charwrite = "00001a10-0000-1000-8000-00805f9b34fb"
+
+  console.log("trying to connect:")
+  console.log(peripheral.id)
+  console.log(datas)
+
+  await BleManager.connect(peripheral.id).then(() => {
+    console.log('Connected to ' + peripheral.id);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+
+  await BleManager.retrieveServices(peripheral.id).then((peripheralData) => {
+    console.log('Retrieved peripheral services'); 
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+
+
+  await BleManager.write(peripheral.id, "00001206-0000-1000-8000-00805f9b34fb", "00001a10-0000-1000-8000-00805f9b34fb", [0xa0, 0x00, 0x00])
+      .then(() => {
+          console.log("Enabled real-time history!");
+      })
+      .catch((error) => {
+        console.log("nah")
+          console.log(error);
+      });
+
+      await BleManager.read(peripheral.id, "00001206-0000-1000-8000-00805f9b34fb", "00001a11-0000-1000-8000-00805f9b34fb")
+      .then((readData) => {
+          console.log("read history!");
+  
+          const buffer = Buffer.from(readData);
+          const number_of_records = buffer.readUint16LE(0)
+
+          console.log(buffer)
+          console.log(number_of_records)
+
+          let val = 431
+          val &= 0xFFFF;
+          console.log(val)
+          
+          const hex = val.toString(16).toUpperCase();
+          console.log(typeof(val))
+          console.log(hex)
+          //console.log(("0000" + hex).slice(-3))
+
+          //const n = Buffer.from("1a");
+          const n = Buffer([parseInt(hex.toString(16),16)])
+          console.log(n)
+      })
+      .catch((error) => {
+          console.log(error);
+      });
+
+
 }
 
 
@@ -197,6 +263,15 @@ const Sensor = forwardRef((props, ref) => {
               color="#841584"
               accessibilityLabel="Połącz"
         />
+      
+      <Text></Text>
+
+      <Button
+              onPress={() => getHistory(flower_care)}
+              title="Historia"
+              color="#841584"
+              accessibilityLabel="Połącz"
+        />
 
         <FlatList style = {styles.data_table}
             numColumns={4}
@@ -213,7 +288,7 @@ const Sensor = forwardRef((props, ref) => {
         />
     </View>
   );
-})
+}
 
 const styles = StyleSheet.create({
   container: {
