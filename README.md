@@ -13,6 +13,10 @@
 - Wojciechowska Agata
 - Rebelski Gabriel
 
+### library for Bluetooth Low Energy in react native
+
+src: https://github.com/innoveit/react-native-ble-manager
+
 ## Windows environment configuration
 
 ### install Java
@@ -52,6 +56,12 @@ go into folder of this project
 #### get react native
 
 > npm install --save react-native
+
+#### get library for Bluetooth Low Energy in react native
+
+> npm i --save react-native-ble-manager
+
+src: https://github.com/innoveit/react-native-ble-manager
 
 #### get React Native Simple Toast
 
@@ -120,6 +130,12 @@ npm install react-native-simple-toast
 ### get React Native File System
 
 npm install react-native-fs
+
+### get library for Bluetooth Low Energy in react native
+
+> npm i --save react-native-ble-manager
+
+src: https://github.com/innoveit/react-native-ble-manager
 
 ### Open folder of your project in terminal and type
 
