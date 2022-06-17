@@ -29,7 +29,7 @@ def main(conn: sqlite3.Connection):
         # konstrukcja polecenia do bazy
         insert = f'''
                     INSERT INTO plants
-                VALUES ({questionmarks(24)})
+                    VALUES ({questionmarks(24)})
                 '''
         # wywołanie polecenia do bazy
         cursor.execute(insert, (file_json['pid'],
