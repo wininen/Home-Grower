@@ -39,9 +39,11 @@ CREATE TABLE reports(
 
 DROP TABLE IF EXISTS myplants;
 CREATE TABLE myplants(
-    photo_path       TEXT,
+    photo_path      TEXT,
     my_plant_name   TEXT UNIQUE,
+    plant_genus_id  INT,
     report_id   INT,
     PRIMARY KEY("my_plant_name"),
-    FOREIGN KEY (report_id) REFERENCES reports(id)
+    FOREIGN KEY(report_id)      REFERENCES reports(id),
+    FOREIGN KEY(plant_genus_id) REFERENCES plants(pid)
 );

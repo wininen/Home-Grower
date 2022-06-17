@@ -7,7 +7,9 @@ import Sensor from './src/Sensor';
 
 
 const App = () => {
-  
+    console.log("LOOK DOWN")
+    console.log(Sensor.peripherals)
+    console.log("LOOK UP")
 
     return (
       <View>
