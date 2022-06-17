@@ -15,11 +15,11 @@
 
 ## Windows environment configuration
 
-## install Java
+### install Java
 
 https://www.java.com/en/download/help/windows_manual_download.html
 
-## Java in environment variables
+### Java in environment variables
 
 Make sure, that you have JAVA_HOME in your environment variables
 
@@ -27,45 +27,45 @@ Make sure, that you have JAVA_HOME in your environment variables
 2. Find and click "environment variables..." (PL: "zmienne środowiskowe...") button
 3. On "system variables" (PL: "Zmienne systemowe") find or add "**JAVA_HOME**" with appriopriet value (for example in my case: "C:\Program Files\Java\jre1.8.0_331")
 
-## Android in environment variables
+### Android in environment variables
 
 Make sure that u have Android Studio installed
 
 in "user variables" (PL:"Zmienne użytkownika") from previous point ("Java in environment variables") find or add "**ANDROID_HOME**" with appriopret value (for example in my case: "C:\Users\MyUsername\AppData\Local\Android\Sdk")
 
-## platform tools in environment variables
+### platform tools in environment variables
 
 in "user variables" (PL:"Zmienne użytkownika") from previous points find or add "**PLATFORM_TOOLS**" with appriopriet value (for example in my case: "C:\Users\MyUsername\AppData\Local\Android\Sdk\platform-tools")
 
-## other configurations
+### other configurations
 
 make sure that you have **npm** installed
 
 go into folder of this project
 
-### Node & Watchman
+#### Node & Watchman
 
 > brew install node
 >
 > brew install watchman
 
-### get react native
+#### get react native
 
 > npm install --save react-native
 
-### get React Native Simple Toast
+#### get React Native Simple Toast
 
 > npm install react-native-simple-toast
 
-### get React Native File System
+#### get React Native File System
 
 > npm install react-native-fs
 
-### adb config
+#### adb config
 
 > adb reverse tcp:8081 tcp:8081
 
-## running the project
+### running the project
 
 Open folder of your project in terminal and type
 
