@@ -216,7 +216,7 @@ const getHistory = async (peripheral, service ="00001206-0000-1000-8000-00805f9b
         console.log("read history!");
         const buffer = Buffer.from(readData);
         console.log(buffer)
-        number_of_records = buffer.readUint16LE(0)  
+        number_of_records = buffer.readUInt8(0)  
     })
     .catch((error) => {
         console.log(error);
@@ -228,6 +228,24 @@ const getHistory = async (peripheral, service ="00001206-0000-1000-8000-00805f9b
 
 
     for (let i=0; i<number_of_records; i++){
+
+        console.log("dz")
+        await BleManager.isPeripheralConnected(
+            peripheral.id,
+            []
+          ).then((isConnected) => {
+            if (isConnected) {
+              console.log("Peripheral is connected!");
+            } else {
+                BleManager.connect(peripheral.id).then(() => {
+                    console.log('Connected to ' + peripheral.id);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+            }
+          });
+
         let val = i
         val &= 0xFFFF;
       
@@ -238,6 +256,22 @@ const getHistory = async (peripheral, service ="00001206-0000-1000-8000-00805f9b
         const addr = [...buff]
         console.log(buff[0])
         console.log(addr)
+
+        await BleManager.isPeripheralConnected(
+            peripheral.id,
+            []
+          ).then((isConnected) => {
+            if (isConnected) {
+              console.log("Peripheral is connected!");
+            } else {
+                BleManager.connect(peripheral.id).then(() => {
+                    console.log('Connected to ' + peripheral.id);
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+            }
+          });
 
         await BleManager.write(peripheral.id, "00001206-0000-1000-8000-00805f9b34fb", "00001a10-0000-1000-8000-00805f9b34fb", addr)
         .then(() => {
