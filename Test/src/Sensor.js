@@ -372,16 +372,16 @@ const Sensor = () => {
   }, []);
   return (
     <SensorContainer>
-      <Container>
+      <Container style={{position: 'relative'}}>
         <Image source={require('./icons/hamburger.png')} />
         <Title style={{left: 24}}>Moje rośliny</Title>
         <Image
           source={require('./icons/potted_plant.png')}
-          style={{left: 312}}
+          style={{right: 60, top: '50%', elevation: 5, position: 'absolute'}}
         />
         <Image
           source={require('./icons/notification.png')}
-          style={{left: 336}}
+          style={{right: 20, top: '50%', elevation: 5, position: 'absolute'}}
         />
       </Container>
       <ButtonsWrapper>
@@ -416,6 +416,12 @@ const Sensor = () => {
         numColumns={4}
         keyExtractor={item => item.id}
         data={datas}
+        contentContainerStyle={{
+          marginTop: 20,
+          display: 'flex',
+          justifyContent: 'space-around',
+          flex: 1,
+        }}
         renderItem={({item}) => (
           <TouchableOpacity>
             <View>

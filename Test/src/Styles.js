@@ -4,14 +4,17 @@ import styled from 'styled-components/native';
 export const styles = StyleSheet.create({
   data_table: {
     marginTop: 20,
+    display: 'flex',
+    // justifyContent: 'space-around',
+    flex: 1,
   },
   item: {
-    backgroundColor: 'pink',
+    backgroundColor: 'white',
     padding: 30,
     margin: 1,
     fontSize: 24,
     borderWidth: 1,
-    borderColor: '#a83264',
+    borderColor: '#ccc',
     borderRadius: 10,
   },
   id: {
