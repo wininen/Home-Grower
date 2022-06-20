@@ -30,6 +30,7 @@ import {
   styles,
 } from './Styles';
 import getBluetoothScanPermission from './Permissions';
+import storage from './storage';
 
 const BleManagerModule = NativeModules.BleManager;
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
@@ -76,7 +77,7 @@ const Sensor = () => {
   };
 
   // funkcja obsługująca rejestrowanie nowych wartości konkretnej "characteristics"
-  const handleUpdateValueForCharacteristic = data => {
+  const handleUpdateValueForCharacteristic = async data => {
     const inputData = Buffer.from(data.value);
     //odkodowuje bity
     temperature = inputData.readUint16LE(0) / 10;
@@ -84,6 +85,11 @@ const Sensor = () => {
     //light = inputData.readUInt32LE(3)
     moist = inputData.readUInt8(7);
     fertility = inputData.readUint16LE(8);
+
+    const plant_data = {temperature, light, moist, fertility, date: new Date()};
+    const plantsArr = await storage.getObject('flower_data');
+    if (plantsArr !== null) plantsArr.push(plant_data);
+    storage.setObject('flower_data', plantsArr);
 
     console.log('\n');
     const fetchedData = [
@@ -350,7 +356,20 @@ const Sensor = () => {
     }
   };
 
+  /*
+  (async () => {
+    const msg = await storage.get('damian');
+    console.log('Widomosc z przyszlosci', msg);
+  })();
+  */
   // GENEROWANIE PRZYCISKÓW
+
+  useEffect(() => {
+    (async () => {
+      const plantsArr = await storage.getObject('flower_data');
+      console.log('plantsArr', plantsArr);
+    })();
+  }, []);
   return (
     <SensorContainer>
       <Container>
