@@ -1,7 +1,9 @@
 import React, {useState, useEffect, forwardRef, useImperativeHandle } from 'react';
-import {View, Text, StyleSheet, Button, FlatList,TouchableHighlight, TouchableOpacity, Platform, NativeModules, NativeEventEmitter, ToastAndroid, StatusBar } from 'react-native';
+import {View, Text, StyleSheet, Button, Image, FlatList,TouchableHighlight, TouchableOpacity, Platform, NativeModules, NativeEventEmitter, ToastAndroid, StatusBar } from 'react-native';
 import BleManager from "react-native-ble-manager";
 import {Buffer} from 'buffer';
+import styled from 'styled-components/native';
+import {Container, Title, styles} from './Styles'
 import getBluetoothScanPermission from './Permissions';
 
 const BleManagerModule = NativeModules.BleManager;
@@ -318,10 +320,16 @@ const getHistory = async (peripheral, service ="00001206-0000-1000-8000-00805f9b
 // GENEROWANIE PRZYCISKÓW
   return (
     <View style = {styles.container}>
+      <Container>
+         <Image source = {require('./icons/hamburger.png')} />
+         <Title style = {{left: 24}}>Moje rośliny</Title>
+         <Image source = {require('./icons/potted_plant.png')} style = {{left: 312}}/>
+         <Image source = {require('./icons/notification.png')} style = {{left: 336}}/>
+      </Container>
       <Button
         onPress={scan}
         title="Wyszukaj urządzenie"
-        color="#841584"
+        color="#2FA84E"
         accessibilityLabel="Wyszukaj urządzenie"
       />
 
@@ -331,7 +339,7 @@ const getHistory = async (peripheral, service ="00001206-0000-1000-8000-00805f9b
               onPress={() => connect(flower_care)}
               //onPress={connectAndPrepare}
               title="Połącz"
-              color="#841584"
+              color="#2FA84E"
               accessibilityLabel="Połącz"
         />
       
@@ -340,7 +348,7 @@ const getHistory = async (peripheral, service ="00001206-0000-1000-8000-00805f9b
       <Button
               onPress={() => getHistory(flower_care)}
               title="Historia"
-              color="#841584"
+              color="#2FA84E"
               accessibilityLabel="Połącz"
         />
 
@@ -361,33 +369,6 @@ const getHistory = async (peripheral, service ="00001206-0000-1000-8000-00805f9b
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
-    padding: 0,
-    margin: 0,
-    paddingTop: Platform.OS === "android" ? 300 : 0,
-    paddingBottom: Platform.OS === "android" ? 300 : 0,
-    alignItems: 'center',
-    alignContent: 'space-between'
-  },
-  data_table: {
-    marginTop: 20
-  },
-  item: {
-    backgroundColor: 'pink',
-    padding: 30,
-    margin: 1,
-    fontSize: 24,
-    borderWidth: 1,
-    borderColor: "#a83264",
-    borderRadius: 10
-  },
-  id: {
-      fontSize: 12,
-      textAlign: 'center',
-      textAlignVertical: 'center'
-  }
-});
+
 
 export default Sensor;
