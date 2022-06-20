@@ -102,6 +102,11 @@ const Sensor = () => {
 
   //bleManagerEmmiter obsługuje eventy
   useEffect(() => {
+    BleManager.start({forceLegacy: true});
+  }, []);
+
+  //bleManagerEmmiter obsługuje eventy
+  useEffect(() => {
     const subs_discover = bleManagerEmitter.addListener(
       'BleManagerDiscoverPeripheral',
       handleDiscoverPeripheral,
@@ -131,7 +136,7 @@ const Sensor = () => {
     const OsVer = Platform.constants['Release'];
 
     console.log('started');
-    await BleManager.start({forceLegacy: true});
+    // await BleManager.start({forceLegacy: true});
 
     if (OsVer >= 12) {
       console.log('check location access permission');
