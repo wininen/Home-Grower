@@ -375,7 +375,7 @@ const Sensor =  ({navigation}) => {
   }, []);
   return (
     <OuterContainer>
-      <InnerContainer style={{position: 'relative'}}>
+      <InnerContainer>
         <Image source={require('./icons/hamburger.png')} />
         <Title style={{left: 24}}>Moje rośliny</Title>
         <Image
