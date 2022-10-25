@@ -16,13 +16,12 @@ import {
   NativeModules,
   NativeEventEmitter,
   ToastAndroid,
-  StatusBar,
 } from 'react-native';
 import BleManager from 'react-native-ble-manager';
 import {Buffer} from 'buffer';
 import {
-  SensorContainer,
-  Container,
+  OuterContainer,
+  InnerContainer,
   Title,
   ButtonsWrapper,
   ButtonContainer,
@@ -35,7 +34,7 @@ import storage from './storage';
 const BleManagerModule = NativeModules.BleManager;
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 
-const Sensor = () => {
+const Sensor =  ({navigation}) => {
   const [flower_care, setFlowerCare] = useState([]);
   const [datas, setDatas] = useState();
   const peripherals = new Map();
@@ -43,6 +42,10 @@ const Sensor = () => {
   const createConnection = async () => {
     await scan();
     setTimeout(connect, 5000);
+  };
+
+  const toPlantsPage = async () => {
+     navigation.navigate('Plants');
   };
 
   // funkcja obsługująca wyszukiwanie urządzeń
@@ -371,46 +374,51 @@ const Sensor = () => {
     })();
   }, []);
   return (
-    <SensorContainer>
-      <Container style={{position: 'relative'}}>
+    <OuterContainer>
+      <InnerContainer style={{position: 'relative'}}>
         <Image source={require('./icons/hamburger.png')} />
         <Title style={{left: 24}}>Moje rośliny</Title>
         <Image
           source={require('./icons/potted_plant.png')}
-          style={{right: 60, top: '50%', elevation: 5, position: 'absolute'}}
+          style={{left: 320}}
         />
         <Image
           source={require('./icons/notification.png')}
-          style={{right: 20, top: '50%', elevation: 5, position: 'absolute'}}
+          style={{left: 340}}
         />
-      </Container>
+      </InnerContainer>
       <ButtonsWrapper>
         <ButtonContainer>
           <StyledButton
             onPress={scan}
-            title="Wyszukaj urządzenie"
-            color="#2FA84E"
-            accessibilityLabel="Wyszukaj urządzenie"
-          />
+            accessibilityLabel="Wyszukaj urządzenie">
+            <Text style={styles.body}>Wyszukaj urządzenie</Text>
+          </StyledButton>
         </ButtonContainer>
         <ButtonContainer>
           <StyledButton
             onPress={() => connect(flower_care)}
             //onPress={connectAndPrepare}
-            title="Połącz"
-            color="#2FA84E"
-            accessibilityLabel="Połącz"
-          />
+            accessibilityLabel="Połącz">  
+            <Text style={styles.body}>Połącz</Text>
+          </StyledButton>
         </ButtonContainer>
         <ButtonContainer>
           <StyledButton
-            onPress={() => getHistory(flower_care)}
-            title="Historia"
-            color="#2FA84E"
-            accessibilityLabel="Połącz"
-          />
+              onPress={() => getHistory(flower_care)}
+              accessibilityLabel="Połącz">   
+            <Text style={styles.body}>Historia</Text>
+          </StyledButton>
+        </ButtonContainer>
+        <ButtonContainer>
+          <StyledButton
+              onPress={() => toPlantsPage()}
+              accessibilityLabel="Baza roślin">
+            <Text style={styles.body}>Baza roślin</Text>
+          </StyledButton>
         </ButtonContainer>
       </ButtonsWrapper>
+
       <FlatList
         style={styles.data_table}
         numColumns={4}
@@ -431,7 +439,7 @@ const Sensor = () => {
           </TouchableOpacity>
         )}
       />
-    </SensorContainer>
+    </OuterContainer>
   );
 };
 
