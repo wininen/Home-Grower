@@ -57,12 +57,11 @@ const Sensor = () => {
           ToastAndroid.SHORT,
           ToastAndroid.BOTTOM,
         );
-
         peripherals.set(peripheral.id, peripheral);
         setFlowerCare(peripheral);
-        //BleManager.stopScan().then(() => {
-        //   console.log("Scan stopped");
-        //  });
+        BleManager.stopScan().then(() => {
+          console.log('Scan stopped');
+        });
       }
     }
   };
@@ -107,6 +106,10 @@ const Sensor = () => {
   };
 
   //bleManagerEmmiter obsługuje eventy
+  //   useEffect(() => {
+  //     plantsArr = storage.setObject('flower_data', []);
+  //   }, []);
+
   useEffect(() => {
     BleManager.start({forceLegacy: true});
   }, []);
@@ -149,7 +152,7 @@ const Sensor = () => {
       await getBluetoothScanPermission();
     }
 
-    await BleManager.scan([], 5)
+    await BleManager.scan([], 2)
       .then(() => {
         console.log('Scanning...');
       })
@@ -268,8 +271,7 @@ const Sensor = () => {
 
     console.log(number_of_records);
 
-    for (let i = 0; i < number_of_records; i++) {
-      console.log('dz');
+    for (let i = 0; i < 15; i++) {
       await BleManager.isPeripheralConnected(peripheral.id, []).then(
         isConnected => {
           if (isConnected) {
@@ -377,11 +379,11 @@ const Sensor = () => {
         <Title style={{left: 24}}>Moje rośliny</Title>
         <Image
           source={require('./icons/potted_plant.png')}
-          style={{right: 60, top: '50%', elevation: 5, position: 'absolute'}}
+          style={{right: 60, top: '50%', position: 'absolute'}}
         />
         <Image
           source={require('./icons/notification.png')}
-          style={{right: 20, top: '50%', elevation: 5, position: 'absolute'}}
+          style={{right: 20, top: '50%', position: 'absolute'}}
         />
       </Container>
       <ButtonsWrapper>
