@@ -7,11 +7,13 @@ export const styles = StyleSheet.create({
     color: 'white',
   },
   bold: {
+    fontFamily: 'Roboto',
     fontWeight: 'bold',
   },
-  separator: {
-    borderBottomColor: '#000',
-    borderBottomWidth: StyleSheet.hairlineWidth,
+  whiteBold: {
+    fontWeight: 'bold',
+    fontFamily: 'Roboto',
+    color: 'white',
   },
   data_table: {
     marginTop: 20,
@@ -54,6 +56,24 @@ export const InnerContainer = styled.View`
   background: #2fa84e;
 `;
 
+export const InnerContainerExtended = styled.View`
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  width: 100%;
+  height: 128px;
+  padding: 0 20px;
+  background: #2fa84e;
+  top: 64px;
+  z-index: 1000;
+`;
+
+export const InnerContainerExtendedList = styled.View`
+  display: flex;
+  height: 64px;
+  justify-content: center;
+`;
+
 export const OuterContainer = styled.View`
   height: 100%;
   width: 100%;
@@ -85,8 +105,6 @@ export const PlantsList = styled.View`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 11px 0px 15px;
-  gap: 10px;
   overflow-y: scroll;
 `;
 
@@ -94,8 +112,7 @@ export const PlantsElement = styled.View`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 1px 16px;
-  gap: 110px;
+  padding: 10px 15px;
 `;
 
 
@@ -117,9 +134,15 @@ export const PlantsFamily = styled.View`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 0px;
-  gap: 1px;
   left: 15px;
+`;
+
+export const Separator = styled.View`
+  border-color: #CCCCCC;
+  border-width: 1px;
+  width: 100%;
+  padding: 0;
+  display: flex;
 `;
 
 

@@ -22,11 +22,14 @@ import {Buffer} from 'buffer';
 import {
   OuterContainer,
   InnerContainer,
+  InnerContainerExtended,
+  InnerContainerExtendedList,
   Title,
   ButtonsWrapper,
   ButtonContainer,
   StyledButton,
   styles,
+  Separator,
 } from './Styles';
 import getBluetoothScanPermission from './Permissions';
 import storage from './storage';
@@ -47,6 +50,8 @@ const Sensor =  ({navigation}) => {
   const toPlantsPage = async () => {
      navigation.navigate('Plants');
   };
+
+  const [elementVisible, setElementVisible] = useState(false);
 
   // funkcja obsługująca wyszukiwanie urządzeń
   const handleDiscoverPeripheral = peripheral => {
@@ -376,7 +381,9 @@ const Sensor =  ({navigation}) => {
   return (
     <OuterContainer>
       <InnerContainer>
-        <Image source={require('./icons/hamburger.png')} />
+        <TouchableOpacity onPress={() => setElementVisible(!elementVisible)}>
+          <Image source={require('./icons/hamburger.png')} />
+        </TouchableOpacity>
         <Title style={{left: 24}}>Moje rośliny</Title>
         <Image
           source={require('./icons/potted_plant.png')}
@@ -387,6 +394,18 @@ const Sensor =  ({navigation}) => {
           style={{left: 340}}
         />
       </InnerContainer>
+      {elementVisible ? (
+            <InnerContainerExtended>
+              <Separator></Separator>
+              <InnerContainerExtendedList style={{borderBottomColor: '#CCCCCC', borderBotttomWidth: 3}}>
+                <Text style={styles.whiteBold}>Pogoda</Text>
+              </InnerContainerExtendedList>
+              <Separator></Separator>
+              <InnerContainerExtendedList>
+                <Text style={styles.whiteBold}>Profil użytkownika</Text>
+              </InnerContainerExtendedList>
+            </InnerContainerExtended>
+          ) : null}
       <ButtonsWrapper>
         <ButtonContainer>
           <StyledButton

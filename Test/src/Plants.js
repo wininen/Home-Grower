@@ -16,7 +16,10 @@ import React, {
     NativeModules,
     NativeEventEmitter,
     ToastAndroid,
+    TouchableHighlightBase,
+    Switch,
   } from 'react-native';
+import { State } from 'react-native-ble-plx';
 
   import {
     SensorContainer,
@@ -29,23 +32,32 @@ import React, {
     styles,
     OuterContainer,
     InnerContainer,
+    InnerContainerExtended,
+    InnerContainerExtendedList,
     PlantsList,
     PlantsElement,
     StyledImage,
     PlantsFamily,
     PlantsAfterElement,
+    Separator,
   } from './Styles';
 
+
 const Plants = ({navigation}) => {
+    const [elementVisible, setElementVisible] = useState(false);
 
     const toHomePage = async () => {
       navigation.navigate('Home');
     };
 
+    
+    
     return(
         <OuterContainer>
           <InnerContainer>
-            <Image source={require('./icons/hamburger.png')} />
+            <TouchableOpacity onPress={() => setElementVisible(!elementVisible)}>
+              <Image source={require('./icons/hamburger.png')} />
+            </TouchableOpacity>
             <Title style={{left: 24}}>Baza roślin</Title>
             <TouchableOpacity onPress={() => toHomePage()}>
               <Image
@@ -58,6 +70,18 @@ const Plants = ({navigation}) => {
               style={{left: 340}}
             />
           </InnerContainer>
+          {elementVisible ? (
+            <InnerContainerExtended>
+              <Separator></Separator>
+              <InnerContainerExtendedList style={{borderBottomColor: '#CCCCCC', borderBotttomWidth: 3}}>
+                <Text style={styles.whiteBold}>Pogoda</Text>
+              </InnerContainerExtendedList>
+              <Separator></Separator>
+              <InnerContainerExtendedList>
+                <Text style={styles.whiteBold}>Profil użytkownika</Text>
+              </InnerContainerExtendedList>
+            </InnerContainerExtended>
+          ) : null}
           <PlantsList>
             <PlantsElement>
               <PlantsAfterElement>
@@ -70,12 +94,101 @@ const Plants = ({navigation}) => {
                 </PlantsFamily>
               </PlantsAfterElement>
             </PlantsElement>
-            <View style={styles.separator}></View>
+            <Separator></Separator>
             <PlantsElement>
-
+              <PlantsAfterElement>
+                <StyledImage
+                  source={require('./images/adenium_obesum.png')}
+                />
+                <PlantsFamily>
+                  <Text style={styles.bold}>Adenium obesum</Text>
+                  <Text>Rodzina</Text>
+                </PlantsFamily>
+              </PlantsAfterElement>
             </PlantsElement>
+            <Separator></Separator>
             <PlantsElement>
-
+              <PlantsAfterElement>
+                <StyledImage
+                  source={require('./images/aeonium_urbicum.jpg')}
+                />
+                <PlantsFamily>
+                  <Text style={styles.bold}>Aeonium urbicum</Text>
+                  <Text>Rodzina</Text>
+                </PlantsFamily>
+              </PlantsAfterElement>
+            </PlantsElement>
+            <Separator></Separator>
+            <PlantsElement>
+              <PlantsAfterElement>
+                <StyledImage
+                  source={require('./images/alocasia_cucullata.jpg')}
+                />
+                <PlantsFamily>
+                  <Text style={styles.bold}>Alocasia cucullata</Text>
+                  <Text>Rodzina</Text>
+                </PlantsFamily>
+              </PlantsAfterElement>
+            </PlantsElement>
+            <Separator></Separator>
+            <PlantsElement>
+              <PlantsAfterElement>
+                <StyledImage
+                  source={require('./images/calathea_concinna.jpg')}
+                />
+                <PlantsFamily>
+                  <Text style={styles.bold}>Calathea concinna</Text>
+                  <Text>Rodzina</Text>
+                </PlantsFamily>
+              </PlantsAfterElement>
+            </PlantsElement>
+            <Separator></Separator>
+            <PlantsElement>
+              <PlantsAfterElement>
+                <StyledImage
+                  source={require('./images/cordyline_fruticosa.jpg')}
+                />
+                <PlantsFamily>
+                  <Text style={styles.bold}>Cordyline fruticosa</Text>
+                  <Text>Rodzina</Text>
+                </PlantsFamily>
+              </PlantsAfterElement>
+            </PlantsElement>
+            <Separator></Separator>
+            <PlantsElement>
+              <PlantsAfterElement>
+                <StyledImage
+                  source={require('./images/crassula_lactea.jpg')}
+                />
+                <PlantsFamily>
+                  <Text style={styles.bold}>Crassula lactea</Text>
+                  <Text>Rodzina</Text>
+                </PlantsFamily>
+              </PlantsAfterElement>
+            </PlantsElement>
+            <Separator></Separator>
+            <PlantsElement>
+              <PlantsAfterElement>
+                <StyledImage
+                  source={require('./images/dracaena_fragrans.jpg')}
+                />
+                <PlantsFamily>
+                  <Text style={styles.bold}>Dracaena fragrans</Text>
+                  <Text>Rodzina</Text>
+                </PlantsFamily>
+              </PlantsAfterElement>
+            </PlantsElement>
+            <Separator></Separator>
+            <PlantsElement>
+              <PlantsAfterElement>
+                <StyledImage
+                  source={require('./images/monstera_deliciosa.jpg')}
+                />
+                <PlantsFamily>
+                  <Text style={styles.bold}>Monstera deliciosa</Text>
+                  <Text>Rodzina</Text>
+                </PlantsFamily>
+              </PlantsAfterElement>
             </PlantsElement>
           </PlantsList>
         </OuterContainer>
