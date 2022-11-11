@@ -4,7 +4,7 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 platform :ios, '11.0'
 install! 'cocoapods', :deterministic_uuids => false
 
-target 'Test' do
+target 'HomeGrowerMobileApp' do
   config = use_native_modules!
 
   # Flags change depending on the env values.
@@ -19,7 +19,7 @@ target 'Test' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  target 'TestTests' do
+  target 'HomeGrowerMobileAppTests' do
     inherit! :complete
     # Pods for testing
   end
