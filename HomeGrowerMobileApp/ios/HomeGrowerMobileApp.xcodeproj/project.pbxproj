@@ -132,7 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				13B07F961A680F5B00A75B9A /* HomeGrowerMobileApp.app */,
-				00E356EE1AD99517003FC87E /* HomeGrowerMobileAppests.xctest */,
+				00E356EE1AD99517003FC87E /* HomeGrowerMobileAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -172,7 +172,7 @@
 			productReference = 00E356EE1AD99517003FC87E /* HomeGrowerMobileAppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		13B07F861A680F5B00A75B9A /* Test */ = {
+		13B07F861A680F5B00A75B9A /* HomeGrowerMobileApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "HomeGrowerMobileApp" */;
 			buildPhases = (
