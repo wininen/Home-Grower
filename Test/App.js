@@ -6,7 +6,6 @@ import { BleManager } from 'react-native-ble-plx';
 import { MainBundlePath } from 'react-native-fs';
 import Sensor from './src/Sensor.js';
 import Plants from './src/Plants.js';
-import { InnerContainerExtended } from './src/Styles.js';
 
 const Main = createNativeStackNavigator();
 
