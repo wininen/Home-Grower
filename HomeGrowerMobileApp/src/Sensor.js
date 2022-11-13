@@ -51,6 +51,10 @@ const Sensor =  ({navigation}) => {
      navigation.navigate('Plants');
   };
 
+  const toForecastPage = async () => {
+    navigation.navigate('Forecast');
+  };
+
   const [elementVisible, setElementVisible] = useState(false);
 
   // funkcja obsługująca wyszukiwanie urządzeń
@@ -397,7 +401,7 @@ const Sensor =  ({navigation}) => {
       {elementVisible ? (
             <InnerContainerExtended>
               <Separator></Separator>
-              <InnerContainerExtendedList style={{borderBottomColor: '#CCCCCC', borderBotttomWidth: 3}}>
+              <InnerContainerExtendedList style={{borderBottomColor: '#CCCCCC', borderBotttomWidth: 3}} onPress={() => toForecastPage()}>
                 <Text style={styles.whiteBold}>Pogoda</Text>
               </InnerContainerExtendedList>
               <Separator></Separator>

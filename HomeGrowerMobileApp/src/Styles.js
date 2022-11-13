@@ -68,7 +68,7 @@ export const InnerContainerExtended = styled.View`
   z-index: 1000;
 `;
 
-export const InnerContainerExtendedList = styled.View`
+export const InnerContainerExtendedList = styled.TouchableOpacity`
   display: flex;
   height: 64px;
   justify-content: center;
@@ -135,6 +135,21 @@ export const PlantsFamily = styled.View`
   flex-direction: column;
   align-items: flex-start;
   left: 15px;
+`;
+
+export const ForecastView = styled.SafeAreaView`
+  width: 675px;
+  height: 1016px;
+  z-index: 1000;
+  margin: 0;
+  padding: 20px 20px 20px 20px;
+`;
+
+export const ForecastOptions = styled.View`
+  width: 100%;
+  height: 24px;
+  display: flex;
+  flex-direction: row;
 `;
 
 export const Separator = styled.View`
