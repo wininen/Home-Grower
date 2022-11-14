@@ -94,13 +94,13 @@ const Forecast = ({navigation}) => {
                 <ForecastOptions>
                     <TouchableOpacity>
                         <Image
-                            source={require('./icons/location.png')}
+                            source={require('./icons/forecast/location.png')}
                             style={{left: 410}}
                         />
                     </TouchableOpacity>
                     <TouchableOpacity>
                         <Image
-                            source={require('./icons/edit_location.png')}
+                            source={require('./icons/forecast/edit_location.png')}
                             style={{left: 430}}
                         />
                     </TouchableOpacity>
@@ -108,7 +108,7 @@ const Forecast = ({navigation}) => {
                 <ForecastMain>
                   <Text style={styles.h2}>Poznań</Text>
                   <Image
-                    source={require('./icons/sun.png')}
+                    source={require('./icons/forecast/sun.png')}
                   />
                   <Text style={styles.h2}>23°</Text>
                   <Text style={styles.h3}>Słonecznie</Text>
@@ -117,7 +117,7 @@ const Forecast = ({navigation}) => {
                     <ForecastTr>
                       <Image
                         style={{marginRight: 20}}
-                        source={require('./icons/calendar_month.png')}
+                        source={require('./icons/forecast/calendar_month.png')}
                       />
                       <Text style={styles.h4}>PROGNOZA (7 DNI)</Text>
                     </ForecastTr>
@@ -125,7 +125,7 @@ const Forecast = ({navigation}) => {
                     <ForecastTr>
                       <Image
                         style={styles.gapForTr}
-                        source={require('./icons/light_mode.png')}
+                        source={require('./icons/forecast/light_mode.png')}
                       />
                       <Text style={styles.h5}>Czw.</Text>
                       <ForecastTd>
@@ -136,7 +136,7 @@ const Forecast = ({navigation}) => {
                     <ForecastTr>
                       <Image
                         style={styles.gapForTr}
-                        source={require('./icons/cloudy.png')}
+                        source={require('./icons/forecast/cloudy.png')}
                       />
                       <Text style={styles.h5}>Pt.</Text>
                       <ForecastTd>
@@ -147,7 +147,7 @@ const Forecast = ({navigation}) => {
                     <ForecastTr>
                       <Image
                         style={styles.gapForTr}
-                        source={require('./icons/light_mode.png')}
+                        source={require('./icons/forecast/light_mode.png')}
                       />
                       <Text style={styles.h5}>Sob.</Text>
                       <ForecastTd>
@@ -158,7 +158,7 @@ const Forecast = ({navigation}) => {
                     <ForecastTr>
                       <Image
                         style={styles.gapForTr}
-                        source={require('./icons/light_mode.png')}
+                        source={require('./icons/forecast/light_mode.png')}
                       />
                       <Text style={styles.h5}>Nd.</Text>
                       <ForecastTd>
@@ -169,7 +169,7 @@ const Forecast = ({navigation}) => {
                     <ForecastTr>
                       <Image
                         style={styles.gapForTr}
-                        source={require('./icons/thunderstorm.png')}
+                        source={require('./icons/forecast/thunderstorm.png')}
                       />
                       <Text style={styles.h5}>Pon.</Text>
                       <ForecastTd>
@@ -180,7 +180,7 @@ const Forecast = ({navigation}) => {
                     <ForecastTr>
                       <Image
                         style={styles.gapForTr}
-                        source={require('./icons/rainy.png')}
+                        source={require('./icons/forecast/rainy.png')}
                       />
                       <Text style={styles.h5}>Wt.</Text>
                       <ForecastTd>
@@ -191,7 +191,7 @@ const Forecast = ({navigation}) => {
                     <ForecastTr>
                       <Image
                         style={styles.gapForTr}
-                        source={require('./icons/cloudy.png')}
+                        source={require('./icons/forecast/cloudy.png')}
                       />
                       <Text style={styles.h5}>Śr.</Text>
                       <ForecastTd>

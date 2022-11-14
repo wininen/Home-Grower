@@ -56,6 +56,11 @@ const Sensor =  ({navigation}) => {
     navigation.navigate('Forecast');
   };
 
+  const toProfilePage = async () => {
+    setElementVisible(!elementVisible);
+    navigation.navigate('Profile');
+  }
+
   const [elementVisible, setElementVisible] = useState(false);
 
   // funkcja obsługująca wyszukiwanie urządzeń
@@ -406,7 +411,7 @@ const Sensor =  ({navigation}) => {
                 <Text style={styles.bold_white}>Pogoda</Text>
               </InnerContainerExtendedList>
               <Separator></Separator>
-              <InnerContainerExtendedList>
+              <InnerContainerExtendedList onPress={() => toProfilePage()}>
                 <Text style={styles.bold_white}>Profil użytkownika</Text>
               </InnerContainerExtendedList>
             </InnerContainerExtended>

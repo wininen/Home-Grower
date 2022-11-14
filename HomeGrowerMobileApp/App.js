@@ -7,6 +7,7 @@ import { MainBundlePath } from 'react-native-fs';
 import Sensor from './src/Sensor.js';
 import Plants from './src/Plants.js';
 import Forecast from './src/Forecast.js';
+import Profile from './src/Profile.js';
 
 const Main = createNativeStackNavigator();
 
@@ -28,6 +29,11 @@ const App = () => {
           <Main.Screen
             name = "Forecast"
             component={Forecast}
+          />
+
+          <Main.Screen
+            name = "Profile"
+            component={Profile}
           />
         </Main.Navigator>
       </NavigationContainer>

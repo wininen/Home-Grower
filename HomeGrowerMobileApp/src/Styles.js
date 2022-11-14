@@ -212,6 +212,27 @@ export const ForecastTd = styled.View`
   margin: 0 10px;
 `;
 
+export const ProfileName = styled.View`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10%;
+`;
+
+export const ProfileOptions = styled.View`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 30px 30px;
+`;
+
+export const ProfileRow = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 10px 0;
+`;
+
 export const Separator = styled.View`
   border-color: #CCCCCC;
   border-width: 1px;
