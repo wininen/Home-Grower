@@ -52,6 +52,7 @@ const Sensor =  ({navigation}) => {
   };
 
   const toForecastPage = async () => {
+    setElementVisible(!elementVisible);
     navigation.navigate('Forecast');
   };
 
@@ -402,11 +403,11 @@ const Sensor =  ({navigation}) => {
             <InnerContainerExtended>
               <Separator></Separator>
               <InnerContainerExtendedList style={{borderBottomColor: '#CCCCCC', borderBotttomWidth: 3}} onPress={() => toForecastPage()}>
-                <Text style={styles.whiteBold}>Pogoda</Text>
+                <Text style={styles.bold_white}>Pogoda</Text>
               </InnerContainerExtendedList>
               <Separator></Separator>
               <InnerContainerExtendedList>
-                <Text style={styles.whiteBold}>Profil użytkownika</Text>
+                <Text style={styles.bold_white}>Profil użytkownika</Text>
               </InnerContainerExtendedList>
             </InnerContainerExtended>
           ) : null}

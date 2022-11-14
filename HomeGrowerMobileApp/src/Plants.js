@@ -50,6 +50,11 @@ const Plants = ({navigation}) => {
       navigation.navigate('Home');
     };
 
+    const toForecastPage = async () => {
+      setElementVisible(!elementVisible);
+      navigation.navigate('Forecast');
+    };
+
     
     
     return(
@@ -73,12 +78,12 @@ const Plants = ({navigation}) => {
           {elementVisible ? (
             <InnerContainerExtended>
               <Separator></Separator>
-              <InnerContainerExtendedList style={{borderBottomColor: '#CCCCCC', borderBotttomWidth: 3}}>
-                <Text style={styles.whiteBold}>Pogoda</Text>
+              <InnerContainerExtendedList style={{borderBottomColor: '#CCCCCC', borderBotttomWidth: 3}} onPress={() => toForecastPage()}>
+                <Text style={styles.bold_white}>Pogoda</Text>
               </InnerContainerExtendedList>
               <Separator></Separator>
               <InnerContainerExtendedList>
-                <Text style={styles.whiteBold}>Profil użytkownika</Text>
+                <Text style={styles.bold_white}>Profil użytkownika</Text>
               </InnerContainerExtendedList>
             </InnerContainerExtended>
           ) : null}
@@ -89,7 +94,7 @@ const Plants = ({navigation}) => {
                   source={require('./images/achimenes_spp.jpg')}
                 />
                 <PlantsFamily>
-                  <Text style={styles.bold}>Achimenes spp</Text>
+                  <Text style={styles.bold_black}>Achimenes spp</Text>
                   <Text>Rodzina</Text>
                 </PlantsFamily>
               </PlantsAfterElement>
@@ -101,7 +106,7 @@ const Plants = ({navigation}) => {
                   source={require('./images/adenium_obesum.png')}
                 />
                 <PlantsFamily>
-                  <Text style={styles.bold}>Adenium obesum</Text>
+                  <Text style={styles.bold_black}>Adenium obesum</Text>
                   <Text>Rodzina</Text>
                 </PlantsFamily>
               </PlantsAfterElement>
@@ -113,7 +118,7 @@ const Plants = ({navigation}) => {
                   source={require('./images/aeonium_urbicum.jpg')}
                 />
                 <PlantsFamily>
-                  <Text style={styles.bold}>Aeonium urbicum</Text>
+                  <Text style={styles.bold_black}>Aeonium urbicum</Text>
                   <Text>Rodzina</Text>
                 </PlantsFamily>
               </PlantsAfterElement>
@@ -125,7 +130,7 @@ const Plants = ({navigation}) => {
                   source={require('./images/alocasia_cucullata.jpg')}
                 />
                 <PlantsFamily>
-                  <Text style={styles.bold}>Alocasia cucullata</Text>
+                  <Text style={styles.bold_black}>Alocasia cucullata</Text>
                   <Text>Rodzina</Text>
                 </PlantsFamily>
               </PlantsAfterElement>
@@ -137,7 +142,7 @@ const Plants = ({navigation}) => {
                   source={require('./images/calathea_concinna.jpg')}
                 />
                 <PlantsFamily>
-                  <Text style={styles.bold}>Calathea concinna</Text>
+                  <Text style={styles.bold_black}>Calathea concinna</Text>
                   <Text>Rodzina</Text>
                 </PlantsFamily>
               </PlantsAfterElement>
@@ -149,7 +154,7 @@ const Plants = ({navigation}) => {
                   source={require('./images/cordyline_fruticosa.jpg')}
                 />
                 <PlantsFamily>
-                  <Text style={styles.bold}>Cordyline fruticosa</Text>
+                  <Text style={styles.bold_black}>Cordyline fruticosa</Text>
                   <Text>Rodzina</Text>
                 </PlantsFamily>
               </PlantsAfterElement>
@@ -161,7 +166,7 @@ const Plants = ({navigation}) => {
                   source={require('./images/crassula_lactea.jpg')}
                 />
                 <PlantsFamily>
-                  <Text style={styles.bold}>Crassula lactea</Text>
+                  <Text style={styles.bold_black}>Crassula lactea</Text>
                   <Text>Rodzina</Text>
                 </PlantsFamily>
               </PlantsAfterElement>
@@ -173,7 +178,7 @@ const Plants = ({navigation}) => {
                   source={require('./images/dracaena_fragrans.jpg')}
                 />
                 <PlantsFamily>
-                  <Text style={styles.bold}>Dracaena fragrans</Text>
+                  <Text style={styles.bold_black}>Dracaena fragrans</Text>
                   <Text>Rodzina</Text>
                 </PlantsFamily>
               </PlantsAfterElement>
@@ -185,7 +190,7 @@ const Plants = ({navigation}) => {
                   source={require('./images/monstera_deliciosa.jpg')}
                 />
                 <PlantsFamily>
-                  <Text style={styles.bold}>Monstera deliciosa</Text>
+                  <Text style={styles.bold_black}>Monstera deliciosa</Text>
                   <Text>Rodzina</Text>
                 </PlantsFamily>
               </PlantsAfterElement>

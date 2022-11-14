@@ -6,14 +6,42 @@ export const styles = StyleSheet.create({
     fontFamily: 'Roboto',
     color: 'white',
   },
-  bold: {
-    fontFamily: 'Roboto',
+  bold_black: {
     fontWeight: 'bold',
   },
-  whiteBold: {
+  bold_white: {
     fontWeight: 'bold',
-    fontFamily: 'Roboto',
     color: 'white',
+  },
+  h2: {
+    fontSize: 36,
+    lineHeight: 40,
+    fontWeight: '700',
+    color: '#000',
+  },
+  h3: {
+    fontSize: 18,
+    lineHeight: 22,
+    fontWeight: '700',
+    color: '#000',
+  },
+  h4: {
+    fontSize: 14,
+    lineHeight: 18,
+    fontWeight: '400',
+    color: '#000',
+  },
+  h5: {
+    fontSize: 12,
+    lineHeight: 16,
+    fontWeight: '700',
+    color: '#000',
+  },
+  h6: {
+    fontSize: 12,
+    lineHeight: 16,
+    fontWeight: '400',
+    color: '#000',
   },
   data_table: {
     marginTop: 20,
@@ -35,6 +63,9 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     textAlignVertical: 'center',
   },
+  gapForTr: {
+    marginRight: 10,
+  },  
 });
 
 export const Title = styled.Text`
@@ -65,7 +96,7 @@ export const InnerContainerExtended = styled.View`
   padding: 0 20px;
   background: #2fa84e;
   top: 64px;
-  z-index: 1000;
+  z-index: 1001;
 `;
 
 export const InnerContainerExtendedList = styled.TouchableOpacity`
@@ -138,7 +169,7 @@ export const PlantsFamily = styled.View`
 `;
 
 export const ForecastView = styled.SafeAreaView`
-  width: 675px;
+  width: 100%;
   height: 1016px;
   z-index: 1000;
   margin: 0;
@@ -146,10 +177,39 @@ export const ForecastView = styled.SafeAreaView`
 `;
 
 export const ForecastOptions = styled.View`
-  width: 100%;
   height: 24px;
   display: flex;
   flex-direction: row;
+`;
+
+export const ForecastMain = styled.View`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+`;
+
+export const ForecastTable = styled.View`
+  padding: 10px 20px;
+  margin-top: 20%;
+  width: 70%;
+  height: 60%;
+  background: rgba(33, 33, 33, 0.08);
+  display: flex;
+  flex-direction: column;
+`;
+
+export const ForecastTr = styled.View`
+  display: flex;
+  flex-direction: row;
+  margin: 10px 0;
+  align-items: center;
+`;
+
+export const ForecastTd = styled.View`
+  display: flex;
+  flex-direction: column;
+  margin: 0 10px;
 `;
 
 export const Separator = styled.View`

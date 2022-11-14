@@ -39,11 +39,15 @@ import { SafeAreaView } from 'react-native-safe-area-context';
     PlantsList,
     PlantsElement,
     ForecastView,
+    ForecastMain,
     StyledImage,
     PlantsFamily,
     PlantsAfterElement,
     Separator,
     ForecastOptions,
+    ForecastTable,
+    ForecastTd,
+    ForecastTr,
   } from './Styles';
 
 
@@ -54,9 +58,6 @@ const Forecast = ({navigation}) => {
       navigation.navigate('Home');
     };
 
-    const toPlantsPage = async () => {
-      navigation.navigate('Plants');
-    };
     
     return(
         <OuterContainer>
@@ -64,27 +65,27 @@ const Forecast = ({navigation}) => {
             <TouchableOpacity onPress={() => setElementVisible(!elementVisible)}>
               <Image source={require('./icons/hamburger.png')} />
             </TouchableOpacity>
-            <Title style={{left: 24}}>Baza roślin</Title>
+            <Title style={{left: 24}}>Pogoda</Title>
             <TouchableOpacity onPress={() => toHomePage()}>
               <Image
                 source={require('./icons/potted_plant.png')}
-                style={{left: 320}}
+                style={{left: 340}}
               />
             </TouchableOpacity>
             <Image
               source={require('./icons/notification.png')}
-              style={{left: 340}}
+              style={{left: 360}}
             />
           </InnerContainer>
           {elementVisible ? (
             <InnerContainerExtended>
               <Separator></Separator>
               <InnerContainerExtendedList style={{borderBottomColor: '#CCCCCC', borderBotttomWidth: 3}}>
-                <Text style={styles.whiteBold}>Pogoda</Text>
+                <Text style={styles.bold_white}>Pogoda</Text>
               </InnerContainerExtendedList>
               <Separator></Separator>
               <InnerContainerExtendedList>
-                <Text style={styles.whiteBold}>Profil użytkownika</Text>
+                <Text style={styles.bold_white}>Profil użytkownika</Text>
               </InnerContainerExtendedList>
             </InnerContainerExtended>
           ) : null}
@@ -104,6 +105,102 @@ const Forecast = ({navigation}) => {
                         />
                     </TouchableOpacity>
                 </ForecastOptions>
+                <ForecastMain>
+                  <Text style={styles.h2}>Poznań</Text>
+                  <Image
+                    source={require('./icons/sun.png')}
+                  />
+                  <Text style={styles.h2}>23°</Text>
+                  <Text style={styles.h3}>Słonecznie</Text>
+                  <Text style={styles.h3}>Min. 11° Max. 23°</Text>
+                  <ForecastTable>
+                    <ForecastTr>
+                      <Image
+                        style={{marginRight: 20}}
+                        source={require('./icons/calendar_month.png')}
+                      />
+                      <Text style={styles.h4}>PROGNOZA (7 DNI)</Text>
+                    </ForecastTr>
+                    <Separator></Separator>
+                    <ForecastTr>
+                      <Image
+                        style={styles.gapForTr}
+                        source={require('./icons/light_mode.png')}
+                      />
+                      <Text style={styles.h5}>Czw.</Text>
+                      <ForecastTd>
+                        <Text style={styles.h6}>Min. 12° Max. 24°</Text>
+                        <Text style={styles.h6}>Słonecznie</Text>
+                      </ForecastTd>
+                    </ForecastTr>
+                    <ForecastTr>
+                      <Image
+                        style={styles.gapForTr}
+                        source={require('./icons/cloudy.png')}
+                      />
+                      <Text style={styles.h5}>Pt.</Text>
+                      <ForecastTd>
+                        <Text style={styles.h6}>Min. 16° Max. 25°</Text>
+                        <Text style={styles.h6}>Pochmurnie</Text>
+                      </ForecastTd>
+                    </ForecastTr>
+                    <ForecastTr>
+                      <Image
+                        style={styles.gapForTr}
+                        source={require('./icons/light_mode.png')}
+                      />
+                      <Text style={styles.h5}>Sob.</Text>
+                      <ForecastTd>
+                        <Text style={styles.h6}>Min. 22° Max. 32°</Text>
+                        <Text style={styles.h6}>Słonecznie</Text>
+                      </ForecastTd>
+                    </ForecastTr>
+                    <ForecastTr>
+                      <Image
+                        style={styles.gapForTr}
+                        source={require('./icons/light_mode.png')}
+                      />
+                      <Text style={styles.h5}>Nd.</Text>
+                      <ForecastTd>
+                        <Text style={styles.h6}>Min. 23° Max. 36°</Text>
+                        <Text style={styles.h6}>Słonecznie</Text>
+                      </ForecastTd>
+                    </ForecastTr>
+                    <ForecastTr>
+                      <Image
+                        style={styles.gapForTr}
+                        source={require('./icons/thunderstorm.png')}
+                      />
+                      <Text style={styles.h5}>Pon.</Text>
+                      <ForecastTd>
+                        <Text style={styles.h6}>Min. 21° Max. 30°</Text>
+                        <Text style={styles.h6}>Burzowo</Text>
+                      </ForecastTd>
+                    </ForecastTr>
+                    <ForecastTr>
+                      <Image
+                        style={styles.gapForTr}
+                        source={require('./icons/rainy.png')}
+                      />
+                      <Text style={styles.h5}>Wt.</Text>
+                      <ForecastTd>
+                        <Text style={styles.h6}>Min. 16° Max. 29°</Text>
+                        <Text style={styles.h6}>Deszczowo</Text>
+                      </ForecastTd>
+                    </ForecastTr>
+                    <ForecastTr>
+                      <Image
+                        style={styles.gapForTr}
+                        source={require('./icons/cloudy.png')}
+                      />
+                      <Text style={styles.h5}>Śr.</Text>
+                      <ForecastTd>
+                        <Text style={styles.h6}>Min. 19° Max. 30°</Text>
+                        <Text style={styles.h6}>Pochmurnie</Text>
+                      </ForecastTd>
+                    </ForecastTr>
+                  </ForecastTable>
+                </ForecastMain>
             </ForecastView>
           </ImageBackground>
             
