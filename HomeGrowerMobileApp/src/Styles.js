@@ -31,6 +31,12 @@ export const styles = StyleSheet.create({
     fontWeight: '400',
     color: '#000',
   },
+  h3_but_green: {
+    fontSize: 18,
+    lineHeight: 20,
+    fontWeight: '700',
+    color: '#2fa84e',
+  },
   h5: {
     fontSize: 12,
     lineHeight: 16,
@@ -64,7 +70,7 @@ export const styles = StyleSheet.create({
     textAlignVertical: 'center',
   },
   gapForTr: {
-    marginRight: 10,
+    right: 5,
   },  
 });
 
@@ -222,15 +228,15 @@ export const ProfileName = styled.View`
 export const ProfileOptions = styled.View`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  padding: 30px 30px;
+  align-items: flex-start;
+  padding: 30px 0;
 `;
 
 export const ProfileRow = styled.View`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 10px 0;
+  padding: 10px 20px;
 `;
 
 export const Separator = styled.View`
@@ -240,5 +246,6 @@ export const Separator = styled.View`
   padding: 0;
   display: flex;
 `;
+
 
 

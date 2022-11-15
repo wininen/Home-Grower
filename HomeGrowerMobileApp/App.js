@@ -11,6 +11,7 @@ import Profile from './src/Profile.js';
 
 const Main = createNativeStackNavigator();
 
+
 const App = () => {
 
     return (

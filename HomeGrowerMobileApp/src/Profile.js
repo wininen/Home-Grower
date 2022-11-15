@@ -1,65 +1,64 @@
 import React, {
-    useState,
     useEffect,
-    forwardRef,
-    useImperativeHandle,
+    useState,
   } from 'react';
-  import {
-    View,
+import {
     Text,
-    StyleSheet,
     Image,
-    FlatList,
-    TouchableHighlight,
     TouchableOpacity,
-    Platform,
-    NativeModules,
-    NativeEventEmitter,
-    ToastAndroid,
-    TouchableHighlightBase,
-    Switch,
   } from 'react-native';
-import { State } from 'react-native-ble-plx';
 
-  import {
-    SensorContainer,
-    Container,
+import {
     Title,
-    ButtonsWrapper,
-    ButtonContainer,
-    StyledButton,
-    Basic,
     styles,
     OuterContainer,
     InnerContainer,
     InnerContainerExtended,
     InnerContainerExtendedList,
-    PlantsList,
-    PlantsElement,
-    StyledImage,
-    PlantsFamily,
-    PlantsAfterElement,
     Separator,
     ProfileName,
     ProfileOptions,
     ProfileRow,
   } from './Styles';
 
+import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 
 const Profile = ({navigation}) => {
     const [elementVisible, setElementVisible] = useState(false);
 
+
+    const celsjus = require('./icons/profile/celsjus.png');
+    const fahrenheit = require('./icons/profile/farenheit.png');
+
+    const [unit, setUnit] = useState(celsjus);
+    const { getItem, setItem } = useAsyncStorage('@temperature_unit');
+
+    const readUnitFromStorage = async () => {
+      const unit = await getItem();
+      unit != null ? JSON.parse(unit) : null
+      setUnit(unit);
+    };
+    
+    const writeUnitToStorage = async newUnit => {
+      const jsonNewUnit = JSON.stringify(newUnit)
+      await setItem(jsonNewUnit);
+      setUnit(jsonNewUnit);
+    };
+
     const toHomePage = async () => {
       navigation.navigate('Home');
     };
-
+  
     const toForecastPage = async () => {
       setElementVisible(!elementVisible);
       navigation.navigate('Forecast');
     };
 
-    
-    
+    useEffect(() => {
+      readUnitFromStorage();
+    }, []);
+
+
     return(
         <OuterContainer>
           <InnerContainer>
@@ -100,55 +99,74 @@ const Profile = ({navigation}) => {
             <ProfileRow>
                 <Image
                     source={require('./icons/profile/edit.png')}
+                    style={styles.gapForTr}
                 />
                 <Text style={styles.h4}>Edytuj profil</Text>
+                <ProfileRow>
+                  <Text style={styles.h3_but_green}>Edit</Text>
+                </ProfileRow>
             </ProfileRow>
             <Separator></Separator>
             <ProfileRow>
                 <Image
                     source={require('./icons/profile/write.png')}
+                    style={styles.gapForTr}
                 />
                 <Text style={styles.h4}>Napisz do nas</Text>
+                <ProfileRow>
+                  <Text style={styles.h3_but_green}>Edit</Text>
+                </ProfileRow>
             </ProfileRow>
             <Separator></Separator>
             <ProfileRow>
                 <Image
                     source={require('./icons/profile/language.png')}
+                    style={styles.gapForTr}
                 />
                 <Text style={styles.h4}>Zmień język</Text>
+                <ProfileRow>
+                  <Text style={styles.h3_but_green}>Edit</Text>
+                </ProfileRow>
             </ProfileRow>
             <Separator></Separator>
             <ProfileRow>
                 <Image
                     source={require('./icons/profile/temperature_unit.png')}
+                    style={styles.gapForTr}
                 />
                 <Text style={styles.h4}>Jednostka temperatury</Text>
-                <ProfileRow style={{left: 180}}>
-                    <Image
-                        source={require('./icons/profile/checked_radio.png')}
-                        style={{height: 24, width: 24}}
-                    />
-                    <Text style={styles.h4}>°C</Text>
-                    <Image
-                        source={require('./icons/profile/unchecked_radio.png')}
-                        style={{height: 24, width: 24}}
-                    />
-                    <Text style={styles.h4}>°F</Text>
+                <ProfileRow style={{left: 220}}>
+                    <TouchableOpacity onPress={() => writeUnitToStorage(
+                      unit == celsjus ? fahrenheit : celsjus
+                    )}>
+                        <Image
+                          source={unit}
+                          style={{height: 24, width: 24}}
+                        />
+                    </TouchableOpacity>
                 </ProfileRow>
             </ProfileRow>
             <Separator></Separator>
             <ProfileRow>
                 <Image
                     source={require('./icons/profile/history.png')}
+                    style={styles.gapForTr}
                 />
-                <Text style={styles.h4}>Historia sensorów</Text> 
+                <Text style={styles.h4}>Historia sensorów</Text>
+                <ProfileRow>
+                  <Text style={styles.h3_but_green}>Edit</Text>
+                </ProfileRow> 
             </ProfileRow>
             <Separator></Separator>
             <ProfileRow>
                 <Image
                     source={require('./icons/profile/rate_app.png')}
+                    style={styles.gapForTr}
                 />
                 <Text style={styles.h4}>Oceń aplikację</Text>
+                <ProfileRow>
+                  <Text style={styles.h3_but_green}>Edit</Text>
+                </ProfileRow>
             </ProfileRow>
           </ProfileOptions>
           

@@ -1,48 +1,23 @@
 import React, {
     useState,
-    useEffect,
-    forwardRef,
-    useImperativeHandle,
   } from 'react';
   import {
-    View,
     Text,
-    StyleSheet,
     Image,
-    FlatList,
-    TouchableHighlight,
     TouchableOpacity,
-    Platform,
-    NativeModules,
-    NativeEventEmitter,
-    ToastAndroid,
-    TouchableHighlightBase,
-    Switch,
     ImageBackground,
   } from 'react-native';
-import { State } from 'react-native-ble-plx';
-import { SafeAreaView } from 'react-native-safe-area-context';
+
 
   import {
-    SensorContainer,
-    Container,
     Title,
-    ButtonsWrapper,
-    ButtonContainer,
-    StyledButton,
-    Basic,
     styles,
     OuterContainer,
     InnerContainer,
     InnerContainerExtended,
     InnerContainerExtendedList,
-    PlantsList,
-    PlantsElement,
     ForecastView,
     ForecastMain,
-    StyledImage,
-    PlantsFamily,
-    PlantsAfterElement,
     Separator,
     ForecastOptions,
     ForecastTable,
@@ -50,12 +25,22 @@ import { SafeAreaView } from 'react-native-safe-area-context';
     ForecastTr,
   } from './Styles';
 
+  import {
+    toHomePage
+  } from '../App';
+
+
 
 const Forecast = ({navigation}) => {
     const [elementVisible, setElementVisible] = useState(false);
 
     const toHomePage = async () => {
       navigation.navigate('Home');
+    };
+
+    const toProfilePage = async () => {
+      setElementVisible(!elementVisible);
+      navigation.navigate('Profile');
     };
 
     
@@ -84,7 +69,7 @@ const Forecast = ({navigation}) => {
                 <Text style={styles.bold_white}>Pogoda</Text>
               </InnerContainerExtendedList>
               <Separator></Separator>
-              <InnerContainerExtendedList>
+              <InnerContainerExtendedList onPress={() => toProfilePage()}>
                 <Text style={styles.bold_white}>Profil użytkownika</Text>
               </InnerContainerExtendedList>
             </InnerContainerExtended>
