@@ -9,7 +9,6 @@ import {
   } from 'react-native';
 
 import {
-    Title,
     styles,
     OuterContainer,
     InnerContainer,
@@ -18,6 +17,8 @@ import {
     Separator,
     ProfileName,
     ProfileOptions,
+    RightRow,
+    LeftRow,
     ProfileRow,
   } from './Styles';
 
@@ -35,8 +36,7 @@ const Profile = ({navigation}) => {
 
     const readUnitFromStorage = async () => {
       const unit = await getItem();
-      unit != null ? JSON.parse(unit) : null
-      setUnit(unit);
+      unit != null ? setUnit(JSON.parse(unit)) : setUnit(celsjus)
     };
     
     const writeUnitToStorage = async newUnit => {
@@ -62,20 +62,23 @@ const Profile = ({navigation}) => {
     return(
         <OuterContainer>
           <InnerContainer>
-            <TouchableOpacity onPress={() => setElementVisible(!elementVisible)}>
-              <Image source={require('./icons/hamburger.png')} />
-            </TouchableOpacity>
-            <Title style={{left: 24}}>Profil użytkownika</Title>
-            <TouchableOpacity onPress={() => toHomePage()}>
+            <LeftRow>
+              <TouchableOpacity onPress={() => setElementVisible(!elementVisible)}>
+                <Image source={require('./icons/hamburger.png')} style={styles.gapForMenu}/>
+              </TouchableOpacity>
+              <Text style={styles.bold_white}>Profil użytkownika</Text>
+            </LeftRow>
+            <RightRow>
+              <TouchableOpacity onPress={() => toHomePage()}>
+                <Image
+                  style={styles.gapForMenu}
+                  source={require('./icons/potted_plant.png')}
+                />
+              </TouchableOpacity>
               <Image
-                source={require('./icons/potted_plant.png')}
-                style={{left: 280}}
+                source={require('./icons/notification.png')}
               />
-            </TouchableOpacity>
-            <Image
-              source={require('./icons/notification.png')}
-              style={{left: 300}}
-            />
+            </RightRow>   
           </InnerContainer>
           {elementVisible ? (
             <InnerContainerExtended>
@@ -97,76 +100,88 @@ const Profile = ({navigation}) => {
           </ProfileName>
           <ProfileOptions>
             <ProfileRow>
-                <Image
-                    source={require('./icons/profile/edit.png')}
-                    style={styles.gapForTr}
-                />
-                <Text style={styles.h4}>Edytuj profil</Text>
-                <ProfileRow>
-                  <Text style={styles.h3_but_green}>Edit</Text>
-                </ProfileRow>
+              <LeftRow>
+                  <Image
+                      source={require('./icons/profile/edit.png')}
+                      style={styles.gapForTr}
+                  />
+                  <Text style={styles.h4}>Edytuj profil</Text>
+              </LeftRow>
+              <RightRow>
+                    <Text style={styles.h3_but_green}>Edytuj</Text>
+              </RightRow>
             </ProfileRow>
             <Separator></Separator>
             <ProfileRow>
-                <Image
-                    source={require('./icons/profile/write.png')}
-                    style={styles.gapForTr}
-                />
-                <Text style={styles.h4}>Napisz do nas</Text>
-                <ProfileRow>
-                  <Text style={styles.h3_but_green}>Edit</Text>
-                </ProfileRow>
+              <LeftRow>
+                  <Image
+                      source={require('./icons/profile/write.png')}
+                      style={styles.gapForTr}
+                  />
+                  <Text style={styles.h4}>Napisz do nas</Text>
+              </LeftRow>
+              <RightRow>
+                    <Text style={styles.h3_but_green}>Napisz</Text>
+              </RightRow>
             </ProfileRow>
             <Separator></Separator>
             <ProfileRow>
-                <Image
-                    source={require('./icons/profile/language.png')}
-                    style={styles.gapForTr}
-                />
-                <Text style={styles.h4}>Zmień język</Text>
-                <ProfileRow>
-                  <Text style={styles.h3_but_green}>Edit</Text>
-                </ProfileRow>
+              <LeftRow>
+                  <Image
+                      source={require('./icons/profile/language.png')}
+                      style={styles.gapForTr}
+                  />
+                  <Text style={styles.h4}>Zmień język</Text>
+              </LeftRow>
+              <RightRow>
+                    <Text style={styles.h3_but_green}>Polski</Text>
+              </RightRow>
+            </ProfileRow>  
+            <Separator></Separator>
+            <ProfileRow>
+              <LeftRow>
+                  <Image
+                      source={require('./icons/profile/temperature_unit.png')}
+                      style={styles.gapForTr}
+                  />
+                  <Text style={styles.h4}>Jednostka temperatury</Text>
+              </LeftRow>
+              <RightRow>
+                  <TouchableOpacity onPress={() => writeUnitToStorage(
+                    unit == celsjus ? fahrenheit : celsjus
+                  )}>
+                  <Image
+                        source={(unit == null ? celsjus : unit)}
+                        style={{height: 24, width: 24}}
+                  />
+                  </TouchableOpacity>
+              </RightRow>
             </ProfileRow>
             <Separator></Separator>
             <ProfileRow>
-                <Image
-                    source={require('./icons/profile/temperature_unit.png')}
-                    style={styles.gapForTr}
-                />
-                <Text style={styles.h4}>Jednostka temperatury</Text>
-                <ProfileRow style={{left: 220}}>
-                    <TouchableOpacity onPress={() => writeUnitToStorage(
-                      unit == celsjus ? fahrenheit : celsjus
-                    )}>
-                        <Image
-                          source={unit}
-                          style={{height: 24, width: 24}}
-                        />
-                    </TouchableOpacity>
-                </ProfileRow>
+              <LeftRow>
+                  <Image
+                      source={require('./icons/profile/history.png')}
+                      style={styles.gapForTr}
+                  />
+                  <Text style={styles.h4}>Historia sensorów</Text>
+              </LeftRow>
+              <RightRow>
+                    <Text style={styles.h3_but_green}>Historia</Text>
+              </RightRow>
             </ProfileRow>
             <Separator></Separator>
             <ProfileRow>
-                <Image
-                    source={require('./icons/profile/history.png')}
-                    style={styles.gapForTr}
-                />
-                <Text style={styles.h4}>Historia sensorów</Text>
-                <ProfileRow>
-                  <Text style={styles.h3_but_green}>Edit</Text>
-                </ProfileRow> 
-            </ProfileRow>
-            <Separator></Separator>
-            <ProfileRow>
-                <Image
-                    source={require('./icons/profile/rate_app.png')}
-                    style={styles.gapForTr}
-                />
-                <Text style={styles.h4}>Oceń aplikację</Text>
-                <ProfileRow>
-                  <Text style={styles.h3_but_green}>Edit</Text>
-                </ProfileRow>
+              <LeftRow>
+                  <Image
+                      source={require('./icons/profile/rate_app.png')}
+                      style={styles.gapForTr}
+                  />
+                  <Text style={styles.h4}>Oceń aplikację</Text>
+              </LeftRow>
+              <RightRow>
+                    <Text style={styles.h3_but_green}>Oceń</Text>
+              </RightRow>
             </ProfileRow>
           </ProfileOptions>
           

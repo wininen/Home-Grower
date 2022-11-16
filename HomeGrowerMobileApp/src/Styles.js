@@ -14,8 +14,8 @@ export const styles = StyleSheet.create({
     color: 'white',
   },
   h2: {
-    fontSize: 36,
-    lineHeight: 40,
+    fontSize: 32,
+    lineHeight: 36,
     fontWeight: '700',
     color: '#000',
   },
@@ -71,18 +71,15 @@ export const styles = StyleSheet.create({
   },
   gapForTr: {
     right: 5,
-  },  
+  },
+  gapForMenu: {
+    marginRight: 10,
+  },
+  bgImage: {
+    flex: 1,
+    justifyContent: 'center',
+  }  
 });
-
-export const Title = styled.Text`
-  font-size: 14px;
-  text-align: center;
-  color: white;
-  font-weight: 700;
-  letter-spacing: -0.25px;
-  line-height: 22px;
-  left: 54px;
-`;
 
 export const InnerContainer = styled.View`
   display: flex;
@@ -175,17 +172,16 @@ export const PlantsFamily = styled.View`
 `;
 
 export const ForecastView = styled.SafeAreaView`
-  width: 100%;
-  height: 1016px;
   z-index: 1000;
   margin: 0;
-  padding: 20px 20px 20px 20px;
+  padding: 0 20px 20px 20px;
 `;
 
 export const ForecastOptions = styled.View`
   height: 24px;
   display: flex;
   flex-direction: row;
+  justify-content: flex-end;
 `;
 
 export const ForecastMain = styled.View`
@@ -196,10 +192,9 @@ export const ForecastMain = styled.View`
 `;
 
 export const ForecastTable = styled.View`
-  padding: 10px 20px;
-  margin-top: 20%;
+  padding: 5px 0;
+  margin-top: 15%;
   width: 70%;
-  height: 60%;
   background: rgba(33, 33, 33, 0.08);
   display: flex;
   flex-direction: column;
@@ -208,7 +203,7 @@ export const ForecastTable = styled.View`
 export const ForecastTr = styled.View`
   display: flex;
   flex-direction: row;
-  margin: 10px 0;
+  margin: 10px 20px;
   align-items: center;
 `;
 
@@ -237,6 +232,23 @@ export const ProfileRow = styled.View`
   flex-direction: row;
   align-items: center;
   padding: 10px 20px;
+  justify-content: space-between;
+`;
+
+export const RightRow = styled.View`
+  display: flex;
+  align-items: center;
+  width: 50%;
+  justify-content: flex-end;
+  flex-direction: row;
+`;
+
+export const LeftRow = styled.View`
+  width: 50%;
+  justify-content: flex-start;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
 `;
 
 export const Separator = styled.View`

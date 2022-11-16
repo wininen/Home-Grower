@@ -1,34 +1,13 @@
 import React, {
     useState,
-    useEffect,
-    forwardRef,
-    useImperativeHandle,
   } from 'react';
   import {
-    View,
     Text,
-    StyleSheet,
     Image,
-    FlatList,
-    TouchableHighlight,
     TouchableOpacity,
-    Platform,
-    NativeModules,
-    NativeEventEmitter,
-    ToastAndroid,
-    TouchableHighlightBase,
-    Switch,
   } from 'react-native';
-import { State } from 'react-native-ble-plx';
 
   import {
-    SensorContainer,
-    Container,
-    Title,
-    ButtonsWrapper,
-    ButtonContainer,
-    StyledButton,
-    Basic,
     styles,
     OuterContainer,
     InnerContainer,
@@ -40,6 +19,8 @@ import { State } from 'react-native-ble-plx';
     PlantsFamily,
     PlantsAfterElement,
     Separator,
+    LeftRow,
+    RightRow,
   } from './Styles';
 
 
@@ -63,20 +44,23 @@ const Plants = ({navigation}) => {
     return(
         <OuterContainer>
           <InnerContainer>
-            <TouchableOpacity onPress={() => setElementVisible(!elementVisible)}>
-              <Image source={require('./icons/hamburger.png')} />
-            </TouchableOpacity>
-            <Title style={{left: 24}}>Baza roślin</Title>
-            <TouchableOpacity onPress={() => toHomePage()}>
+            <LeftRow>
+              <TouchableOpacity onPress={() => setElementVisible(!elementVisible)}>
+                <Image source={require('./icons/hamburger.png')} style={styles.gapForMenu}/>
+              </TouchableOpacity>
+              <Text style={styles.bold_white}>Baza roślin</Text>
+            </LeftRow>
+            <RightRow>
+              <TouchableOpacity onPress={() => toHomePage()}>
+                <Image
+                  source={require('./icons/potted_plant.png')}
+                  style={styles.gapForMenu}
+                />
+              </TouchableOpacity>
               <Image
-                source={require('./icons/potted_plant.png')}
-                style={{left: 320}}
+                source={require('./icons/notification.png')}
               />
-            </TouchableOpacity>
-            <Image
-              source={require('./icons/notification.png')}
-              style={{left: 340}}
-            />
+            </RightRow>
           </InnerContainer>
           {elementVisible ? (
             <InnerContainerExtended>

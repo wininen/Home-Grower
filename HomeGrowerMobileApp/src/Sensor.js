@@ -30,6 +30,8 @@ import {
   StyledButton,
   styles,
   Separator,
+  LeftRow,
+  RightRow,
 } from './Styles';
 import getBluetoothScanPermission from './Permissions';
 import storage from './storage';
@@ -391,18 +393,21 @@ const Sensor =  ({navigation}) => {
   return (
     <OuterContainer>
       <InnerContainer>
-        <TouchableOpacity onPress={() => setElementVisible(!elementVisible)}>
-          <Image source={require('./icons/hamburger.png')} />
-        </TouchableOpacity>
-        <Title style={{left: 24}}>Moje rośliny</Title>
-        <Image
-          source={require('./icons/potted_plant.png')}
-          style={{left: 320}}
-        />
-        <Image
-          source={require('./icons/notification.png')}
-          style={{left: 340}}
-        />
+        <LeftRow>
+          <TouchableOpacity onPress={() => setElementVisible(!elementVisible)}>
+            <Image source={require('./icons/hamburger.png')} style={styles.gapForMenu}/>
+          </TouchableOpacity>
+          <Text style={styles.bold_white}>Moje rośliny</Text>
+        </LeftRow>
+        <RightRow>
+          <Image
+            source={require('./icons/potted_plant.png')}
+            style={styles.gapForMenu}
+          />
+          <Image
+            source={require('./icons/notification.png')}
+          />
+        </RightRow>
       </InnerContainer>
       {elementVisible ? (
             <InnerContainerExtended>

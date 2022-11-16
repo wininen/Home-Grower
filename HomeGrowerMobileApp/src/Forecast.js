@@ -23,6 +23,8 @@ import React, {
     ForecastTable,
     ForecastTd,
     ForecastTr,
+    LeftRow,
+    RightRow,
   } from './Styles';
 
   import {
@@ -47,20 +49,23 @@ const Forecast = ({navigation}) => {
     return(
         <OuterContainer>
           <InnerContainer>
-            <TouchableOpacity onPress={() => setElementVisible(!elementVisible)}>
-              <Image source={require('./icons/hamburger.png')} />
-            </TouchableOpacity>
-            <Title style={{left: 24}}>Pogoda</Title>
-            <TouchableOpacity onPress={() => toHomePage()}>
+            <LeftRow>
+              <TouchableOpacity onPress={() => setElementVisible(!elementVisible)}>
+                <Image source={require('./icons/hamburger.png')} style={styles.gapForMenu}/>
+              </TouchableOpacity>
+              <Text style={styles.bold_white}>Pogoda</Text>
+            </LeftRow>
+            <RightRow>
+              <TouchableOpacity onPress={() => toHomePage()}>
+                <Image
+                  source={require('./icons/potted_plant.png')}
+                  style={styles.gapForMenu}
+                />
+              </TouchableOpacity>
               <Image
-                source={require('./icons/potted_plant.png')}
-                style={{left: 340}}
+                source={require('./icons/notification.png')}
               />
-            </TouchableOpacity>
-            <Image
-              source={require('./icons/notification.png')}
-              style={{left: 360}}
-            />
+            </RightRow>
           </InnerContainer>
           {elementVisible ? (
             <InnerContainerExtended>
@@ -74,19 +79,18 @@ const Forecast = ({navigation}) => {
               </InnerContainerExtendedList>
             </InnerContainerExtended>
           ) : null}
-          <ImageBackground source={require('./images/forecast_background.jpg')}>
+          <ImageBackground source={require('./images/forecast_background.jpg')} resizeMode="cover" style={styles.bgImage}>
             <ForecastView>
                 <ForecastOptions>
                     <TouchableOpacity>
                         <Image
                             source={require('./icons/forecast/location.png')}
-                            style={{left: 410}}
+                            style={styles.gapForMenu}
                         />
                     </TouchableOpacity>
                     <TouchableOpacity>
                         <Image
                             source={require('./icons/forecast/edit_location.png')}
-                            style={{left: 430}}
                         />
                     </TouchableOpacity>
                 </ForecastOptions>
@@ -101,7 +105,7 @@ const Forecast = ({navigation}) => {
                   <ForecastTable>
                     <ForecastTr>
                       <Image
-                        style={{marginRight: 20}}
+                        style={styles.gapForTr}
                         source={require('./icons/forecast/calendar_month.png')}
                       />
                       <Text style={styles.h4}>PROGNOZA (7 DNI)</Text>
