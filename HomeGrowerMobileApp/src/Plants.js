@@ -23,9 +23,8 @@ import React, {
     RightRow,
   } from './Styles';
 
-
 const Plants = ({navigation}) => {
-    const [elementVisible, setElementVisible] = useState(false);
+  const [elementVisible, setElementVisible] = useState(false);
 
     const toHomePage = async () => {
       navigation.navigate('Home');
