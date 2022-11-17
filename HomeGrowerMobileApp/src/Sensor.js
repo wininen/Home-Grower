@@ -30,6 +30,8 @@ import {
   StyledButton,
   styles,
   Separator,
+  LeftRow,
+  RightRow,
 } from './Styles';
 import getBluetoothScanPermission from './Permissions';
 import storage from './storage';
@@ -54,6 +56,16 @@ const Sensor = ({navigation}) => {
   const toPlantsPage = async () => {
     navigation.navigate('Plants');
   };
+
+  const toForecastPage = async () => {
+    setElementVisible(!elementVisible);
+    navigation.navigate('Forecast');
+  };
+
+  const toProfilePage = async () => {
+    setElementVisible(!elementVisible);
+    navigation.navigate('Profile');
+  }
 
   const [elementVisible, setElementVisible] = useState(false);
 
@@ -406,32 +418,34 @@ const Sensor = ({navigation}) => {
   return (
     <OuterContainer>
       <InnerContainer>
-        <TouchableOpacity onPress={() => setElementVisible(!elementVisible)}>
-          <Image source={require('./icons/hamburger.png')} />
-        </TouchableOpacity>
-        <Title style={{left: 24}}>Moje rośliny</Title>
-        <Image
-          source={require('./icons/potted_plant.png')}
-          style={{left: 320}}
-        />
-        <Image
-          source={require('./icons/notification.png')}
-          style={{left: 340}}
-        />
+        <LeftRow>
+          <TouchableOpacity onPress={() => setElementVisible(!elementVisible)}>
+            <Image source={require('./icons/hamburger.png')} style={styles.gapForMenu}/>
+          </TouchableOpacity>
+          <Text style={styles.bold_white}>Moje rośliny</Text>
+        </LeftRow>
+        <RightRow>
+          <Image
+            source={require('./icons/potted_plant.png')}
+            style={styles.gapForMenu}
+          />
+          <Image
+            source={require('./icons/notification.png')}
+          />
+        </RightRow>
       </InnerContainer>
       {elementVisible ? (
-        <InnerContainerExtended>
-          <Separator></Separator>
-          <InnerContainerExtendedList
-            style={{borderBottomColor: '#CCCCCC', borderBotttomWidth: 3}}>
-            <Text style={styles.whiteBold}>Pogoda</Text>
-          </InnerContainerExtendedList>
-          <Separator></Separator>
-          <InnerContainerExtendedList>
-            <Text style={styles.whiteBold}>Profil użytkownika</Text>
-          </InnerContainerExtendedList>
-        </InnerContainerExtended>
-      ) : null}
+            <InnerContainerExtended>
+              <Separator></Separator>
+              <InnerContainerExtendedList style={{borderBottomColor: '#CCCCCC', borderBotttomWidth: 3}} onPress={() => toForecastPage()}>
+                <Text style={styles.bold_white}>Pogoda</Text>
+              </InnerContainerExtendedList>
+              <Separator></Separator>
+              <InnerContainerExtendedList onPress={() => toProfilePage()}>
+                <Text style={styles.bold_white}>Profil użytkownika</Text>
+              </InnerContainerExtendedList>
+            </InnerContainerExtended>
+          ) : null}
       <ButtonsWrapper>
         <ButtonContainer>
           <StyledButton onPress={scan} accessibilityLabel="Wyszukaj urządzenie">
