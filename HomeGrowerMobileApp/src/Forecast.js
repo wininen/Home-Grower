@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, {
     useState,
   } from 'react';
@@ -10,7 +11,6 @@ import React, {
 
 
   import {
-    Title,
     styles,
     OuterContainer,
     InnerContainer,
@@ -27,13 +27,10 @@ import React, {
     RightRow,
   } from './Styles';
 
-  import {
-    toHomePage
-  } from '../App';
-
-
+import { weatherAPI } from './weatherApi.js';
 
 const Forecast = ({navigation}) => {
+    
     const [elementVisible, setElementVisible] = useState(false);
 
     const toHomePage = async () => {
@@ -45,6 +42,53 @@ const Forecast = ({navigation}) => {
       navigation.navigate('Profile');
     };
 
+    const savedWeather = async (value) => {
+      try {
+        const jsonValue = JSON.stringify(value);
+        await AsyncStorage.setItem("@weather_Key", jsonValue);
+        console.log("Data Persisted in Cache");
+        return jsonValue != null ? JSON.parse(jsonValue) : null;
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    const getWeather = async () => {
+      try {
+        const jsonValue = await AsyncStorage.getItem("@weather_Key");
+        jsonValue === undefined
+            ? console.log("No Weather Data in Cache")
+            : console.log("Retrieved from Cache");
+        return jsonValue != null ? JSON.parse(jsonValue) : null;
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    const getCity = async () => {
+      try {
+        const jsonValue = await AsyncStorage.getItem("@city_Key");
+        jsonValue == undefined
+          ? console.log("No City in Cache")
+          : console.log("Retrieved from Cache");
+        return jsonValue != null ? JSON.parse(jsonValue) : null;
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    const savedCity = async () => {
+      try {
+        const jsonValue = JSON.stringify(value);
+        await AsyncStorage.setItem("@city_Key", jsonValue);
+        console.log("Data Persisted in Cache");
+        return jsonValue != null ? JSON.parse(jsonValue) : null;
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    
     
     return(
         <OuterContainer>
@@ -82,7 +126,7 @@ const Forecast = ({navigation}) => {
           <ImageBackground source={require('./images/forecast_background.jpg')} resizeMode="cover" style={styles.bgImage}>
             <ForecastView>
                 <ForecastOptions>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => weatherAPI()}>
                         <Image
                             source={require('./icons/forecast/location.png')}
                             style={styles.gapForMenu}
@@ -95,7 +139,7 @@ const Forecast = ({navigation}) => {
                     </TouchableOpacity>
                 </ForecastOptions>
                 <ForecastMain>
-                  <Text style={styles.h2}>Poznań</Text>
+                  <Text style={styles.h2} value={getCity()}></Text>
                   <Image
                     source={require('./icons/forecast/sun.png')}
                   />
