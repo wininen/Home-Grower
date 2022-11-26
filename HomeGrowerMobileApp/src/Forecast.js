@@ -1,33 +1,48 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, {
-    useState,
-  } from 'react';
-  import {
-    Text,
-    Image,
-    TouchableOpacity,
-    ImageBackground,
-  } from 'react-native';
+  useState,
+  useEffect,
+} from 'react';
+import {
+  Text,
+  Image,
+  TouchableOpacity,
+  ImageBackground,
+} from 'react-native';
 
 
-  import {
-    styles,
-    OuterContainer,
-    InnerContainer,
-    InnerContainerExtended,
-    InnerContainerExtendedList,
-    ForecastView,
-    ForecastMain,
-    Separator,
-    ForecastOptions,
-    ForecastTable,
-    ForecastTd,
-    ForecastTr,
-    LeftRow,
-    RightRow,
-  } from './Styles';
+import {
+  styles,
+  OuterContainer,
+  InnerContainer,
+  InnerContainerExtended,
+  InnerContainerExtendedList,
+  ForecastView,
+  ForecastMain,
+  Separator,
+  ForecastOptions,
+  ForecastTable,
+  ForecastTd,
+  ForecastTr,
+  LeftRow,
+  RightRow,
+} from './Styles';
 
-import { weatherAPI } from './weatherApi.js';
+import {
+  axios,
+} from 'axios';
+
+import Geolocation from '@react-native-community/geolocation';
+
+const config = [
+  {skipPermissionRequests: false,
+  authorizationLevel: 'always',
+  locationProvider: 'auto'}
+];
+
+Geolocation.setRNConfiguration(config);
+
+
 
 const Forecast = ({navigation}) => {
     
@@ -41,6 +56,9 @@ const Forecast = ({navigation}) => {
       setElementVisible(!elementVisible);
       navigation.navigate('Profile');
     };
+
+    const ArrayCity = [1];
+    const ArrayWeather = [1];
 
     const savedWeather = async (value) => {
       try {
@@ -56,9 +74,20 @@ const Forecast = ({navigation}) => {
     const getWeather = async () => {
       try {
         const jsonValue = await AsyncStorage.getItem("@weather_Key");
-        jsonValue === undefined
+        jsonValue == undefined
             ? console.log("No Weather Data in Cache")
-            : console.log("Retrieved from Cache");
+            : console.log("Retrieved Weather from Cache");
+        return jsonValue != undefined ? JSON.parse(jsonValue) : null;
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    const savedCity = async (value) => {
+      try {
+        const jsonValue = JSON.stringify(value);
+        await AsyncStorage.setItem("@city_Key", jsonValue);
+        console.log("Data Persisted in Cache");
         return jsonValue != null ? JSON.parse(jsonValue) : null;
       } catch (err) {
         console.log(err);
@@ -70,24 +99,109 @@ const Forecast = ({navigation}) => {
         const jsonValue = await AsyncStorage.getItem("@city_Key");
         jsonValue == undefined
           ? console.log("No City in Cache")
-          : console.log("Retrieved from Cache");
-        return jsonValue != null ? JSON.parse(jsonValue) : null;
+          : console.log("Retrieved City from Cache");
+        return jsonValue != undefined ? JSON.parse(jsonValue) : null;
       } catch (err) {
         console.log(err);
       }
     };
 
-    const savedCity = async () => {
-      try {
-        const jsonValue = JSON.stringify(value);
-        await AsyncStorage.setItem("@city_Key", jsonValue);
-        console.log("Data Persisted in Cache");
-        return jsonValue != null ? JSON.parse(jsonValue) : null;
-      } catch (err) {
-        console.log(err);
-      }
+
+    const API_KEY = '9d3b0897994554a14149d179a9a65217';
+
+
+
+    const localisation = async () => {
+        const [latLon, setLatLon] = useState(null);
+
+        Geolocation.getCurrentPosition(
+            position => {
+                setLatLon([position.coords.latitude], [position.coords.longitude]);
+            },
+            (err) => {
+                console.log(err);
+            },
+            {timeout: Infinity, maximumAge: Infinity}
+        );
+
+        return latLon;
+    };
+    
+    const [weather, setWeather] = useState(null);
+    const useWeather = async () => {
+        
+    
+        const latLon = localisation();
+        
+
+
+        const fetchAPI = async (lat, lon) => {
+            try {
+                const res = await axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`);
+                const data = await savedWeather(filterWeather(res.data));
+            setWeather(data);
+            } catch (err) {
+            console.log("API connection failed");
+            const data = await getWeather();
+            setWeather(data);
+            }
+        };
+            
+        const filterWeather = (rawData) => {
+            return {
+                weather: [{main: rawData.city.weather.main}],
+                main: {
+                  temp_min: rawData.city.main.temp_min,
+                  temp_max: rawData.city.main.temp_max,
+                },
+            };
+        };
+
+        console.log(latLon);
+        latLon ? fetchAPI(latLon[0], latLon[1]) : null;
+    
+        return weather;
+    };
+    
+    const [city, setCity] = useState(null);
+    const useCity = async () => {
+        
+    
+        const latLon = localisation();
+        
+        const fetchAPI = async (lat, lon) => {
+            try {
+                const res = await axios.get(`https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=${1}&appid=${API_KEY}`);
+                const data = await savedCity(filterCity(res.data));
+            setCity(data);
+            } catch (err) {
+                console.log("API connection failed");
+                const data = await getCity();
+                setCity(data);
+            }
+        };
+            
+        const filterCity = (rawData) => {
+            return {
+                name: rawData.name,
+            };
+        };
+
+        console.log(latLon);
+        latLon ? fetchAPI(latLon[0], latLon[1]) : null;
+    
+        return city;
     };
 
+    const callCityAndWeatherFunc = () => {
+      useCity();
+      useWeather();
+    };
+
+    useEffect(() => {
+      getCity();
+      getWeather();
+    }, []);
     
     
     return(
@@ -126,7 +240,7 @@ const Forecast = ({navigation}) => {
           <ImageBackground source={require('./images/forecast_background.jpg')} resizeMode="cover" style={styles.bgImage}>
             <ForecastView>
                 <ForecastOptions>
-                    <TouchableOpacity onPress={() => weatherAPI()}>
+                    <TouchableOpacity onPress={() => callCityAndWeatherFunc()}>
                         <Image
                             source={require('./icons/forecast/location.png')}
                             style={styles.gapForMenu}
@@ -139,11 +253,11 @@ const Forecast = ({navigation}) => {
                     </TouchableOpacity>
                 </ForecastOptions>
                 <ForecastMain>
-                  <Text style={styles.h2} value={getCity()}></Text>
+                  <Text style={styles.h2}>{console.log(ArrayCity.fill((city == null ? "Warszawa" : city)))}</Text>
                   <Image
                     source={require('./icons/forecast/sun.png')}
                   />
-                  <Text style={styles.h2}>23°</Text>
+                  <Text style={styles.h2}>{console.log(ArrayWeather.fill((weather == null ? "23°" : weather)))}</Text>
                   <Text style={styles.h3}>Słonecznie</Text>
                   <Text style={styles.h3}>Min. 11° Max. 23°</Text>
                   <ForecastTable>
