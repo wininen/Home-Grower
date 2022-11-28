@@ -78,7 +78,13 @@ export const styles = StyleSheet.create({
   bgImage: {
     flex: 1,
     justifyContent: 'center',
-  }  
+  },
+  sensorTitle: {
+    textAlign: 'center',
+    color: '#588157',
+    fontSize: 20,
+    fontWeight: '400',
+  },
 });
 
 export const InnerContainer = styled.View`
@@ -116,7 +122,6 @@ export const OuterContainer = styled.View`
   margin: 0;
 `;
 
-
 export const ButtonsWrapper = styled.View`
   padding-top: 30px;
   align-items: center;
@@ -127,7 +132,7 @@ export const ButtonContainer = styled.View`
 `;
 
 export const StyledButton = styled.TouchableOpacity`
-  background-color: #2FA84E;
+  background-color: #2fa84e;
   border-radius: 25px;
   align-items: center;
   justify-content: center;
@@ -148,7 +153,6 @@ export const PlantsElement = styled.View`
   align-items: center;
   padding: 10px 15px;
 `;
-
 
 export const StyledImage = styled.Image`
   width: 40px;
@@ -252,12 +256,31 @@ export const LeftRow = styled.View`
 `;
 
 export const Separator = styled.View`
-  border-color: #CCCCCC;
+  border-color: #cccccc;
   border-width: 1px;
   width: 100%;
   padding: 0;
   display: flex;
 `;
 
+export const SensorComponent = styled.View`
+  margin: 3% auto;
+  border-color: #cccccc;
+  border-width: 1px;
+  height: 20%;
+  width: 90%;
+  padding: 0;
+  display: flex;
+  border-radius: 10px;
+`;
 
-
+export const SensorButton = styled.TouchableOpacity`
+  margin: 0 auto;
+  background-color: #edebe6;
+  border-top-right-radius: 300px;
+  border-bottom-right-radius: 300px;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  width: 85%;
+`;

@@ -30,6 +30,10 @@ import {
   StyledButton,
   styles,
   Separator,
+  LeftRow,
+  RightRow,
+  SensorComponent,
+  SensorButton,
 } from './Styles';
 import getBluetoothScanPermission from './Permissions';
 import storage from './storage';
@@ -37,21 +41,31 @@ import storage from './storage';
 const BleManagerModule = NativeModules.BleManager;
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 
-const SensorOld = ({navigation}) => {
-  const [isScanning, setIsScanning] = useState(false);
+const Sensor = ({navigation}) => {
   const [flower_care, setFlowerCare] = useState([]);
+  const [sensorListAvailable, setSensorListAvailable] = useState([]);
+  const [sensorListConnected, setSensorListConnected] = useState([]);
   const [datas, setDatas] = useState();
-  const peripherals = new Map();
-  const delay = ms => new Promise(res => setTimeout(res, ms));
-  const ThemeContext = React.createContext(themes.light);
+  const peripheralsAvailable = new Map();
+  const peripheralsConnected = new Map();
 
   const createConnection = async () => {
     await scan();
-    await connect(flower_care);
+    setTimeout(connect, 5000);
   };
 
   const toPlantsPage = async () => {
     navigation.navigate('Plants');
+  };
+
+  const toForecastPage = async () => {
+    setElementVisible(!elementVisible);
+    navigation.navigate('Forecast');
+  };
+
+  const toProfilePage = async () => {
+    setElementVisible(!elementVisible);
+    navigation.navigate('Profile');
   };
 
   const [elementVisible, setElementVisible] = useState(false);
@@ -59,18 +73,19 @@ const SensorOld = ({navigation}) => {
   // funkcja obsługująca wyszukiwanie urządzeń
   const handleDiscoverPeripheral = peripheral => {
     if (peripheral.name == 'Flower care') {
+      // console.log(peripheral);
+
       if (flower_care.length == 0) {
-        // console.log(peripheral);
         // powiadomienie wskazujące na połączenie się z czujnikiem
         ToastAndroid.showWithGravity(
-          'Połączono z urządzeniem o adresie MAC: ' + peripheral.id,
+          'Scanning....',
           ToastAndroid.SHORT,
           ToastAndroid.BOTTOM,
         );
 
-        peripherals.set(peripheral.id, peripheral);
+        peripheralsAvailable.set(peripheral.id, peripheral);
         setFlowerCare(peripheral);
-        console.log(flower_care);
+        setSensorListAvailable(Array.from(peripheralsAvailable.values()));
         //BleManager.stopScan().then(() => {
         //   console.log("Scan stopped");
         //  });
@@ -80,10 +95,7 @@ const SensorOld = ({navigation}) => {
 
   const handleStopScan = () => {
     console.log('done!');
-    setIsScanning(false);
   };
-  useEffect(() => console.log('dupa'), [someOb]);
-  setSomeOb({name: 'nazwa'});
 
   // funkcja obsługująca odłączenie urządzenia, jeszcze nie skonfigurowana
   const handleDisconnectedPeripheral = data => {
@@ -163,17 +175,13 @@ const SensorOld = ({navigation}) => {
       await getBluetoothScanPermission();
     }
 
-    await BleManager.scan(['00001204-0000-1000-8000-00805f9b34fb'], 5, false)
+    await BleManager.scan([], 5)
       .then(() => {
         console.log('Scanning...');
-        setIsScanning(true);
       })
       .catch(e => {
         console.log(error);
       });
-
-    // setTimeout(connect(flower_care), 5000);
-    // await connect();
   };
 
   //funkcja łącząca się z sensorem
@@ -182,21 +190,31 @@ const SensorOld = ({navigation}) => {
     service = '00001204-0000-1000-8000-00805f9b34fb',
     characteristic = '00001a01-0000-1000-8000-00805f9b34fb',
   ) => {
-    await delay(6000);
-    console.log('Waited 5s');
-    const charwrite = '00001a00-0000-1000-8000-00805f9b34fb'; //takie rzeczy przenosi się do configu
+    const charwrite = '00001a00-0000-1000-8000-00805f9b34fb';
 
     console.log('trying to connect:');
     console.log(peripheral.id);
+    console.log('data');
+    console.log(peripheral);
 
     // połącz się z czujnikiem
     await BleManager.connect(peripheral.id)
       .then(() => {
         console.log('Connected to ' + peripheral.id);
+        ToastAndroid.showWithGravity(
+          'Połączono z urządzeniem o adresie MAC: ' + peripheral.id,
+          ToastAndroid.SHORT,
+          ToastAndroid.BOTTOM,
+        );
       })
       .catch(error => {
         console.log(error);
       });
+
+    peripheralsAvailable.delete(peripheral.id);
+    setSensorListAvailable(Array.from(peripheralsAvailable.values()));
+    peripheralsConnected.set(peripheral.id, peripheral);
+    setSensorListConnected(Array.from(peripheralsConnected.values()));
 
     // odnajduje services i characteristics danego urządzenia
     // trzeba zawsze uruchomić najpierw przed uruchomieniem metod write, read i start notification
@@ -393,29 +411,34 @@ const SensorOld = ({navigation}) => {
   return (
     <OuterContainer>
       <InnerContainer>
-        <TouchableOpacity onPress={() => setElementVisible(!elementVisible)}>
-          <Image source={require('./icons/hamburger.png')} />
-        </TouchableOpacity>
-        <Title style={{left: 24}}>Moje rośliny</Title>
-        <Image
-          source={require('./icons/potted_plant.png')}
-          style={{left: 320}}
-        />
-        <Image
-          source={require('./icons/notification.png')}
-          style={{left: 340}}
-        />
+        <LeftRow>
+          <TouchableOpacity onPress={() => setElementVisible(!elementVisible)}>
+            <Image
+              source={require('./icons/hamburger.png')}
+              style={styles.gapForMenu}
+            />
+          </TouchableOpacity>
+          <Text style={styles.bold_white}>Moje rośliny</Text>
+        </LeftRow>
+        <RightRow>
+          <Image
+            source={require('./icons/potted_plant.png')}
+            style={styles.gapForMenu}
+          />
+          <Image source={require('./icons/notification.png')} />
+        </RightRow>
       </InnerContainer>
       {elementVisible ? (
         <InnerContainerExtended>
           <Separator></Separator>
           <InnerContainerExtendedList
-            style={{borderBottomColor: '#CCCCCC', borderBotttomWidth: 3}}>
-            <Text style={styles.whiteBold}>Pogoda</Text>
+            style={{borderBottomColor: '#CCCCCC', borderBotttomWidth: 3}}
+            onPress={() => toForecastPage()}>
+            <Text style={styles.bold_white}>Pogoda</Text>
           </InnerContainerExtendedList>
           <Separator></Separator>
-          <InnerContainerExtendedList>
-            <Text style={styles.whiteBold}>Profil użytkownika</Text>
+          <InnerContainerExtendedList onPress={() => toProfilePage()}>
+            <Text style={styles.bold_white}>Profil użytkownika</Text>
           </InnerContainerExtendedList>
         </InnerContainerExtended>
       ) : null}
@@ -425,21 +448,21 @@ const SensorOld = ({navigation}) => {
             <Text style={styles.body}>Wyszukaj urządzenie</Text>
           </StyledButton>
         </ButtonContainer>
-        <ButtonContainer>
+        {/* <ButtonContainer>
           <StyledButton
             onPress={() => connect(flower_care)}
             //onPress={connectAndPrepare}
             accessibilityLabel="Połącz">
             <Text style={styles.body}>Połącz</Text>
           </StyledButton>
-        </ButtonContainer>
-        <ButtonContainer>
+        </ButtonContainer> */}
+        {/* <ButtonContainer>
           <StyledButton
             onPress={() => getHistory(flower_care)}
             accessibilityLabel="Połącz">
             <Text style={styles.body}>Historia</Text>
           </StyledButton>
-        </ButtonContainer>
+        </ButtonContainer> */}
         <ButtonContainer>
           <StyledButton
             onPress={() => toPlantsPage()}
@@ -449,6 +472,45 @@ const SensorOld = ({navigation}) => {
         </ButtonContainer>
       </ButtonsWrapper>
 
+      <SensorComponent>
+        <Text style={styles.sensorTitle}> Connected </Text>
+        <FlatList
+          // style={styles.data_table}
+          keyExtractor={item => item.id}
+          data={sensorListConnected}
+          contentContainerStyle={{
+            marginTop: 20,
+            display: 'flex',
+            justifyContent: 'space-around',
+            flex: 1,
+          }}
+          renderItem={({item}) => (
+            <SensorButton onPress={() => connect(item)}>
+              <Text>{item.id}</Text>
+            </SensorButton>
+          )}
+        />
+      </SensorComponent>
+
+      <SensorComponent>
+        <Text style={styles.sensorTitle}> Available </Text>
+        <FlatList
+          // style={styles.data_table}
+          keyExtractor={item => item.id}
+          data={sensorListAvailable}
+          contentContainerStyle={{
+            marginTop: 20,
+            display: 'flex',
+            justifyContent: 'space-around',
+            flex: 1,
+          }}
+          renderItem={({item}) => (
+            <SensorButton onPress={() => connect(item)}>
+              <Text>{item.id}</Text>
+            </SensorButton>
+          )}
+        />
+      </SensorComponent>
       <FlatList
         style={styles.data_table}
         numColumns={4}
@@ -473,4 +535,4 @@ const SensorOld = ({navigation}) => {
   );
 };
 
-export default SensorOld;
+export default Sensor;
