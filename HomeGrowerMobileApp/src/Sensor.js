@@ -33,7 +33,7 @@ import {
   LeftRow,
   RightRow,
 } from './Styles';
-import getBluetoothScanPermission from './Permissions';
+import getBluetoothScanPermission from './components/Permissions/Permissions';
 import storage from './storage';
 
 const BleManagerModule = NativeModules.BleManager;

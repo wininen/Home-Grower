@@ -1,3 +1,4 @@
+import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 import {StyleSheet} from 'react-native';
 import styled from 'styled-components/native';
 
@@ -50,10 +51,10 @@ export const styles = StyleSheet.create({
     color: '#000',
   },
   data_table: {
-    marginTop: 20,
+    // marginTop: 20,
     display: 'flex',
+    border: '1px solid green',
     // justifyContent: 'space-around',
-    flex: 1,
   },
   item: {
     backgroundColor: 'white',
@@ -115,6 +116,7 @@ export const InnerContainerExtendedList = styled.TouchableOpacity`
 `;
 
 export const OuterContainer = styled.View`
+  //do przeniesienia do sobnych plikow
   height: 100%;
   width: 100%;
   background-color: #fff;
@@ -261,26 +263,4 @@ export const Separator = styled.View`
   width: 100%;
   padding: 0;
   display: flex;
-`;
-
-export const SensorComponent = styled.View`
-  margin: 3% auto;
-  border-color: #cccccc;
-  border-width: 1px;
-  height: 20%;
-  width: 90%;
-  padding: 0;
-  display: flex;
-  border-radius: 10px;
-`;
-
-export const SensorButton = styled.TouchableOpacity`
-  margin: 0 auto;
-  background-color: #edebe6;
-  border-top-right-radius: 300px;
-  border-bottom-right-radius: 300px;
-  align-items: center;
-  justify-content: center;
-  height: 60px;
-  width: 85%;
 `;
