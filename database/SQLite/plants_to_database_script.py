@@ -20,7 +20,7 @@ def main(conn: sqlite3.Connection):
     cursor.executescript(sql_table_creation)
 
     # przechodzenie po plikach json
-    for file in glob.glob("../plants/*.json"):
+    for file in glob.glob("../../plants/*.json"):
         with open(file) as f:
             file_contents = f.read()
 
