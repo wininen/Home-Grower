@@ -21,7 +21,7 @@ import {
   ForecastTr,
 } from './Forecast.styled';
 
-import Geolocation from '@react-native-community/geolocation';
+import Geolocation from 'react-native-geolocation-service';
 import Layout from '../Layout/Layout';
 
 const API_KEY = '9d3b0897994554a14149d179a9a65217';

@@ -27,9 +27,15 @@ const Profile = ({navigation}) => {
       jsonUnit == undefined
         ? console.log('No unit choice in Cache')
         : console.log('Retrieved unit choice from Cache');
-      return jsonUnit != null
-        ? setUnit(JSON.parse(jsonUnit))
-        : setUnit(require('../../assets/icons/profile/celsjus.png'));
+      if (jsonUnit != undefined) {
+        if (jsonUnit == require('../../assets/icons/profile/celsjus.png')) {
+          setUnit(require('../../assets/icons/profile/celsjus.png'));
+        } else {
+          setUnit(require('../../assets/icons/profile/farenheit.png'));
+        }
+      } else {
+        setUnit(require('../../assets/icons/profile/celsjus.png'));
+      }
     } catch (err) {
       console.log(err);
     }
@@ -45,18 +51,16 @@ const Profile = ({navigation}) => {
     }
   };
 
-  const changeUnit = async Unit => {
+  const changeUnit = async () => {
     try {
-      const currentUnit = JSON.stringify(Unit);
-      return currentUnit == require('../../assets/icons/profile/celsjus.png')
-        ? (writeUnitToStorage(
-            require('../../assets/icons/profile/farenheit.png'),
-          ),
-          setUnit(require('../../assets/icons/profile/farenheit.png')))
-        : (writeUnitToStorage(
-            require('../../assets/icons/profile/celsjus.png'),
-          ),
-          setUnit(require('../../assets/icons/profile/celsjus.png')));
+      const currentUnit = JSON.stringify(unit);
+      if (currentUnit == require('../../assets/icons/profile/celsjus.png')) {
+        writeUnitToStorage(require('../../assets/icons/profile/farenheit.png'));
+        setUnit(require('../../assets/icons/profile/farenheit.png'));
+      } else {
+        writeUnitToStorage(require('../../assets/icons/profile/celsjus.png'));
+        setUnit(require('../../assets/icons/profile/celsjus.png'));
+      }
     } catch (err) {
       console.log(err);
     }
@@ -122,7 +126,7 @@ const Profile = ({navigation}) => {
               <Text style={styles.h4}>Jednostka temperatury</Text>
             </LeftRow>
             <RightRow>
-              <TouchableOpacity onPress={() => changeUnit(unit)}>
+              <TouchableOpacity onPress={() => changeUnit()}>
                 <Image source={unit} style={{height: 24, width: 24}} />
               </TouchableOpacity>
             </RightRow>

@@ -1,7 +1,6 @@
 import styled from 'styled-components/native';
 
 export const OuterContainer = styled.View`
-  //do przeniesienia do sobnych plikow
   height: 100%;
   width: 100%;
   background-color: #fff;
