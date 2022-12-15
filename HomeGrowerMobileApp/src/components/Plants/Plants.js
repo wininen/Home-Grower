@@ -1,8 +1,9 @@
 import React from 'react';
 import {Text} from 'react-native';
 import Layout from '../Layout/Layout.js';
+import {styles} from '../../Styles/';
+
 import {
-  styles,
   OuterContainer,
   PlantsList,
   PlantsElement,
@@ -10,7 +11,7 @@ import {
   PlantsFamily,
   PlantsAfterElement,
   Separator,
-} from '../../Styles/';
+} from './Plants.styled';
 
 const Plants = ({navigation}) => {
   return (

@@ -35,6 +35,7 @@ import {
 } from './Styles';
 import getBluetoothScanPermission from './components/Permissions/Permissions';
 import storage from './storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const BleManagerModule = NativeModules.BleManager;
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
@@ -58,12 +59,10 @@ const Sensor = ({navigation}) => {
   };
 
   const toForecastPage = async () => {
-    setElementVisible(!elementVisible);
     navigation.navigate('Forecast');
   };
 
   const toProfilePage = async () => {
-    setElementVisible(!elementVisible);
     navigation.navigate('Profile');
   };
 
