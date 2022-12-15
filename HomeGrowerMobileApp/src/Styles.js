@@ -1,3 +1,4 @@
+import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 import {StyleSheet} from 'react-native';
 import styled from 'styled-components/native';
 
@@ -50,10 +51,10 @@ export const styles = StyleSheet.create({
     color: '#000',
   },
   data_table: {
-    marginTop: 20,
+    // marginTop: 20,
     display: 'flex',
+    border: '1px solid green',
     // justifyContent: 'space-around',
-    flex: 1,
   },
   item: {
     backgroundColor: 'white',
@@ -78,6 +79,12 @@ export const styles = StyleSheet.create({
   bgImage: {
     flex: 1,
     justifyContent: 'center',
+  },
+  sensorTitle: {
+    textAlign: 'center',
+    color: '#588157',
+    fontSize: 20,
+    fontWeight: '400',
   },
 });
 
@@ -109,6 +116,7 @@ export const InnerContainerExtendedList = styled.TouchableOpacity`
 `;
 
 export const OuterContainer = styled.View`
+  //do przeniesienia do sobnych plikow
   height: 100%;
   width: 100%;
   background-color: #fff;

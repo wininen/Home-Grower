@@ -1,13 +1,10 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React, {useRef} from 'react';
-import {View, Text, SafeAreaView} from 'react-native';
-import {BleManager} from 'react-native-ble-plx';
-import {MainBundlePath} from 'react-native-fs';
-import Sensor from './src/Sensor.js';
-import Plants from './src/Plants.js';
-import Forecast from './src/Forecast.js';
-import Profile from './src/Profile.js';
+import SensorOld from './src/components/Sensor/SensorOld.js';
+import Plants from './src/components/Plants/Plants.js';
+import Forecast from './src/components/Forecast/Forecast.js';
+import Profile from './src/components/Profile/Profile.js';
 
 const Main = createNativeStackNavigator();
 
@@ -17,7 +14,7 @@ const App = () => {
       <Main.Navigator
         initialRouteName="Home"
         screenOptions={{headerShown: false}}>
-        <Main.Screen name="Home" component={Sensor} />
+        <Main.Screen name="Home" component={SensorOld} />
 
         <Main.Screen name="Plants" component={Plants} />
 
