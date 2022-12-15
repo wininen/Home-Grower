@@ -59,12 +59,10 @@ const Sensor = ({navigation}) => {
   };
 
   const toForecastPage = async () => {
-    setElementVisible(!elementVisible);
     navigation.navigate('Forecast');
   };
 
   const toProfilePage = async () => {
-    setElementVisible(!elementVisible);
     navigation.navigate('Profile');
   };
 

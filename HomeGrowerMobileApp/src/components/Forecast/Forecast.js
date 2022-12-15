@@ -1,8 +1,16 @@
-import React, {useState} from 'react';
-import {Text, Image, TouchableOpacity, ImageBackground} from 'react-native';
-import Layout from '../Layout/Layout.js';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, {useState, useEffect} from 'react';
 import {
-  styles,
+  Text,
+  Image,
+  TouchableOpacity,
+  ImageBackground,
+  PermissionsAndroid,
+} from 'react-native';
+
+import {styles} from '../../Styles';
+
+import {
   OuterContainer,
   ForecastView,
   ForecastMain,
@@ -11,9 +19,328 @@ import {
   ForecastTable,
   ForecastTd,
   ForecastTr,
-} from '../../Styles';
+} from './Forecast.styled';
+
+import Geolocation from '@react-native-community/geolocation';
+import Layout from '../Layout/Layout';
+
+const API_KEY = '9d3b0897994554a14149d179a9a65217';
+
+const weatherImages = {
+  mist: require('../../assets/icons/forecast/mist_main.png'),
+  sun: require('../../assets/icons/forecast/sun_main.png'),
+  rain: require('../../assets/icons/forecast/rainy_main.png'),
+  storm: require('../../assets/icons/forecast/storm_main.png'),
+  snow: require('../../assets/icons/forecast/snow_main.png'),
+  cloud: require('../../assets/icons/forecast/cloudy_main.png'),
+};
 
 const Forecast = ({navigation}) => {
+  const convertToCelsjus = async jsonValue => {
+    let afterConvertValue = [null, null, null, null, null];
+    afterConvertValue[0] = jsonValue[0];
+    afterConvertValue[1] =
+      (
+        (jsonValue[1].substring(0, jsonValue[1].length - 2) - 32) *
+        (5 / 9)
+      ).toFixed(2) + '°C';
+    afterConvertValue[2] = jsonValue[2];
+    afterConvertValue[3] =
+      (
+        (jsonValue[3].substring(0, jsonValue[3].length - 2) - 32) *
+        (5 / 9)
+      ).toFixed(2) + '°C';
+    afterConvertValue[4] =
+      (
+        (jsonValue[4].substring(0, jsonValue[4].length - 2) - 32) *
+        (5 / 9)
+      ).toFixed(2) + '°C';
+    return afterConvertValue;
+  };
+
+  const convertToFarenheit = async jsonValue => {
+    let afterConvertValue = [null, null, null, null, null];
+    afterConvertValue[0] = jsonValue[0];
+    afterConvertValue[1] =
+      (
+        jsonValue[1].substring(0, jsonValue[1].length - 2) * (9 / 5) +
+        32
+      ).toFixed(2) + '°F';
+    afterConvertValue[2] = jsonValue[2];
+    afterConvertValue[3] =
+      (
+        jsonValue[3].substring(0, jsonValue[3].length - 2) * (9 / 5) +
+        32
+      ).toFixed(2) + '°F';
+    afterConvertValue[4] =
+      (
+        jsonValue[4].substring(0, jsonValue[4].length - 2) * (9 / 5) +
+        32
+      ).toFixed(2) + '°F';
+    return afterConvertValue;
+  };
+
+  const savedWeather = async value => {
+    try {
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem('@weather_Key', jsonValue);
+      console.log('Weather Persisted in Cache');
+      return jsonValue != null ? setWeather(JSON.parse(jsonValue)) : null;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const getWeather = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('@weather_Key');
+      const jsonUnit = await AsyncStorage.getItem('@temperature_Key');
+      jsonValue == undefined
+        ? console.log('No Weather Data in Cache')
+        : console.log('Retrieved Weather from Cache');
+      jsonUnit == undefined
+        ? console.log('No Unit in Cache')
+        : console.log('Retrieved Unit from Cache');
+      if (jsonValue != undefined) {
+        if (jsonUnit != undefined) {
+          if (jsonUnit == require('../../assets/icons/profile/celsjus.png')) {
+            if (
+              JSON.parse(jsonValue)[1].substring(
+                JSON.parse(jsonValue)[1].length - 2,
+              ) == '°C'
+            ) {
+              setWeather(JSON.parse(jsonValue));
+            } else {
+              let newJsonValue = await convertToCelsjus(JSON.parse(jsonValue));
+              setWeather(newJsonValue);
+            }
+          } else {
+            if (
+              JSON.parse(jsonValue)[1].substring(
+                JSON.parse(jsonValue)[1].length - 2,
+              ) == '°F'
+            ) {
+              setWeather(JSON.parse(jsonValue));
+            } else {
+              let newJsonValue = await convertToFarenheit(
+                JSON.parse(jsonValue),
+              );
+              setWeather(newJsonValue);
+            }
+          }
+        } else {
+          if (
+            JSON.parse(jsonValue)[1].substring(
+              JSON.parse(jsonValue)[1].length - 2,
+            ) == '°F'
+          ) {
+            let newJsonValue = await convertToCelsjus(JSON.parse(jsonValue));
+            setWeather(newJsonValue);
+          } else {
+            setWeather(JSON.parse(jsonValue));
+          }
+        }
+      } else {
+        if (jsonUnit == require('../../assets/icons/profile/celsjus.png')) {
+          setWeather([
+            weatherImages.sun,
+            '23°C',
+            'Słonecznie',
+            '22.6°C',
+            '23.3°C',
+          ]);
+        } else if (
+          jsonUnit == require('../../assets/icons/profile/farenheit.png')
+        ) {
+          setWeather([
+            weatherImages.sun,
+            '73.4°F',
+            'Słonecznie',
+            '72.68°F',
+            '73.94°F',
+          ]);
+        } else {
+          setWeather([
+            weatherImages.sun,
+            '23°C',
+            'Słonecznie',
+            '22.6°C',
+            '23.3°C',
+          ]);
+        }
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const savedCity = async value => {
+    try {
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem('@city_Key', jsonValue);
+      console.log('City Persisted in Cache');
+      return jsonValue != null ? setCity(JSON.parse(jsonValue)) : null;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const getCity = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('@city_Key');
+      jsonValue == undefined
+        ? console.log('No City in Cache')
+        : console.log('Retrieved City from Cache');
+      return jsonValue != null
+        ? setCity(JSON.parse(jsonValue))
+        : setCity('Warszawa');
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const [weather, setWeather] = useState([
+    require('../../assets/icons/forecast/sun_main.png'),
+    '23°C',
+    'Słonecznie',
+    '22.6C',
+    '23.3°C',
+  ]);
+  const useWeather = async (lat, lon) => {
+    let weatherIcon;
+    const jsonUnit = await AsyncStorage.getItem('@temperature_Key');
+    const fetchAPI = async (lat, lon) => {
+      jsonUnit == null ||
+      jsonUnit == require('../../assets/icons/profile/celsjus.png')
+        ? fetch(
+            `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`,
+          )
+            .then(res => res.json())
+            .then(res => {
+              console.log(
+                res['weather'][0].main,
+                res['main'].temp,
+                '°C',
+                res['main'].temp_min,
+                '°C',
+                res['main'].temp_max,
+                '°C',
+              );
+              switchWeather(res['weather'][0].main);
+              savedWeather([
+                weatherIcon,
+                res['main'].temp + '°C',
+                res['weather'][0].main,
+                res['main'].temp_min + '°C',
+                res['main'].temp_max + '°C',
+              ]);
+              setWeather([
+                weatherIcon,
+                res['main'].temp + '°C',
+                res['weather'][0].main,
+                res['main'].temp_min + '°C',
+                res['main'].temp_max + '°C',
+              ]);
+            })
+            .catch(err => {
+              console.log(err);
+              const data = getWeather();
+              setWeather(data);
+            })
+        : fetch(
+            `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=imperial`,
+          )
+            .then(res => res.json())
+            .then(res => {
+              console.log(
+                res['weather'][0].main,
+                res['main'].temp,
+                '°F',
+                res['main'].temp_min,
+                '°F',
+                res['main'].temp_max,
+                '°F',
+              );
+              switchWeather(res['weather'][0].main);
+              savedWeather([
+                weatherIcon,
+                res['main'].temp + '°F',
+                res['weather'][0].main,
+                res['main'].temp_min + '°F',
+                res['main'].temp_max + '°F',
+              ]);
+              setWeather([
+                weatherIcon,
+                res['main'].temp + '°F',
+                res['weather'][0].main,
+                res['main'].temp_min + '°F',
+                res['main'].temp_max + '°F',
+              ]);
+            })
+            .catch(err => {
+              console.log(err);
+              const data = getWeather();
+              setWeather(data);
+            });
+    };
+
+    const switchWeather = async param => {
+      try {
+        switch (param) {
+          case 'Mist':
+            weatherIcon = weatherImages.mist;
+            break;
+          case 'Rain':
+            weatherIcon = weatherImages.rain;
+            break;
+          case 'Sun':
+            weatherIcon = weatherImages.sun;
+            break;
+          case 'Drizzle':
+            weatherIcon = weatherImages.storm;
+            break;
+          case 'Snow':
+            weatherIcon = weatherImages.snow;
+            break;
+          case 'Clouds':
+            weatherIcon = weatherImages.cloud;
+            break;
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchAPI(lat, lon);
+  };
+
+  const [city, setCity] = useState('Warszawa');
+  const useCity = async (lat, lon) => {
+    const fetchAPI = async (lat, lon) => {
+      fetch(
+        `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=${API_KEY}`,
+      )
+        .then(res => res.json())
+        .then(res => {
+          console.log(res[0].name);
+          savedCity(res[0].name);
+          setCity(res[0].name);
+        })
+        .catch(err => {
+          console.log(err);
+          const data = getCity();
+          setCity(data);
+        });
+    };
+
+    fetchAPI(lat, lon);
+  };
+
+  useEffect(() => {
+    getCity();
+    getWeather();
+  }, []);
+
   return (
     <Layout>
       <OuterContainer>
@@ -23,7 +350,34 @@ const Forecast = ({navigation}) => {
           style={styles.bgImage}>
           <ForecastView>
             <ForecastOptions>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  try {
+                    const granted = PermissionsAndroid.request(
+                      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+                      Geolocation.getCurrentPosition(
+                        position => {
+                          useCity(
+                            position.coords.latitude,
+                            position.coords.longitude,
+                          );
+                          useWeather(
+                            position.coords.latitude,
+                            position.coords.longitude,
+                          );
+                          console.log(
+                            position.coords.latitude,
+                            position.coords.longitude,
+                          );
+                        },
+                        err => console.log(err),
+                        {enableHighAccuracy: false},
+                      ),
+                    );
+                  } catch (err) {
+                    console.warn(err);
+                  }
+                }}>
                 <Image
                   source={require('../../assets/icons/forecast/location.png')}
                   style={styles.gapForMenu}
@@ -36,11 +390,13 @@ const Forecast = ({navigation}) => {
               </TouchableOpacity>
             </ForecastOptions>
             <ForecastMain>
-              <Text style={styles.h2}>Poznań</Text>
-              <Image source={require('../../assets/icons/forecast/sun.png')} />
-              <Text style={styles.h2}>23°</Text>
-              <Text style={styles.h3}>Słonecznie</Text>
-              <Text style={styles.h3}>Min. 11° Max. 23°</Text>
+              <Text style={styles.h2}>{city}</Text>
+              <Image source={weather[0]} />
+              <Text style={styles.h2}>{weather[1]}</Text>
+              <Text style={styles.h3}>{weather[2]}</Text>
+              <Text style={styles.h3}>
+                Min. {weather[3]} Max. {weather[4]}
+              </Text>
               <ForecastTable>
                 <ForecastTr>
                   <Image
@@ -53,7 +409,7 @@ const Forecast = ({navigation}) => {
                 <ForecastTr>
                   <Image
                     style={styles.gapForTr}
-                    source={require('../../assets/icons/forecast/light_mode.png')}
+                    source={require('../../assets/icons/forecast/sun.png')}
                   />
                   <Text style={styles.h5}>Czw.</Text>
                   <ForecastTd>
@@ -75,7 +431,7 @@ const Forecast = ({navigation}) => {
                 <ForecastTr>
                   <Image
                     style={styles.gapForTr}
-                    source={require('../../assets/icons/forecast/light_mode.png')}
+                    source={require('../../assets/icons/forecast/sun.png')}
                   />
                   <Text style={styles.h5}>Sob.</Text>
                   <ForecastTd>
@@ -86,7 +442,7 @@ const Forecast = ({navigation}) => {
                 <ForecastTr>
                   <Image
                     style={styles.gapForTr}
-                    source={require('../../assets/icons/forecast/light_mode.png')}
+                    source={require('../../assets/icons/forecast/sun.png')}
                   />
                   <Text style={styles.h5}>Nd.</Text>
                   <ForecastTd>
@@ -97,7 +453,7 @@ const Forecast = ({navigation}) => {
                 <ForecastTr>
                   <Image
                     style={styles.gapForTr}
-                    source={require('../../assets/icons/forecast/thunderstorm.png')}
+                    source={require('../../assets/icons/forecast/storm.png')}
                   />
                   <Text style={styles.h5}>Pon.</Text>
                   <ForecastTd>

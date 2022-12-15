@@ -1,35 +1,65 @@
 import React, {useEffect, useState} from 'react';
 import {Text, Image, TouchableOpacity} from 'react-native';
-import Layout from '../Layout/Layout.js';
-import {
-  styles,
-  OuterContainer,
-  Separator,
-  ProfileName,
-  ProfileOptions,
-  RightRow,
-  LeftRow,
-  ProfileRow,
-} from '../../Styles.js';
 
-import {useAsyncStorage} from '@react-native-async-storage/async-storage';
+import {styles} from '../../Styles';
+
+import {
+  OuterContainer,
+  LeftRow,
+  RightRow,
+  ProfileName,
+  ProfileRow,
+  ProfileOptions,
+  Separator,
+} from './Profile.styled';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import Layout from '../Layout/Layout';
 
 const Profile = ({navigation}) => {
-  const celsjus = require('../../assets/icons/profile/celsjus.png');
-  const fahrenheit = require('../../assets/icons/profile/farenheit.png');
-
-  const [unit, setUnit] = useState(celsjus);
-  const {getItem, setItem} = useAsyncStorage('@temperature_unit');
+  const [unit, setUnit] = useState(
+    require('../../assets/icons/profile/celsjus.png'),
+  );
 
   const readUnitFromStorage = async () => {
-    const unit = await getItem();
-    unit != null ? setUnit(JSON.parse(unit)) : setUnit(celsjus);
+    try {
+      const jsonUnit = await AsyncStorage.getItem('@temperature_Key');
+      jsonUnit == undefined
+        ? console.log('No unit choice in Cache')
+        : console.log('Retrieved unit choice from Cache');
+      return jsonUnit != null
+        ? setUnit(JSON.parse(jsonUnit))
+        : setUnit(require('../../assets/icons/profile/celsjus.png'));
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const writeUnitToStorage = async newUnit => {
-    const jsonNewUnit = JSON.stringify(newUnit);
-    await setItem(jsonNewUnit);
-    setUnit(jsonNewUnit);
+    try {
+      const jsonNewUnit = JSON.stringify(newUnit);
+      await AsyncStorage.setItem('@temperature_Key', jsonNewUnit);
+      return jsonNewUnit != null ? setUnit(JSON.parse(jsonNewUnit)) : null;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const changeUnit = async Unit => {
+    try {
+      const currentUnit = JSON.stringify(Unit);
+      return currentUnit == require('../../assets/icons/profile/celsjus.png')
+        ? (writeUnitToStorage(
+            require('../../assets/icons/profile/farenheit.png'),
+          ),
+          setUnit(require('../../assets/icons/profile/farenheit.png')))
+        : (writeUnitToStorage(
+            require('../../assets/icons/profile/celsjus.png'),
+          ),
+          setUnit(require('../../assets/icons/profile/celsjus.png')));
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   useEffect(() => {
@@ -92,14 +122,8 @@ const Profile = ({navigation}) => {
               <Text style={styles.h4}>Jednostka temperatury</Text>
             </LeftRow>
             <RightRow>
-              <TouchableOpacity
-                onPress={() =>
-                  writeUnitToStorage(unit == celsjus ? fahrenheit : celsjus)
-                }>
-                <Image
-                  source={unit == null ? celsjus : unit}
-                  style={{height: 24, width: 24}}
-                />
+              <TouchableOpacity onPress={() => changeUnit(unit)}>
+                <Image source={unit} style={{height: 24, width: 24}} />
               </TouchableOpacity>
             </RightRow>
           </ProfileRow>
