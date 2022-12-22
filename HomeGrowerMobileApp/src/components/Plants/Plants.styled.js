@@ -1,33 +1,14 @@
 import styled from 'styled-components/native';
 
-export const OuterContainer = styled.View`
-  height: 100%;
-  width: 100%;
+export const PlantsContainer = styled.View`
+  flex: 1;
   background-color: #fff;
   padding: 0;
   margin: 0;
 `;
 
-export const PlantsList = styled.View`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  overflow-y: scroll;
-`;
-
-export const Separator = styled.View`
-  border-color: #cccccc;
-  border-width: 1px;
-  width: 100%;
-  padding: 0;
-  display: flex;
-`;
-
-export const PlantsElement = styled.View`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 10px 15px;
+export const PlantsElement = styled.TouchableOpacity`
+  background-color: rgba(47, 168, 78, 0.7);
 `;
 
 export const StyledImage = styled.Image`
@@ -39,14 +20,24 @@ export const StyledImage = styled.Image`
 export const PlantsAfterElement = styled.View`
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
   padding: 0px;
-  gap: 16px;
 `;
 
 export const PlantsFamily = styled.View`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  left: 15px;
+  left: 20px;
+`;
+
+export const ButtonBox = styled.View`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 1px;
+  margin-left: 340px;
+  bottom: 30px;
 `;

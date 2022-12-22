@@ -33,6 +33,7 @@ const weatherImages = {
   storm: require('../../assets/icons/forecast/storm_main.png'),
   snow: require('../../assets/icons/forecast/snow_main.png'),
   cloud: require('../../assets/icons/forecast/cloudy_main.png'),
+  moon: require('../../assets/icons/forecast/moon_main.png'),
 };
 
 const Forecast = ({navigation}) => {
@@ -283,6 +284,7 @@ const Forecast = ({navigation}) => {
 
     const switchWeather = async param => {
       try {
+        let time = new Date().getHours();
         switch (param) {
           case 'Mist':
             weatherIcon = weatherImages.mist;
@@ -311,6 +313,14 @@ const Forecast = ({navigation}) => {
           case 'Haze':
             weatherIcon = weatherImages.mist;
             polishName = 'Lekka mgła';
+            break;
+          case 'Clear':
+            if (time > 17 || time < 5) {
+              weatherIcon = weatherImages.moon;
+            } else {
+              weatherIcon = weatherImages.sun;
+            }
+            polishName = 'Czyste niebo';
             break;
         }
       } catch (err) {

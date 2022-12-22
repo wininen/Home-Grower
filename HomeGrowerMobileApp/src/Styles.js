@@ -86,10 +86,32 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '400',
   },
+  plantsList: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    paddingVertical: 20,
+  },
+  shadow: {
+    borderWidth: 1,
+    borderColor: '#ddd',
+    shadowColor: '#000000',
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 0.9,
+    shadowRadius: 3,
+    elevation: 3,
+    borderRadius: 20,
+    margin: 10,
+    width: 220,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+  },
 });
 
 export const OuterContainer = styled.View`
-  //do przeniesienia do sobnych plikow
   height: 100%;
   width: 100%;
   background-color: #fff;
