@@ -32,6 +32,7 @@ import {
   ScrollableList,
   SensorsList,
 } from './Sensor.styled';
+import {Console} from 'console';
 
 const BleManagerModule = NativeModules.BleManager;
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
@@ -193,6 +194,12 @@ const Sensor = ({navigation}) => {
     console.log(peripheral.id);
     console.log('data');
     console.log(peripheral);
+    console.log('......');
+
+    console.log(sensorListConnected);
+    console.log(sensorListAvailable);
+    console.log(peripheralsAvailable);
+    console.log(peripheralsConnected);
 
     // połącz się z czujnikiem
     await BleManager.connect(peripheral.id)
@@ -227,6 +234,12 @@ const Sensor = ({navigation}) => {
     peripheralsConnected.set(peripheral.id, peripheral);
     setSensorListConnected(Array.from(peripheralsConnected.values()));
 
+    console.log('====UPDATE===');
+    console.log(sensorListConnected);
+    console.log(sensorListAvailable);
+    console.log(peripheralsAvailable);
+    console.log(peripheralsConnected);
+
     // odnajduje services i characteristics danego urządzenia
     // trzeba zawsze uruchomić najpierw przed uruchomieniem metod write, read i start notification
     await BleManager.retrieveServices(peripheral.id)
@@ -250,13 +263,13 @@ const Sensor = ({navigation}) => {
     //The buffer will collect a number or messages from the server and then emit once the buffer count it reached.
     //Helpful to reducing the number or js bridge crossings when a characteristic is sending a lot of messages. Returns a Promise objec
 
-    await BleManager.startNotification(peripheral.id, service, characteristic)
-      .then(() => {
-        console.log('started notifications of:  ' + peripheral.id);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    // await BleManager.startNotification(peripheral.id, service, characteristic)
+    //   .then(() => {
+    //     console.log('started notifications of:  ' + peripheral.id);
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //   });
   };
 
   const turnOnDiode = async (
@@ -455,7 +468,26 @@ const Sensor = ({navigation}) => {
     console.log('Widomosc z przyszlosci', msg);
   })();
   */
-  // GENEROWANIE PRZYCISKÓW
+
+  useEffect(() => {
+    console.log('Hiii');
+    const interval = setInterval(() => {
+      console.log("It's running");
+      console.log(sensorListConnected);
+      console.log(sensorListAvailable);
+      console.log(peripheralsAvailable);
+      console.log(peripheralsConnected);
+      // if (peripheralsConnected) {
+      //   console.log('Mamy to');
+      //   console.log(peripheralsConnected);
+      //   console.log(peripheralsConnected.length);
+      //   for (let i = 0; i < sensorListConnected.length; i++) {
+      //     connect(sensorListConnected[i]);
+      //     console.log(sensorListConnected[i]);
+      //   }
+      // }
+    }, 60000);
+  }, []);
 
   useEffect(() => {
     (async () => {
