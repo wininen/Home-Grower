@@ -39,5 +39,24 @@ export const ButtonBox = styled.View`
   width: 22px;
   height: 1px;
   margin-left: 340px;
+  margin-top: auto;
   bottom: 30px;
+`;
+
+export const ModalButton = styled.TouchableOpacity`
+  background-color: #2fa84e;
+  border-radius: 25px;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  width: 100px;
+`;
+
+export const ModalList = styled.TouchableOpacity`
+  background-color: #2fa84e;
+  border-radius: 25px;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  width: 350px;
 `;

@@ -109,6 +109,33 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 10,
   },
+  modalContent: {
+    flex: 1,
+    margin: 15,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 150,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 10,
+  },
+  modalText: {
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    fontSize: 12,
+  },
 });
 
 export const OuterContainer = styled.View`
