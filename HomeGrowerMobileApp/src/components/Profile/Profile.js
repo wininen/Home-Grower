@@ -24,9 +24,11 @@ const Profile = ({navigation}) => {
   const readUnitFromStorage = async () => {
     try {
       const jsonUnit = await AsyncStorage.getItem('@temperature_Key');
-      jsonUnit == undefined
-        ? console.log('No unit choice in Cache')
-        : console.log('Retrieved unit choice from Cache');
+      if (jsonUnit == undefined) {
+        console.log('No unit choice in Cache');
+      } else {
+        console.log('Retrieved unit choice from Cache');
+      }
       if (jsonUnit != undefined) {
         if (jsonUnit == require('../../assets/icons/profile/celsjus.png')) {
           setUnit(require('../../assets/icons/profile/celsjus.png'));
