@@ -86,10 +86,59 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '400',
   },
+  plantsList: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    paddingVertical: 20,
+  },
+  shadow: {
+    borderWidth: 1,
+    borderColor: '#ddd',
+    shadowColor: '#000000',
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 0.9,
+    shadowRadius: 3,
+    elevation: 3,
+    borderRadius: 20,
+    margin: 10,
+    width: 220,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+  },
+  modalContent: {
+    flex: 1,
+    margin: 15,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 150,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 10,
+  },
+  modalText: {
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    fontSize: 12,
+  },
 });
 
 export const OuterContainer = styled.View`
-  //do przeniesienia do sobnych plikow
   height: 100%;
   width: 100%;
   background-color: #fff;
