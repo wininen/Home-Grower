@@ -1,16 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import {
-  View,
   Text,
-  FlatList,
-  TouchableOpacity,
   Platform,
   NativeModules,
   NativeEventEmitter,
   ToastAndroid,
 } from 'react-native';
-import Entypo from 'react-native-vector-icons/Entypo';
-import Swipeable from 'react-native-gesture-handler/Swipeable';
 import BleManager from 'react-native-ble-manager';
 import {Buffer} from 'buffer';
 import Layout from '../Layout/Layout';
@@ -25,14 +20,10 @@ import storage from '../../utils/storage.js';
 import {AvailableSensor, ConnectedSensor} from './SensorOption.js';
 import {
   OuterContainer,
-  SensorComponent,
-  SensorButton,
-  SensorRow,
   SensorsContainer,
   ScrollableList,
   SensorsList,
 } from './Sensor.styled';
-import {Console} from 'console';
 
 const BleManagerModule = NativeModules.BleManager;
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
@@ -44,25 +35,6 @@ const Sensor = ({navigation}) => {
   const [datas, setDatas] = useState();
   const peripheralsAvailable = new Map();
   const peripheralsConnected = new Map();
-
-  const createConnection = async () => {
-    await scan();
-    setTimeout(connect, 5000);
-  };
-
-  const toPlantsPage = async () => {
-    navigation.navigate('Plants');
-  };
-
-  const toForecastPage = async () => {
-    setElementVisible(!elementVisible);
-    navigation.navigate('Forecast');
-  };
-
-  const toProfilePage = async () => {
-    setElementVisible(!elementVisible);
-    navigation.navigate('Profile');
-  };
 
   // funkcja obsługująca wyszukiwanie urządzeń
   const handleDiscoverPeripheral = peripheral => {
@@ -149,6 +121,10 @@ const Sensor = ({navigation}) => {
       'BleManagerDidUpdateValueForCharacteristic',
       handleUpdateValueForCharacteristic,
     );
+    const subs_disconnect = bleManagerEmitter.addListener(
+      'BleManagerDisconnectPeripheral',
+      handleDisconnectedPeripheral,
+    );
     //bleManagerEmitter.addListener('BleManagerDisconnectPeripheral', handleDisconnectedPeripheral );
     return () => {
       //eventy do usunięcia
@@ -156,6 +132,7 @@ const Sensor = ({navigation}) => {
       subs_discover.remove();
       subs_stopScan.remove();
       subs_updateVal.remove();
+      subs_disconnect.remove();
       //bleManagerEmitter.remove('BleManagerStopScan',handleStopScan)
       //bleManagerEmitter.remove('BleManagerDidUpdateValueForCharacteristic', handleUpdateValueForCharacteristic );
     };
@@ -215,6 +192,13 @@ const Sensor = ({navigation}) => {
         console.log(error);
       });
 
+    // storage.remove(peripheral.id);
+    try {
+      storage.setObject(peripheral.id, peripheral);
+    } catch (e) {
+      console.log('Object already exists');
+    }
+
     //Zaktualizuj mapy i usestate
     for (let i = 0; i < sensorListAvailable.length; i++) {
       peripheralsAvailable.set(
@@ -233,6 +217,10 @@ const Sensor = ({navigation}) => {
     }
     peripheralsConnected.set(peripheral.id, peripheral);
     setSensorListConnected(Array.from(peripheralsConnected.values()));
+
+    const result = await storage.getAllSensorData();
+    console.log(result);
+    // console.log(result.map(req => JSON.parse(req)).forEach(console.log));
 
     console.log('====UPDATE===');
     console.log(sensorListConnected);
@@ -270,6 +258,7 @@ const Sensor = ({navigation}) => {
     //   .catch(error => {
     //     console.log(error);
     //   });
+    return;
   };
 
   const turnOnDiode = async (
@@ -314,6 +303,31 @@ const Sensor = ({navigation}) => {
     //   .catch(error => {
     //     console.log(error);
     //   });
+  };
+
+  const disconectPeripheral = async peripheral => {
+    console.log('Trying to disconnect');
+    console.log(peripheral.id);
+    BleManager.disconnect(peripheral.id)
+      .then(() => {
+        console.log('Disconnected');
+
+        //Zaktualizuj mapy i usestate
+        for (let i = 0; i < sensorListConnected.length; i++) {
+          peripheralsConnected.set(
+            sensorListConnected[i].id,
+            sensorListConnected[i],
+          );
+        }
+
+        peripheralsConnected.delete(peripheral.id);
+        setSensorListConnected(Array.from(peripheralsConnected.values()));
+
+        storage.remove(peripheral.id);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   const getHistory = async (
@@ -462,6 +476,10 @@ const Sensor = ({navigation}) => {
     }
   };
 
+  const getSensorDataFromStorage = () => {
+    return storage.getAllSensorData();
+  };
+
   /*
   (async () => {
     const msg = await storage.get('damian');
@@ -470,30 +488,48 @@ const Sensor = ({navigation}) => {
   */
 
   useEffect(() => {
-    console.log('Hiii');
-    const interval = setInterval(() => {
-      console.log("It's running");
-      console.log(sensorListConnected);
-      console.log(sensorListAvailable);
-      console.log(peripheralsAvailable);
-      console.log(peripheralsConnected);
-      // if (peripheralsConnected) {
-      //   console.log('Mamy to');
-      //   console.log(peripheralsConnected);
-      //   console.log(peripheralsConnected.length);
-      //   for (let i = 0; i < sensorListConnected.length; i++) {
-      //     connect(sensorListConnected[i]);
-      //     console.log(sensorListConnected[i]);
-      //   }
-      // }
-    }, 60000);
+    (async () => {
+      setSensorListConnected(await storage.getAllSensorData());
+      console.log('sensorListConnected', sensorListConnected);
+
+      console.log('tUTAJ INTERWAŁ');
+      const interval = setInterval(() => {
+        console.log("It's running");
+        console.log(sensorListConnected);
+        console.log(sensorListAvailable);
+        console.log(peripheralsAvailable);
+        console.log(peripheralsConnected);
+        (async () => {
+          const result = await storage.getAllSensorData();
+          if (result.length > 0) {
+            console.log('Mamy to');
+            console.log('POŁĄCZONE');
+            console.log(result);
+            for (let i = 0; i < result.length; i++) {
+              connect(result[i]);
+              console.log(result[i]);
+            }
+          }
+        })();
+        // if (await storage.getAllSensorData()) {
+        //   console.log('Mamy to');
+        //   const result =
+        //   console.log(peripheralsConnected);
+        //   console.log(peripheralsConnected.length);
+        //   for (let i = 0; i < sensorListConnected.length; i++) {
+        //     connect(sensorListConnected[i]);
+        //     console.log(sensorListConnected[i]);
+        //   }
+        // }
+      }, 30000);
+    })();
   }, []);
 
   useEffect(() => {
-    (async () => {
-      const plantsArr = await storage.getObject('flower_data');
-      console.log('plantsArr', plantsArr);
-    })();
+    // (async () => {
+    //   const plantsArr = await storage.getObject('flower_data');
+    //   console.log('plantsArr', plantsArr);
+    // })();
   }, []);
   return (
     <Layout>
@@ -508,6 +544,7 @@ const Sensor = ({navigation}) => {
                   item={item}
                   connect={connect}
                   turnOnDiode={turnOnDiode}
+                  disconectPeripheral={disconectPeripheral}
                 />
               ))}
             </SensorsList>

@@ -21,3 +21,7 @@ export const SensorRow = styled.View`
   justify-content: space-evenly;
   padding: 20px;
 `;
+
+export const Icon = styled.TouchableOpacity`
+  padding: 0px 10px;
+`;
