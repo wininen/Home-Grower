@@ -40,16 +40,7 @@ const Sensor = ({navigation}) => {
   // funkcja obsługująca wyszukiwanie urządzeń
   const handleDiscoverPeripheral = peripheral => {
     if (peripheral.name == 'Flower care') {
-      // console.log(peripheral);
-
       if (flower_care.length == 0) {
-        // powiadomienie wskazujące na połączenie się z czujnikiem
-        // ToastAndroid.showWithGravity(
-        //   'Scanning....',
-        //   ToastAndroid.SHORT,
-        //   ToastAndroid.BOTTOM,
-        // );
-
         peripheralsAvailable.set(peripheral.id, peripheral);
         console.log('set');
         console.log(peripheralsAvailable);
@@ -57,9 +48,6 @@ const Sensor = ({navigation}) => {
         setSensorListAvailable(Array.from(peripheralsAvailable.values()));
         console.log('after');
         console.log(peripheralsAvailable);
-        //BleManager.stopScan().then(() => {
-        //   console.log("Scan stopped");
-        //  });
       }
     }
   };
@@ -134,7 +122,6 @@ const Sensor = ({navigation}) => {
       subs_stopScan.remove();
       subs_updateVal.remove();
       subs_disconnect.remove();
-      //bleManagerEmitter.remove('BleManagerStopScan',handleStopScan)
       //bleManagerEmitter.remove('BleManagerDidUpdateValueForCharacteristic', handleUpdateValueForCharacteristic );
     };
   }, []);
