@@ -17,6 +17,7 @@ import {
 } from '../../Styles';
 import getBluetoothScanPermission from '../Permissions/Permissions';
 import storage from '../../utils/storage.js';
+import config from '../../utils/config.js';
 import {AvailableSensor, ConnectedSensor} from './SensorOption.js';
 import {
   OuterContainer,
@@ -160,13 +161,7 @@ const Sensor = ({navigation}) => {
   };
 
   //funkcja łącząca się z sensorem
-  const connect = async (
-    peripheral,
-    service = '00001204-0000-1000-8000-00805f9b34fb',
-    characteristic = '00001a01-0000-1000-8000-00805f9b34fb',
-  ) => {
-    const charwrite = '00001a00-0000-1000-8000-00805f9b34fb';
-
+  const connect = async peripheral => {
     console.log('trying to connect:');
     console.log(peripheral.id);
     console.log('data');
@@ -239,7 +234,12 @@ const Sensor = ({navigation}) => {
       });
 
     // wpijemy wartość [0xa0, 0x1f] do characteristics "charwrite" żeby uruchomić odczytywanie w czasie rzeczywistym
-    await BleManager.write(peripheral.id, service, charwrite, [0xa0, 0x1f])
+    await BleManager.write(
+      peripheral.id,
+      config.service,
+      config.characteristicToWrite,
+      config.byteRealTimeData,
+    )
       .then(() => {
         console.log('Enabled real-time data!');
       })
@@ -251,7 +251,11 @@ const Sensor = ({navigation}) => {
     //The buffer will collect a number or messages from the server and then emit once the buffer count it reached.
     //Helpful to reducing the number or js bridge crossings when a characteristic is sending a lot of messages. Returns a Promise objec
 
-    // await BleManager.startNotification(peripheral.id, service, characteristic)
+    // await BleManager.startNotification(
+    //   peripheral.id,
+    //   config.service,
+    //   config.characteristic,
+    // )
     //   .then(() => {
     //     console.log('started notifications of:  ' + peripheral.id);
     //   })
@@ -261,13 +265,7 @@ const Sensor = ({navigation}) => {
     return;
   };
 
-  const turnOnDiode = async (
-    peripheral,
-    service = '00001204-0000-1000-8000-00805f9b34fb',
-    characteristic = '00001a01-0000-1000-8000-00805f9b34fb',
-  ) => {
-    const charwrite = '00001a00-0000-1000-8000-00805f9b34fb';
-
+  const turnOnDiode = async peripheral => {
     // połącz się z czujnikiem
     await BleManager.connect(peripheral.id)
       .then(() => {
@@ -296,13 +294,30 @@ const Sensor = ({navigation}) => {
       });
 
     // // zaświeć diodą
-    // await BleManager.write(peripheral.id, service, charwrite, [0xfd, 0xff])
+    // await BleManager.write(peripheral.id,config.service, config.characteristicToWrite, config.byteTurnOnDiote)
     //   .then(() => {
     //     console.log('Blik!');
     //   })
     //   .catch(error => {
     //     console.log(error);
     //   });
+  };
+
+  const retriveConnection = async peripheral => {
+    await BleManager.connect(peripheral.id)
+      .then(() => {
+        console.log('Connected to ' + peripheral.id);
+        ToastAndroid.showWithGravity(
+          'Retrived connection with' + peripheral.id,
+          ToastAndroid.SHORT,
+          ToastAndroid.BOTTOM,
+        );
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+    return;
   };
 
   const disconectPeripheral = async peripheral => {
@@ -476,17 +491,6 @@ const Sensor = ({navigation}) => {
     }
   };
 
-  const getSensorDataFromStorage = () => {
-    return storage.getAllSensorData();
-  };
-
-  /*
-  (async () => {
-    const msg = await storage.get('damian');
-    console.log('Widomosc z przyszlosci', msg);
-  })();
-  */
-
   useEffect(() => {
     (async () => {
       setSensorListConnected(await storage.getAllSensorData());
@@ -506,23 +510,35 @@ const Sensor = ({navigation}) => {
             console.log('POŁĄCZONE');
             console.log(result);
             for (let i = 0; i < result.length; i++) {
-              connect(result[i]);
+              retriveConnection(result[i]);
               console.log(result[i]);
             }
           }
         })();
-        // if (await storage.getAllSensorData()) {
-        //   console.log('Mamy to');
-        //   const result =
-        //   console.log(peripheralsConnected);
-        //   console.log(peripheralsConnected.length);
-        //   for (let i = 0; i < sensorListConnected.length; i++) {
-        //     connect(sensorListConnected[i]);
-        //     console.log(sensorListConnected[i]);
-        //   }
-        // }
-      }, 30000);
+      }, 60000);
     })();
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      setSensorListConnected(await storage.getAllSensorData());
+      console.log('sensorListConnected', sensorListConnected);
+      console.log('Executed once connecting');
+      (async () => {
+        const result = await storage.getAllSensorData();
+        if (result.length > 0) {
+          console.log('Mamy to');
+          console.log('POŁĄCZONE');
+          console.log(result);
+          for (let i = 0; i < result.length; i++) {
+            retriveConnection(result[i]);
+            console.log(result[i]);
+          }
+        }
+      })();
+    })();
+
+    return;
   }, []);
 
   useEffect(() => {
