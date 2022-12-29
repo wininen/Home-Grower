@@ -136,6 +136,11 @@ export const styles = StyleSheet.create({
     textAlignVertical: 'center',
     fontSize: 12,
   },
+  camera: {
+    position: 'relative',
+    alignItems: 'center',
+    padding: 30,
+  },
 });
 
 export const OuterContainer = styled.View`

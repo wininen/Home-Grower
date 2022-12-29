@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {Text, Image, TouchableOpacity} from 'react-native';
 
 import {styles} from '../../Styles';
@@ -14,9 +14,13 @@ import {
 } from './Profile.styled';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {NavigationContext} from '@react-navigation/native';
 import Layout from '../Layout/Layout';
 
-const Profile = ({navigation}) => {
+const Profile = () => {
+  const navigation = useContext(NavigationContext);
+  const navigate = dest => navigation.navigate(dest);
+
   const [unit, setUnit] = useState(
     require('../../assets/icons/profile/celsjus.png'),
   );
@@ -159,6 +163,7 @@ const Profile = ({navigation}) => {
               <Text style={styles.h3_but_green}>Oceń</Text>
             </RightRow>
           </ProfileRow>
+          <Separator />
           <ProfileRow>
             <LeftRow>
               <Image
@@ -168,7 +173,9 @@ const Profile = ({navigation}) => {
               <Text style={styles.h4}>Skanner QR</Text>
             </LeftRow>
             <RightRow>
-              <Text style={styles.h3_but_green}>Skanuj</Text>
+              <TouchableOpacity onPress={() => navigate('Scanner')}>
+                <Text style={styles.h3_but_green}>Skanuj</Text>
+              </TouchableOpacity>
             </RightRow>
           </ProfileRow>
         </ProfileOptions>
