@@ -159,6 +159,18 @@ const Profile = ({navigation}) => {
               <Text style={styles.h3_but_green}>Oceń</Text>
             </RightRow>
           </ProfileRow>
+          <ProfileRow>
+            <LeftRow>
+              <Image
+                source={require('../../assets/icons/profile/rate_app.png')}
+                style={styles.gapForTr}
+              />
+              <Text style={styles.h4}>Skanner QR</Text>
+            </LeftRow>
+            <RightRow>
+              <Text style={styles.h3_but_green}>Skanuj</Text>
+            </RightRow>
+          </ProfileRow>
         </ProfileOptions>
       </OuterContainer>
     </Layout>
