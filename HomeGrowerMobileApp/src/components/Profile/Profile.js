@@ -14,6 +14,10 @@ import {
 } from './Profile.styled';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import Entypo from 'react-native-vector-icons/Entypo';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Layout from '../Layout/Layout';
 
 const Profile = ({navigation, route}) => {
@@ -86,9 +90,10 @@ const Profile = ({navigation, route}) => {
         <ProfileOptions>
           <ProfileRow>
             <LeftRow>
-              <Image
-                source={require('../../assets/icons/profile/edit.png')}
-                style={styles.gapForTr}
+              <AntDesign
+                name="edit"
+                size={40}
+                style={{color: 'black', paddingRight: 15}}
               />
               <Text style={styles.h4}>Edytuj profil</Text>
             </LeftRow>
@@ -99,9 +104,10 @@ const Profile = ({navigation, route}) => {
           <Separator></Separator>
           <ProfileRow>
             <LeftRow>
-              <Image
-                source={require('../../assets/icons/profile/write.png')}
-                style={styles.gapForTr}
+              <Entypo
+                name="new-message"
+                size={40}
+                style={{color: 'black', paddingRight: 15}}
               />
               <Text style={styles.h4}>Napisz do nas</Text>
             </LeftRow>
@@ -112,9 +118,10 @@ const Profile = ({navigation, route}) => {
           <Separator></Separator>
           <ProfileRow>
             <LeftRow>
-              <Image
-                source={require('../../assets/icons/profile/language.png')}
-                style={styles.gapForTr}
+              <Entypo
+                name="language"
+                size={40}
+                style={{color: 'black', paddingRight: 15}}
               />
               <Text style={styles.h4}>Zmień język</Text>
             </LeftRow>
@@ -125,9 +132,10 @@ const Profile = ({navigation, route}) => {
           <Separator></Separator>
           <ProfileRow>
             <LeftRow>
-              <Image
-                source={require('../../assets/icons/profile/temperature_unit.png')}
-                style={styles.gapForTr}
+              <FontAwesome5
+                name="temperature-high"
+                size={40}
+                style={{color: 'black', paddingRight: 15}}
               />
               <Text style={styles.h4}>Jednostka temperatury</Text>
             </LeftRow>
@@ -140,9 +148,10 @@ const Profile = ({navigation, route}) => {
           <Separator></Separator>
           <ProfileRow>
             <LeftRow>
-              <Image
-                source={require('../../assets/icons/profile/history.png')}
-                style={styles.gapForTr}
+              <FontAwesome5
+                name="history"
+                size={40}
+                style={{color: 'black', paddingRight: 15}}
               />
               <Text style={styles.h4}>Historia sensorów</Text>
             </LeftRow>
@@ -153,9 +162,10 @@ const Profile = ({navigation, route}) => {
           <Separator></Separator>
           <ProfileRow>
             <LeftRow>
-              <Image
-                source={require('../../assets/icons/profile/rate_app.png')}
-                style={styles.gapForTr}
+              <AntDesign
+                name="like2"
+                size={40}
+                style={{color: 'black', paddingRight: 15}}
               />
               <Text style={styles.h4}>Oceń aplikację</Text>
             </LeftRow>
@@ -166,9 +176,10 @@ const Profile = ({navigation, route}) => {
           <Separator />
           <ProfileRow>
             <LeftRow>
-              <Image
-                source={require('../../assets/icons/profile/rate_app.png')}
-                style={styles.gapForTr}
+              <AntDesign
+                name="qrcode"
+                size={40}
+                style={{color: 'black', paddingRight: 15}}
               />
               <Text style={styles.h4}>Skanner QR</Text>
             </LeftRow>
