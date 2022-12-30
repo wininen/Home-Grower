@@ -14,12 +14,12 @@ import {
 } from './Profile.styled';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {NavigationContext} from '@react-navigation/native';
 import Layout from '../Layout/Layout';
 
-const Profile = () => {
-  const navigation = useContext(NavigationContext);
-  const navigate = dest => navigation.navigate(dest);
+const Profile = ({navigation, route}) => {
+  const qrCode = route.params;
+  console.log('Routeeeeee');
+  console.log(qrCode);
 
   const [unit, setUnit] = useState(
     require('../../assets/icons/profile/celsjus.png'),
@@ -173,7 +173,7 @@ const Profile = () => {
               <Text style={styles.h4}>Skanner QR</Text>
             </LeftRow>
             <RightRow>
-              <TouchableOpacity onPress={() => navigate('Scanner')}>
+              <TouchableOpacity onPress={() => navigation.navigate('Scanner')}>
                 <Text style={styles.h3_but_green}>Skanuj</Text>
               </TouchableOpacity>
             </RightRow>

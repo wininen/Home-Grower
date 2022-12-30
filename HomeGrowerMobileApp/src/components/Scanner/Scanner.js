@@ -14,6 +14,13 @@ const Scanner = () => {
   const navigation = useContext(NavigationContext);
   const navigate = dest => navigation.navigate(dest);
 
+  const onScan = event => {
+    console.log('Qr code');
+    console.log(event.nativeEvent.codeStringValue);
+    const qrCode = event.nativeEvent.codeStringValue;
+    navigation.navigate('Profile', {qrCode: qrCode});
+  };
+
   return (
     <Layout>
       <ScannerContainer>
@@ -22,7 +29,7 @@ const Scanner = () => {
           actions={{rightButtonText: 'Done', leftButtonText: 'Cancel'}}
           onBottomButtonPressed={event => this.onBottomButtonPressed(event)}
           scanBarcode={true}
-          onReadCode={event => console.log(event.nativeEvent.codeStringValue)} // optional
+          onReadCode={event => onScan(event)} // optional
           showFrame={true} // (default false) optional, show frame with transparent layer (qr code or barcode will be read on this area ONLY), start animation for scanner,that stoped when find any code. Frame always at center of the screen
           laserColor="red" // (default red) optional, color of laser in scanner frame
           frameColor="white" // (default white) optional, color of border of scanner frame
