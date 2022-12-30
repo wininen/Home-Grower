@@ -1,21 +1,23 @@
 import glob
 import json
 
+DESTINATION = "one_file_with_all_plants.json"
 
-def main(result):
+
+def main():
+    all_plants = []
+
     # przechodzenie po plikach json
     for file in glob.glob("../../plants/*.json"):
         with open(file) as f:
-            file_contents = f.read()
+            plant = json.load(f)
+        plant.pop('image')
 
-        # przepisanie zawartości pliku na zrozumiałego programistycznie jsona
-        file_json = json.loads(file_contents)
+        all_plants.append(plant)
 
-        # wywołanie przepisywania do zbiorczego pliku
-        result.write(file_contents)
-    result.close()
+    with open(DESTINATION, 'w') as f:
+        json.dump(all_plants, f)
 
 
 if __name__ == '__main__':
-    with open('onefilewithallplants.txt', 'w') as myfile:
-        main(myfile)
+    main()
