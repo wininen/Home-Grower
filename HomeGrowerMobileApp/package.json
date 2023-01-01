@@ -15,6 +15,8 @@
     "@react-navigation/native": "^6.0.13",
     "@react-navigation/native-stack": "^6.9.1",
     "buffer": "^6.0.3",
+    "link": "^1.5.1",
+    "linking": "^0.1.0-beta.5",
     "react": "^18.2.0",
     "react-native": "0.70.6",
     "react-native-ble-manager": "^8.4.4",
@@ -22,6 +24,7 @@
     "react-native-fs": "^2.20.0",
     "react-native-safe-area-context": "^4.4.1",
     "react-native-screens": "^3.18.2",
+    "react-native-sqlite-storage": "^6.0.1",
     "styled-components": "^5.3.6"
   },
   "devDependencies": {
