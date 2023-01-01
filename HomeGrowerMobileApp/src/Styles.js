@@ -1,3 +1,4 @@
+import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 import {StyleSheet} from 'react-native';
 import styled from 'styled-components/native';
 
@@ -50,10 +51,10 @@ export const styles = StyleSheet.create({
     color: '#000',
   },
   data_table: {
-    marginTop: 20,
+    // marginTop: 20,
     display: 'flex',
+    border: '1px solid green',
     // justifyContent: 'space-around',
-    flex: 1,
   },
   item: {
     backgroundColor: 'white',
@@ -78,35 +79,69 @@ export const styles = StyleSheet.create({
   bgImage: {
     flex: 1,
     justifyContent: 'center',
-  }  
+  },
+  sensorTitle: {
+    textAlign: 'center',
+    color: '#588157',
+    fontSize: 20,
+    fontWeight: '400',
+  },
+  plantsList: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    paddingVertical: 20,
+  },
+  shadow: {
+    borderWidth: 1,
+    borderColor: '#ddd',
+    shadowColor: '#000000',
+    shadowOffset: {width: 0, height: 2},
+    shadowOpacity: 0.9,
+    shadowRadius: 3,
+    elevation: 3,
+    borderRadius: 20,
+    margin: 10,
+    width: 220,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+  },
+  modalContent: {
+    flex: 1,
+    margin: 15,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 150,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 10,
+  },
+  modalText: {
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    fontSize: 12,
+  },
+  camera: {
+    position: 'relative',
+    alignItems: 'center',
+    padding: 30,
+  },
 });
-
-export const InnerContainer = styled.View`
-  display: flex;
-  flex-direction: row;
-  height: 64px;
-  width: 100%;
-  padding: 20px 20px 20px 20px;
-  background: #2fa84e;
-`;
-
-export const InnerContainerExtended = styled.View`
-  display: flex;
-  position: absolute;
-  flex-direction: column;
-  width: 100%;
-  height: 128px;
-  padding: 0 20px;
-  background: #2fa84e;
-  top: 64px;
-  z-index: 1001;
-`;
-
-export const InnerContainerExtendedList = styled.TouchableOpacity`
-  display: flex;
-  height: 64px;
-  justify-content: center;
-`;
 
 export const OuterContainer = styled.View`
   height: 100%;
@@ -115,7 +150,6 @@ export const OuterContainer = styled.View`
   padding: 0;
   margin: 0;
 `;
-
 
 export const ButtonsWrapper = styled.View`
   padding-top: 30px;
@@ -127,137 +161,10 @@ export const ButtonContainer = styled.View`
 `;
 
 export const StyledButton = styled.TouchableOpacity`
-  background-color: #2FA84E;
+  background-color: #2fa84e;
   border-radius: 25px;
   align-items: center;
   justify-content: center;
   height: 40px;
   width: 150px;
 `;
-
-export const PlantsList = styled.View`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  overflow-y: scroll;
-`;
-
-export const PlantsElement = styled.View`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 10px 15px;
-`;
-
-
-export const StyledImage = styled.Image`
-  width: 40px;
-  height: 40px;
-  border-radius: 20px;
-`;
-
-export const PlantsAfterElement = styled.View`
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  padding: 0px;
-  gap: 16px;
-`;
-
-export const PlantsFamily = styled.View`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  left: 15px;
-`;
-
-export const ForecastView = styled.SafeAreaView`
-  z-index: 1000;
-  margin: 0;
-  padding: 0 20px 20px 20px;
-`;
-
-export const ForecastOptions = styled.View`
-  height: 24px;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-`;
-
-export const ForecastMain = styled.View`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-`;
-
-export const ForecastTable = styled.View`
-  padding: 5px 0;
-  margin-top: 15%;
-  width: 70%;
-  background: rgba(33, 33, 33, 0.08);
-  display: flex;
-  flex-direction: column;
-`;
-
-export const ForecastTr = styled.View`
-  display: flex;
-  flex-direction: row;
-  margin: 10px 20px;
-  align-items: center;
-`;
-
-export const ForecastTd = styled.View`
-  display: flex;
-  flex-direction: column;
-  margin: 0 10px;
-`;
-
-export const ProfileName = styled.View`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 10%;
-`;
-
-export const ProfileOptions = styled.View`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 30px 0;
-`;
-
-export const ProfileRow = styled.View`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 10px 20px;
-  justify-content: space-between;
-`;
-
-export const RightRow = styled.View`
-  display: flex;
-  align-items: center;
-  width: 50%;
-  justify-content: flex-end;
-  flex-direction: row;
-`;
-
-export const LeftRow = styled.View`
-  width: 50%;
-  justify-content: flex-start;
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-`;
-
-export const Separator = styled.View`
-  border-color: #CCCCCC;
-  border-width: 1px;
-  width: 100%;
-  padding: 0;
-  display: flex;
-`;
-
-
-
