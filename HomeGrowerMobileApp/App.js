@@ -10,14 +10,14 @@ import Scanner from './src/components/Scanner/Scanner.js';
 const Main = createNativeStackNavigator();
 
 const App = () => {
+  return (
+    <NavigationContainer>
+      <Main.Navigator
+        initialRouteName="Home"
+        screenOptions={{headerShown: false}}>
+        <Main.Screen name="Home" component={SensorOld} />
 
-    return (
-      <NavigationContainer>
-        <Main.Navigator initialRouteName="Home" screenOptions={{headerShown: false}}>
-          <Main.Screen
-            name = "Home"
-            component = {Sensor}
-          />
+        <Main.Screen name="Plants" component={Plants} />
 
         <Main.Screen name="Forecast" component={Forecast} />
 
