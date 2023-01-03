@@ -10,8 +10,11 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
-
 const {width, height} = Dimensions.get('window');
+
+import Onboarding1 from '../../assets/images/onboarding_1.svg';
+import Onboarding2 from '../../assets/images/onboarding_2.svg';
+import Onboarding3 from '../../assets/images/onboarding_3.svg';
 
 const COLORS = {primary: '#282534', white: '#fff'};
 
