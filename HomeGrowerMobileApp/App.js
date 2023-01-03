@@ -5,24 +5,44 @@ import SensorOld from './src/components/Sensor/SensorOld.js';
 import Plants from './src/components/Plants/Plants.js';
 import Forecast from './src/components/Forecast/Forecast.js';
 import Profile from './src/components/Profile/Profile.js';
+import OnboardingScreen from './src/components/Onboarding/OnboardingScreens.js';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Main = createNativeStackNavigator();
 
 const App = () => {
+  const isAppLaunchedForFirstTime = React.useState(null);
+  const setIsAppLaunchecForFirstTime = React.useState(null);
+  React.useEffect(async () => {
+    const appData = await AsyncStorage.getItem('isAppLaunchedForFirstTime');
+    if (appData == null) {
+      setIsAppLaunchecForFirstTime(true);
+      // AsyncStorage.setItem('isAppLaunchedForFirstTime', 'false');
+    } else {
+      setIsAppLaunchecForFirstTime(false);
+    }
+  }, []);
+
   return (
-    <NavigationContainer>
-      <Main.Navigator
-        initialRouteName="Home"
-        screenOptions={{headerShown: false}}>
-        <Main.Screen name="Home" component={SensorOld} />
+    isAppLaunchedForFirstTime != null && (
+      <NavigationContainer>
+        <Main.Navigator screenOptions={{headerShown: false}}>
+          {isAppLaunchedForFirstTime && (
+            <Main.Screen
+              name="OnboardingScreens"
+              component={OnboardingScreen}
+            />
+          )}
+          <Main.Screen name="Home" component={SensorOld} />
 
-        <Main.Screen name="Plants" component={Plants} />
+          <Main.Screen name="Plants" component={Plants} />
 
-        <Main.Screen name="Forecast" component={Forecast} />
+          <Main.Screen name="Forecast" component={Forecast} />
 
-        <Main.Screen name="Profile" component={Profile} />
-      </Main.Navigator>
-    </NavigationContainer>
+          <Main.Screen name="Profile" component={Profile} />
+        </Main.Navigator>
+      </NavigationContainer>
+    )
   );
 };
 
