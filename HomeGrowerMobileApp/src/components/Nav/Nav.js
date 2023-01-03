@@ -34,14 +34,14 @@ export const Nav = () => {
         active={route.name === 'Plants'}
       />
       <NavOption
-        iconName="paypal"
+        iconName="signal"
         routeName="Sensor"
         redirectName="Home"
         navigate={navigate}
         active={route.name === 'Home'}
       />
       <NavOption
-        iconName="youtube"
+        iconName="user"
         routeName="Profil"
         redirectName="Profile"
         navigate={navigate}
