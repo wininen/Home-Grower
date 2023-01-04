@@ -113,28 +113,40 @@ const Plants = ({navigation}) => {
                     break;
                   case 'fertilization':
                     another.fertilization.push(value);
+                    break;
                   case 'pruning':
                     another.pruning.push(value);
+                    break;
                   case 'max_light_lux':
                     another.max_light_lux.push(value);
+                    break;
                   case 'min_light_lux':
                     another.min_light_lux.push(value);
+                    break;
                   case 'max_temp':
                     another.max_temp.push(value);
+                    break;
                   case 'min_temp':
                     another.min_temp.push(value);
+                    break;
                   case 'max_env_humid':
                     another.max_env_humid.push(value);
+                    break;
                   case 'min_env_humid':
                     another.min_env_humid.push(value);
+                    break;
                   case 'max_soil_moist':
                     another.max_soil_moist.push(value);
+                    break;
                   case 'min_soil_moist':
                     another.min_soil_moist.push(value);
+                    break;
                   case 'max_soil_ec':
                     another.max_soil_ec.push(value);
+                    break;
                   case 'min_soil_ec':
                     another.min_soil_ec.push(value);
+                    break;
                   default:
                     Alert.alert(value + " not implemented \n");
                 }
