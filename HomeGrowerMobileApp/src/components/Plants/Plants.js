@@ -26,7 +26,7 @@ SQLite.DEBUG(true);
 SQLite.enablePromise(false);
 
 let db = SQLite.openDatabase({
-  name: 'plants.db',
+  name: 'plantsSQLite.db',
   createFromLocation: 1,
 });
 
@@ -75,7 +75,7 @@ const Plants = ({navigation}) => {
             for (let i = 0; i < len; i++) {
               Object.entries(res.rows.item(i)).forEach(([key, value]) => {
                 if (key == 'pid') {
-                  console.log(key, value);
+                  // console.log(key, value);
                   pid.pid.push(value);
                 } else if (key == 'floral_language') {
                   another.floral_language.push(value);
@@ -126,8 +126,7 @@ const Plants = ({navigation}) => {
                 }
               });
             }
-            console.log(pid);
-            console.log(another);
+            console.log("Everything about SQLite done");
             setName(pid);
             setDetails(another);
             setLoading(false);
@@ -135,7 +134,7 @@ const Plants = ({navigation}) => {
         );
       });
     } catch (e) {
-      console.log(e);
+      console.log("ERROR" + e);
     }
   };
 
