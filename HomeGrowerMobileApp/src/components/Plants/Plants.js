@@ -67,62 +67,76 @@ const Plants = ({navigation}) => {
       };
       await db.transaction(txn => {
         txn.executeSql(
-          `SELECT pid, origin, production, category from 'plants'`,
+          `SELECT pid, origin, production, category FROM 'plants'`,
           [],
-          (tx, res) => {
+          (tx, reponse) => {
             console.log('Query completed');
-            const len = res.rows.length;
+            let len = reponse.rows.length;
             for (let i = 0; i < len; i++) {
-              Object.entries(res.rows.item(i)).forEach(([key, value]) => {
-                if (key == 'pid') {
-                  // console.log(key, value);
-                  pid.pid.push(value);
-                } else if (key == 'floral_language') {
-                  another.floral_language.push(value);
-                } else if (key == 'origin') {
-                  another.origin.push(value);
-                } else if (key == 'production') {
-                  another.production.push(value);
-                } else if (key == 'category') {
-                  another.category.push(value);
-                } else if (key == 'blooming') {
-                  another.blooming.push(value);
-                } else if (key == 'color') {
-                  another.color.push(value);
-                } else if (key == 'display_pid') {
-                  another.display_pid.push(item[key]);
-                } else if (key == 'size') {
-                  another.size.push(value);
-                } else if (key == 'soil') {
-                  another.soil.push(value);
-                } else if (key == 'sunlight') {
-                  another.sunlight.push(value);
-                } else if (key == 'watering') {
-                  another.watering.push(value);
-                } else if (key == 'fertilization') {
-                  another.fertilization.push(value);
-                } else if (key == 'pruning') {
-                  another.pruning.push(value);
-                } else if (key == 'max_light_lux') {
-                  another.max_light_lux.push(value);
-                } else if (key == 'min_light_lux') {
-                  another.min_light_lux.push(value);
-                } else if (key == 'max_temp') {
-                  another.max_temp.push(value);
-                } else if (key == 'min_temp') {
-                  another.min_temp.push(value);
-                } else if (key == 'max_env_humid') {
-                  another.max_env_humid.push(value);
-                } else if (key == 'min_env_humid') {
-                  another.min_env_humid.push(value);
-                } else if (key == 'max_soil_moist') {
-                  another.max_soil_moist.push(value);
-                } else if (key == 'min_soil_moist') {
-                  another.min_soil_moist.push(value);
-                } else if (key == 'max_soil_ec') {
-                  another.max_soil_ec.push(value);
-                } else if (key == 'min_soil_ec') {
-                  another.min_soil_ec.push(value);
+              Object.entries(reponse.rows.item(i)).forEach(([key, value]) => {
+                switch(key) {
+                  case 'pid':
+                    pid.pid.push(value);
+                    break;
+                  case 'floral_language':
+                    another.floral_language.push(value);
+                    break;
+                  case 'origin':
+                    another.origin.push(value);
+                    break;
+                  case 'production':
+                    another.production.push(value);
+                    break;
+                  case 'category':
+                    another.category.push(value);
+                    break;
+                  case 'blooming':
+                    another.blooming.push(value);
+                    break;
+                  case 'color':
+                    another.color.push(value);
+                    break;
+                  case 'display_pid':
+                    another.display_pid.push(item[key]);
+                    break;
+                  case 'size':
+                    another.size.push(value);
+                    break;
+                  case 'soil':
+                    another.soil.push(value);
+                    break;
+                  case 'sunlight':
+                    another.sunlight.push(value);
+                    break;
+                  case 'watering':
+                    another.watering.push(value);
+                    break;
+                  case 'fertilization':
+                    another.fertilization.push(value);
+                  case 'pruning':
+                    another.pruning.push(value);
+                  case 'max_light_lux':
+                    another.max_light_lux.push(value);
+                  case 'min_light_lux':
+                    another.min_light_lux.push(value);
+                  case 'max_temp':
+                    another.max_temp.push(value);
+                  case 'min_temp':
+                    another.min_temp.push(value);
+                  case 'max_env_humid':
+                    another.max_env_humid.push(value);
+                  case 'min_env_humid':
+                    another.min_env_humid.push(value);
+                  case 'max_soil_moist':
+                    another.max_soil_moist.push(value);
+                  case 'min_soil_moist':
+                    another.min_soil_moist.push(value);
+                  case 'max_soil_ec':
+                    another.max_soil_ec.push(value);
+                  case 'min_soil_ec':
+                    another.min_soil_ec.push(value);
+                  default:
+                    Alert.alert(value + " not implemented \n");
                 }
               });
             }
