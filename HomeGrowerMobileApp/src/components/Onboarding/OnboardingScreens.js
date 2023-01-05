@@ -12,30 +12,33 @@ import {
 } from 'react-native';
 const {width, height} = Dimensions.get('window');
 
-import Onboarding1 from '../../assets/images/onboarding_1.svg';
-import Onboarding2 from '../../assets/images/onboarding_2.svg';
-import Onboarding3 from '../../assets/images/onboarding_3.svg';
-
-const COLORS = {primary: '#282534', white: '#fff'};
+const COLORS = {primary: '#2FA84E', white: '#fff', dark: '#000'};
 
 const slides = [
   {
     id: '1',
-    image: require('../../assets/images/onboarding_1.svg'),
+    image: require('../../assets/images/onboarding_1.png'),
     title: 'Witaj w HomeGrower',
     subtitle: 'Rośliny zadbane jak nigdy przedtem',
   },
   {
     id: '2',
-    image: require('../../assets/images/onboarding_1.svg'),
+    image: require('../../assets/images/onboarding_2.png'),
     title: 'Nie musisz się przejmować',
     subtitle: 'Nasza aplikacja zajmie się dbaniem o Twoje rośliny',
   },
   {
     id: '3',
-    image: require('../../assets/images/onboarding_1.svg'),
+    image: require('../../assets/images/onboarding_3.png'),
     title: 'Zawsze z tobą',
     subtitle: 'Przypomnimy Tobie o wszystkich wymaganiach Twojej pociechy',
+  },
+  {
+    id: '4',
+    image: require('../../assets/images/onboarding_4.png'),
+    title: 'Byłeś juz z nami?',
+    subtitle:
+      'W tym miejsciu możesz przywrócić swoje dane lub zacząć jako nowy użytkownik',
   },
 ];
 
@@ -101,7 +104,7 @@ const OnboardingScreen = ({navigation}) => {
               style={[
                 styles.indicator,
                 currentSlideIndex == index && {
-                  backgroundColor: COLORS.white,
+                  backgroundColor: 'grey',
                   width: 25,
                 },
               ]}
@@ -112,12 +115,39 @@ const OnboardingScreen = ({navigation}) => {
         {/* Render buttons */}
         <View style={{marginBottom: 20}}>
           {currentSlideIndex == slides.length - 1 ? (
-            <View style={{height: 50}}>
+            <View style={{flexDirection: 'row'}}>
               <TouchableOpacity
-                style={styles.btn}
-                onPress={() => navigation.replace('Home')}>
-                <Text style={{fontWeight: 'bold', fontSize: 15}}>
-                  ZACZYNAMY
+                activeOpacity={0.8}
+                style={[
+                  styles.btn,
+                  {
+                    borderColor: COLORS.primary,
+                    borderWidth: 1,
+                    backgroundColor: 'transparent',
+                  },
+                ]}
+                onPress={() => navigation.navigate('Scanner')}>
+                <Text
+                  style={{
+                    fontWeight: 'bold',
+                    fontSize: 15,
+                    color: COLORS.primary,
+                  }}>
+                  IMPORTUJ DANE
+                </Text>
+              </TouchableOpacity>
+              <View style={{width: 15}} />
+              <TouchableOpacity
+                activeOpacity={0.8}
+                onPress={() => navigation.replace('Home')}
+                style={styles.btn}>
+                <Text
+                  style={{
+                    fontWeight: 'bold',
+                    fontSize: 15,
+                    color: COLORS.white,
+                  }}>
+                  JESTEM NOWY
                 </Text>
               </TouchableOpacity>
             </View>
@@ -128,7 +158,7 @@ const OnboardingScreen = ({navigation}) => {
                 style={[
                   styles.btn,
                   {
-                    borderColor: COLORS.white,
+                    borderColor: COLORS.primary,
                     borderWidth: 1,
                     backgroundColor: 'transparent',
                   },
@@ -138,7 +168,7 @@ const OnboardingScreen = ({navigation}) => {
                   style={{
                     fontWeight: 'bold',
                     fontSize: 15,
-                    color: COLORS.white,
+                    color: COLORS.primary,
                   }}>
                   POMIŃ
                 </Text>
@@ -152,6 +182,7 @@ const OnboardingScreen = ({navigation}) => {
                   style={{
                     fontWeight: 'bold',
                     fontSize: 15,
+                    color: COLORS.white,
                   }}>
                   DALEJ
                 </Text>
@@ -164,7 +195,7 @@ const OnboardingScreen = ({navigation}) => {
   };
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: COLORS.primary}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: COLORS.white}}>
       <StatusBar backgroundColor={COLORS.primary} />
       <FlatList
         ref={ref}
@@ -183,7 +214,7 @@ const OnboardingScreen = ({navigation}) => {
 
 const styles = StyleSheet.create({
   subtitle: {
-    color: COLORS.white,
+    color: COLORS.dark,
     fontSize: 13,
     marginTop: 10,
     maxWidth: '70%',
@@ -191,7 +222,7 @@ const styles = StyleSheet.create({
     lineHeight: 23,
   },
   title: {
-    color: COLORS.white,
+    color: COLORS.dark,
     fontSize: 22,
     fontWeight: 'bold',
     marginTop: 20,
@@ -205,15 +236,16 @@ const styles = StyleSheet.create({
   indicator: {
     height: 2.5,
     width: 10,
-    backgroundColor: 'grey',
+    backgroundColor: 'black',
     marginHorizontal: 3,
     borderRadius: 2,
   },
   btn: {
+    marginTop: 5,
     flex: 1,
     height: 50,
     borderRadius: 5,
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.primary,
     justifyContent: 'center',
     alignItems: 'center',
   },

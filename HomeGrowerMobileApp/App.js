@@ -12,15 +12,15 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const Main = createNativeStackNavigator();
 
 const App = () => {
-  const isAppLaunchedForFirstTime = React.useState(null);
-  const setIsAppLaunchecForFirstTime = React.useState(null);
+  const [isAppLaunchedForFirstTime, setIsAppLaunchedForFirstTime] =
+    React.useState(null);
   React.useEffect(async () => {
     const appData = await AsyncStorage.getItem('isAppLaunchedForFirstTime');
     if (appData == null) {
-      setIsAppLaunchecForFirstTime(true);
-      // AsyncStorage.setItem('isAppLaunchedForFirstTime', 'false');
+      setIsAppLaunchedForFirstTime(true);
+      AsyncStorage.setItem('isAppLaunchedForFirstTime', 'false');
     } else {
-      setIsAppLaunchecForFirstTime(false);
+      setIsAppLaunchedForFirstTime(false);
     }
   }, []);
 
