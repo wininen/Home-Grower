@@ -473,17 +473,19 @@ const Sensor = ({navigation}) => {
           );
         })
         .catch(error => {
-          console.log(error);
+          console.log("ERROR:" + error);
         });
     }
   };
 
   useEffect(() => {
     (async () => {
+      console.log("-----------------------------------------");
+      console.log("SENSOR CONNECTION START");
       setSensorListConnected(await storage.getAllSensorData());
       console.log('sensorListConnected', sensorListConnected);
 
-      console.log('tUTAJ INTERWAŁ');
+      console.log('TUTAJ INTERWAŁ');
       const interval = setInterval(() => {
         console.log("It's running");
         console.log(sensorListConnected);
@@ -502,6 +504,8 @@ const Sensor = ({navigation}) => {
             }
           }
         })();
+        console.log("SENSOR CONNECTION DONE");
+        console.log("-----------------------------------------");
       }, 60000);
     })();
   }, []);

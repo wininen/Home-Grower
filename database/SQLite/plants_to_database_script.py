@@ -13,14 +13,14 @@ def main(conn: sqlite3.Connection):
     cursor = conn.cursor()
 
     # pobranie poleceń tworzących bazę (z zapisanego pliku)
-    with open("create_databsase.sql") as f:
+    with open("create_database.sql") as f:
         sql_table_creation = f.read()
 
     # utworzenie tabel w bazie
     cursor.executescript(sql_table_creation)
 
     # przechodzenie po plikach json
-    for file in glob.glob("../plants/*.json"):
+    for file in glob.glob("../../plants/*.json"):
         with open(file) as f:
             file_contents = f.read()
 

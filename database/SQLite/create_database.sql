@@ -1,3 +1,4 @@
+-- cat create_database.sql | sqlite3 plants.db
 DROP TABLE IF EXISTS plants;
 CREATE TABLE plants ( 
     pid         TEXT NOT NULL UNIQUE,
@@ -40,10 +41,22 @@ CREATE TABLE reports(
 DROP TABLE IF EXISTS myplants;
 CREATE TABLE myplants(
     photo_path      TEXT,
-    my_plant_name   TEXT UNIQUE,
+    my_plant_id     TEXT UNIQUE,
+    my_plant_name   TEXT,
     plant_genus_id  INT,
-    report_id   INT,
-    PRIMARY KEY("my_plant_name"),
+    report_id       INT,
+    PRIMARY KEY("my_plant_id"),
     FOREIGN KEY(report_id)      REFERENCES reports(id),
     FOREIGN KEY(plant_genus_id) REFERENCES plants(pid)
 );
+
+DROP TABLE IF EXISTS user;
+CREATE TABLE user(
+    user_id         TEXT UNIQUE,
+    myplant_id      INT,
+    PRIMARY KEY("user_id"),
+    FOREIGN KEY(myplant_id)      REFERENCES reports(id)
+);
+
+-- 1 do wielu dla rośliny - raporty 
+-- nazwa my plants: osobna tabela id_usera + id_rośliny
