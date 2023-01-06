@@ -32,7 +32,7 @@ export const ForecastTable = styled.View`
   padding: 5px 0;
   margin-top: 15%;
   width: 70%;
-  background: rgba(33, 33, 33, 0.08);
+  background: rgba(33, 33, 33, 0.12);
   display: flex;
   flex-direction: column;
 `;
@@ -40,6 +40,7 @@ export const ForecastTable = styled.View`
 export const ForecastTr = styled.View`
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   margin: 10px 20px;
   align-items: center;
 `;
@@ -51,7 +52,7 @@ export const ForecastTd = styled.View`
 `;
 
 export const Separator = styled.View`
-  border-color: #cccccc;
+  border-color: #6f7c75;
   border-width: 1px;
   width: 100%;
   padding: 0;

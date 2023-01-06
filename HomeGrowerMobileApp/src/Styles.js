@@ -70,9 +70,6 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     textAlignVertical: 'center',
   },
-  gapForTr: {
-    right: 5,
-  },
   gapForMenu: {
     marginRight: 10,
   },
