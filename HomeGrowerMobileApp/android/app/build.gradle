@@ -269,11 +269,6 @@ dependencies {
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
 
-    def appcompat_version = "1.5.1"
-
-    implementation "androidx.appcompat:appcompat:$appcompat_version"
-    // For loading and tinting drawables on older versions of the platform
-    implementation "androidx.appcompat:appcompat-resources:$appcompat_version"
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
