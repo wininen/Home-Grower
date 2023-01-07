@@ -394,7 +394,6 @@ const Forecast = ({navigation}) => {
         8,
         10,
       )}/${fullDate.substring(0, 4)}`;
-      console.log(validForm);
       const days_name = ['Nd.', 'Pon.', 'Wt.', 'Śr.', 'Czw.', 'Pt.', 'Sob.'];
       const date_obj = new Date(validForm);
       const day_name = days_name[date_obj.getDay()];
@@ -408,9 +407,7 @@ const Forecast = ({navigation}) => {
           counter += 1;
         }
       }
-      console.log(day_name, nextDays);
       setWeek(nextDays);
-      console.log(week);
     } catch (e) {
       console.log('Error: ' + e);
     }
