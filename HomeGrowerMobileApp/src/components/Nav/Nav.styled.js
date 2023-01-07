@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {h6} from '../../styles/typography.styled';
 
