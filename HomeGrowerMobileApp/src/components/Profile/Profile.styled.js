@@ -53,3 +53,13 @@ export const ProfileRow = styled.View`
   padding: 10px 20px;
   justify-content: space-between;
 `;
+
+export const ModalButton = styled.TouchableOpacity`
+  margin-top: 30px;
+  background-color: #2fa84e;
+  border-radius: 25px;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  width: 100px;
+`;
