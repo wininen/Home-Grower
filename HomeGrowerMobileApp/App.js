@@ -1,6 +1,6 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import React, {useRef} from 'react';
+import React, {useState, useEffect} from 'react';
 import SensorOld from './src/components/Sensor/SensorOld.js';
 import Plants from './src/components/Plants/Plants.js';
 import Forecast from './src/components/Forecast/Forecast.js';
@@ -13,15 +13,24 @@ const Main = createNativeStackNavigator();
 
 const App = () => {
   const [isAppLaunchedForFirstTime, setIsAppLaunchedForFirstTime] =
-    React.useState(null);
-  React.useEffect(async () => {
-    const appData = await AsyncStorage.getItem('isAppLaunchedForFirstTime');
-    if (appData == null) {
-      setIsAppLaunchedForFirstTime(true);
-      AsyncStorage.setItem('isAppLaunchedForFirstTime', 'false');
-    } else {
-      setIsAppLaunchedForFirstTime(false);
+    useState(null);
+
+  const firstRun = async () => {
+    try {
+      const appData = await AsyncStorage.getItem('isAppLaunchedForFirstTime');
+      if (appData == null) {
+        setIsAppLaunchedForFirstTime(true);
+        AsyncStorage.setItem('isAppLaunchedForFirstTime', 'false');
+      } else {
+        setIsAppLaunchedForFirstTime(false);
+      }
+    } catch (err) {
+      console.log('Error occured: ' + err);
     }
+  };
+
+  useEffect(() => {
+    firstRun();
   }, []);
 
   return (
