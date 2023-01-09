@@ -1,7 +1,8 @@
 import React, {useEffect, useState, useContext} from 'react';
-import {Text, Image, TouchableOpacity} from 'react-native';
+import {Text, Image, TouchableOpacity, View} from 'react-native';
 
 import {styles} from '../../Styles';
+import QRCode from 'react-native-qrcode-svg';
 
 import {
   OuterContainer,
@@ -11,16 +12,20 @@ import {
   ProfileRow,
   ProfileOptions,
   Separator,
+  ModalButton,
 } from './Profile.styled';
-
+import {Modal} from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Layout from '../Layout/Layout';
+import GeneratorQr from '../Scanner/GeneratorQr';
 
 const Profile = ({navigation, route}) => {
+  const [modal, setModal] = useState(false);
+  const [qrCodeValue, setQrCodeValue] = useState(null);
   const qrCode = route.params;
   console.log('Routeeeeee');
   console.log(qrCode);
@@ -74,6 +79,11 @@ const Profile = ({navigation, route}) => {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const createQRCode = () => {
+    setQrCodeValue(GeneratorQr.returnUsername());
+    setModal(!modal);
   };
 
   useEffect(() => {
@@ -189,7 +199,40 @@ const Profile = ({navigation, route}) => {
               </TouchableOpacity>
             </RightRow>
           </ProfileRow>
+          <Separator />
+          <ProfileRow>
+            <LeftRow>
+              <AntDesign
+                name="qrcode"
+                size={40}
+                style={{color: 'black', paddingRight: 15}}
+              />
+              <Text style={styles.h4}>Generator QR</Text>
+            </LeftRow>
+            <RightRow>
+              <TouchableOpacity onPress={() => createQRCode()}>
+                <Text style={styles.h3_but_green}>Wygeneruj</Text>
+              </TouchableOpacity>
+            </RightRow>
+          </ProfileRow>
         </ProfileOptions>
+
+        <Modal
+          animationType="fade"
+          transparent={true}
+          visible={modal}
+          onRequestClose={() => {
+            setModal(!modal);
+          }}>
+          <View style={styles.modalContent}>
+            <View style={styles.modalContainer}>
+              <QRCode value={qrCodeValue} size={200} />
+              <ModalButton onPress={() => setModal(!modal)}>
+                <Text style={styles.body}>Wróć</Text>
+              </ModalButton>
+            </View>
+          </View>
+        </Modal>
       </OuterContainer>
     </Layout>
   );
