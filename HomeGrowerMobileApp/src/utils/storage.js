@@ -61,9 +61,10 @@ const getAllSensorData = async () => {
       '@weather_Key',
       'flower_data',
       'username',
+      'isAppLaunchedForFirstTime',
     ];
-    // console.log('KEYS');
-    // console.log(keys);
+    console.log('KEYS');
+    console.log(keys);
     const filteredKeys = keys.filter(item => !irrelevantKeys.includes(item));
     // console.log(filteredKeys);
     let result = await AsyncStorage.multiGet(filteredKeys);
