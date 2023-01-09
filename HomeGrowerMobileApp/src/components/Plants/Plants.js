@@ -6,6 +6,7 @@ import {
   ScrollView,
   View,
   SafeAreaView,
+  FlatList,
 } from 'react-native';
 import Layout from '../Layout/Layout.js';
 import {StyledButton, styles} from '../../Styles.js';
@@ -31,8 +32,7 @@ let db = SQLite.openDatabase({
 });
 
 const Plants = ({navigation}) => {
-  const [otherData, setOtherData] = useState({});
-  const [result, setResult] = useState([null, null, null, null]);
+  const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(true);
   const [name, setName] = useState({});
   const [details, setDetails] = useState({});
@@ -126,7 +126,7 @@ const Plants = ({navigation}) => {
                 }
               });
             }
-            console.log("Everything about SQLite done");
+            console.log('Everything about SQLite done');
             setName(pid);
             setDetails(another);
             setLoading(false);
@@ -134,7 +134,7 @@ const Plants = ({navigation}) => {
         );
       });
     } catch (e) {
-      console.log("ERROR" + e);
+      console.log('ERROR' + e);
     }
   };
 
@@ -143,8 +143,10 @@ const Plants = ({navigation}) => {
   const showDetails = async index => {
     let orig = await details.origin[index];
     let prod = await details.production[index];
-    let cat = await details.category[index];
-    setResult([orig, prod, cat]);
+    setResult([
+      ['Pochodzenie:', orig],
+      ['Produkcja:', prod],
+    ]);
     setModal(!modal);
   };
 
@@ -166,7 +168,7 @@ const Plants = ({navigation}) => {
                 />
                 <PlantsFamily>
                   <Text style={styles.bold_black}>{name.pid[0]}</Text>
-                  <Text>Rodzina</Text>
+                  <Text>{details.category[0]}</Text>
                 </PlantsFamily>
               </PlantsAfterElement>
             </PlantsElement>
@@ -177,7 +179,7 @@ const Plants = ({navigation}) => {
                 />
                 <PlantsFamily>
                   <Text style={styles.bold_black}>{name.pid[1]}</Text>
-                  <Text>Rodzina</Text>
+                  <Text>{details.category[1]}</Text>
                 </PlantsFamily>
               </PlantsAfterElement>
             </PlantsElement>
@@ -188,7 +190,7 @@ const Plants = ({navigation}) => {
                 />
                 <PlantsFamily>
                   <Text style={styles.bold_black}>{name.pid[2]}</Text>
-                  <Text>Rodzina</Text>
+                  <Text>{details.category[2]}</Text>
                 </PlantsFamily>
               </PlantsAfterElement>
             </PlantsElement>
@@ -199,7 +201,7 @@ const Plants = ({navigation}) => {
                 />
                 <PlantsFamily>
                   <Text style={styles.bold_black}>{name.pid[3]}</Text>
-                  <Text>Rodzina</Text>
+                  <Text>{details.category[3]}</Text>
                 </PlantsFamily>
               </PlantsAfterElement>
             </PlantsElement>
@@ -210,7 +212,7 @@ const Plants = ({navigation}) => {
                 />
                 <PlantsFamily>
                   <Text style={styles.bold_black}>{name.pid[4]}</Text>
-                  <Text>Rodzina</Text>
+                  <Text>{details.category[4]}</Text>
                 </PlantsFamily>
               </PlantsAfterElement>
             </PlantsElement>
@@ -221,7 +223,7 @@ const Plants = ({navigation}) => {
                 />
                 <PlantsFamily>
                   <Text style={styles.bold_black}>{name.pid[5]}</Text>
-                  <Text>Rodzina</Text>
+                  <Text>{details.category[5]}</Text>
                 </PlantsFamily>
               </PlantsAfterElement>
             </PlantsElement>
@@ -232,7 +234,7 @@ const Plants = ({navigation}) => {
                 />
                 <PlantsFamily>
                   <Text style={styles.bold_black}>{name.pid[6]}</Text>
-                  <Text>Rodzina</Text>
+                  <Text>{details.category[6]}</Text>
                 </PlantsFamily>
               </PlantsAfterElement>
             </PlantsElement>
@@ -243,7 +245,7 @@ const Plants = ({navigation}) => {
                 />
                 <PlantsFamily>
                   <Text style={styles.bold_black}>{name.pid[7]}</Text>
-                  <Text>Rodzina</Text>
+                  <Text>{details.category[7]}</Text>
                 </PlantsFamily>
               </PlantsAfterElement>
             </PlantsElement>
@@ -254,39 +256,36 @@ const Plants = ({navigation}) => {
                 />
                 <PlantsFamily>
                   <Text style={styles.bold_black}>{name.pid[8]}</Text>
-                  <Text>Rodzina</Text>
+                  <Text>{details.category[8]}</Text>
                 </PlantsFamily>
               </PlantsAfterElement>
             </PlantsElement>
           </ScrollView>
         )}
-        {otherData && result && (
-          <>
-            <Modal
-              animationType="fade"
-              transparent={true}
-              visible={modal}
-              onRequestClose={() => {
-                setModal(!modal);
-              }}>
-              <View style={styles.modalContent}>
-                <View style={styles.modalContainer}>
-                  <ModalList>
-                    <Text style={styles.modalText}>{result[0]}</Text>
-                  </ModalList>
-                  <ModalList>
-                    <Text style={styles.modalText}>{result[1]}</Text>
-                  </ModalList>
-                  <ModalList>
-                    <Text style={styles.modalText}>{result[2]}</Text>
-                  </ModalList>
-                  <ModalButton onPress={() => setModal(!modal)}>
-                    <Text style={styles.body}>Wróć</Text>
-                  </ModalButton>
-                </View>
+        {result != null && (
+          <Modal
+            animationType="fade"
+            transparent={true}
+            visible={modal}
+            onRequestClose={() => {
+              setModal(!modal);
+            }}>
+            <View style={styles.modalContent}>
+              <View style={styles.modalContainer}>
+                <ModalList>
+                  <Text style={styles.h4}>{result[0][0]}</Text>
+                  <Text style={styles.h4_bold}>{result[0][1]}</Text>
+                </ModalList>
+                <ModalList>
+                  <Text style={styles.h4}>{result[1][0]}</Text>
+                  <Text style={styles.h4_bold}>{result[1][1]}</Text>
+                </ModalList>
+                <ModalButton onPress={() => setModal(!modal)}>
+                  <Text style={styles.body}>Wróć</Text>
+                </ModalButton>
               </View>
-            </Modal>
-          </>
+            </View>
+          </Modal>
         )}
         <ButtonBox>
           <TouchableOpacity>

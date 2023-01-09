@@ -32,6 +32,12 @@ export const styles = StyleSheet.create({
     fontWeight: '400',
     color: '#000',
   },
+  h4_bold: {
+    fontSize: 14,
+    lineHeight: 18,
+    fontWeight: '700',
+    color: '#000',
+  },
   h3_but_green: {
     fontSize: 18,
     lineHeight: 20,
@@ -127,11 +133,6 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 10,
-  },
-  modalText: {
-    textAlign: 'center',
-    textAlignVertical: 'center',
-    fontSize: 12,
   },
   camera: {
     position: 'relative',

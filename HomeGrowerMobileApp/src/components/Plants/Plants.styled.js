@@ -53,10 +53,10 @@ export const ModalButton = styled.TouchableOpacity`
 `;
 
 export const ModalList = styled.TouchableOpacity`
-  background-color: #2fa84e;
+  background-color: #fff;
   border-radius: 25px;
   align-items: center;
   justify-content: center;
   height: 60px;
-  width: 350px;
+  width: 150px;
 `;
