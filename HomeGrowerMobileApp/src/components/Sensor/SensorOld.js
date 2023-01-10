@@ -55,6 +55,11 @@ const Sensor = ({navigation}) => {
             break;
           }
         }
+        console.log(
+          `Connected ma wartość ${isConnected};  czujnik ${peripheral.id} \n
+          `,
+        );
+        console.log(`mapa available: ${peripheralsAvailable}`);
 
         if (!isConnected) {
           peripheralsAvailable.set(peripheral.id, peripheral);
@@ -168,6 +173,8 @@ const Sensor = ({navigation}) => {
     await BleManager.scan([], 3)
       .then(() => {
         console.log('Scanning...');
+        peripheralsAvailable.clear();
+        setSensorListAvailable([]);
       })
       .catch(e => {
         console.log(error);
