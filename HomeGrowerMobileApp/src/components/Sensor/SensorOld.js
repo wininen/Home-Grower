@@ -38,16 +38,33 @@ const Sensor = ({navigation}) => {
   const peripheralsConnected = new Map();
 
   // funkcja obsługująca wyszukiwanie urządzeń
-  const handleDiscoverPeripheral = peripheral => {
+  const handleDiscoverPeripheral = async peripheral => {
     if (peripheral.name == 'Flower care') {
       if (flower_care.length == 0) {
-        peripheralsAvailable.set(peripheral.id, peripheral);
-        console.log('set');
-        console.log(peripheralsAvailable);
-        setFlowerCare(peripheral);
-        setSensorListAvailable(Array.from(peripheralsAvailable.values()));
-        console.log('after');
-        console.log(peripheralsAvailable);
+        const connectedPeripherals = await storage.getAllSensorData();
+        let isConnected = false;
+        console.log('connectedPeripherals');
+        console.log(connectedPeripherals);
+
+        for (i = 0; i < connectedPeripherals.length; i++) {
+          console.log('Wypisujemy');
+          console.log(connectedPeripherals[i].id);
+          console.log(peripheral.id);
+          if (connectedPeripherals[i].id == peripheral.id) {
+            isConnected = true;
+            break;
+          }
+        }
+
+        if (!isConnected) {
+          peripheralsAvailable.set(peripheral.id, peripheral);
+          console.log('set');
+          console.log(peripheralsAvailable);
+          setFlowerCare(peripheral);
+          setSensorListAvailable(Array.from(peripheralsAvailable.values()));
+          console.log('after');
+          console.log(peripheralsAvailable);
+        }
       }
     }
   };
@@ -137,6 +154,16 @@ const Sensor = ({navigation}) => {
       console.log('check location access permission');
       await getBluetoothScanPermission();
     }
+
+    await BleManager.enableBluetooth()
+      .then(() => {
+        // Success code
+        console.log('The bluetooth is already enabled or the user confirm');
+      })
+      .catch(error => {
+        // Failure code
+        console.log('The user refuse to enable bluetooth');
+      });
 
     await BleManager.scan([], 3)
       .then(() => {
@@ -473,15 +500,15 @@ const Sensor = ({navigation}) => {
           );
         })
         .catch(error => {
-          console.log("ERROR:" + error);
+          console.log('ERROR:' + error);
         });
     }
   };
 
   useEffect(() => {
     (async () => {
-      console.log("-----------------------------------------");
-      console.log("SENSOR CONNECTION START");
+      console.log('-----------------------------------------');
+      console.log('SENSOR CONNECTION START');
       setSensorListConnected(await storage.getAllSensorData());
       console.log('sensorListConnected', sensorListConnected);
 
@@ -504,8 +531,8 @@ const Sensor = ({navigation}) => {
             }
           }
         })();
-        console.log("SENSOR CONNECTION DONE");
-        console.log("-----------------------------------------");
+        console.log('SENSOR CONNECTION DONE');
+        console.log('-----------------------------------------');
       }, 60000);
     })();
   }, []);
