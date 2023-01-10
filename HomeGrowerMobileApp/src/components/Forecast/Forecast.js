@@ -3,9 +3,14 @@ import React, {useState, useEffect} from 'react';
 import {
   Text,
   Image,
+  View,
   TouchableOpacity,
   ImageBackground,
   PermissionsAndroid,
+  Alert,
+  Modal,
+  TextInput,
+  KeyboardAvoidingView,
 } from 'react-native';
 
 import {styles} from '../../Styles';
@@ -19,7 +24,10 @@ import {
   ForecastTable,
   ForecastTd,
   ForecastTr,
+  InputBox,
 } from './Forecast.styled';
+
+import {ModalList, ModalButton} from '../Plants/Plants.styled';
 
 import Geolocation from 'react-native-geolocation-service';
 import Layout from '../Layout/Layout';
@@ -413,6 +421,33 @@ const Forecast = ({navigation}) => {
     }
   };
 
+  const [inputCity, setInputCity] = useState(null);
+  const [modal, setModal] = useState(false);
+  const useOwnCity = async () => {
+    try {
+      console.log(inputCity);
+      fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${inputCity}&appid=${API_KEY}`,
+      )
+        .then(res => res.json())
+        .then(res => {
+          console.log(res);
+          useWeather(res.coord.lat, res.coord.lon);
+          savedCity(res.name);
+          setCity(res.name);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    } catch (err) {
+      Alert.alert(
+        'Error',
+        'Coś poszło nie tak ze sprawdzeniem pogody dla twojego miasta',
+      );
+    }
+    setModal(!modal);
+  };
+
   useEffect(() => {
     getWeather();
     getCity();
@@ -434,7 +469,7 @@ const Forecast = ({navigation}) => {
                   style={styles.gapForMenu}
                 />
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => setModal(!modal)}>
                 <Image
                   source={require('../../assets/icons/forecast/edit_location.png')}
                 />
@@ -534,6 +569,38 @@ const Forecast = ({navigation}) => {
                   </ForecastTd>
                 </ForecastTr>
               </ForecastTable>
+              {modal && (
+                <Modal
+                  animationType="fade"
+                  transparent={true}
+                  visible={modal}
+                  onRequestClose={() => {
+                    setModal(!modal);
+                  }}>
+                  <View style={styles.modalContainer}>
+                    <View style={styles.modalCityContent}>
+                      <ModalList>
+                        <Text style={styles.h4_bold}>Wpisz miasto</Text>
+                      </ModalList>
+                      <InputBox>
+                        <TextInput
+                          style={styles.h4}
+                          onChangeText={setInputCity}
+                          placeholder="Warszawa"
+                        />
+                      </InputBox>
+                      <ForecastTr>
+                        <ModalButton onPress={() => setModal(!modal)}>
+                          <Text style={styles.body}>Wróć</Text>
+                        </ModalButton>
+                        <ModalButton onPress={() => useOwnCity()}>
+                          <Text style={styles.body}>Wybierz</Text>
+                        </ModalButton>
+                      </ForecastTr>
+                    </View>
+                  </View>
+                </Modal>
+              )}
             </ForecastMain>
           </ForecastView>
         </ImageBackground>

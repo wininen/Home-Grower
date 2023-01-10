@@ -224,8 +224,8 @@ const Profile = ({navigation, route}) => {
           onRequestClose={() => {
             setModal(!modal);
           }}>
-          <View style={styles.modalContent}>
-            <View style={styles.modalContainer}>
+          <View style={styles.modalContainer}>
+            <View style={styles.modalQRContent}>
               <QRCode value={qrCodeValue} size={200} />
               <ModalButton onPress={() => setModal(!modal)}>
                 <Text style={styles.body}>Wróć</Text>

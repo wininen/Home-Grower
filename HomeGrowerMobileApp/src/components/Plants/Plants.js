@@ -7,6 +7,7 @@ import {
   View,
   SafeAreaView,
   FlatList,
+  VirtualizedList,
 } from 'react-native';
 import Layout from '../Layout/Layout.js';
 import {StyledButton, styles} from '../../Styles.js';
@@ -150,6 +151,12 @@ const Plants = ({navigation}) => {
     setModal(!modal);
   };
 
+  const renderList = ({item}) => (
+    <View>
+      <ModalList>{item.pid}</ModalList>
+    </View>
+  );
+
   useEffect(() => {
     fetchPlants();
   }, []);
@@ -160,7 +167,9 @@ const Plants = ({navigation}) => {
         {loading ? (
           <Text style={styles.h2}>Loading...</Text>
         ) : (
-          <ScrollView contentContainerStyle={styles.plantsList}>
+          <ScrollView
+            contentContainerStyle={styles.plantsList}
+            keyboardShouldPersistTaps="handled">
             <PlantsElement style={styles.shadow} onPress={() => showDetails(0)}>
               <PlantsAfterElement>
                 <StyledImage
@@ -270,8 +279,8 @@ const Plants = ({navigation}) => {
             onRequestClose={() => {
               setModal(!modal);
             }}>
-            <View style={styles.modalContent}>
-              <View style={styles.modalContainer}>
+            <View style={styles.modalContainer}>
+              <View style={styles.modalPlantContent}>
                 <ModalList>
                   <Text style={styles.h4}>{result[0][0]}</Text>
                   <Text style={styles.h4_bold}>{result[0][1]}</Text>

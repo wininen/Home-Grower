@@ -19,7 +19,7 @@
     "appcenter-crashes": "4.4.5",
     "axios": "^1.2.0",
     "buffer": "^6.0.3",
-    "react": "18.2.0",
+    "react": "18.1.0",
     "react-native": "0.70.6",
     "react-native-ble-manager": "^8.4.4",
     "react-native-camera-kit": "^13.0.0",

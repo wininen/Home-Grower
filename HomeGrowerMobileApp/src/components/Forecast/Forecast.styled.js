@@ -22,10 +22,10 @@ export const ForecastOptions = styled.View`
 `;
 
 export const ForecastMain = styled.View`
-  width: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
+  justify-content: center;
 `;
 
 export const ForecastTable = styled.View`
@@ -57,4 +57,11 @@ export const Separator = styled.View`
   width: 100%;
   padding: 0;
   display: flex;
+`;
+
+export const InputBox = styled.View`
+  border: 2px solid #2fa84e;
+  margin-bottom: 10px;
+  width: 200px;
+  border-radius: 20px;
 `;

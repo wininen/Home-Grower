@@ -8,7 +8,7 @@ export const PlantsContainer = styled.View`
 `;
 
 export const PlantsElement = styled.TouchableOpacity`
-  background-color: rgba(47, 168, 78, 0.7);
+  background-color: rgba(47, 168, 78, 0.8);
 `;
 
 export const StyledImage = styled.Image`
@@ -18,11 +18,8 @@ export const StyledImage = styled.Image`
 `;
 
 export const PlantsAfterElement = styled.View`
-  display: flex;
   flex-direction: row;
-  justify-content: center;
   align-items: center;
-  padding: 0px;
 `;
 
 export const PlantsFamily = styled.View`
@@ -53,8 +50,6 @@ export const ModalButton = styled.TouchableOpacity`
 `;
 
 export const ModalList = styled.TouchableOpacity`
-  background-color: #fff;
-  border-radius: 25px;
   align-items: center;
   justify-content: center;
   height: 60px;
