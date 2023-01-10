@@ -159,7 +159,7 @@ const Forecast = ({navigation}) => {
             '73.94°F',
           ]);
         } else {
-          setWeather([weatherImages.sun, '12°C', 'Pizga', '-2°C', '17°C']);
+          setWeather([weatherImages.sun, '23°C', 'Słońce', '22.6°C', '23.3°C']);
         }
       }
     } catch (err) {
@@ -331,7 +331,7 @@ const Forecast = ({navigation}) => {
     fetchAPI(lat, lon);
   };
 
-  const [city, setCity] = useState('Kraków');
+  const [city, setCity] = useState('Warszawa');
   const useCity = async (lat, lon) => {
     const fetchAPI = async (lat, lon) => {
       fetch(
