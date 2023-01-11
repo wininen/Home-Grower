@@ -27,7 +27,7 @@ import {
   InputBox,
 } from './Forecast.styled';
 
-import {ModalList, ModalButton} from '../Plants/Plants.styled';
+import {ModalList, ModalButton} from '../myPlants/MyPlants.styled';
 
 import Geolocation from 'react-native-geolocation-service';
 import Layout from '../Layout/Layout';

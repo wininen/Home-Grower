@@ -15,18 +15,12 @@ export const StyledImage = styled.Image`
   width: 40px;
   height: 40px;
   border-radius: 20px;
+  margin-right: 20px;
 `;
 
 export const PlantsAfterElement = styled.View`
   flex-direction: row;
   align-items: center;
-`;
-
-export const PlantsFamily = styled.View`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  left: 20px;
 `;
 
 export const ButtonBox = styled.View`

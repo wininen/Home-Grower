@@ -8,6 +8,8 @@ export const styles = StyleSheet.create({
     color: 'white',
   },
   bold_black: {
+    flex: 1,
+    flexWrap: 'wrap',
     fontWeight: 'bold',
   },
   bold_white: {
@@ -105,7 +107,7 @@ export const styles = StyleSheet.create({
     elevation: 3,
     borderRadius: 20,
     margin: 10,
-    width: 300,
+    width: 250,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',

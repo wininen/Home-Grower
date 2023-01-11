@@ -2,7 +2,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React, {useState, useEffect} from 'react';
 import SensorOld from './src/components/Sensor/SensorOld.js';
-import Plants from './src/components/Plants/Plants.js';
+import MyPlants from './src/components/myPlants/MyPlants.js';
+import AllPlants from './src/components/allPlants/AllPlants.js';
 import Forecast from './src/components/Forecast/Forecast.js';
 import Profile from './src/components/Profile/Profile.js';
 import Scanner from './src/components/Scanner/Scanner.js';
@@ -45,7 +46,9 @@ const App = () => {
           )}
           <Main.Screen name="Home" component={SensorOld} />
 
-          <Main.Screen name="Plants" component={Plants} />
+          <Main.Screen name="MyPlants" component={MyPlants} />
+
+          <Main.Screen name="AllPlants" component={AllPlants} />
 
           <Main.Screen name="Forecast" component={Forecast} />
 

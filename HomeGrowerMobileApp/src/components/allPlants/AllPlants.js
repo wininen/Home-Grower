@@ -5,23 +5,20 @@ import {
   Image,
   ScrollView,
   View,
-  SafeAreaView,
   FlatList,
-  VirtualizedList,
 } from 'react-native';
 import Layout from '../Layout/Layout.js';
-import {StyledButton, styles} from '../../Styles.js';
+import {styles} from '../../Styles.js';
 
 import {
   PlantsContainer,
   PlantsElement,
   StyledImage,
-  PlantsFamily,
   PlantsAfterElement,
   ButtonBox,
   ModalButton,
   ModalList,
-} from './Plants.styled';
+} from './AllPlants.styled';
 import {Modal} from 'react-native-paper';
 import SQLite from 'react-native-sqlite-storage';
 SQLite.DEBUG(true);
@@ -32,7 +29,7 @@ let db = SQLite.openDatabase({
   createFromLocation: 1,
 });
 
-const Plants = ({navigation}) => {
+const AllPlants = ({navigation}) => {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(true);
   const [name, setName] = useState({});
@@ -139,6 +136,15 @@ const Plants = ({navigation}) => {
     }
   };
 
+  const [newPlant, setNewPlant] = useState(null);
+
+  const addPlant = async () => {
+    try {
+    } catch (err) {
+      console.log('Error: ' + err);
+    }
+  };
+
   const [modal, setModal] = useState(false);
 
   const showDetails = async index => {
@@ -151,10 +157,15 @@ const Plants = ({navigation}) => {
     setModal(!modal);
   };
 
-  const renderList = ({item}) => (
-    <View>
-      <ModalList>{item.pid}</ModalList>
-    </View>
+  const renderList = ({item, index}) => (
+    <PlantsElement style={styles.shadow} onPress={() => showDetails(index)}>
+      <PlantsAfterElement>
+        <StyledImage
+          source={require('../../assets/images/achimenes_spp.jpg')}
+        />
+        <Text style={styles.bold_black}>{item}</Text>
+      </PlantsAfterElement>
+    </PlantsElement>
   );
 
   useEffect(() => {
@@ -170,105 +181,7 @@ const Plants = ({navigation}) => {
           <ScrollView
             contentContainerStyle={styles.plantsList}
             keyboardShouldPersistTaps="handled">
-            <PlantsElement style={styles.shadow} onPress={() => showDetails(0)}>
-              <PlantsAfterElement>
-                <StyledImage
-                  source={require('../../assets/images/achimenes_spp.jpg')}
-                />
-                <PlantsFamily>
-                  <Text style={styles.bold_black}>{name.pid[0]}</Text>
-                  <Text>{details.category[0]}</Text>
-                </PlantsFamily>
-              </PlantsAfterElement>
-            </PlantsElement>
-            <PlantsElement style={styles.shadow} onPress={() => showDetails(1)}>
-              <PlantsAfterElement>
-                <StyledImage
-                  source={require('../../assets/images/adenium_obesum.png')}
-                />
-                <PlantsFamily>
-                  <Text style={styles.bold_black}>{name.pid[1]}</Text>
-                  <Text>{details.category[1]}</Text>
-                </PlantsFamily>
-              </PlantsAfterElement>
-            </PlantsElement>
-            <PlantsElement style={styles.shadow} onPress={() => showDetails(2)}>
-              <PlantsAfterElement>
-                <StyledImage
-                  source={require('../../assets/images/aeonium_urbicum.jpg')}
-                />
-                <PlantsFamily>
-                  <Text style={styles.bold_black}>{name.pid[2]}</Text>
-                  <Text>{details.category[2]}</Text>
-                </PlantsFamily>
-              </PlantsAfterElement>
-            </PlantsElement>
-            <PlantsElement style={styles.shadow} onPress={() => showDetails(3)}>
-              <PlantsAfterElement>
-                <StyledImage
-                  source={require('../../assets/images/alocasia_cucullata.jpg')}
-                />
-                <PlantsFamily>
-                  <Text style={styles.bold_black}>{name.pid[3]}</Text>
-                  <Text>{details.category[3]}</Text>
-                </PlantsFamily>
-              </PlantsAfterElement>
-            </PlantsElement>
-            <PlantsElement style={styles.shadow} onPress={() => showDetails(4)}>
-              <PlantsAfterElement>
-                <StyledImage
-                  source={require('../../assets/images/calathea_concinna.jpg')}
-                />
-                <PlantsFamily>
-                  <Text style={styles.bold_black}>{name.pid[4]}</Text>
-                  <Text>{details.category[4]}</Text>
-                </PlantsFamily>
-              </PlantsAfterElement>
-            </PlantsElement>
-            <PlantsElement style={styles.shadow} onPress={() => showDetails(5)}>
-              <PlantsAfterElement>
-                <StyledImage
-                  source={require('../../assets/images/cordyline_fruticosa.jpg')}
-                />
-                <PlantsFamily>
-                  <Text style={styles.bold_black}>{name.pid[5]}</Text>
-                  <Text>{details.category[5]}</Text>
-                </PlantsFamily>
-              </PlantsAfterElement>
-            </PlantsElement>
-            <PlantsElement style={styles.shadow} onPress={() => showDetails(6)}>
-              <PlantsAfterElement>
-                <StyledImage
-                  source={require('../../assets/images/crassula_lactea.jpg')}
-                />
-                <PlantsFamily>
-                  <Text style={styles.bold_black}>{name.pid[6]}</Text>
-                  <Text>{details.category[6]}</Text>
-                </PlantsFamily>
-              </PlantsAfterElement>
-            </PlantsElement>
-            <PlantsElement style={styles.shadow} onPress={() => showDetails(7)}>
-              <PlantsAfterElement>
-                <StyledImage
-                  source={require('../../assets/images/dracaena_fragrans.jpg')}
-                />
-                <PlantsFamily>
-                  <Text style={styles.bold_black}>{name.pid[7]}</Text>
-                  <Text>{details.category[7]}</Text>
-                </PlantsFamily>
-              </PlantsAfterElement>
-            </PlantsElement>
-            <PlantsElement style={styles.shadow} onPress={() => showDetails(8)}>
-              <PlantsAfterElement>
-                <StyledImage
-                  source={require('../../assets/images/monstera_deliciosa.jpg')}
-                />
-                <PlantsFamily>
-                  <Text style={styles.bold_black}>{name.pid[8]}</Text>
-                  <Text>{details.category[8]}</Text>
-                </PlantsFamily>
-              </PlantsAfterElement>
-            </PlantsElement>
+            <FlatList data={name.pid.slice(0, 961)} renderItem={renderList} />
           </ScrollView>
         )}
         {result != null && (
@@ -289,23 +202,21 @@ const Plants = ({navigation}) => {
                   <Text style={styles.h4}>{result[1][0]}</Text>
                   <Text style={styles.h4_bold}>{result[1][1]}</Text>
                 </ModalList>
-                <ModalButton onPress={() => setModal(!modal)}>
-                  <Text style={styles.body}>Wróć</Text>
-                </ModalButton>
+                <PlantsAfterElement>
+                  <ModalButton onPress={() => setModal(!modal)}>
+                    <Text style={styles.body}>Wróć</Text>
+                  </ModalButton>
+                  <ModalButton onPress={() => navigation.navigate('MyPlants')}>
+                    <Text style={styles.body}>Dodaj</Text>
+                  </ModalButton>
+                </PlantsAfterElement>
               </View>
             </View>
           </Modal>
         )}
-        <ButtonBox>
-          <TouchableOpacity>
-            <Image
-              source={require('../../assets/icons/plants/add_plant.png')}
-            />
-          </TouchableOpacity>
-        </ButtonBox>
       </PlantsContainer>
     </Layout>
   );
 };
 
-export default Plants;
+export default AllPlants;
