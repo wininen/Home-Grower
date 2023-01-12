@@ -45,7 +45,13 @@ export const ModalButton = styled.TouchableOpacity`
 
 export const ModalList = styled.TouchableOpacity`
   align-items: center;
-  justify-content: center;
-  height: 60px;
-  width: 150px;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 200px;
+  height: 30px;
+  margin-bottom: 5px;
+`;
+
+export const ModalItem = styled.Text`
+  padding: 0 30px 10px 0;
 `;

@@ -6,6 +6,7 @@ import {
   ScrollView,
   View,
   FlatList,
+  Alert,
 } from 'react-native';
 import Layout from '../Layout/Layout.js';
 import {styles} from '../../Styles.js';
@@ -18,6 +19,7 @@ import {
   ButtonBox,
   ModalButton,
   ModalList,
+  ModalItem,
 } from './AllPlants.styled';
 import {Modal} from 'react-native-paper';
 import SQLite from 'react-native-sqlite-storage';
@@ -136,10 +138,32 @@ const AllPlants = ({navigation}) => {
     }
   };
 
-  const [newPlant, setNewPlant] = useState(null);
-
-  const addPlant = async () => {
+  const addPlant = async (name, origin, production, category) => {
     try {
+      await db.transaction(txn => {
+        txn.executeSql(
+          `SELECT 1 FROM 'myplants' WHERE photo_path = ?`,
+          [name],
+          (tx, resp) => {
+            if (resp.rows.length == 1) {
+              Alert.alert('Podana roślina znajduje się już w twoich roślinach');
+            } else {
+              txn.executeSql(
+                `INSERT INTO 'myplants' (photo_path, my_plant_name, plant_genus_id, report_id) VALUES(?,?,?,?)`,
+                [name, origin, production, category],
+                (tx, res) => {
+                  console.log('Query completed');
+                  const len = res.rowsAffected;
+                  if (len == 1) {
+                    console.log('Everything about SQLite done');
+                    navigation.navigate('MyPlants');
+                  }
+                },
+              );
+            }
+          },
+        );
+      });
     } catch (err) {
       console.log('Error: ' + err);
     }
@@ -147,18 +171,24 @@ const AllPlants = ({navigation}) => {
 
   const [modal, setModal] = useState(false);
 
-  const showDetails = async index => {
+  const showDetails = async (index, item) => {
     let orig = await details.origin[index];
     let prod = await details.production[index];
+    let cat = await details.category[index];
+    let name = await item;
     setResult([
+      ['Nazwa:', name],
       ['Pochodzenie:', orig],
       ['Produkcja:', prod],
+      ['Kategoria:', cat],
     ]);
     setModal(!modal);
   };
 
   const renderList = ({item, index}) => (
-    <PlantsElement style={styles.shadow} onPress={() => showDetails(index)}>
+    <PlantsElement
+      style={styles.shadow}
+      onPress={() => showDetails(index, item)}>
       <PlantsAfterElement>
         <StyledImage
           source={require('../../assets/images/achimenes_spp.jpg')}
@@ -195,21 +225,33 @@ const AllPlants = ({navigation}) => {
             <View style={styles.modalContainer}>
               <View style={styles.modalPlantContent}>
                 <ModalList>
-                  <Text style={styles.h4}>{result[0][0]}</Text>
-                  <Text style={styles.h4_bold}>{result[0][1]}</Text>
+                  <ModalItem style={styles.h4}>{result[1][0]}</ModalItem>
+                  <ModalItem style={styles.h4_bold}>{result[1][1]}</ModalItem>
                 </ModalList>
                 <ModalList>
-                  <Text style={styles.h4}>{result[1][0]}</Text>
-                  <Text style={styles.h4_bold}>{result[1][1]}</Text>
+                  <ModalItem style={styles.h4}>{result[2][0]}</ModalItem>
+                  <ModalItem style={styles.h4_bold}>{result[2][1]}</ModalItem>
                 </ModalList>
-                <PlantsAfterElement>
+                <ModalList>
+                  <ModalItem style={styles.h4}>{result[3][0]}</ModalItem>
+                  <ModalItem style={styles.h4_bold}>{result[3][1]}</ModalItem>
+                </ModalList>
+                <ModalList>
                   <ModalButton onPress={() => setModal(!modal)}>
                     <Text style={styles.body}>Wróć</Text>
                   </ModalButton>
-                  <ModalButton onPress={() => navigation.navigate('MyPlants')}>
+                  <ModalButton
+                    onPress={() =>
+                      addPlant(
+                        result[0][1],
+                        result[1][1],
+                        result[2][1],
+                        result[3][1],
+                      )
+                    }>
                     <Text style={styles.body}>Dodaj</Text>
                   </ModalButton>
-                </PlantsAfterElement>
+                </ModalList>
               </View>
             </View>
           </Modal>

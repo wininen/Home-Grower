@@ -579,9 +579,9 @@ const Forecast = ({navigation}) => {
                   }}>
                   <View style={styles.modalContainer}>
                     <View style={styles.modalCityContent}>
-                      <ModalList>
+                      <ForecastTr>
                         <Text style={styles.h4_bold}>Wpisz miasto</Text>
-                      </ModalList>
+                      </ForecastTr>
                       <InputBox>
                         <TextInput
                           style={styles.h4}

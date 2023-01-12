@@ -134,7 +134,7 @@ export const styles = StyleSheet.create({
   modalCityContent: {
     backgroundColor: 'white',
     borderRadius: 20,
-    paddingVertical: 20,
+    paddingVertical: 15,
     alignItems: 'center',
     shadowColor: '#000',
     shadowOffset: {
@@ -148,8 +148,8 @@ export const styles = StyleSheet.create({
   modalPlantContent: {
     backgroundColor: 'white',
     borderRadius: 20,
-    paddingVertical: 90,
-    paddingHorizontal: 30,
+    paddingVertical: 80,
+    paddingHorizontal: 50,
     alignItems: 'center',
     justifyContent: 'center',
     shadowColor: '#000',
@@ -165,7 +165,6 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 10,
   },
   camera: {
     position: 'relative',
