@@ -126,7 +126,7 @@ const Plants = ({navigation}) => {
                 }
               });
             }
-            console.log("Everything about SQLite done");
+            console.log('Everything about SQLite done');
             setName(pid);
             setDetails(another);
             setLoading(false);
@@ -134,7 +134,7 @@ const Plants = ({navigation}) => {
         );
       });
     } catch (e) {
-      console.log("ERROR" + e);
+      console.log('ERROR' + e);
     }
   };
 
@@ -170,90 +170,15 @@ const Plants = ({navigation}) => {
                 </PlantsFamily>
               </PlantsAfterElement>
             </PlantsElement>
-            <PlantsElement style={styles.shadow} onPress={() => showDetails(1)}>
+            <PlantsElement
+              style={styles.shadow}
+              onPress={() => navigation.navigate('MyPlant')}>
               <PlantsAfterElement>
                 <StyledImage
                   source={require('../../assets/images/adenium_obesum.png')}
                 />
                 <PlantsFamily>
                   <Text style={styles.bold_black}>{name.pid[1]}</Text>
-                  <Text>Rodzina</Text>
-                </PlantsFamily>
-              </PlantsAfterElement>
-            </PlantsElement>
-            <PlantsElement style={styles.shadow} onPress={() => showDetails(2)}>
-              <PlantsAfterElement>
-                <StyledImage
-                  source={require('../../assets/images/aeonium_urbicum.jpg')}
-                />
-                <PlantsFamily>
-                  <Text style={styles.bold_black}>{name.pid[2]}</Text>
-                  <Text>Rodzina</Text>
-                </PlantsFamily>
-              </PlantsAfterElement>
-            </PlantsElement>
-            <PlantsElement style={styles.shadow} onPress={() => showDetails(3)}>
-              <PlantsAfterElement>
-                <StyledImage
-                  source={require('../../assets/images/alocasia_cucullata.jpg')}
-                />
-                <PlantsFamily>
-                  <Text style={styles.bold_black}>{name.pid[3]}</Text>
-                  <Text>Rodzina</Text>
-                </PlantsFamily>
-              </PlantsAfterElement>
-            </PlantsElement>
-            <PlantsElement style={styles.shadow} onPress={() => showDetails(4)}>
-              <PlantsAfterElement>
-                <StyledImage
-                  source={require('../../assets/images/calathea_concinna.jpg')}
-                />
-                <PlantsFamily>
-                  <Text style={styles.bold_black}>{name.pid[4]}</Text>
-                  <Text>Rodzina</Text>
-                </PlantsFamily>
-              </PlantsAfterElement>
-            </PlantsElement>
-            <PlantsElement style={styles.shadow} onPress={() => showDetails(5)}>
-              <PlantsAfterElement>
-                <StyledImage
-                  source={require('../../assets/images/cordyline_fruticosa.jpg')}
-                />
-                <PlantsFamily>
-                  <Text style={styles.bold_black}>{name.pid[5]}</Text>
-                  <Text>Rodzina</Text>
-                </PlantsFamily>
-              </PlantsAfterElement>
-            </PlantsElement>
-            <PlantsElement style={styles.shadow} onPress={() => showDetails(6)}>
-              <PlantsAfterElement>
-                <StyledImage
-                  source={require('../../assets/images/crassula_lactea.jpg')}
-                />
-                <PlantsFamily>
-                  <Text style={styles.bold_black}>{name.pid[6]}</Text>
-                  <Text>Rodzina</Text>
-                </PlantsFamily>
-              </PlantsAfterElement>
-            </PlantsElement>
-            <PlantsElement style={styles.shadow} onPress={() => showDetails(7)}>
-              <PlantsAfterElement>
-                <StyledImage
-                  source={require('../../assets/images/dracaena_fragrans.jpg')}
-                />
-                <PlantsFamily>
-                  <Text style={styles.bold_black}>{name.pid[7]}</Text>
-                  <Text>Rodzina</Text>
-                </PlantsFamily>
-              </PlantsAfterElement>
-            </PlantsElement>
-            <PlantsElement style={styles.shadow} onPress={() => showDetails(8)}>
-              <PlantsAfterElement>
-                <StyledImage
-                  source={require('../../assets/images/monstera_deliciosa.jpg')}
-                />
-                <PlantsFamily>
-                  <Text style={styles.bold_black}>{name.pid[8]}</Text>
                   <Text>Rodzina</Text>
                 </PlantsFamily>
               </PlantsAfterElement>

@@ -37,6 +37,11 @@ const Sensor = ({navigation}) => {
   const peripheralsAvailable = new Map();
   const peripheralsConnected = new Map();
 
+  const getRealTimeDataForPlant = async peripheral => {
+    await connect(peripheral);
+    return datas;
+  };
+
   // funkcja obsługująca wyszukiwanie urządzeń
   const handleDiscoverPeripheral = peripheral => {
     if (peripheral.name == 'Flower care') {
@@ -238,17 +243,17 @@ const Sensor = ({navigation}) => {
     //The buffer will collect a number or messages from the server and then emit once the buffer count it reached.
     //Helpful to reducing the number or js bridge crossings when a characteristic is sending a lot of messages. Returns a Promise objec
 
-    // await BleManager.startNotification(
-    //   peripheral.id,
-    //   config.service,
-    //   config.characteristic,
-    // )
-    //   .then(() => {
-    //     console.log('started notifications of:  ' + peripheral.id);
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //   });
+    await BleManager.startNotification(
+      peripheral.id,
+      config.service,
+      config.characteristic,
+    )
+      .then(() => {
+        console.log('started notifications of:  ' + peripheral.id);
+      })
+      .catch(error => {
+        console.log(error);
+      });
     return;
   };
 
@@ -473,15 +478,15 @@ const Sensor = ({navigation}) => {
           );
         })
         .catch(error => {
-          console.log("ERROR:" + error);
+          console.log('ERROR:' + error);
         });
     }
   };
 
   useEffect(() => {
     (async () => {
-      console.log("-----------------------------------------");
-      console.log("SENSOR CONNECTION START");
+      console.log('-----------------------------------------');
+      console.log('SENSOR CONNECTION START');
       setSensorListConnected(await storage.getAllSensorData());
       console.log('sensorListConnected', sensorListConnected);
 
@@ -504,8 +509,8 @@ const Sensor = ({navigation}) => {
             }
           }
         })();
-        console.log("SENSOR CONNECTION DONE");
-        console.log("-----------------------------------------");
+        console.log('SENSOR CONNECTION DONE');
+        console.log('-----------------------------------------');
       }, 60000);
     })();
   }, []);
@@ -602,6 +607,127 @@ const Sensor = ({navigation}) => {
       </OuterContainer>
     </Layout>
   );
+};
+
+const getRealTimeDataForPlant = async peripheral => {
+  const [flower_care, setFlowerCare] = useState([]);
+  const [sensorListAvailable, setSensorListAvailable] = useState([]);
+  const [sensorListConnected, setSensorListConnected] = useState([]);
+  const [datas, setDatas] = useState();
+  const peripheralsAvailable = new Map();
+  const peripheralsConnected = new Map();
+
+  const connect = async peripheral => {
+    console.log('trying to connect:');
+    console.log(peripheral.id);
+    console.log('data');
+    console.log(peripheral);
+    console.log('......');
+
+    console.log(sensorListConnected);
+    console.log(sensorListAvailable);
+    console.log(peripheralsAvailable);
+    console.log(peripheralsConnected);
+
+    // połącz się z czujnikiem
+    await BleManager.connect(peripheral.id)
+      .then(() => {
+        console.log('Connected to ' + peripheral.id);
+        ToastAndroid.showWithGravity(
+          'Połączono z urządzeniem o adresie MAC: ' + peripheral.id,
+          ToastAndroid.SHORT,
+          ToastAndroid.BOTTOM,
+        );
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+    // storage.remove(peripheral.id);
+    try {
+      storage.setObject(peripheral.id, peripheral);
+    } catch (e) {
+      console.log('Object already exists');
+    }
+
+    //Zaktualizuj mapy i usestate
+    for (let i = 0; i < sensorListAvailable.length; i++) {
+      peripheralsAvailable.set(
+        sensorListAvailable[i].id,
+        sensorListAvailable[i],
+      );
+    }
+    peripheralsAvailable.delete(peripheral.id);
+    setSensorListAvailable(Array.from(peripheralsAvailable.values()));
+
+    for (let i = 0; i < sensorListConnected.length; i++) {
+      peripheralsConnected.set(
+        sensorListConnected[i].id,
+        sensorListConnected[i],
+      );
+    }
+    peripheralsConnected.set(peripheral.id, peripheral);
+    setSensorListConnected(Array.from(peripheralsConnected.values()));
+
+    const result = await storage.getAllSensorData();
+    console.log(result);
+
+    // odnajduje services i characteristics danego urządzenia
+    // trzeba zawsze uruchomić najpierw przed uruchomieniem metod write, read i start notification
+    await BleManager.retrieveServices(peripheral.id)
+      .then(peripheralData => {
+        console.log('Retrieved peripheral services');
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+    // wpijemy wartość [0xa0, 0x1f] do characteristics "charwrite" żeby uruchomić odczytywanie w czasie rzeczywistym
+    await BleManager.write(
+      peripheral.id,
+      config.service,
+      config.characteristicToWrite,
+      config.byteRealTimeData,
+    )
+      .then(() => {
+        console.log('Enabled real-time data!');
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+    //Start the notification on the specified characteristic, you need to call retrieveServices method before.
+    //The buffer will collect a number or messages from the server and then emit once the buffer count it reached.
+    //Helpful to reducing the number or js bridge crossings when a characteristic is sending a lot of messages. Returns a Promise objec
+
+    await BleManager.startNotification(
+      peripheral.id,
+      config.service,
+      config.characteristic,
+    )
+      .then(() => {
+        console.log('started notifications of:  ' + peripheral.id);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    return;
+  };
+
+  useEffect(() => {
+    BleManager.start({forceLegacy: true});
+  }, []);
+
+  //bleManagerEmmiter obsługuje eventy
+  useEffect(() => {
+    const subs_updateVal = bleManagerEmitter.addListener(
+      'BleManagerDidUpdateValueForCharacteristic',
+      handleUpdateValueForCharacteristic,
+    );
+    return () => {
+      subs_updateVal.remove();
+    };
+  }, []);
 };
 
 export default Sensor;
