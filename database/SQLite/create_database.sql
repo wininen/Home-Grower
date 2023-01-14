@@ -25,13 +25,13 @@ CREATE TABLE plants (
     min_soil_moist  INT,    -- odpowiadający parameter.min_soil_moist
     max_soil_ec     INT,    -- odpowiadający parameter.max_soil_ec
     min_soil_ec     INT,    -- odpowiadający parameter.min_soil_ec
+    image           BLOB,
     PRIMARY KEY("id")
 );
 
 DROP TABLE IF EXISTS myplants;
 CREATE TABLE myplants(
     id              TEXT UNIQUE,
-    photo_path      TEXT,
     plant_genus_id  TEXT,
     PRIMARY KEY("id"),
     FOREIGN KEY(plant_genus_id) REFERENCES plants(id)
@@ -39,7 +39,7 @@ CREATE TABLE myplants(
 
 DROP TABLE IF EXISTS reports;
 CREATE TABLE reports(
-    id          INTEGER NOT NULL UNIQUE,
+    id          TEXT NOT NULL UNIQUE,
     my_plant_id    TEXT,
     plant_genus_id TEXT,
     timestamp   DATETIME,
@@ -47,8 +47,9 @@ CREATE TABLE reports(
     env_humid   INT,
     soil_moist  INT,
     soil_ec     INT,
+    temp        INT,
     device_id   TEXT,
-    PRIMARY KEY("id" AUTOINCREMENT),
+    PRIMARY KEY("id"),
     FOREIGN KEY(my_plant_id) REFERENCES myplants(id),
     FOREIGN KEY(plant_genus_id) REFERENCES plants(id)
     
@@ -56,7 +57,7 @@ CREATE TABLE reports(
 
 DROP TABLE IF EXISTS myplantuser;
 CREATE TABLE myplantuser(
-    myplant_id  TEXT UNIQUE,
+    myplant_id  TEXT,
     user_id     TEXT,
     plant_name  TEXT,
     PRIMARY KEY("myplant_id","user_id"),
