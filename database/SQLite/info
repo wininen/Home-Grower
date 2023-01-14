@@ -52,7 +52,7 @@ device_id   TEXT,
 MYPLANTUSER
 tabela pośrednicząca
 przypisuje usera do rośliny; dzięki temu każdy user może nazywać tą samą roślinę inaczej
-myplant_id  PRIMARY KEY TEXT UNIQUE,  FOREIGN KEY(myplant_id) REFERENCES myplants(id)
+myplant_id  PRIMARY KEY TEXT,         FOREIGN KEY(myplant_id) REFERENCES myplants(id)
 user_id     PRIMARY KEY TEXT,         FOREIGN KEY(user_id) REFERENCES user(id)
 plant_name  TEXT,
 
