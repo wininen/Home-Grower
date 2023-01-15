@@ -156,10 +156,14 @@ const AllPlants = ({navigation}) => {
                   const len = res.rowsAffected;
                   if (len == 1) {
                     console.log('Everything about SQLite done');
-                    navigation.navigate('MyPlants');
+                  } else {
+                    console.log('Something went wrong');
                   }
                 },
               );
+              Alert.alert('Sukces!', 'Pomyślnie dodano roślinę', [
+                {onPress: () => navigation.goBack('MyPlants')},
+              ]);
             }
           },
         );

@@ -41,6 +41,7 @@ export const ModalButton = styled.TouchableOpacity`
   justify-content: center;
   height: 30px;
   width: 100px;
+  margin: 5px 5px 5px 0;
 `;
 
 export const ModalList = styled.TouchableOpacity`
@@ -53,5 +54,6 @@ export const ModalList = styled.TouchableOpacity`
 `;
 
 export const ModalItem = styled.Text`
-  padding: 0 30px 10px 0;
+  margin-left: -30px;
+  margin-right: -30px;
 `;

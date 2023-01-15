@@ -6,9 +6,11 @@ import {
   ScrollView,
   View,
   FlatList,
+  Alert,
 } from 'react-native';
 import Layout from '../Layout/Layout.js';
 import {StyledButton, styles} from '../../Styles.js';
+import {useIsFocused} from '@react-navigation/native';
 
 import {
   PlantsContainer,
@@ -18,10 +20,10 @@ import {
   ButtonBox,
   ModalButton,
   ModalList,
-} from './MyPlants.styled';
+  ModalItem,
+} from '../AllPlants/AllPlants.styled';
 import {Modal} from 'react-native-paper';
 import SQLite from 'react-native-sqlite-storage';
-import {ModalItem} from '../allPlants/AllPlants.styled.js';
 SQLite.DEBUG(true);
 SQLite.enablePromise(false);
 
@@ -35,6 +37,10 @@ const MyPlants = ({navigation}) => {
   const [loading, setLoading] = useState(true);
   const [myPlants, setMyPlants] = useState({});
   const [details, setDetails] = useState({});
+
+  const [changes, setChanges] = useState(0);
+
+  const isFocused = useIsFocused();
 
   const fetchPlants = async () => {
     try {
@@ -51,6 +57,7 @@ const MyPlants = ({navigation}) => {
           (tx, res) => {
             console.log('Query completed');
             const len = res.rows.length;
+            setChanges(len);
             for (let i = 0; i < len; i++) {
               Object.entries(res.rows.item(i)).forEach(([key, value]) => {
                 if (key == 'photo_path') {
@@ -68,7 +75,6 @@ const MyPlants = ({navigation}) => {
             console.log('Everything about SQLite done');
             setMyPlants(photo_path);
             setDetails(another);
-            setLoading(false);
           },
         );
       });
@@ -88,7 +94,14 @@ const MyPlants = ({navigation}) => {
             const len = res.rowsAffected;
             if (len > 0) {
               console.log('Everything about SQLite done');
-              navigation.navigate('MyPlants');
+              Alert.alert('Sukces!', 'Pomyślnie usunięto roślinę', [
+                {
+                  onPress: () => {
+                    setModal(!modal);
+                  },
+                },
+              ]);
+              navigation.push('MyPlants');
             }
           },
         );
@@ -129,14 +142,15 @@ const MyPlants = ({navigation}) => {
 
   useEffect(() => {
     fetchPlants();
-  }, []);
+    setLoading(false);
+  }, [isFocused]);
 
   return (
     <Layout>
       <PlantsContainer>
         {loading ? (
           <Text style={styles.h2}>Loading...</Text>
-        ) : myPlants.photo_path.length != 0 ? (
+        ) : changes != 0 ? (
           <ScrollView
             contentContainerStyle={styles.plantsList}
             keyboardShouldPersistTaps="handled">

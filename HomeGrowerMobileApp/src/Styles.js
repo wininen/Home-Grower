@@ -147,6 +147,7 @@ export const styles = StyleSheet.create({
   },
   modalPlantContent: {
     backgroundColor: 'white',
+    flexDirection: 'column',
     borderRadius: 20,
     paddingVertical: 80,
     paddingHorizontal: 50,
