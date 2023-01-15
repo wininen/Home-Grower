@@ -20,7 +20,7 @@ def main(conn: sqlite3.Connection):
     cursor.executescript(sql_table_creation)
 
     # przechodzenie po plikach json
-    for file in glob.glob("../../plants/*.json"):
+    for file in glob.glob("../plants/*.json"):
         with open(file) as f:
             file_contents = f.read()
 
@@ -29,7 +29,7 @@ def main(conn: sqlite3.Connection):
         # konstrukcja polecenia do bazy
         insert = f'''
                     INSERT INTO plants
-                    VALUES ({questionmarks(24)})
+                    VALUES ({questionmarks(25)})
                 '''
         # wywołanie polecenia do bazy
         cursor.execute(insert, (file_json['pid'],
@@ -44,7 +44,8 @@ def main(conn: sqlite3.Connection):
                                 file_json['parameter']['max_temp'], file_json['parameter']['min_temp'],
                                 file_json['parameter']['max_env_humid'], file_json['parameter']['min_env_humid'],
                                 file_json['parameter']['max_soil_moist'], file_json['parameter']['min_soil_moist'],
-                                file_json['parameter']['max_soil_ec'], file_json['parameter']['min_soil_ec']))
+                                file_json['parameter']['max_soil_ec'], file_json['parameter']['min_soil_ec'],
+                                file_json['image']))
 
 
 if __name__ == '__main__':

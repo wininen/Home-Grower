@@ -199,3 +199,13 @@ export const StyledButton = styled.TouchableOpacity`
   height: 40px;
   width: 150px;
 `;
+
+export const ButtonPlant = styled.TouchableOpacity`
+  background-color: #2fa84e;
+  border-radius: 25px;
+  align-items: center;
+  justify-content: center;
+  margin: 50px auto;
+  height: 40px;
+  width: 150px;
+`;

@@ -1,7 +1,7 @@
 -- cat create_database.sql | sqlite3 plants.db
 DROP TABLE IF EXISTS plants;
 CREATE TABLE plants ( 
-    pid         TEXT NOT NULL UNIQUE,
+    id          TEXT NOT NULL UNIQUE,
     floral_language TEXT,   -- odpowiadający basic.floral_language
     origin      TEXT,       -- odpowiadający basic.origin
     production  TEXT,       -- odpowiadający basic.production
@@ -25,38 +25,49 @@ CREATE TABLE plants (
     min_soil_moist  INT,    -- odpowiadający parameter.min_soil_moist
     max_soil_ec     INT,    -- odpowiadający parameter.max_soil_ec
     min_soil_ec     INT,    -- odpowiadający parameter.min_soil_ec
-    PRIMARY KEY("pid")
-);
-
-DROP TABLE IF EXISTS reports;
-CREATE TABLE reports(
-    id	INTEGER NOT NULL UNIQUE,
-    timestamp   DATETIME,
-    env_humid   INT,
-    soil_moist  INT,
-    soil_ec     INT,
-    PRIMARY KEY("id" AUTOINCREMENT)
+    image           BLOB,
+    PRIMARY KEY("id")
 );
 
 DROP TABLE IF EXISTS myplants;
 CREATE TABLE myplants(
-    photo_path      TEXT,
-    my_plant_id     TEXT UNIQUE,
-    my_plant_name   TEXT,
-    plant_genus_id  INT,
-    report_id       INT,
-    PRIMARY KEY("my_plant_id"),
-    FOREIGN KEY(report_id)      REFERENCES reports(id),
-    FOREIGN KEY(plant_genus_id) REFERENCES plants(pid)
+    id              TEXT UNIQUE,
+    plant_genus_id  TEXT,
+    PRIMARY KEY("id"),
+    FOREIGN KEY(plant_genus_id) REFERENCES plants(id)
+);
+
+DROP TABLE IF EXISTS reports;
+CREATE TABLE reports(
+    id          TEXT NOT NULL UNIQUE,
+    my_plant_id    TEXT,
+    plant_genus_id TEXT,
+    timestamp   DATETIME,
+    light       INT,
+    env_humid   INT,
+    soil_moist  INT,
+    soil_ec     INT,
+    temp        INT,
+    device_id   TEXT,
+    PRIMARY KEY("id"),
+    FOREIGN KEY(my_plant_id) REFERENCES myplants(id),
+    FOREIGN KEY(plant_genus_id) REFERENCES plants(id)
+    
+);
+
+DROP TABLE IF EXISTS myplantuser;
+CREATE TABLE myplantuser(
+    myplant_id  TEXT,
+    user_id     TEXT,
+    plant_name  TEXT,
+    PRIMARY KEY("myplant_id","user_id"),
+    FOREIGN KEY(myplant_id)      REFERENCES myplants(id),
+    FOREIGN KEY(user_id)         REFERENCES user(id)
 );
 
 DROP TABLE IF EXISTS user;
 CREATE TABLE user(
-    user_id         TEXT UNIQUE,
-    myplant_id      INT,
-    PRIMARY KEY("user_id"),
-    FOREIGN KEY(myplant_id)      REFERENCES reports(id)
+    id          TEXT UNIQUE,
+    username    TEXT,
+    PRIMARY KEY("id")
 );
-
--- 1 do wielu dla rośliny - raporty 
--- nazwa my plants: osobna tabela id_usera + id_rośliny
