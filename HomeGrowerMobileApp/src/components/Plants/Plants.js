@@ -185,7 +185,9 @@ const Plants = ({navigation}) => {
           <Text style={styles.h2}>Loading...</Text>
         ) : (
           <ScrollView contentContainerStyle={styles.plantsList}>
-            <PlantsElement style={styles.shadow} onPress={() => showDetails(0)}>
+            <PlantsElement
+              style={styles.shadow}
+              onPress={() => navigation.navigate('ScrollableTabBar')}>
               <PlantsAfterElement>
                 <StyledImage
                   source={require('../../assets/images/achimenes_spp.jpg')}
