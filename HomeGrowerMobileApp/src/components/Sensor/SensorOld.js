@@ -26,8 +26,37 @@ import {
   SensorsList,
 } from './Sensor.styled';
 
+import BackgroundService from 'react-native-background-actions';
+
 const BleManagerModule = NativeModules.BleManager;
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
+const sleep = time => new Promise(resolve => setTimeout(() => resolve(), time));
+
+const connectInterval = async taskDataArguments => {
+  // Example of an infinite loop task
+  console.log('witam');
+  const {delay} = taskDataArguments;
+  await new Promise(async resolve => {
+    for (let i = 0; BackgroundService.isRunning(); i++) {
+      console.log(i);
+      await sleep(delay);
+    }
+  });
+};
+
+const options = {
+  taskName: 'Example',
+  taskTitle: 'ExampleTask title',
+  taskDesc: 'ExampleTask desc',
+  taskIcon: {
+    name: 'ic_launcher',
+    type: 'mipmap',
+  },
+  color: '#ff00ff',
+  parameters: {
+    delay: 1000,
+  },
+};
 
 const Sensor = ({navigation}) => {
   const [flower_care, setFlowerCare] = useState([]);
@@ -483,58 +512,73 @@ const Sensor = ({navigation}) => {
     }
   };
 
+  // useEffect(() => {
+  //   (async () => {
+  //     console.log('-----------------------------------------');
+  //     console.log('SENSOR CONNECTION START');
+  //     setSensorListConnected(await storage.getAllSensorData());
+  //     console.log('sensorListConnected', sensorListConnected);
+
+  //     console.log('TUTAJ INTERWAŁ');
+  //     const interval = setInterval(() => {
+  //       console.log("It's running");
+  //       console.log(sensorListConnected);
+  //       console.log(sensorListAvailable);
+  //       console.log(peripheralsAvailable);
+  //       console.log(peripheralsConnected);
+  //       (async () => {
+  //         const result = await storage.getAllSensorData();
+  //         if (result.length > 0) {
+  //           console.log('Mamy to');
+  //           console.log('POŁĄCZONE');
+  //           console.log(result);
+  //           for (let i = 0; i < result.length; i++) {
+  //             retriveConnection(result[i]);
+  //             console.log(result[i]);
+  //           }
+  //         }
+  //       })();
+  //       console.log('SENSOR CONNECTION DONE');
+  //       console.log('-----------------------------------------');
+  //     }, 60000);
+  //   })();
+  // }, []);
+
+  // useEffect(() => {
+  //   (async () => {
+  //     setSensorListConnected(await storage.getAllSensorData());
+  //     console.log('sensorListConnected', sensorListConnected);
+  //     console.log('Executed once connecting');
+  //     (async () => {
+  //       const result = await storage.getAllSensorData();
+  //       if (result.length > 0) {
+  //         console.log('Mamy to');
+  //         console.log('POŁĄCZONE');
+  //         console.log(result);
+  //         for (let i = 0; i < result.length; i++) {
+  //           retriveConnection(result[i]);
+  //           console.log(result[i]);
+  //         }
+  //       }
+  //     })();
+  //   })();
+
+  //   return;
+  // }, []);
+
   useEffect(() => {
     (async () => {
-      console.log('-----------------------------------------');
-      console.log('SENSOR CONNECTION START');
-      setSensorListConnected(await storage.getAllSensorData());
-      console.log('sensorListConnected', sensorListConnected);
-
-      console.log('TUTAJ INTERWAŁ');
-      const interval = setInterval(() => {
-        console.log("It's running");
-        console.log(sensorListConnected);
-        console.log(sensorListAvailable);
-        console.log(peripheralsAvailable);
-        console.log(peripheralsConnected);
-        (async () => {
-          const result = await storage.getAllSensorData();
-          if (result.length > 0) {
-            console.log('Mamy to');
-            console.log('POŁĄCZONE');
-            console.log(result);
-            for (let i = 0; i < result.length; i++) {
-              retriveConnection(result[i]);
-              console.log(result[i]);
-            }
-          }
-        })();
-        console.log('SENSOR CONNECTION DONE');
-        console.log('-----------------------------------------');
-      }, 60000);
+      try {
+        console.log('Trying to start background service');
+        // console.log(BackgroundService.isRunning());
+        // await BackgroundService.start(connectInterval, options);
+        // console.log('Successful start!');
+        // await BackgroundService.updateNotification({taskDesc: 'Runned -> '});
+        // console.log(BackgroundService.isRunning());
+      } catch (e) {
+        console.log('Error', e);
+      }
     })();
-  }, []);
-
-  useEffect(() => {
-    (async () => {
-      setSensorListConnected(await storage.getAllSensorData());
-      console.log('sensorListConnected', sensorListConnected);
-      console.log('Executed once connecting');
-      (async () => {
-        const result = await storage.getAllSensorData();
-        if (result.length > 0) {
-          console.log('Mamy to');
-          console.log('POŁĄCZONE');
-          console.log(result);
-          for (let i = 0; i < result.length; i++) {
-            retriveConnection(result[i]);
-            console.log(result[i]);
-          }
-        }
-      })();
-    })();
-
-    return;
   }, []);
 
   useEffect(() => {
