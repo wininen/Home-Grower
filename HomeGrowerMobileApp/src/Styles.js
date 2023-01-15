@@ -8,6 +8,8 @@ export const styles = StyleSheet.create({
     color: 'white',
   },
   bold_black: {
+    flex: 1,
+    flexWrap: 'wrap',
     fontWeight: 'bold',
   },
   bold_white: {
@@ -32,9 +34,15 @@ export const styles = StyleSheet.create({
     fontWeight: '400',
     color: '#000',
   },
-  h3_but_green: {
-    fontSize: 18,
-    lineHeight: 20,
+  h4_bold: {
+    fontSize: 14,
+    lineHeight: 18,
+    fontWeight: '700',
+    color: '#000',
+  },
+  h4_but_green: {
+    fontSize: 14,
+    lineHeight: 18,
     fontWeight: '700',
     color: '#2fa84e',
   },
@@ -70,9 +78,6 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     textAlignVertical: 'center',
   },
-  gapForTr: {
-    right: 5,
-  },
   gapForMenu: {
     marginRight: 10,
   },
@@ -102,20 +107,52 @@ export const styles = StyleSheet.create({
     elevation: 3,
     borderRadius: 20,
     margin: 10,
-    width: 220,
+    width: 250,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 15,
     paddingVertical: 10,
   },
-  modalContent: {
-    flex: 1,
+  modalQRContent: {
     margin: 15,
     backgroundColor: 'white',
     borderRadius: 20,
-    padding: 150,
+    paddingHorizontal: 50,
+    paddingVertical: 150,
+    justifyContent: 'center',
     alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  modalCityContent: {
+    backgroundColor: 'white',
+    borderRadius: 20,
+    paddingVertical: 15,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  modalPlantContent: {
+    backgroundColor: 'white',
+    flexDirection: 'column',
+    borderRadius: 20,
+    paddingVertical: 80,
+    paddingHorizontal: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -129,12 +166,6 @@ export const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 10,
-  },
-  modalText: {
-    textAlign: 'center',
-    textAlignVertical: 'center',
-    fontSize: 12,
   },
   camera: {
     position: 'relative',

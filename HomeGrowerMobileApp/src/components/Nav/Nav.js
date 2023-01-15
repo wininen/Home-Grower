@@ -29,9 +29,9 @@ export const Nav = () => {
       <NavOption
         iconName="flower"
         routeName="Rośliny"
-        redirectName="Plants"
+        redirectName="MyPlants"
         navigate={navigate}
-        active={route.name === 'Plants'}
+        active={route.name === 'MyPlants'}
       />
       <NavOption
         iconName="signal"

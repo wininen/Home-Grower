@@ -42,6 +42,13 @@ export const NameRow = styled.View`
   flex-direction: row;
 `;
 
+export const SpecsContainer = styled.View`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+`;
+
 export const isValueInRangeStyle = function (leftBorder, rightBorder, value) {
   if (value >= leftBorder && value <= rightBorder) {
     return {
