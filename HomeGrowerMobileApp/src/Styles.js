@@ -40,9 +40,9 @@ export const styles = StyleSheet.create({
     fontWeight: '700',
     color: '#000',
   },
-  h3_but_green: {
-    fontSize: 18,
-    lineHeight: 20,
+  h4_but_green: {
+    fontSize: 14,
+    lineHeight: 18,
     fontWeight: '700',
     color: '#2fa84e',
   },

@@ -83,54 +83,17 @@ const MyPlants = ({navigation}) => {
     }
   };
 
-  const delPlant = async name => {
-    try {
-      await db.transaction(txn => {
-        txn.executeSql(
-          `DELETE FROM 'myplants' WHERE photo_path LIKE ?`,
-          [name],
-          (tx, res) => {
-            console.log('Query completed');
-            const len = res.rowsAffected;
-            if (len > 0) {
-              console.log('Everything about SQLite done');
-              Alert.alert('Sukces!', 'Pomyślnie usunięto roślinę', [
-                {
-                  onPress: () => {
-                    setModal(!modal);
-                  },
-                },
-              ]);
-              navigation.push('MyPlants');
-            }
-          },
-        );
-      });
-    } catch (err) {
-      console.log('Error: ' + err);
-    }
-  };
-
-  const [modal, setModal] = useState(false);
-
-  const showDetails = async (index, item) => {
-    let planame = await details.my_plant_name[index];
-    let plagenus = await details.plant_genus_id[index];
-    let repoid = await details.report_id[index];
-    let name = await item;
-    setResult([
-      ['Nazwa:', name],
-      ['Pochodzenie:', planame],
-      ['Produkcja:', plagenus],
-      ['Kategoria:', repoid],
-    ]);
-    setModal(!modal);
-  };
-
   const renderList = ({item, index}) => (
     <PlantsElement
       style={styles.shadow}
-      onPress={() => showDetails(index, item)}>
+      onPress={() =>
+        navigation.navigate('MyPlant', {
+          planame: ['Pochodzenie:', details.my_plant_name[index]],
+          plagenus: ['Produkcja:', details.plant_genus_id[index]],
+          repoid: ['Kategoria:', details.report_id[index]],
+          name: ['Nazwa:', item],
+        })
+      }>
       <PlantsAfterElement>
         <StyledImage
           source={require('../../assets/images/achimenes_spp.jpg')}
@@ -158,40 +121,6 @@ const MyPlants = ({navigation}) => {
           </ScrollView>
         ) : (
           <Text style={styles.h2}>Nie masz jeszcze żadnych roślin</Text>
-        )}
-        {result != null && (
-          <Modal
-            animationType="fade"
-            transparent={true}
-            visible={modal}
-            onRequestClose={() => {
-              setModal(!modal);
-            }}>
-            <View style={styles.modalContainer}>
-              <View style={styles.modalPlantContent}>
-                <ModalList>
-                  <ModalItem style={styles.h4}>{result[1][0]}</ModalItem>
-                  <ModalItem style={styles.h4_bold}>{result[1][1]}</ModalItem>
-                </ModalList>
-                <ModalList>
-                  <ModalItem style={styles.h4}>{result[2][0]}</ModalItem>
-                  <ModalItem style={styles.h4_bold}>{result[2][1]}</ModalItem>
-                </ModalList>
-                <ModalList>
-                  <ModalItem style={styles.h4}>{result[3][0]}</ModalItem>
-                  <ModalItem style={styles.h4_bold}>{result[3][1]}</ModalItem>
-                </ModalList>
-                <ModalList>
-                  <ModalButton onPress={() => setModal(!modal)}>
-                    <Text style={styles.body}>Wróć</Text>
-                  </ModalButton>
-                  <ModalButton onPress={() => delPlant(result[0][1])}>
-                    <Text style={styles.body}>Usuń</Text>
-                  </ModalButton>
-                </ModalList>
-              </View>
-            </View>
-          </Modal>
         )}
         <ButtonBox>
           <TouchableOpacity onPress={() => navigation.navigate('AllPlants')}>

@@ -108,7 +108,7 @@ const Profile = ({navigation, route}) => {
               <Text style={styles.h4}>Edytuj profil</Text>
             </LeftRow>
             <RightRow>
-              <Text style={styles.h3_but_green}>Edytuj</Text>
+              <Text style={styles.h4_but_green}>Edytuj</Text>
             </RightRow>
           </ProfileRow>
           <Separator></Separator>
@@ -122,7 +122,7 @@ const Profile = ({navigation, route}) => {
               <Text style={styles.h4}>Napisz do nas</Text>
             </LeftRow>
             <RightRow>
-              <Text style={styles.h3_but_green}>Napisz</Text>
+              <Text style={styles.h4_but_green}>Napisz</Text>
             </RightRow>
           </ProfileRow>
           <Separator></Separator>
@@ -136,7 +136,7 @@ const Profile = ({navigation, route}) => {
               <Text style={styles.h4}>Zmień język</Text>
             </LeftRow>
             <RightRow>
-              <Text style={styles.h3_but_green}>Polski</Text>
+              <Text style={styles.h4_but_green}>Polski</Text>
             </RightRow>
           </ProfileRow>
           <Separator></Separator>
@@ -151,7 +151,7 @@ const Profile = ({navigation, route}) => {
             </LeftRow>
             <RightRow>
               <TouchableOpacity onPress={() => changeUnit()}>
-                <Image source={unit} style={{height: 24, width: 24}} />
+                <Image source={unit} style={{height: 18, width: 18}} />
               </TouchableOpacity>
             </RightRow>
           </ProfileRow>
@@ -166,7 +166,7 @@ const Profile = ({navigation, route}) => {
               <Text style={styles.h4}>Historia sensorów</Text>
             </LeftRow>
             <RightRow>
-              <Text style={styles.h3_but_green}>Historia</Text>
+              <Text style={styles.h4_but_green}>Historia</Text>
             </RightRow>
           </ProfileRow>
           <Separator></Separator>
@@ -180,7 +180,7 @@ const Profile = ({navigation, route}) => {
               <Text style={styles.h4}>Oceń aplikację</Text>
             </LeftRow>
             <RightRow>
-              <Text style={styles.h3_but_green}>Oceń</Text>
+              <Text style={styles.h4_but_green}>Oceń</Text>
             </RightRow>
           </ProfileRow>
           <Separator />
@@ -195,7 +195,7 @@ const Profile = ({navigation, route}) => {
             </LeftRow>
             <RightRow>
               <TouchableOpacity onPress={() => navigation.navigate('Scanner')}>
-                <Text style={styles.h3_but_green}>Skanuj</Text>
+                <Text style={styles.h4_but_green}>Skanuj</Text>
               </TouchableOpacity>
             </RightRow>
           </ProfileRow>
@@ -211,7 +211,7 @@ const Profile = ({navigation, route}) => {
             </LeftRow>
             <RightRow>
               <TouchableOpacity onPress={() => createQRCode()}>
-                <Text style={styles.h3_but_green}>Wygeneruj</Text>
+                <Text style={styles.h4_but_green}>Wygeneruj</Text>
               </TouchableOpacity>
             </RightRow>
           </ProfileRow>
