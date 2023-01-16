@@ -8,6 +8,7 @@ import {
   NativeModules,
   NativeEventEmitter,
   Button,
+  Alert,
 } from 'react-native';
 import {ButtonPlant, styles, OuterContainer} from '../../Styles.js';
 import {
@@ -17,17 +18,28 @@ import {
   PropertiesContainer,
   PropertiesRow,
   Separator,
+  SpecsContainer,
 } from './MyPlants.styled.js';
+import {ModalButton, ModalItem, ModalList} from '../AllPlants/AllPlants.styled';
 import BleManager from 'react-native-ble-manager';
 import {Buffer} from 'buffer';
 import storage from '../../utils/storage.js';
 import config from '../../utils/config.js';
 import PlantsDataRow from './MyPlantsData.js';
 
+import SQLite from 'react-native-sqlite-storage';
+SQLite.DEBUG(true);
+SQLite.enablePromise(false);
+
+let db = SQLite.openDatabase({
+  name: 'plantsSQLite.db',
+  createFromLocation: 1,
+});
+
 const BleManagerModule = NativeModules.BleManager;
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 
-const MyPlant = ({navigation}) => {
+const MyPlant = ({route, navigation}) => {
   const [datas, setDatas] = useState([
     {id: 'temperature', title: 0},
     {id: 'light', title: 0},
@@ -166,6 +178,39 @@ const MyPlant = ({navigation}) => {
     );
   };
 
+  const delPlant = async name => {
+    try {
+      await db.transaction(txn => {
+        txn.executeSql(
+          `DELETE FROM 'myplants' WHERE photo_path LIKE ?`,
+          [name],
+          (tx, res) => {
+            console.log('Query completed');
+            const len = res.rowsAffected;
+            if (len > 0) {
+              console.log('Everything about SQLite done');
+              Alert.alert('Sukces!', 'Pomyślnie usunięto roślinę', [
+                {
+                  onPress: () => {
+                    navigation.goBack();
+                  },
+                },
+              ]);
+            }
+          },
+        );
+      });
+    } catch (err) {
+      console.log('Error: ' + err);
+    }
+  };
+
+  const {planame, plagenus, repoid, name} = route.params;
+
+  useEffect(() => {
+    console.log(planame, plagenus, repoid, name);
+  }, []);
+
   useEffect(() => {
     BleManager.start({forceLegacy: true});
   }, []);
@@ -193,8 +238,8 @@ const MyPlant = ({navigation}) => {
 
   return (
       <OuterContainer>
-        <ButtonPlant title="Pobierz dane " onPress={getData}>
-          <Text> Pobierz dane </Text>
+        <ButtonPlant title="Pobierz dane" onPress={getData}>
+          <Text style={styles.body}> Pobierz dane </Text>
         </ButtonPlant>
         <PropertiesContainer>
           <Separator />
@@ -202,6 +247,32 @@ const MyPlant = ({navigation}) => {
             <PlantsDataRow title={item.id} value={item.title} parameters={0} />
           ))}
         </PropertiesContainer>
+        <SpecsContainer>
+          <ModalList>
+            <ModalItem style={styles.h4}>{name[0]}</ModalItem>
+            <ModalItem style={styles.h4_bold}>{name[1]}</ModalItem>
+          </ModalList>
+          <ModalList>
+            <ModalItem style={styles.h4}>{planame[0]}</ModalItem>
+            <ModalItem style={styles.h4_bold}>{planame[1]}</ModalItem>
+          </ModalList>
+          <ModalList>
+            <ModalItem style={styles.h4}>{plagenus[0]}</ModalItem>
+            <ModalItem style={styles.h4_bold}>{plagenus[1]}</ModalItem>
+          </ModalList>
+          <ModalList>
+            <ModalItem style={styles.h4}>{repoid[0]}</ModalItem>
+            <ModalItem style={styles.h4_bold}>{repoid[1]}</ModalItem>
+          </ModalList>
+          <ModalList>
+            <ModalButton onPress={() => navigation.goBack('MyPlants')}>
+              <Text style={styles.body}>Wróć</Text>
+            </ModalButton>
+            <ModalButton onPress={() => delPlant(name[1])}>
+              <Text style={styles.body}>Usuń</Text>
+            </ModalButton>
+          </ModalList>
+        </SpecsContainer>
         {/* <FlatList
           style={styles.data_table}
           numColumns={4}
