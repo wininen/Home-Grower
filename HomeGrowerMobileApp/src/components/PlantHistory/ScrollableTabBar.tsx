@@ -16,14 +16,12 @@ type State = NavigationState<{
   title: string;
 }>;
 
-const ScrollableTabBar = ({route, navigation}) => {
+const ScrollableTabBar = ({route}) => {
   const [index, onIndexChange] = React.useState(1);
   const [routes] = React.useState([
-    {key: 'livedata', title: 'Bieżące odczyty'},
+    {key: 'livedata', title: 'Bieżące odczyty', params: route.params},
     {key: 'planthistory', title: 'Wykresy historyczne'},
   ]);
-
-  const {planame, plagenus, repoid, name} = route.params;
 
   const renderTabBar = (
     props: SceneRendererProps & {navigationState: State},
@@ -37,6 +35,14 @@ const ScrollableTabBar = ({route, navigation}) => {
       labelStyle={ScrollableTabBarStyles.label}
     />
   );
+
+  // const LiveData = ({route}: any) => (
+  //   <View style={{flex: 1}}>
+  //     <TouchableOpacity onPress={() => {}}>
+  //       <Text>{JSON.stringify(route.params)}</Text>
+  //     </TouchableOpacity>
+  //   </View>
+  // );
 
   const renderScene = SceneMap({
     livedata: LiveData,
