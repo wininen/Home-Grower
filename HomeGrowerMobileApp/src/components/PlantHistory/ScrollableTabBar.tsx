@@ -44,7 +44,7 @@ const ScrollableTabBar = () => {
   return (
     <Layout>
       <TabView
-        lazy
+        //lazy
         navigationState={{
           index,
           routes,
