@@ -24,6 +24,7 @@ import {
   SensorsContainer,
   ScrollableList,
   SensorsList,
+  isBackgroundTaskRunning,
 } from './Sensor.styled';
 
 import BackgroundService from 'react-native-background-actions';
@@ -51,6 +52,7 @@ const Sensor = ({navigation}) => {
   const [sensorListAvailable, setSensorListAvailable] = useState([]);
   const [sensorListConnected, setSensorListConnected] = useState([]);
   const [datas, setDatas] = useState();
+  const [active, setActive] = useState(true);
   const peripheralsAvailable = new Map();
   const peripheralsConnected = new Map();
 
@@ -58,40 +60,50 @@ const Sensor = ({navigation}) => {
     // Example of an infinite loop task
     const {delay} = taskDataArguments;
     await new Promise(async resolve => {
-      // For loop with a delay
-      // for (let i = 0; BackgroundService.isRunning(); i++) {
-      //   console.log(BackgroundService.isRunning(), delay);
-      //   console.log('-----------------------------------------');
-      //   console.log('SENSOR CONNECTION START');
-      //   setSensorListConnected(await storage.getAllSensorData());
-      //   console.log('sensorListConnected', sensorListConnected);
-      //   console.log('TUTAJ INTERWAŁ');
-      //   console.log("It's running");
-      //   console.log(sensorListConnected);
-      //   console.log(sensorListAvailable);
-      //   console.log(peripheralsAvailable);
-      //   console.log(peripheralsConnected);
-      //   (async () => {
-      //     const result = await storage.getAllSensorData();
-      //     if (result.length > 0) {
-      //       console.log('Mamy to');
-      //       console.log('POŁĄCZONE');
-      //       console.log(result);
-      //       for (let i = 0; i < result.length; i++) {
-      //         retriveConnection(result[i]);
-      //         console.log(result[i]);
-      //       }
-      //     }
-      //   })();
-      //   console.log('SENSOR CONNECTION DONE');
-      //   console.log('-----------------------------------------');
-      //   // for (let i = 0; BackgroundJob.isRunning(); i++) {
-      //   // console.log('Runned -> ', i);
-      //   // await BackgroundJob.updateNotification({ taskDesc: 'Runned -> ' + i });
-      //   await sleep(delay);
-      // }
+      for (let i = 0; BackgroundService.isRunning(); i++) {
+        console.log(BackgroundService.isRunning(), delay);
+        console.log('-----------------------------------------');
+        console.log('SENSOR CONNECTION START');
+        setSensorListConnected(await storage.getAllSensorData());
+        console.log('sensorListConnected', sensorListConnected);
+        console.log('TUTAJ INTERWAŁ');
+        console.log("It's running");
+        console.log(sensorListConnected);
+        console.log(sensorListAvailable);
+        console.log(peripheralsAvailable);
+        console.log(peripheralsConnected);
+        (async () => {
+          const result = await storage.getAllSensorData();
+          if (result.length > 0) {
+            console.log('Mamy to');
+            console.log('POŁĄCZONE');
+            console.log(result);
+            for (let i = 0; i < result.length; i++) {
+              retriveConnection(result[i]);
+              console.log(result[i]);
+            }
+          }
+        })();
+        console.log('SENSOR CONNECTION DONE');
+        //   console.log('-----------------------------------------');
+        //   // for (let i = 0; BackgroundJob.isRunning(); i++) {
+        //   // console.log('Runned -> ', i);
+        //   // await BackgroundJob.updateNotification({ taskDesc: 'Runned -> ' + i });
+        await sleep(delay);
+      }
       // }
     });
+  };
+
+  const stopBackgroundTask = async () => {
+    setActive(!active);
+    if (BackgroundService.isRunning()) {
+      await BackgroundService.stop();
+      console.log('Successful stop!');
+    } else {
+      await BackgroundService.start(connectInterval, options);
+      console.log('Successful start!');
+    }
   };
 
   // funkcja obsługująca wyszukiwanie urządzeń
@@ -597,7 +609,6 @@ const Sensor = ({navigation}) => {
         await BackgroundService.start(connectInterval, options);
         console.log('Successful start!');
         console.log(BackgroundService.isRunning());
-        await BackgroundService.stop();
       } catch (e) {
         console.log('Error', e);
       }
@@ -649,6 +660,15 @@ const Sensor = ({navigation}) => {
               <Text style={styles.body}>Wyszukaj urządzenie</Text>
             </StyledButton>
           </ButtonContainer>
+
+          <ButtonContainer>
+            <StyledButton
+              onPress={stopBackgroundTask}
+              accessibilityLabel="Wyszukaj urządzenie"
+              style={{backgroundColor: active ? '#A7C957' : '#BC4749'}}>
+              <Text style={styles.body}>Czuwaj w tle</Text>
+            </StyledButton>
+          </ButtonContainer>
         </ButtonsWrapper>
 
         {/* <FlatList
@@ -674,127 +694,6 @@ const Sensor = ({navigation}) => {
       </OuterContainer>
     </Layout>
   );
-};
-
-const getRealTimeDataForPlant = async peripheral => {
-  const [flower_care, setFlowerCare] = useState([]);
-  const [sensorListAvailable, setSensorListAvailable] = useState([]);
-  const [sensorListConnected, setSensorListConnected] = useState([]);
-  const [datas, setDatas] = useState();
-  const peripheralsAvailable = new Map();
-  const peripheralsConnected = new Map();
-
-  const connect = async peripheral => {
-    console.log('trying to connect:');
-    console.log(peripheral.id);
-    console.log('data');
-    console.log(peripheral);
-    console.log('......');
-
-    console.log(sensorListConnected);
-    console.log(sensorListAvailable);
-    console.log(peripheralsAvailable);
-    console.log(peripheralsConnected);
-
-    // połącz się z czujnikiem
-    await BleManager.connect(peripheral.id)
-      .then(() => {
-        console.log('Connected to ' + peripheral.id);
-        ToastAndroid.showWithGravity(
-          'Połączono z urządzeniem o adresie MAC: ' + peripheral.id,
-          ToastAndroid.SHORT,
-          ToastAndroid.BOTTOM,
-        );
-      })
-      .catch(error => {
-        console.log(error);
-      });
-
-    // storage.remove(peripheral.id);
-    try {
-      storage.setObject(peripheral.id, peripheral);
-    } catch (e) {
-      console.log('Object already exists');
-    }
-
-    //Zaktualizuj mapy i usestate
-    for (let i = 0; i < sensorListAvailable.length; i++) {
-      peripheralsAvailable.set(
-        sensorListAvailable[i].id,
-        sensorListAvailable[i],
-      );
-    }
-    peripheralsAvailable.delete(peripheral.id);
-    setSensorListAvailable(Array.from(peripheralsAvailable.values()));
-
-    for (let i = 0; i < sensorListConnected.length; i++) {
-      peripheralsConnected.set(
-        sensorListConnected[i].id,
-        sensorListConnected[i],
-      );
-    }
-    peripheralsConnected.set(peripheral.id, peripheral);
-    setSensorListConnected(Array.from(peripheralsConnected.values()));
-
-    const result = await storage.getAllSensorData();
-    console.log(result);
-
-    // odnajduje services i characteristics danego urządzenia
-    // trzeba zawsze uruchomić najpierw przed uruchomieniem metod write, read i start notification
-    await BleManager.retrieveServices(peripheral.id)
-      .then(peripheralData => {
-        console.log('Retrieved peripheral services');
-      })
-      .catch(error => {
-        console.log(error);
-      });
-
-    // wpijemy wartość [0xa0, 0x1f] do characteristics "charwrite" żeby uruchomić odczytywanie w czasie rzeczywistym
-    await BleManager.write(
-      peripheral.id,
-      config.service,
-      config.characteristicToWrite,
-      config.byteRealTimeData,
-    )
-      .then(() => {
-        console.log('Enabled real-time data!');
-      })
-      .catch(error => {
-        console.log(error);
-      });
-
-    //Start the notification on the specified characteristic, you need to call retrieveServices method before.
-    //The buffer will collect a number or messages from the server and then emit once the buffer count it reached.
-    //Helpful to reducing the number or js bridge crossings when a characteristic is sending a lot of messages. Returns a Promise objec
-
-    await BleManager.startNotification(
-      peripheral.id,
-      config.service,
-      config.characteristic,
-    )
-      .then(() => {
-        console.log('started notifications of:  ' + peripheral.id);
-      })
-      .catch(error => {
-        console.log(error);
-      });
-    return;
-  };
-
-  useEffect(() => {
-    BleManager.start({forceLegacy: true});
-  }, []);
-
-  //bleManagerEmmiter obsługuje eventy
-  useEffect(() => {
-    const subs_updateVal = bleManagerEmitter.addListener(
-      'BleManagerDidUpdateValueForCharacteristic',
-      handleUpdateValueForCharacteristic,
-    );
-    return () => {
-      subs_updateVal.remove();
-    };
-  }, []);
 };
 
 export default Sensor;
