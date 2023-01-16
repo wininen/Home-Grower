@@ -155,7 +155,7 @@ const Profile = ({navigation, route}) => {
               </TouchableOpacity>
             </RightRow>
           </ProfileRow>
-          <Separator></Separator>
+          {/* <Separator></Separator>
           <ProfileRow>
             <LeftRow>
               <FontAwesome5
@@ -168,7 +168,7 @@ const Profile = ({navigation, route}) => {
             <RightRow>
               <Text style={styles.h4_but_green}>Historia</Text>
             </RightRow>
-          </ProfileRow>
+          </ProfileRow> */}
           <Separator></Separator>
           <ProfileRow>
             <LeftRow>

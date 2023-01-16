@@ -10,6 +10,7 @@ import Scanner from './src/components/Scanner/Scanner.js';
 import OnboardingScreen from './src/components/Onboarding/OnboardingScreens.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import MyPlant from './src/components/MyPlant/MyPlant.js';
+import ScrollableTabBar from './src/components/PlantHistory/ScrollableTabBar.tsx';
 
 const Main = createNativeStackNavigator();
 
@@ -58,6 +59,8 @@ const App = () => {
           <Main.Screen name="Scanner" component={Scanner} />
 
           <Main.Screen name="MyPlant" component={MyPlant} />
+
+          <Main.Screen name="ScrollableTabBar" component={ScrollableTabBar} />
         </Main.Navigator>
       </NavigationContainer>
     )
