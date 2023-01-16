@@ -16,12 +16,14 @@ type State = NavigationState<{
   title: string;
 }>;
 
-const ScrollableTabBar = () => {
+const ScrollableTabBar = ({route, navigation}) => {
   const [index, onIndexChange] = React.useState(1);
   const [routes] = React.useState([
     {key: 'livedata', title: 'Bieżące odczyty'},
     {key: 'planthistory', title: 'Wykresy historyczne'},
   ]);
+
+  const {planame, plagenus, repoid, name} = route.params;
 
   const renderTabBar = (
     props: SceneRendererProps & {navigationState: State},
@@ -40,6 +42,17 @@ const ScrollableTabBar = () => {
     livedata: LiveData,
     planthistory: PlantHistory,
   });
+
+  //tutaj Gabrielu nwm jak to rozwiązać
+  //dokumentacja: https://github.com/react-navigation/react-navigation/tree/main/packages/react-native-tab-view
+  // const renderScene = ({route}) => {
+  //   switch (route.key) {
+  //     case 'livedata':
+  //       return <MusicRoute foo={this.props.foo} />;
+  //     case 'planthistory':
+  //       return <AlbumsRoute jumpTo={jumpTo} />;
+  //   }
+  // };
 
   return (
     <Layout>
