@@ -32,29 +32,17 @@ const BleManagerModule = NativeModules.BleManager;
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 const sleep = time => new Promise(resolve => setTimeout(() => resolve(), time));
 
-const connectInterval = async taskDataArguments => {
-  // Example of an infinite loop task
-  console.log('witam');
-  const {delay} = taskDataArguments;
-  await new Promise(async resolve => {
-    for (let i = 0; BackgroundService.isRunning(); i++) {
-      console.log(i);
-      await sleep(delay);
-    }
-  });
-};
-
 const options = {
-  taskName: 'Example',
-  taskTitle: 'ExampleTask title',
-  taskDesc: 'ExampleTask desc',
+  taskName: 'Sensor',
+  taskTitle: 'Czujnik czuwa',
+  taskDesc: 'Aplikacja pobiera w tle dane z czujnika',
   taskIcon: {
     name: 'ic_launcher',
     type: 'mipmap',
   },
   color: '#ff00ff',
   parameters: {
-    delay: 1000,
+    delay: 60000,
   },
 };
 
@@ -66,9 +54,44 @@ const Sensor = ({navigation}) => {
   const peripheralsAvailable = new Map();
   const peripheralsConnected = new Map();
 
-  const getRealTimeDataForPlant = async peripheral => {
-    await connect(peripheral);
-    return datas;
+  const connectInterval = async taskDataArguments => {
+    // Example of an infinite loop task
+    const {delay} = taskDataArguments;
+    await new Promise(async resolve => {
+      // For loop with a delay
+      // for (let i = 0; BackgroundService.isRunning(); i++) {
+      //   console.log(BackgroundService.isRunning(), delay);
+      //   console.log('-----------------------------------------');
+      //   console.log('SENSOR CONNECTION START');
+      //   setSensorListConnected(await storage.getAllSensorData());
+      //   console.log('sensorListConnected', sensorListConnected);
+      //   console.log('TUTAJ INTERWAŁ');
+      //   console.log("It's running");
+      //   console.log(sensorListConnected);
+      //   console.log(sensorListAvailable);
+      //   console.log(peripheralsAvailable);
+      //   console.log(peripheralsConnected);
+      //   (async () => {
+      //     const result = await storage.getAllSensorData();
+      //     if (result.length > 0) {
+      //       console.log('Mamy to');
+      //       console.log('POŁĄCZONE');
+      //       console.log(result);
+      //       for (let i = 0; i < result.length; i++) {
+      //         retriveConnection(result[i]);
+      //         console.log(result[i]);
+      //       }
+      //     }
+      //   })();
+      //   console.log('SENSOR CONNECTION DONE');
+      //   console.log('-----------------------------------------');
+      //   // for (let i = 0; BackgroundJob.isRunning(); i++) {
+      //   // console.log('Runned -> ', i);
+      //   // await BackgroundJob.updateNotification({ taskDesc: 'Runned -> ' + i });
+      //   await sleep(delay);
+      // }
+      // }
+    });
   };
 
   // funkcja obsługująca wyszukiwanie urządzeń
@@ -570,11 +593,11 @@ const Sensor = ({navigation}) => {
     (async () => {
       try {
         console.log('Trying to start background service');
-        // console.log(BackgroundService.isRunning());
-        // await BackgroundService.start(connectInterval, options);
-        // console.log('Successful start!');
-        // await BackgroundService.updateNotification({taskDesc: 'Runned -> '});
-        // console.log(BackgroundService.isRunning());
+        console.log(BackgroundService.isRunning());
+        await BackgroundService.start(connectInterval, options);
+        console.log('Successful start!');
+        console.log(BackgroundService.isRunning());
+        await BackgroundService.stop();
       } catch (e) {
         console.log('Error', e);
       }
