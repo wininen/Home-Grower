@@ -1,10 +1,11 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Dimensions} from 'react-native';
+const greatWidth = Dimensions.get('window').width * 0.5;
 export const ScrollableTabBarStyles = StyleSheet.create({
   tabbar: {
     backgroundColor: '#2fa84e',
   },
   tab: {
-    width: 200,
+    width: greatWidth,
   },
   indicator: {
     backgroundColor: '#ffeb3b',

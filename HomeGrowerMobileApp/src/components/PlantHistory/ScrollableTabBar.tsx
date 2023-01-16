@@ -20,7 +20,7 @@ const ScrollableTabBar = ({route}) => {
   const [index, onIndexChange] = React.useState(1);
   const [routes] = React.useState([
     {key: 'livedata', title: 'Bieżące odczyty', params: route.params},
-    {key: 'planthistory', title: 'Wykresy historyczne'},
+    {key: 'planthistory', title: 'Wykresy historyczne', params: route.params},
   ]);
 
   const renderTabBar = (

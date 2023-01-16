@@ -1,20 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {useIsFocused} from '@react-navigation/native';
 import {
-  SafeAreaView,
   Image,
-  StyleSheet,
-  FlatList,
-  View,
-  Text,
-  StatusBar,
-  TouchableOpacity,
   Dimensions,
   ScrollView,
+  Text,
 } from 'react-native';
 import {LineChart} from 'react-native-chart-kit';
 import {HistoryContainer, HistoryElement} from './PlantHistory.styled';
-import {TabView, SceneMap} from 'react-native-tab-view';
 import SQLite from 'react-native-sqlite-storage';
 SQLite.DEBUG(true);
 SQLite.enablePromise(false);
@@ -24,23 +17,11 @@ let db = SQLite.openDatabase({
   createFromLocation: 1,
 });
 
-// const FirstRoute = () => <View style={{flex: 1, backgroundColor: '#ff4081'}} />;
-
-// const SecondRoute = () => (
-//   <View style={{flex: 1, backgroundColor: '#673ab7'}} />
-// );
-
-// const renderScene = SceneMap({
-//   first: FirstRoute,
-//   second: SecondRoute,
-// });
-
-const PlantHistory = ({item, index}) => {
-    const isFocused = useIsFocused();
-  const [loading, setLoading] = useState(true);
+const PlantHistory = props => {
+  const isFocused = useIsFocused();
   const [report, setReport] = useState({});
-
-    const fetchReports = async () => {
+const {planame, plagenus, repoid, name} = props.route.params;
+  const fetchReports = async name => {
     try {
       let reportData = {
         id: [],
@@ -56,9 +37,9 @@ const PlantHistory = ({item, index}) => {
       };
       await db.transaction(txn => {
         txn.executeSql(
-          `SELECT * FROM reports;`,
-          [],
-          (tx, res) => {
+          `SELECT * FROM reports WHERE 'plant_genus_id' = ?;`,
+          [name],
+          (res) => {
             console.log('Funkcja od raportów się wykonała');
             const len = res.rows.length;
             for (let i = 0; i < len; i++) {
@@ -88,7 +69,6 @@ const PlantHistory = ({item, index}) => {
               console.log(reportData.device_id);
             }
             console.log('Everything about SQLite done');
-            console.log('CHCE TO WYPISAĆ!!!!!' + reportData.timestamp);
             setReport(reportData);
           },
         );
@@ -97,10 +77,12 @@ const PlantHistory = ({item, index}) => {
       console.log('ERROR' + e);
     }
   };
+
+  
+
     useEffect(() => {
-      fetchReports();
-      setLoading(false);
-    }, [isFocused]);
+    console.log(planame, plagenus, repoid, name);
+  }, []);
 
   const chartPropersties = {
     backgroundColor: '#2FA84E',
@@ -119,6 +101,11 @@ const PlantHistory = ({item, index}) => {
       stroke: 'lightgray',
     },
   };
+
+      useEffect(() => {
+        fetchReports(name[1]);
+      }, [isFocused]);
+      console.log('asdfsfasdfdf' + []);
   return (
     <HistoryContainer>
       <ScrollView>
@@ -132,7 +119,7 @@ const PlantHistory = ({item, index}) => {
           <Text>Nawodnienie</Text>
           <LineChart
             data={{
-              labels: report.timestamp,
+              labels: [report.timestamp],
               datasets: [
                 {
                   data: [
