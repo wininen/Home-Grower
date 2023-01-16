@@ -3,9 +3,14 @@ import React, {useState, useEffect} from 'react';
 import {
   Text,
   Image,
+  View,
   TouchableOpacity,
   ImageBackground,
   PermissionsAndroid,
+  Alert,
+  Modal,
+  TextInput,
+  KeyboardAvoidingView,
 } from 'react-native';
 
 import {styles} from '../../Styles';
@@ -19,7 +24,10 @@ import {
   ForecastTable,
   ForecastTd,
   ForecastTr,
+  InputBox,
 } from './Forecast.styled';
+
+import {ModalList, ModalButton} from '../MyPlants/MyPlants.styled';
 
 import Geolocation from 'react-native-geolocation-service';
 import Layout from '../Layout/Layout';
@@ -385,9 +393,65 @@ const Forecast = ({navigation}) => {
     }
   };
 
+  const [week, setWeek] = useState([]);
+  const next7days = async () => {
+    try {
+      let today = new Date();
+      let fullDate = today.toISOString().substring(0, 10);
+      let validForm = `${fullDate.substring(5, 7)}/${fullDate.substring(
+        8,
+        10,
+      )}/${fullDate.substring(0, 4)}`;
+      const days_name = ['Nd.', 'Pon.', 'Wt.', 'Śr.', 'Czw.', 'Pt.', 'Sob.'];
+      const date_obj = new Date(validForm);
+      const day_name = days_name[date_obj.getDay()];
+      let nextDays = [];
+      let counter = 0;
+      for (let i = 1; i < 8; i++) {
+        if (date_obj.getDay() + i < 7) {
+          nextDays.push(days_name[date_obj.getDay() + i]);
+        } else {
+          nextDays.push(days_name[counter]);
+          counter += 1;
+        }
+      }
+      setWeek(nextDays);
+    } catch (e) {
+      console.log('Error: ' + e);
+    }
+  };
+
+  const [inputCity, setInputCity] = useState(null);
+  const [modal, setModal] = useState(false);
+  const useOwnCity = async () => {
+    try {
+      console.log(inputCity);
+      fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${inputCity}&appid=${API_KEY}`,
+      )
+        .then(res => res.json())
+        .then(res => {
+          console.log(res);
+          useWeather(res.coord.lat, res.coord.lon);
+          savedCity(res.name);
+          setCity(res.name);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    } catch (err) {
+      Alert.alert(
+        'Error',
+        'Coś poszło nie tak ze sprawdzeniem pogody dla twojego miasta',
+      );
+    }
+    setModal(!modal);
+  };
+
   useEffect(() => {
     getWeather();
     getCity();
+    next7days();
   }, []);
 
   return (
@@ -405,7 +469,7 @@ const Forecast = ({navigation}) => {
                   style={styles.gapForMenu}
                 />
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => setModal(!modal)}>
                 <Image
                   source={require('../../assets/icons/forecast/edit_location.png')}
                 />
@@ -422,90 +486,121 @@ const Forecast = ({navigation}) => {
               <ForecastTable>
                 <ForecastTr>
                   <Image
-                    style={styles.gapForTr}
                     source={require('../../assets/icons/forecast/calendar_month.png')}
                   />
                   <Text style={styles.h4}>PROGNOZA (7 DNI)</Text>
                 </ForecastTr>
                 <Separator></Separator>
                 <ForecastTr>
+                  <Text style={styles.h5}>{week[0]}</Text>
                   <Image
-                    style={styles.gapForTr}
                     source={require('../../assets/icons/forecast/sun.png')}
                   />
-                  <Text style={styles.h5}>Czw.</Text>
+
                   <ForecastTd>
                     <Text style={styles.h6}>Min. 12° Max. 24°</Text>
                     <Text style={styles.h6}>Słońce</Text>
                   </ForecastTd>
                 </ForecastTr>
                 <ForecastTr>
+                  <Text style={styles.h5}>{week[1]}</Text>
+
                   <Image
-                    style={styles.gapForTr}
                     source={require('../../assets/icons/forecast/cloudy.png')}
                   />
-                  <Text style={styles.h5}>Pt.</Text>
                   <ForecastTd>
                     <Text style={styles.h6}>Min. 16° Max. 25°</Text>
                     <Text style={styles.h6}>Chmury</Text>
                   </ForecastTd>
                 </ForecastTr>
                 <ForecastTr>
+                  <Text style={styles.h5}>{week[2]}</Text>
                   <Image
-                    style={styles.gapForTr}
                     source={require('../../assets/icons/forecast/sun.png')}
                   />
-                  <Text style={styles.h5}>Sob.</Text>
+
                   <ForecastTd>
                     <Text style={styles.h6}>Min. 22° Max. 32°</Text>
                     <Text style={styles.h6}>Słońce</Text>
                   </ForecastTd>
                 </ForecastTr>
                 <ForecastTr>
+                  <Text style={styles.h5}>{week[3]}</Text>
+
                   <Image
-                    style={styles.gapForTr}
                     source={require('../../assets/icons/forecast/sun.png')}
                   />
-                  <Text style={styles.h5}>Nd.</Text>
                   <ForecastTd>
                     <Text style={styles.h6}>Min. 23° Max. 36°</Text>
                     <Text style={styles.h6}>Słońce</Text>
                   </ForecastTd>
                 </ForecastTr>
                 <ForecastTr>
+                  <Text style={styles.h5}>{week[4]}</Text>
                   <Image
-                    style={styles.gapForTr}
                     source={require('../../assets/icons/forecast/storm.png')}
                   />
-                  <Text style={styles.h5}>Pon.</Text>
+
                   <ForecastTd>
                     <Text style={styles.h6}>Min. 21° Max. 30°</Text>
                     <Text style={styles.h6}>Burza</Text>
                   </ForecastTd>
                 </ForecastTr>
                 <ForecastTr>
+                  <Text style={styles.h5}>{week[5]}</Text>
+
                   <Image
-                    style={styles.gapForTr}
                     source={require('../../assets/icons/forecast/rainy.png')}
                   />
-                  <Text style={styles.h5}>Wt.</Text>
                   <ForecastTd>
                     <Text style={styles.h6}>Min. 16° Max. 29°</Text>
                     <Text style={styles.h6}>Deszcz</Text>
                   </ForecastTd>
                 </ForecastTr>
                 <ForecastTr>
+                  <Text style={styles.h5}>{week[6]}</Text>
+
                   <Image
-                    style={styles.gapForTr}
                     source={require('../../assets/icons/forecast/cloudy.png')}
                   />
-                  <Text style={styles.h5}>Śr.</Text>
                   <ForecastTd>
                     <Text style={styles.h6}>Min. 19° Max. 30°</Text>
                     <Text style={styles.h6}>Chmury</Text>
                   </ForecastTd>
                 </ForecastTr>
               </ForecastTable>
+              {modal && (
+                <Modal
+                  animationType="fade"
+                  transparent={true}
+                  visible={modal}
+                  onRequestClose={() => {
+                    setModal(!modal);
+                  }}>
+                  <View style={styles.modalContainer}>
+                    <View style={styles.modalCityContent}>
+                      <ForecastTr>
+                        <Text style={styles.h4_bold}>Wpisz miasto</Text>
+                      </ForecastTr>
+                      <InputBox>
+                        <TextInput
+                          style={styles.h4}
+                          onChangeText={setInputCity}
+                          placeholder="Warszawa"
+                        />
+                      </InputBox>
+                      <ForecastTr>
+                        <ModalButton onPress={() => setModal(!modal)}>
+                          <Text style={styles.body}>Wróć</Text>
+                        </ModalButton>
+                        <ModalButton onPress={() => useOwnCity()}>
+                          <Text style={styles.body}>Wybierz</Text>
+                        </ModalButton>
+                      </ForecastTr>
+                    </View>
+                  </View>
+                </Modal>
+              )}
             </ForecastMain>
           </ForecastView>
         </ImageBackground>
