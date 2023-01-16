@@ -184,11 +184,16 @@ export const OuterContainer = styled.View`
 
 export const ButtonsWrapper = styled.View`
   padding-top: 30px;
+  padding-right: 25px;
+  padding-left: 25px;
   align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 export const ButtonContainer = styled.View`
   margin-bottom: 30px;
+  display: flex;
 `;
 
 export const StyledButton = styled.TouchableOpacity`
