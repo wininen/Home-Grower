@@ -192,7 +192,7 @@ const MyPlant = ({route, navigation}) => {
               Alert.alert('Sukces!', 'Pomyślnie usunięto roślinę', [
                 {
                   onPress: () => {
-                    navigation.goBack();
+                    navigation.navigate('MyPlants');
                   },
                 },
               ]);
@@ -265,7 +265,7 @@ const MyPlant = ({route, navigation}) => {
             <ModalItem style={styles.h4_bold}>{repoid[1]}</ModalItem>
           </ModalList>
           <ModalList>
-            <ModalButton onPress={() => navigation.goBack('MyPlants')}>
+            <ModalButton onPress={() => navigation.navigate('MyPlants')}>
               <Text style={styles.body}>Wróć</Text>
             </ModalButton>
             <ModalButton onPress={() => delPlant(name[1])}>
