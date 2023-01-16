@@ -9,7 +9,6 @@ import {
   NativeEventEmitter,
   Button,
 } from 'react-native';
-import Layout from '../Layout/Layout.js';
 import {ButtonPlant, styles, OuterContainer} from '../../Styles.js';
 import {
   DataRow,
@@ -193,7 +192,6 @@ const MyPlant = ({navigation}) => {
   }, []);
 
   return (
-    <Layout>
       <OuterContainer>
         <ButtonPlant title="Pobierz dane " onPress={getData}>
           <Text> Pobierz dane </Text>
@@ -225,7 +223,6 @@ const MyPlant = ({navigation}) => {
           )}
         /> */}
       </OuterContainer>
-    </Layout>
   );
 };
 

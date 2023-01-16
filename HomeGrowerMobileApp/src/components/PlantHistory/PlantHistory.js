@@ -13,8 +13,6 @@ import {
 } from 'react-native';
 import {LineChart} from 'react-native-chart-kit';
 import {HistoryContainer, HistoryElement} from './PlantHistory.styled';
-import Layout from '../Layout/Layout.js';
-import {NavigationContext} from '@react-navigation/native';
 import {TabView, SceneMap} from 'react-native-tab-view';
 
 const FirstRoute = () => <View style={{flex: 1, backgroundColor: '#ff4081'}} />;
@@ -57,7 +55,6 @@ const PlantHistory = () => {
     },
   };
   return (
-    <Layout>
       <HistoryContainer>
         <ScrollView>
           <HistoryElement>
@@ -192,7 +189,6 @@ const PlantHistory = () => {
           </HistoryElement>
         </ScrollView>
       </HistoryContainer>
-    </Layout>
   );
 };
 

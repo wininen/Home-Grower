@@ -6,14 +6,10 @@ import {
   NavigationState,
   SceneRendererProps,
 } from 'react-native-tab-view';
+import Layout from '../Layout/Layout.js';
 import LiveData from '../MyPlant/MyPlant';
 import PlantHistory from './PlantHistory';
-import {
-  TabBarStyle,
-  TabStyle,
-  IndicatorStyle,
-  LabelStyle,
-} from './ScrollableTabBar.styled';
+import {ScrollableTabBarStyles} from './ScrollableTabBarStyles.js';
 
 type State = NavigationState<{
   key: string;
@@ -23,8 +19,8 @@ type State = NavigationState<{
 const ScrollableTabBar = () => {
   const [index, onIndexChange] = React.useState(1);
   const [routes] = React.useState([
-    {key: 'livedata', title: 'LiveData'},
-    {key: 'planthistory', title: 'PlantHistory'},
+    {key: 'livedata', title: 'Bieżące odczyty'},
+    {key: 'planthistory', title: 'Wykresy historyczne'},
   ]);
 
   const renderTabBar = (
@@ -33,10 +29,10 @@ const ScrollableTabBar = () => {
     <TabBar
       {...props}
       scrollEnabled
-      // indicatorStyle={IndicatorStyle}
-      // style={TabBarStyle}
-      // tabStyle={TabStyle}
-      // labelStyle={LabelStyle}
+      indicatorStyle={ScrollableTabBarStyles.indicator}
+      style={ScrollableTabBarStyles.tabbar}
+      tabStyle={ScrollableTabBarStyles.tab}
+      labelStyle={ScrollableTabBarStyles.label}
     />
   );
 
@@ -46,16 +42,18 @@ const ScrollableTabBar = () => {
   });
 
   return (
-    <TabView
-      lazy
-      navigationState={{
-        index,
-        routes,
-      }}
-      renderScene={renderScene}
-      renderTabBar={renderTabBar}
-      onIndexChange={onIndexChange}
-    />
+    <Layout>
+      <TabView
+        lazy
+        navigationState={{
+          index,
+          routes,
+        }}
+        renderScene={renderScene}
+        renderTabBar={renderTabBar}
+        onIndexChange={onIndexChange}
+      />
+    </Layout>
   );
 };
 
