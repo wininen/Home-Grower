@@ -25,6 +25,7 @@
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "react-native": "0.70.6",
+    "react-native-background-actions": "^3.0.0",
     "react-native-ble-manager": "^8.4.4",
     "react-native-camera-kit": "^13.0.0",
     "react-native-chart-kit": "^6.12.0",
