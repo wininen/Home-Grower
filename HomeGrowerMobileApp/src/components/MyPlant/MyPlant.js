@@ -10,7 +10,6 @@ import {
   Button,
   Alert,
 } from 'react-native';
-import Layout from '../Layout/Layout.js';
 import {ButtonPlant, styles, OuterContainer} from '../../Styles.js';
 import {
   DataRow,
@@ -27,6 +26,7 @@ import {Buffer} from 'buffer';
 import storage from '../../utils/storage.js';
 import config from '../../utils/config.js';
 import PlantsDataRow from './MyPlantsData.js';
+import {useNavigation} from '@react-navigation/native';
 
 import SQLite from 'react-native-sqlite-storage';
 SQLite.DEBUG(true);
@@ -40,7 +40,7 @@ let db = SQLite.openDatabase({
 const BleManagerModule = NativeModules.BleManager;
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 
-const MyPlant = ({route, navigation}) => {
+const MyPlant = props => {
   const [datas, setDatas] = useState([
     {id: 'temperature', title: 0},
     {id: 'light', title: 0},
@@ -52,6 +52,7 @@ const MyPlant = ({route, navigation}) => {
   const [sensorListConnected, setSensorListConnected] = useState([]);
   const peripheralsAvailable = new Map();
   const peripheralsConnected = new Map();
+  const navigation = useNavigation();
 
   const getData = async () => {
     const result = await storage.getAllSensorData();
@@ -193,7 +194,7 @@ const MyPlant = ({route, navigation}) => {
               Alert.alert('Sukces!', 'Pomyślnie usunięto roślinę', [
                 {
                   onPress: () => {
-                    navigation.goBack();
+                    navigation.navigate('MyPlants');
                   },
                 },
               ]);
@@ -206,7 +207,7 @@ const MyPlant = ({route, navigation}) => {
     }
   };
 
-  const {planame, plagenus, repoid, name} = route.params;
+  const {planame, plagenus, repoid, name} = props.route.params;
 
   useEffect(() => {
     console.log(planame, plagenus, repoid, name);
@@ -238,44 +239,43 @@ const MyPlant = ({route, navigation}) => {
   }, []);
 
   return (
-    <Layout>
-      <OuterContainer>
-        <ButtonPlant title="Pobierz dane" onPress={getData}>
-          <Text style={styles.body}> Pobierz dane </Text>
-        </ButtonPlant>
-        <PropertiesContainer>
-          <Separator />
-          {datas.map(item => (
-            <PlantsDataRow title={item.id} value={item.title} parameters={0} />
-          ))}
-        </PropertiesContainer>
-        <SpecsContainer>
-          <ModalList>
-            <ModalItem style={styles.h4}>{name[0]}</ModalItem>
-            <ModalItem style={styles.h4_bold}>{name[1]}</ModalItem>
-          </ModalList>
-          <ModalList>
-            <ModalItem style={styles.h4}>{planame[0]}</ModalItem>
-            <ModalItem style={styles.h4_bold}>{planame[1]}</ModalItem>
-          </ModalList>
-          <ModalList>
-            <ModalItem style={styles.h4}>{plagenus[0]}</ModalItem>
-            <ModalItem style={styles.h4_bold}>{plagenus[1]}</ModalItem>
-          </ModalList>
-          <ModalList>
-            <ModalItem style={styles.h4}>{repoid[0]}</ModalItem>
-            <ModalItem style={styles.h4_bold}>{repoid[1]}</ModalItem>
-          </ModalList>
-          <ModalList>
-            <ModalButton onPress={() => navigation.goBack('MyPlants')}>
-              <Text style={styles.body}>Wróć</Text>
-            </ModalButton>
-            <ModalButton onPress={() => delPlant(name[1])}>
-              <Text style={styles.body}>Usuń</Text>
-            </ModalButton>
-          </ModalList>
-        </SpecsContainer>
-        {/* <FlatList
+    <OuterContainer>
+      <ButtonPlant title="Pobierz dane" onPress={getData}>
+        <Text style={styles.body}> Pobierz dane </Text>
+      </ButtonPlant>
+      <PropertiesContainer>
+        <Separator />
+        {datas.map(item => (
+          <PlantsDataRow title={item.id} value={item.title} parameters={0} />
+        ))}
+      </PropertiesContainer>
+      <SpecsContainer>
+        <ModalList>
+          <ModalItem style={styles.h4}>{name[0]}</ModalItem>
+          <ModalItem style={styles.h4_bold}>{name[1]}</ModalItem>
+        </ModalList>
+        <ModalList>
+          <ModalItem style={styles.h4}>{planame[0]}</ModalItem>
+          <ModalItem style={styles.h4_bold}>{planame[1]}</ModalItem>
+        </ModalList>
+        <ModalList>
+          <ModalItem style={styles.h4}>{plagenus[0]}</ModalItem>
+          <ModalItem style={styles.h4_bold}>{plagenus[1]}</ModalItem>
+        </ModalList>
+        <ModalList>
+          <ModalItem style={styles.h4}>{repoid[0]}</ModalItem>
+          <ModalItem style={styles.h4_bold}>{repoid[1]}</ModalItem>
+        </ModalList>
+        <ModalList>
+          <ModalButton onPress={() => navigation.goBack()}>
+            <Text style={styles.body}>Wróć</Text>
+          </ModalButton>
+          <ModalButton onPress={() => delPlant(name[1])}>
+            <Text style={styles.body}>Usuń</Text>
+          </ModalButton>
+        </ModalList>
+      </SpecsContainer>
+      {/* <FlatList
           style={styles.data_table}
           numColumns={4}
           keyExtractor={item => item.id}
@@ -295,8 +295,7 @@ const MyPlant = ({route, navigation}) => {
             </TouchableOpacity>
           )}
         /> */}
-      </OuterContainer>
-    </Layout>
+    </OuterContainer>
   );
 };
 

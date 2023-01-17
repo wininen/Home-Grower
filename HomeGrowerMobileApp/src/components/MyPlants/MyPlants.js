@@ -87,7 +87,7 @@ const MyPlants = ({navigation}) => {
     <PlantsElement
       style={styles.shadow}
       onPress={() =>
-        navigation.navigate('MyPlant', {
+        navigation.navigate('ScrollableTabBar', {
           planame: ['Pochodzenie:', details.my_plant_name[index]],
           plagenus: ['Produkcja:', details.plant_genus_id[index]],
           repoid: ['Kategoria:', details.report_id[index]],
