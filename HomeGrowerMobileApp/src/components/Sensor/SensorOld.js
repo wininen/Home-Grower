@@ -52,7 +52,7 @@ const Sensor = ({navigation}) => {
   const [sensorListAvailable, setSensorListAvailable] = useState([]);
   const [sensorListConnected, setSensorListConnected] = useState([]);
   const [datas, setDatas] = useState();
-  const [active, setActive] = useState(true);
+  const [active, setActive] = useState(false);
   const peripheralsAvailable = new Map();
   const peripheralsConnected = new Map();
 
@@ -68,10 +68,6 @@ const Sensor = ({navigation}) => {
         console.log('sensorListConnected', sensorListConnected);
         console.log('TUTAJ INTERWAŁ');
         console.log("It's running");
-        console.log(sensorListConnected);
-        console.log(sensorListAvailable);
-        console.log(peripheralsAvailable);
-        console.log(peripheralsConnected);
         (async () => {
           const result = await storage.getAllSensorData();
           if (result.length > 0) {
@@ -101,8 +97,12 @@ const Sensor = ({navigation}) => {
       await BackgroundService.stop();
       console.log('Successful stop!');
     } else {
-      await BackgroundService.start(connectInterval, options);
-      console.log('Successful start!');
+      try {
+        await BackgroundService.start(connectInterval, options);
+        console.log('Successful start!');
+      } catch (e) {
+        console.log('Error', e);
+      }
     }
   };
 
@@ -603,15 +603,22 @@ const Sensor = ({navigation}) => {
 
   useEffect(() => {
     (async () => {
-      try {
-        console.log('Trying to start background service');
-        console.log(BackgroundService.isRunning());
-        await BackgroundService.start(connectInterval, options);
-        console.log('Successful start!');
-        console.log(BackgroundService.isRunning());
-      } catch (e) {
-        console.log('Error', e);
-      }
+      setSensorListConnected(await storage.getAllSensorData());
+      console.log('sensorListConnected', sensorListConnected);
+      console.log('TUTAJ INTERWAŁ');
+      console.log("It's running");
+      (async () => {
+        const result = await storage.getAllSensorData();
+        if (result.length > 0) {
+          console.log('Mamy to');
+          console.log('POŁĄCZONE');
+          console.log(result);
+          for (let i = 0; i < result.length; i++) {
+            retriveConnection(result[i]);
+            console.log(result[i]);
+          }
+        }
+      })();
     })();
   }, []);
 
