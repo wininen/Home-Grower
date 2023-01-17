@@ -7,9 +7,10 @@ import {
   View,
   FlatList,
   Alert,
+  ActivityIndicator,
 } from 'react-native';
 import Layout from '../Layout/Layout.js';
-import {styles} from '../../Styles.js';
+import {styles, StyledButton} from '../../Styles.js';
 
 import {
   PlantsContainer,
@@ -21,25 +22,21 @@ import {
   ModalList,
   ModalItem,
 } from './AllPlants.styled';
-import {Modal} from 'react-native-paper';
-import SQLite from 'react-native-sqlite-storage';
-SQLite.DEBUG(true);
-SQLite.enablePromise(false);
-
-let db = SQLite.openDatabase({
-  name: 'plantsSQLite.db',
-  createFromLocation: 1,
-});
+import {Modal, TextInput} from 'react-native-paper';
+import {db} from '../../../App.js';
 
 const AllPlants = ({navigation}) => {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(true);
   const [name, setName] = useState({});
   const [details, setDetails] = useState({});
+  const [offset, setOffset] = useState(0);
+  const [dbCopy, setDbCopy] = useState({});
+  const [write, setWrite] = useState('');
 
   const fetchPlants = async () => {
     try {
-      let pid = {pid: []};
+      let id = {id: []};
       let another = {
         floral_language: [],
         origin: [],
@@ -64,19 +61,20 @@ const AllPlants = ({navigation}) => {
         min_soil_moist: [],
         max_soil_ec: [],
         min_soil_ec: [],
+        image: [],
       };
       await db.transaction(txn => {
         txn.executeSql(
-          `SELECT pid, origin, production, category from 'plants'`,
-          [],
+          `SELECT id, origin, production, category, image from 'plants' LIMIT ?,20`,
+          [offset],
           (tx, res) => {
             console.log('Query completed');
             const len = res.rows.length;
+            console.log(len);
             for (let i = 0; i < len; i++) {
               Object.entries(res.rows.item(i)).forEach(([key, value]) => {
-                if (key == 'pid') {
-                  // console.log(key, value);
-                  pid.pid.push(value);
+                if (key == 'id') {
+                  id.id.push(value);
                 } else if (key == 'floral_language') {
                   another.floral_language.push(value);
                 } else if (key == 'origin') {
@@ -90,7 +88,7 @@ const AllPlants = ({navigation}) => {
                 } else if (key == 'color') {
                   another.color.push(value);
                 } else if (key == 'display_pid') {
-                  another.display_pid.push(item[key]);
+                  another.display_pid.push(value);
                 } else if (key == 'size') {
                   another.size.push(value);
                 } else if (key == 'soil') {
@@ -123,11 +121,15 @@ const AllPlants = ({navigation}) => {
                   another.max_soil_ec.push(value);
                 } else if (key == 'min_soil_ec') {
                   another.min_soil_ec.push(value);
+                } else if (key == 'image') {
+                  another.image.push(value);
                 }
               });
             }
             console.log('Everything about SQLite done');
-            setName(pid);
+            setOffset(offset + 20);
+            setName(id);
+            setDbCopy(id);
             setDetails(another);
             setLoading(false);
           },
@@ -138,19 +140,30 @@ const AllPlants = ({navigation}) => {
     }
   };
 
-  const addPlant = async (name, origin, production, category) => {
+  const generateRandomString = length => {
+    const char =
+      'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+    const random = Array.from(
+      {length: length},
+      () => char[Math.floor(Math.random() * char.length)],
+    );
+    const randomString = random.join('');
+    return randomString;
+  };
+
+  const addPlant = async (name, origin, production, category, image) => {
     try {
       await db.transaction(txn => {
         txn.executeSql(
-          `SELECT 1 FROM 'myplants' WHERE photo_path = ?`,
+          `SELECT 1 FROM 'myplants' WHERE plant_genus_id = ?`,
           [name],
           (tx, resp) => {
             if (resp.rows.length == 1) {
               Alert.alert('Podana roślina znajduje się już w twoich roślinach');
             } else {
               txn.executeSql(
-                `INSERT INTO 'myplants' (photo_path, my_plant_name, plant_genus_id, report_id) VALUES(?,?,?,?)`,
-                [name, origin, production, category],
+                `INSERT INTO 'myplants' (id, plant_genus_id) VALUES(?,?)`,
+                [generateRandomString(36), name],
                 (tx, res) => {
                   console.log('Query completed');
                   const len = res.rowsAffected;
@@ -162,7 +175,16 @@ const AllPlants = ({navigation}) => {
                 },
               );
               Alert.alert('Sukces!', 'Pomyślnie dodano roślinę', [
-                {onPress: () => navigation.goBack('MyPlants')},
+                {
+                  onPress: () =>
+                    navigation.goBack('MyPlants', {
+                      name: name,
+                      origin: origin,
+                      production: production,
+                      category: category,
+                      image: image,
+                    }),
+                },
               ]);
             }
           },
@@ -194,13 +216,39 @@ const AllPlants = ({navigation}) => {
       style={styles.shadow}
       onPress={() => showDetails(index, item)}>
       <PlantsAfterElement>
-        <StyledImage
-          source={require('../../assets/images/achimenes_spp.jpg')}
-        />
+        <StyledImage source={{uri: details.image[index]}} />
         <Text style={styles.bold_black}>{item}</Text>
       </PlantsAfterElement>
     </PlantsElement>
   );
+
+  const renderFooter = () => {
+    return (
+      <View style={styles.plantsList}>
+        <StyledButton onPress={fetchPlants}>
+          <Text style={styles.body}>Pokaż Następne</Text>
+          {loading ? (
+            <ActivityIndicator color="white" style={{marginLeft: 8}} />
+          ) : null}
+        </StyledButton>
+      </View>
+    );
+  };
+
+  const searchBar = text => {
+    if (text) {
+      const filteredData = dbCopy.id.filter(item => {
+        const itemData = item.id ? item.id.toLowerCase() : ''.toLowerCase();
+        const textData = text.toLowerCase();
+        return itemData.indexOf(textData) > -1;
+      });
+      setName(filteredData);
+      setWrite(text);
+    } else {
+      setName(dbCopy);
+      setWrite(text);
+    }
+  };
 
   useEffect(() => {
     fetchPlants();
@@ -215,7 +263,18 @@ const AllPlants = ({navigation}) => {
           <ScrollView
             contentContainerStyle={styles.plantsList}
             keyboardShouldPersistTaps="handled">
-            <FlatList data={name.pid.slice(0, 961)} renderItem={renderList} />
+            <TextInput
+              style={{height: 60, borderColor: '#000', borderWidth: 1}}
+              placeholder="Wyszukaj roślinę..."
+              onChangeText={text => searchBar(text)}
+              value={write}
+            />
+            <FlatList
+              data={name.id}
+              renderItem={renderList}
+              alwaysBounceVertical={true}
+              ListFooterComponent={renderFooter}
+            />
           </ScrollView>
         )}
         {result != null && (

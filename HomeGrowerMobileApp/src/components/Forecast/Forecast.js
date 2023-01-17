@@ -155,19 +155,13 @@ const Forecast = ({navigation}) => {
         }
       } else {
         if (jsonUnit == require('../../assets/icons/profile/celsjus.png')) {
-          setWeather([weatherImages.sun, '23°C', 'Słońce', '22.6°C', '23.3°C']);
+          setWeather([weatherImages.sun, '—°C', 'Słońce', '—°C', '—°C']);
         } else if (
           jsonUnit == require('../../assets/icons/profile/farenheit.png')
         ) {
-          setWeather([
-            weatherImages.sun,
-            '73.4°F',
-            'Słońce',
-            '72.68°F',
-            '73.94°F',
-          ]);
+          setWeather([weatherImages.sun, '—°F', 'Słońce', '—°F', '—°F']);
         } else {
-          setWeather([weatherImages.sun, '23°C', 'Słońce', '22.6°C', '23.3°C']);
+          setWeather([weatherImages.sun, '—°C', 'Słońce', '—°C', '—°C']);
         }
       }
     } catch (err) {
@@ -192,9 +186,7 @@ const Forecast = ({navigation}) => {
       jsonValue == undefined
         ? console.log('No City in Cache')
         : console.log('Retrieved City from Cache');
-      return jsonValue != null
-        ? setCity(JSON.parse(jsonValue))
-        : setCity('Warszawa');
+      return jsonValue != null ? setCity(JSON.parse(jsonValue)) : setCity('—');
     } catch (err) {
       console.log(err);
     }
@@ -202,10 +194,10 @@ const Forecast = ({navigation}) => {
 
   const [weather, setWeather] = useState([
     require('../../assets/icons/forecast/sun_main.png'),
-    '23°C',
+    '—°C',
     'Słońce',
-    '22.6C',
-    '23.3°C',
+    '—°C',
+    '—°C',
   ]);
   const useWeather = async (lat, lon) => {
     let weatherIcon;
@@ -339,7 +331,7 @@ const Forecast = ({navigation}) => {
     fetchAPI(lat, lon);
   };
 
-  const [city, setCity] = useState('Warszawa');
+  const [city, setCity] = useState('—');
   const useCity = async (lat, lon) => {
     const fetchAPI = async (lat, lon) => {
       fetch(
