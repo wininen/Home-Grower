@@ -147,10 +147,10 @@ const Sensor = ({navigation}) => {
 
     console.log('\n');
     const fetchedData = [
-      {id: 'temperatura', title: temperature},
-      {id: 'światło', title: light},
-      {id: 'wilgotność', title: moist},
-      {id: 'żyzność', title: fertility},
+      {id: 'temperature', title: temperature},
+      {id: 'light', title: light},
+      {id: 'moist', title: moist},
+      {id: 'fertility', title: fertility},
     ];
     setDatas(fetchedData);
 
@@ -667,13 +667,14 @@ const Sensor = ({navigation}) => {
               <Text style={styles.body}>Wyszukaj urządzenie</Text>
             </StyledButton>
           </ButtonContainer>
-
-          <StyledButton
-            onPress={stopBackgroundTask}
-            accessibilityLabel="Wyszukaj urządzenie"
-            style={{backgroundColor: active ? '#A7C957' : '#BC4749'}}>
-            <Text style={styles.body}>Czuwaj w tle</Text>
-          </StyledButton>
+          <ButtonContainer>
+            <StyledButton
+              onPress={stopBackgroundTask}
+              accessibilityLabel="Wyszukaj urządzenie"
+              style={{backgroundColor: active ? '#A7C957' : '#BC4749'}}>
+              <Text style={styles.body}>Czuwaj w tle</Text>
+            </StyledButton>
+          </ButtonContainer>
         </ButtonsWrapper>
       </OuterContainer>
     </Layout>

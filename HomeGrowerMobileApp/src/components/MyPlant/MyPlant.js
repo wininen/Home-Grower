@@ -117,9 +117,6 @@ const MyPlant = props => {
         console.log(error);
       });
 
-    peripheral = peripheral;
-    setModal(false);
-    setActive(true);
     // odnajduje services i characteristics danego urządzenia
     // trzeba zawsze uruchomić najpierw przed uruchomieniem metod write, read i start notification
     await BleManager.retrieveServices(peripheral.id)
