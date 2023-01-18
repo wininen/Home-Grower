@@ -1,21 +1,21 @@
 {
     "pid": "pachyveria pachytoides",
     "basic": {
-        "floral_language": "Pachyveria pachytoides\nFloriography: noble, beautiful, warm\nPachyveria pachytoides has ovate leaves with round edges, blue-green, with a very thin layer of white powder, in sunny environments leaves become pale pink and the plant becomes more compact, has a high ornamental value, quite popular in recent years among small succulents.\nPachyveria pachytoides likes sunny places, no dormancy. Bloom sometimes with a long scape emerging from the center of leaves, orange flowers in a bell-shape.",
-        "origin": "Mexico",
-        "production": "China",
+        "floral_language": "Pachyveria pachytoides\nFloriography: noble, beautiful, warm\nPachyveria pachytoides has ovate leaves with round edges, blue-zielony, with a very thin layer of biały powder, in sunny environments leaves become pale różowy i the plant becomes more compact, has a high ornamental value, quite popular in recent years among small succulents.\nPachyveria pachytoides likes sunny places, no dormancy. Bloom sometimes with a long scape emerging from the center of leaves, pomarańczowy kwiaty in a bell-shape.",
+        "origin": "Meksyk",
+        "production": "Chiny",
         "category": "Crassulaceae, Pachyphytum",
-        "blooming": "Succulent plants, sometimes flowers, orange red flowers",
-        "color": "Leaf color blue green, when sunny leaf edges turning to light red"
+        "blooming": "roślina kaktusowata, czasami kwitnie, pomarańczowe i czerwone kwiaty",
+        "color": "kolor liści: blue zielony, when sunny liść: edges turning to light czerwony"
     },
     "display_pid": "Pachyveria pachytoides",
     "maintenance": {
-        "size": "Diameter 3-15 cm, height 3-15 cm",
-        "soil": "Peat and akadama mixed in 3:1 ratio",
-        "sunlight": "Like adequate sunlight no apparent period of dormancy",
-        "watering": "Resistant to drought, keep soil moist, water thoroughly when soil is dry",
-        "fertilization": "Dilute fertilizers following instructions, apply once every month",
-        "pruning": "Remove dead and rotten part timely"
+        "size": "średnica: 3-15 cm, wysokość: 3-15 cm",
+        "soil": "mieszanka torfu i perlitu w proporcji 3:1",
+        "sunlight": "lubi umiarkowane światło",
+        "watering": "odporna na susze, utrzymuj ziemię wilgotną, podlewaj obficie, gdy ziemia wyschnie",
+        "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, stosuj raz na month",
+        "pruning": "od czasu do czasu usuwaj martwe tkanki oraz liście, które Ci się nie podobają"
     },
     "parameter": {
         "max_light_mmol": 8400,

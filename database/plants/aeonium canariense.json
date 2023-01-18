@@ -2,20 +2,20 @@
     "pid": "aeonium canariense",
     "basic": {
         "floral_language": "",
-        "origin": "North Africa, The Canary Islands",
-        "production": "China",
+        "origin": "  północ Afryki, The Canary Islis",
+        "production": "Chiny",
         "category": "Crassulaceae, Aeonium",
-        "blooming": "Succulent plants, sometimes flowers",
-        "color": "Leaf color green , leaf margine red"
+        "blooming": "roślina kaktusowata, czasami kwitnie",
+        "color": "kolor liści: zielony, czerwona krawędź liścia"
     },
     "display_pid": "Aeonium canariense",
     "maintenance": {
-        "size": "Diameter \u2265 10 cm, height \u2265 15 cm",
-        "soil": "Peat or soil with specific nutrients",
-        "sunlight": "Like sunshine, grows in sunny places",
-        "watering": "Water thoroughly after soil surface dries, avoid saturated water",
-        "fertilization": "Dilute fertilizers following instructions, apply 1-2 times monthly",
-        "pruning": "Remove aged tissues, dead, rotten, diseased leaves timely"
+        "size": "średnica: 10 cm, wysokość: 15 cm",
+        "soil": "perlit albo gleba ze specjalnymi wymaganiami",
+        "sunlight": "lubi stanowiska słoneczne, dobrze rozwija się na jasnych stanowiskach",
+        "watering": "podlewaj obficie po wyschnięciu gleby, unikaj wody wysokomineralizowanej",
+        "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, stosuj 1-2 razy w miesiącu",
+        "pruning": "od czasu do czasu usuwaj martwe tkanki oraz liście, które Ci się nie podobają"
     },
     "parameter": {
         "max_light_mmol": 6000,

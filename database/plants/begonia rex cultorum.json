@@ -1,21 +1,21 @@
 {
     "pid": "begonia rex cultorum",
     "basic": {
-        "floral_language": "Begonia grandis \nFloriography: hearty, tender, sincere\nBegonia grandis Dry has clustered delicate flowers with bright and vivid colors. Often used for indoor decoration or flower beds.\nBegonia grandis prefers gentle sunlight, tolerates half shade. May bloom all year round, with peak times in spring, autumn and winter.",
-        "origin": "China",
-        "production": "China",
+        "floral_language": "Begonia griis \nFloriography: hearty, tender, sincere\nBegonia griis Dry has clusteczerwony delicate kwiaty with bright i vivid colors. Often used for indoor decoration albo flower beds.\nBegonia griis prefers gentle sunlight, tolerates half shade. May bloom all year round, with peak times in spring, jesienią i zimą.",
+        "origin": "Chiny",
+        "production": "Chiny",
         "category": "Begoniaceae, Begonia",
-        "blooming": "Foliage plants, flowering period March-May",
-        "color": "Leaf colorful, green, red brown in mixture, flower color white or pink"
+        "blooming": "Foliage plants, okres kwitnienia: March-maj",
+        "color": "liść: colorful, zielony, czerwonobrązowy ich mieszanka, kolor kwiatów: biały albo różowy"
     },
     "display_pid": "Begonia rex cultorum",
     "maintenance": {
-        "size": "Diameter \u2265 10 cm, height 15-18 cm",
-        "soil": "Peat or soil with specific nutrients",
-        "sunlight": "Likes bright scattered light, resistance to shade",
-        "watering": "Water thoroughly when soil is dry",
-        "fertilization": "Dilute fertilizers following instructions, apply 2-3 times monthly",
-        "pruning": "Remove old, diseased, dead leaves and withered flowers timely"
+        "size": "średnica: 10 cm, wysokość: 15-18 cm",
+        "soil": "perlit albo gleba ze specjalnymi wymaganiami",
+        "sunlight": "lubi dużo rozproszonego światła, resistance to shade",
+        "watering": "podlewaj obficie, gdy ziemia wyschnie",
+        "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, stosuj 2-3 razy w miesiącu",
+        "pruning": "od czasu do czasu usuwaj martwe tkanki"
     },
     "parameter": {
         "max_light_mmol": 3800,

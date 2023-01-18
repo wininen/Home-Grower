@@ -1,21 +1,21 @@
 {
     "pid": "espostoa lanata",
     "basic": {
-        "floral_language": "Espostoa lanata \nFloriography: strong, kind, persistent.\nSucculent stem of the Espostoa lanata is oval and palm shaped, thick and juicy. Leaves reduce to long needle spines. Because it is almost care free, Espostoa lanata is very popular and could be found on desktop, tea table, bedroom and office.\nEspostoa lanata requires direct bright sunlight for growth. It blooms in certain conditions. Flower color could be light yellow, orange or pink.",
-        "origin": "Mexico",
-        "production": "China",
+        "floral_language": "Espostoa lanata \nFloriography: strong, kind, persistent.\nSucculent stem of the Espostoa lanata is oval i palm shaped, thick i juicy. Leaves czerwonyuce to long needle spines. Because it is almost care free, Espostoa lanata is very popular i could be found on desktop, tea table, bedroom i office.\nEspostoa lanata requires direct bright sunlight for growth. It blooms in certain conditions. kolor kwiatów: could be jasnożółty, pomarańczowy albo różowy.",
+        "origin": "Meksyk",
+        "production": "Chiny",
         "category": "Cactaceae, Espostoa",
-        "blooming": "Succulent plants, sometimes flowers with a short period flowering time 2-3 days",
-        "color": "Green, white hair on surface, flower light yellow, orange, pink"
+        "blooming": "roślina kaktusowata, czasami kwitnie with a short period flowering time 2-3 dni",
+        "color": "zielony, biały hair on surface, flower jasnożółty, pomarańczowy, różowy"
     },
     "display_pid": "Espostoa lanata",
     "maintenance": {
-        "size": "Diameter \u2265 10 cm, height \u2265 15 cm",
-        "soil": "Peat and akadama mixed in 3:1 ratio",
-        "sunlight": "Likes strong light, put in sunny places",
-        "watering": "Resistant to drought, water thoroughly when soil is dry, reduce watering in winter dormancy",
-        "fertilization": "Dilute fertilizers following instructions, apply once monthly in spring to autumn",
-        "pruning": "Remove dead and rotten part timely"
+        "size": "średnica: 10 cm, wysokość: 15 cm",
+        "soil": "mieszanka torfu i perlitu w proporcji 3:1",
+        "sunlight": "lubi bardzo silne światło, trzymaj w słonecznym miejscu",
+        "watering": "odporna na susze, podlewaj obficie, gdy ziemia wyschnie, zredukuj podlewanie zimą",
+        "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, stosuj raz w miesiącu in spring to autumn",
+        "pruning": "od czasu do czasu usuwaj martwe tkanki oraz liście, które Ci się nie podobają"
     },
     "parameter": {
         "max_light_mmol": 8700,

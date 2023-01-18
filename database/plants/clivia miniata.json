@@ -1,21 +1,21 @@
 {
     "pid": "clivia miniata",
     "basic": {
-        "floral_language": "Clivia miniata\nFloriography: gentle, humble, benevolent\nClivia miniata is the official flower of Changchun City in China. Has thick, dark green leave oppositely arrange in neat and graceful symmetry, scape emerging from the middle of the blades with funnel-shape flowers on top. Flower color is orange red, yellow, white, and red. Because of it gorgeousness and shade-tolerance, commonly used in home decoration.\nClivia miniata likes half shaded environments, suitable in bright scattered light. Blooms best in January to February or up to 1 month.",
-        "origin": "Africa",
-        "production": "China",
+        "floral_language": "Clivia miniata\nFloriography: gentle, humble, benevolent\nClivia miniata is the official flower of Changchun City in Chiny. Has thick, ciemnozielony leave oppositely arrange in neat i graceful symmetry, scape emerging from the middle of the blades with funnel-shape kwiaty on top. kolor kwiatów: is pomarańczowe i czerwone, żółty, biały, i czerwony. Because of it gorgeousness i shade-tolerance, commonly used in home decoration.\nClivia miniata lubi półcieńd environments, suitable in jasne rozproszone światło. Blooms best in styczeń to February albo up to 1 month.",
+        "origin": "Afryka",
+        "production": "Chiny",
         "category": "Amaryllidaceae, Clivia",
-        "blooming": "Flowering period January-February, flowers year around, viewing period 1-2 months",
-        "color": "Flower color orange red , yellow, white, red"
+        "blooming": "okres kwitnienia: styczeń-February, kwiaty year around, widoczne przez 1-2 miesiące",
+        "color": "kolor kwiatów: pomarańczowe i czerwoneprzylistek  żółty, biały, czerwony"
     },
     "display_pid": "Clivia miniata",
     "maintenance": {
-        "size": "Diameter \u2265 10 cm, height \u2265 15 cm",
-        "soil": "Peat or soil with specific nutrients",
-        "sunlight": "Resistant to half shade, likes moderate sunshine, avoid direct strong light",
-        "watering": "Resistant to drought, water thoroughly when soil is dry",
-        "fertilization": "Dilute fertilizers following instructions, apply 1-2 times monthly in spring and autumn, except flowering stages",
-        "pruning": "Remove dead and yellowish leaves and withered flowers"
+        "size": "średnica: 10 cm, wysokość: 15 cm",
+        "soil": "perlit albo gleba ze specjalnymi wymaganiami",
+        "sunlight": "odporna na półcień, lubi umiarkowane światło, unikaj bezpośredniego i silnego światła",
+        "watering": "odporna na susze, podlewaj obficie, gdy ziemia wyschnie",
+        "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, stosuj 1-2 razy wiosną i jesienią, z wyjątkiem czasu kwitnięcia",
+        "pruning": "od czasu do czasu usuwaj martwe tkanki"
     },
     "parameter": {
         "max_light_mmol": 4000,

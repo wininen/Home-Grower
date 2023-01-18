@@ -1,21 +1,21 @@
 {
     "pid": "phalaenopsis 'los angeles'",
     "basic": {
-        "floral_language": "Burgundy Phalaenopsis\nFloriography: elegant, quiet, wise\nBurgundy Phalaenopsis has beautiful flowers like butterflies in serene tropical rainforests, one of the three national flowers in Indonesia.\nBurgundy Phalaenopsis has a graceful looking with burgundy flower colors, white aerial roots surround leaves and butterfly-like flowers.\nBurgundy Phalaenopsis blooms normally in January-February for more than 1-2 months. With modern regulation techniques, Phalaenopsis amabilis can flower year around.",
-        "origin": "Holland",
+        "floral_language": "Burgundy Phalaenopsis\nFloriography: elegant, quiet, wise\nBurgundy Phalaenopsis has beautiful kwiaty like butterflies in serene tropical rainforests, one of the three national kwiaty in Indonesia.\nBurgundy Phalaenopsis has a graceful looking with burgundy kolor kwiatów:s, biały aerial roots surround leaves i butterfly-like kwiaty.\nBurgundy Phalaenopsis blooms normally in styczeń-February for more than 1-2 miesiące. With modern regulation techniques, Phalaenopsis amabilis can flower year around.",
+        "origin": "Holli",
         "production": "Yunnan",
         "category": "Orchidaceae, Phalaenopsis",
-        "blooming": "Flowering period January-July, viewing period up to 1-2 months",
-        "color": "Flower color mainly pink"
+        "blooming": "okres kwitnienia: styczeń-lipiec, widoczne przez up to 1-2 miesiące",
+        "color": "kolor kwiatów: mainly różowy"
     },
     "display_pid": "Phalaenopsis 'Los Angeles'",
     "maintenance": {
-        "size": "Diameter \u2265 10 cm, height 16-30 cm",
-        "soil": "In sphagnum moss, replace once a year",
-        "sunlight": "Before flowering put under gentle sunlight, avoid direct strong light, when flowering put in places with scattered light",
-        "watering": "Water thoroughly every 5-7 days, may water by put the soil in water, may spray water in the air in summer",
-        "fertilization": "Dilute fertilizers following instructions, apply 1-2 times monthly, except flowering stages",
-        "pruning": "Remove withered flowers and diseased leaves; remove peduncle after flowering, except the 2-3 segments at the bottom of peduncle, about 10cm"
+        "size": "średnica: 10 cm, wysokość: 16-30 cm",
+        "soil": "In mech torfowy, wymieniaj raz w roku",
+        "sunlight": "Before flowering put under gentle sunlight, unikaj bezpośredniego i silnego światła, when flowering przenieś na stanowisko bardziej zacienione",
+        "watering": "Water thoroughly every 5-7 dni, may water by put the soil in water, may spray water in the air latem",
+        "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, stosuj 1-2 razy w miesiącu, z wyjątkiem czasu kwitnięcia",
+        "pruning": "usuwaj uschnięte kwiaty i diseased leaves; usuwaj szypułkę po kwitnięciu, except the 2-3 segments at the bottom of peduncle, about 10cm"
     },
     "parameter": {
         "max_light_mmol": 4000,

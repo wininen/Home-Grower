@@ -1,21 +1,21 @@
 {
     "pid": "xgraptoveria 'douglas huth'",
     "basic": {
-        "floral_language": "xGraptoveria 'Douglas Huth'\nFloriography: glorious, tender, lovely\nIs a hybrid succulent, leaves loosely arranged in a rosette, long oval shape with tips, covered by a layer of white powders, with great diurnal temperature range and abundant sunlight, leaves turn pink, look glorious, suitable for decoration on desks or in bedrooms. \nLikes sunny places, tolerates to half shade, does not have an apparent dormant period. Flowers sometimes, pale yellow.",
-        "origin": "Mexico",
-        "production": "China",
+        "floral_language": "xGraptoveria 'Douglas Huth'\nFloriography: glorious, tender, lovely\nIs a hybrid succulent, leaves loosely arranged in a rosette, long oval shape with tips, coveczerwony by a layer of biały powders, with great diurnal temperature range i abundant sunlight, leaves turn różowy, look glorious, suitable for decoration on desks albo in bedrooms. \nLikes sunny places, tolerates to half shade, does not have an apparent dormant period. kwiaty sometimes, pale żółty.",
+        "origin": "Meksyk",
+        "production": "Chiny",
         "category": "Crassulaceae, Echeveria",
-        "blooming": "Succulent plants, sometimes flowers, light yellow flowers",
-        "color": "Leaf color blue green, when sunny turning to pink"
+        "blooming": "roślina kaktusowata, czasami kwitnie, jasnożółty kwiaty",
+        "color": "kolor liści: blue zielony, when sunny turning to różowy"
     },
     "display_pid": "xGraptoveria 'Douglas Huth'",
     "maintenance": {
-        "size": "Diameter \u2265 5 cm, height \u2265 5 cm",
-        "soil": "Peat and akadama mixed in 3:1 ratio",
-        "sunlight": "Likes light, resistant to half shade, no apparent period of dormancy",
-        "watering": "Resistant to drought, water thoroughly when soil is dry, reduce water in summer",
-        "fertilization": "Dilute fertilizers following instructions,  apply once every 1-2 months in spring and autumn",
-        "pruning": "Remove dead and rotten part timely"
+        "size": "średnica: 5 cm, wysokość: 5 cm",
+        "soil": "mieszanka torfu i perlitu w proporcji 3:1",
+        "sunlight": "lubi światło, odporna na półcień, no apparent period of dormancy",
+        "watering": "odporna na susze, podlewaj obficie, gdy ziemia wyschnie",
+        "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, stosuj raz na 1-2 miesiące in wiosną i jesienią",
+        "pruning": "od czasu do czasu usuwaj martwe tkanki oraz liście, które Ci się nie podobają"
     },
     "parameter": {
         "max_light_mmol": 8000,

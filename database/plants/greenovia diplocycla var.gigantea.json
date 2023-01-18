@@ -1,21 +1,21 @@
 {
-    "pid": "greenovia diplocycla var.gigantea",
+    "pid": "zielonyovia diplocycla var.gigantea",
     "basic": {
-        "floral_language": "Greenovia diplocycla var.gigantea\nFloriography: perseverance, vigorous, beautiful\nGreenovia diplocycla var.gigantea looks like a flower with green oval leaves of smoothly curved edges. When in summer dormancy, leaves will close tightly, like a rose. Strong reproductive ability, may plant alone.\nLikes sunny places with half-shade tolerance, hibernates under high temperatures in summer, should shade properly and stop watering. Flowers sometimes with yellow flowers.",
-        "origin": "Africa",
-        "production": "China",
+        "floral_language": "zielonyovia diplocycla var.gigantea\nFloriography: perseverance, vigorous, beautiful\nzielonyovia diplocycla var.gigantea looks like a flower with zielony oval leaves of smoothly curved edges. When latem  leaves will close tightly, like a rose. Strong reproductive ability, may plant alone.\nLikes sunny places with half-shade tolerance, hibernates under high temperatures latem, should shade properly i stop watering. kwiaty sometimes with żółty kwiaty.",
+        "origin": "Afryka",
+        "production": "Chiny",
         "category": "Crassulaceae, Aeonium",
-        "blooming": "Succulent plants, sometimes flowers, yellow flowers",
-        "color": "Leaf color green"
+        "blooming": "roślina kaktusowata, czasami kwitnie, żółty kwiaty",
+        "color": "kolor liści: zielony"
     },
-    "display_pid": "Greenovia diplocycla var.gigantea",
+    "display_pid": "zielonyovia diplocycla var.gigantea",
     "maintenance": {
-        "size": "Diameter \u2265 2 cm, height \u2265 5 cm",
-        "soil": "Peat and akadama mixed in 3:1 ratio",
-        "sunlight": "Like sunshine, resistant to half shade, dormant under high temperature in summer",
-        "watering": "Water thoroughly when soil is dry, avoid saturated water, stop watering when in summer dormancy",
-        "fertilization": "Dilute fertilizers following instructions, apply once monthly",
-        "pruning": "Remove dead and rotten part timely"
+        "size": "średnica: 2 cm, wysokość: 5 cm",
+        "soil": "mieszanka torfu i perlitu w proporcji 3:1",
+        "sunlight": "lubi stanowiska słoneczne, odporna na półcień, dormant under high temperature latem",
+        "watering": "podlewaj obficie, gdy ziemia wyschnie, unikaj wody wysokomineralizowanej, stop watering when latem dormancy",
+        "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, stosuj raz w miesiącu",
+        "pruning": "od czasu do czasu usuwaj martwe tkanki oraz liście, które Ci się nie podobają"
     },
     "parameter": {
         "max_light_mmol": 7200,

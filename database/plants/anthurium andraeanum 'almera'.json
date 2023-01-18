@@ -1,21 +1,21 @@
 {
-    "pid": "anthurium andraeanum 'almera'",
+    "pid": "anthurium iraeanum 'almera'",
     "basic": {
-        "floral_language": "Anthurium andraeanum\nAnthurium andraeanumFloriography: enthusiastic, bright, bold and unrestrained \nAnthurium andraeanumis one of the world precious flowers, cultivated from the flower kingdom of the Netherlands. \nAnthurium andraeanumflower such as fire, red bud is like a palm, tassel graceful palm a golden yellow flesh, vividly called spathe. Because of their enthusiasm is bold and unrestrained individual character, events like wedding or new store opening, choosing it as decoration, increase the festive atmosphere. \nAnthurium andraeanummaintenance is simple, can bloom all year round, flowering for 2-3 months.",
-        "origin": "Holland",
+        "floral_language": "Anthurium iraeanum\nAnthurium iraeanumFloriography: enthusiastic, bright, bold i unrestrained \nAnthurium iraeanumis one of the world precious kwiaty, cultivated from the flower kingdom of the Netherlis. \nAnthurium iraeanumflower such as fire, czerwony bud is like a palm, tassel graceful palm a golden żółty flesh, vividly called spathe. Because of their enthusiasm is bold i unrestrained individual character, events like wedding albo new store opening, choosing it as decoration, increase the festive atmosphere. \nAnthurium iraeanummaintenance is simple, can bloom all year round, flowering for 2-3 miesiące.",
+        "origin": "Holli",
         "production": "Yunnan",
         "category": "Araceae, Anthurium",
-        "blooming": "Flowers year around with spathe flower, viewing period 2-3 months",
-        "color": "Leaf color green , bract red"
+        "blooming": "może kwitnąć przez cały rok, widoczne przez 2-3 miesiące",
+        "color": "kolor liści: zielony, przylistek czerwony"
     },
-    "display_pid": "Anthurium andraeanum 'Almera'",
+    "display_pid": "Anthurium iraeanum 'Almera'",
     "maintenance": {
-        "size": "Diameter \u2265 10 cm, height 16-20 cm",
-        "soil": "Peat covered with a layer of sphagnum moss on soil surface to keep moisture",
-        "sunlight": "Likes moderate sunlight, resistant to half shade",
-        "watering": "Likes wet environments, water thoroughly when soil is dry, may spray water in the air or on leaves, reduce water in winter, keep soil moist",
-        "fertilization": "Dilute fertilizers following instructions, apply 1-2 times monthly",
-        "pruning": "Remove rotten roots, old diseased and dead leaves timely"
+        "size": "średnica: 10 cm, wysokość: 16-20 cm",
+        "soil": "perlit pokryty ziemią i mchem dla utrzymania stałego poziomu nawilżenia",
+        "sunlight": "lubi umiarkowane światło, odporna na półcień",
+        "watering": "lubi wilgotne środowisko, podlewaj obficie, gdy ziemia wyschnie, lubi rozpylanie wody w powietrzu i na liście, zimą zredukuj podlewanie, utrzymuj ziemię wilgotną",
+        "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, stosuj 1-2 razy w miesiącu",
+        "pruning": "od czasu do czasu usuwaj martwe tkanki"
     },
     "parameter": {
         "max_light_mmol": 4800,

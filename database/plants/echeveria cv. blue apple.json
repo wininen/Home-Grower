@@ -2,20 +2,20 @@
     "pid": "echeveria cv. blue apple",
     "basic": {
         "floral_language": "",
-        "origin": "Mexico",
-        "production": "China",
+        "origin": "Meksyk",
+        "production": "Chiny",
         "category": "Crassulaceae, Echeveria",
-        "blooming": "Succulent plant\uff0cflowering period in spring",
-        "color": "Leaf color blue green\uff0cand will turn pink red with adequate sunlight"
+        "blooming": "Succulent plant\uff0cokres kwitnienia: in spring",
+        "color": "kolor liści: blue zielony\uff0ci will turn różowy czerwonyprzy dłuższej ekspozycji na światło"
     },
     "display_pid": "Echeveria cv. blue apple",
     "maintenance": {
-        "size": "Diameter\u22656cm\uff0cHeight\u22655cm",
-        "soil": "Peat and akadama mixed in 3:1 ratio",
-        "sunlight": "Enjoy sunlight, avoid strong sunlight in summer",
-        "watering": "Resistant to drought, water thoroughly when soil surface is dry, reduce water in summer",
-        "fertilization": "Dilute fertilizers following instructions, apply once monthly in spring and autumn",
-        "pruning": "Remove flower stem, diseased and rotten leaves timely"
+        "size": "średnica:6cm\uff0cwysokość:5cm",
+        "soil": "mieszanka torfu i perlitu w proporcji 3:1",
+        "sunlight": "lubi światło, unikaj bezpośredniego silnego światła",
+        "watering": "odporna na susze, podlewaj obficie, gdy powierzchnia gleby wyschnie"
+        "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, wiosną i jesienią stosować raz w miesiącu",
+        "pruning": "usuń łodygę kwiatu po przekwitnięciu, od czasu do czasu usuwaj martwe tkanki"
     },
     "parameter": {
         "max_light_mmol": 12500,

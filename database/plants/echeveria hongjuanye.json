@@ -1,21 +1,21 @@
 {
     "pid": "echeveria hongjuanye",
     "basic": {
-        "floral_language": "Echeveria hongjuanye\nFloriography: sunshine, lovely, beautiful \nEcheveria hongjuanye is a medium-sized succulent plant and is very popular recently. \nEcheveria hongjuanye plant stature is elegant. The leaf blade is long ovoid, leaf color is blue green with a layer of white powder on the surface. Leaf layers are stacked, look like a small pineapple from long distance. When it is sunny in cool season, the leaves will become pink, which is very lovely. \nEcheveria hongjuanye like the sunshine. In hot summer it needs a short dormancy, and place it in the semi-shade. It is blooming from March to May with orange color flowers.",
+        "floral_language": "Echeveria hongjuanye\nFloriography: sunshine, lovely, beautiful \nEcheveria hongjuanye is a medium-sized succulent plant i is very popular recently. \nEcheveria hongjuanye plant stature is elegant. The liść: blade is long ovoid, kolor liści: is blue zielony with a layer of biały powder on the surface. liść: layers are stacked, look like a small pineapple from long distance. When it is sunny in cool season, the leaves will become różowy, which is very lovely. \nEcheveria hongjuanye like the sunshine. In hot summer it needs a short  i place it in the semi-shade. It is blooming from March to May with pomarańczowy color kwiaty.",
         "origin": "Asia",
         "production": "Yunnan",
         "category": "Crassulaceae, Echeveria",
-        "blooming": "Succulent plants, sometimes flowers, orange flowers",
-        "color": "Leaf color blue green, when sunny leaf color turning to peach red"
+        "blooming": "roślina kaktusowata, czasami kwitnie, pomarańczowy kwiaty",
+        "color": "kolor liści: blue zielony, when sunny kolor liści: turning to peach czerwony"
     },
     "display_pid": "Echeveria hongjuanye",
     "maintenance": {
-        "size": "Diameter 6-10 cm, height 5-15 cm",
-        "soil": "Peat and akadama mixed in 3:1 ratio",
-        "sunlight": "Likes light, and resistant to half shade, short period of dormancy in summer, use half shade for better care",
-        "watering": "Water thoroughly 2 times during summer dormancy, keep soil moist in other time, water thoroughly when soil is dry",
-        "fertilization": "Dilute fertilizers following instructions,  apply once monthly in spring and autumn",
-        "pruning": "Remove dead and rotten part timely"
+        "size": "średnica: 6-10 cm, wysokość: 5-15 cm",
+        "soil": "mieszanka torfu i perlitu w proporcji 3:1",
+        "sunlight": "lubi światło, i odporna na półcień, przechodzi krótki okres spoczynku latem",
+        "watering": "podlej 2 razy w trakcie lata, w pozostałe sezony utrzymuj glebę delikatnie wilgotną, podlewaj obficie, gdy ziemia wyschnie",
+        "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, wiosną i jesienią stosować raz w miesiącu",
+        "pruning": "od czasu do czasu usuwaj martwe tkanki oraz liście, które Ci się nie podobają"
     },
     "parameter": {
         "max_light_mmol": 7000,

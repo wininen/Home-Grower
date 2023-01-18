@@ -1,21 +1,21 @@
 {
     "pid": "crassula ovata",
     "basic": {
-        "floral_language": "Crassula ovata \nFloriography: beautiful, spotty, sunny\nIs a pretty plant with thick long oval leaves like a pad, leaf color green and marked by yellow patches, in a cool season with abundant sunlight, leaf edges turn pink, forming a mixture of green, yellow, and pink, very colorful and spotty, has a high ornamental value.\nLikes sunshine, tolerates to half shade, has a short dormant period under summer high temperature, place under bright scattered light. Flowers sometimes, pink color.",
-        "origin": "South Africa",
-        "production": "China",
+        "floral_language": "Crassula ovata \nFloriography: beautiful, spotty, sunny\nIs a pretty plant with thick long oval leaves like a pad, kolor liści: zielony i marked by żółty patches, in a cool season with abundant sunlight, liść: edges turn różowy, forming a mixture of zielony, żółty, i różowy, very colorful i spotty, has a high ornamental value.\nlubi światło słoneczne, tolerates to half shade, has a short dormant period under summer high temperature, place under jasne rozproszone światło. kwiaty sometimes, różowy color.",
+        "origin": "południe Afryki",
+        "production": "Chiny",
         "category": "Crassulaceae, Crassula",
-        "blooming": "Succulent plants, sometimes flowers, white flowers",
-        "color": "Leaf color green, with yellow marks, leaf edges red"
+        "blooming": "roślina kaktusowata, czasami kwitnie, biały kwiaty",
+        "color": "kolor liści: zielony, with żółty marks, liść: edges czerwony"
     },
     "display_pid": "Crassula ovata",
     "maintenance": {
-        "size": "Diameter \u2265 5 cm, height \u2265 5 cm",
-        "soil": "Peat and akadama mixed in 3:1 ratio",
-        "sunlight": "Likes light, resistant to half shade, dormant in summer under high temperatures, put in places with scattered light",
-        "watering": "Resistant to drought, water thoroughly when soil is dry, reduce water in summer",
-        "fertilization": "Dilute fertilizers following instructions,  apply once every 1-2 months in spring and autumn",
-        "pruning": "Remove dead and rotten part timely"
+        "size": "średnica: 5 cm, wysokość: 5 cm",
+        "soil": "mieszanka torfu i perlitu w proporcji 3:1",
+        "sunlight": "lubi światło, odporna na półcień, dormant latem under high temperatures, przenieś na stanowisko bardziej zacienione",
+        "watering": "odporna na susze, podlewaj obficie, gdy ziemia wyschnie",
+        "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, stosuj raz na 1-2 miesiące in wiosną i jesienią",
+        "pruning": "od czasu do czasu usuwaj martwe tkanki oraz liście, które Ci się nie podobają"
     },
     "parameter": {
         "max_light_mmol": 11200,

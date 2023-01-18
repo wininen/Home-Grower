@@ -1,21 +1,21 @@
 {
     "pid": "graptopetalum 'mirinae'",
     "basic": {
-        "floral_language": "Graptopetalum 'Mirinae'\nFloriography: Gentle, generous, beautiful\nGraptopetalum 'Mirinae' looks like lotus flowers, leaves smaller than Graptosedum 'Francesco Baldi', oval shape with spine on the tip, green and smooth surface, turn pale pink when light is abundant. Often used in small pot succulent combos for indoor decorations.\nGraptopetalum 'Mirinae' loves sunlight, but may be dormant in summer under high temperature, need reduce watering and sunlight exposure. Occasionally blooms with white slightly reddish flowers",
-        "origin": "Mexico",
-        "production": "China",
+        "floral_language": "Graptopetalum 'Mirinae'\nFloriography: Gentle, generous, beautiful\nGraptopetalum 'Mirinae' looks like lotus kwiaty, leaves smaller than Graptosedum 'Francesco Baldi', oval shape with spine on the tip, zielony i smooth surface, turn pale różowy when light is abundant. Often used in small pot succulent combos for indoor decorations.\nGraptopetalum 'Mirinae' loves sunlight, but may be dormant latem under high temperature, need czerwonyuce watering i sunlight exposure. Occasionally blooms with biały slightly czerwonydish kwiaty",
+        "origin": "Meksyk",
+        "production": "Chiny",
         "category": "Crassulaceae, Graptopetalum",
-        "blooming": "Succulent plants, sometimes flowers, white slightly red flowers",
-        "color": "Leaf color pale green, with adequate sunlight, leaves or whole plants turning to pink"
+        "blooming": "roślina kaktusowata, czasami kwitnie, biały slightly czerwony kwiaty",
+        "color": "kolor liści: jasnozielony,przy dłuższej ekspozycji na światło, leaves albo whole plants turning to różowy"
     },
     "display_pid": "Graptopetalum 'Mirinae'",
     "maintenance": {
-        "size": "Diameter \u2265 3 cm, height 3-10 cm",
-        "soil": "Peat and akadama mixed in 3:1 ratio",
-        "sunlight": "Likes adequate sunshine, when in a short period of dormancy in summer, reduce water and shade properly",
-        "watering": "Do not water frequently, keep a dry environment, water every 7-10 days",
-        "fertilization": "Dilute fertilizers following instructions, apply once monthly in spring and autumn",
-        "pruning": "Remove withered and dead leaves and excessive daughter plants"
+        "size": "średnica: 3 cm, wysokość: 3-10 cm",
+        "soil": "mieszanka torfu i perlitu w proporcji 3:1",
+        "sunlight": "lubi umiarkowane światło, latem chronić przed bezpośrednim światłem",
+        "watering": "nie podlewaj często, lubi suche środowisko, podlewaj raz na 7-10 dni",
+        "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, wiosną i jesienią stosować raz w miesiącu",
+        "pruning": "od czasu do czasu usuwaj martwe tkanki oraz liście, które Ci się nie podobają"
     },
     "parameter": {
         "max_light_mmol": 7500,

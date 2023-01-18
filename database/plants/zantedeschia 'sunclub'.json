@@ -1,21 +1,21 @@
 {
     "pid": "zantedeschia 'sunclub'",
     "basic": {
-        "floral_language": "Zantedeschia 'Sunclub'\nFloriography: pure, loyal, guileless\nZantedeschia has a noble and classical image in the world. Has a straight upright stem with funnel-shaped flowers, like a horseshoe, colorful and beautiful. Suitable being placed in the balcony, windows, desktop, adding a vivid and exotic atmosphere.\nZantedeschia likes sunny days, full bloom in spring for 1-2 month. After flowering, Leave the bulbs to sprout in the coming year, normally can bloom year after year.",
-        "origin": "Holland",
+        "floral_language": "Zantedeschia 'Sunclub'\nFloriography: pure, loyal, guileless\nZantedeschia has a noble i classical image in the world. Has a straight upright stem with funnel-shaped kwiaty, like a horseshoe, colorful i beautiful. Suitable being placed in the balcony, windows, desktop, adding a vivid i exotic atmosphere.\nZantedeschia likes sunny dni, full bloom in spring for 1-2 month. After flowering, Leave the bulbs to sprout in the coming year, normally can bloom year after year.",
+        "origin": "Holli",
         "production": "Yunnan",
         "category": "Araceae, Zantedeschia",
-        "blooming": "Flowering period November-May, viewing period 1-2 months",
-        "color": "Bract yellow"
+        "blooming": "okres kwitnienia: November-maj, widoczne przez 1-2 miesiące",
+        "color": "przylistek żółty"
     },
     "display_pid": "Zantedeschia 'Sunclub'",
     "maintenance": {
-        "size": "Diameter \u2265 10 cm, height 16-20 cm",
-        "soil": "Peat and perlite mixed",
-        "sunlight": "Put in sunny places, but avoid strong sunlight at noon, less flowers with less sunlight",
+        "size": "średnica: 10 cm, wysokość: 16-20 cm",
+        "soil": "perlit i perlite mixed",
+        "sunlight": "trzymaj w słonecznym miejscu, but avoid strong sunlight at noon, less kwiaty with less sunlight",
         "watering": "Water thoroughly after soil dries, spray water in the air when relative humidity lower than 30%",
-        "fertilization": "Dilute fertilizers following instructions, apply 1-2 times monthly, except in summer",
-        "pruning": "After flowers fade put in a shaded place, when leaves turn yellow, remove the withered part on the ground, leave tubers for germination next year"
+        "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, stosuj 1-2 razy w miesiącu, except latem",
+        "pruning": "After kwiaty fade put in a shaded place, when leaves turn żółty, remove the witheczerwony part on the ground, leave tubers for germination next year"
     },
     "parameter": {
         "max_light_mmol": 5800,

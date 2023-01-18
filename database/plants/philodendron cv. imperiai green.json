@@ -1,21 +1,21 @@
 {
-    "pid": "philodendron cv. imperiai green",
+    "pid": "philodendron cv. imperiai zielony",
     "basic": {
         "floral_language": "",
-        "origin": "South American tropical areas",
-        "production": "Southern China",
+        "origin": "południe American tropical areas",
+        "production": "południe Chin",
         "category": "Araceae, Philodendron",
-        "blooming": "Foliage plants, sometimes flowers, spathe flowers",
-        "color": "Leaf surface green, lower surface and stem red"
+        "blooming": "Foliage plants, czasami kwitnie, spathe kwiaty",
+        "color": "liść: surface zielony, lower surface i stem czerwony"
     },
-    "display_pid": "Philodendron cv. imperiai Green",
+    "display_pid": "Philodendron cv. imperiai zielony",
     "maintenance": {
-        "size": "Diameter \u2265 10 cm, can climb",
-        "soil": "Slightly acidic soil with loose texture or soil with specific nutrients",
-        "sunlight": "Likes half shade environments, avoid strong light, put in places with scattered light",
-        "watering": "Likes wet environments, water thoroughly when soil is dry, avoid saturated water",
-        "fertilization": "Dilute fertilizers following instructions, apply 1-2 times monthly",
-        "pruning": "Remove aged tissues, dead, rotten, diseased leaves timely"
+        "size": "średnica: 10 cm, can climb",
+        "soil": "lekko kwaśne PH przepuszczalna gleba albo gleba ze specjalnymi wymaganiami",
+        "sunlight": "lubi stanowiska zacienione, avoid strong light, przenieś na stanowisko bardziej zacienione",
+        "watering": "lubi wilgotne środowisko, podlewaj obficie, gdy ziemia wyschnie, unikaj wody wysokomineralizowanej",
+        "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, stosuj 1-2 razy w miesiącu",
+        "pruning": "od czasu do czasu usuwaj martwe tkanki oraz liście, które Ci się nie podobają"
     },
     "parameter": {
         "max_light_mmol": 5300,

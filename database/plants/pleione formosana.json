@@ -3,19 +3,19 @@
     "basic": {
         "floral_language": "",
         "origin": "Taiwan",
-        "production": "China",
+        "production": "Chiny",
         "category": "Orchidaceae, Pleione",
-        "blooming": "Flowering period April-June",
-        "color": "Flower color white, pink, light purple"
+        "blooming": "okres kwitnienia: kwiecień-June",
+        "color": "kolor kwiatów: biały, różowy, light fioletowy"
     },
     "display_pid": "Pleione formosana",
     "maintenance": {
-        "size": "Diameter \u2265 10 cm",
+        "size": "średnica: 10 cm",
         "soil": "Humus soil",
-        "sunlight": "Likes moderate sunshine, avoid scorching light",
-        "watering": "Keep soil moist at the seedling stage, water frequently during peak growth stages",
-        "fertilization": "Apply small amount fertilizer monthly in peak growth stages",
-        "pruning": "Remove old, diseased and dead leaves timely"
+        "sunlight": "lubi umiarkowane światło, avoid scorching light",
+        "watering": "utrzymuj ziemię wilgotną at the seedling stage, water frequently during peak growth stages",
+        "fertilization": "stosuj small amount fertilizer monthly in peak growth stages",
+        "pruning": "od czasu do czasu usuwaj martwe tkanki"
     },
     "parameter": {
         "max_light_mmol": 4000,

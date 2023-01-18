@@ -1,21 +1,21 @@
 {
     "pid": "cymbidium cyperifolium",
     "basic": {
-        "floral_language": "Cymbidium cyperifolium\nFloriography: virtuous, tender, intelligent\nCymbidium cyperifolium, commonly referred to as the Chinese orchid, represents simplicity and serenity.\nCymbidium cyperifolium are graceful with slender leaves and colorful, exotic flowers with pure colors and fragrances, though not as huge as the orchids flowers in the West, but very elegant. For its high ornamental value, often used to decorate rooms.\nCymbidium cyperifolium like half shaded environments. Flowering time differs in different varieties throughout the year with a month-long flowering time, promptly cut the scape after flowering for germination in the next year.",
-        "origin": "China",
-        "production": "China",
+        "floral_language": "Cymbidium cyperifolium\nFloriography: virtuous, tender, intelligent\nCymbidium cyperifolium, commonly referczerwony to as the Chinese orchid, represents simplicity i serenity.\nCymbidium cyperifolium are graceful with slender leaves i colorful, exotic kwiaty with pure colors i fragrances, though not as huge as the orchids kwiaty in the West, but very elegant. For its high ornamental value, often used to decorate rooms.\nCymbidium cyperifolium lubi półcieńd environments. Flowering time differs in different varieties throughout the year with a month-long flowering time, promptly cut the scape after flowering for germination in the next year.",
+        "origin": "Chiny",
+        "production": "Chiny",
         "category": "Orchidaceae, Cymbidium",
-        "blooming": "Flowering period October-February, viewing period 3-4 weeks",
-        "color": "Flower color yellow green"
+        "blooming": "okres kwitnienia: październik-February, widoczne przez 3-4 tygodnie",
+        "color": "kolor kwiatów: żółtozielony"
     },
     "display_pid": "Cymbidium cyperifolium",
     "maintenance": {
-        "size": "Diameter \u2265 10 cm, height \u2265 15 cm",
-        "soil": "Breathable and loose planting materials with coconut shell, bark or sphagnum moss",
-        "sunlight": "Like half shade, in autumn and winter may take 2-3h sunlight, receive more light when leaves are dark green",
-        "watering": "Water thoroughly when soil is dry, may spray to the ambient environment in summer, reduce watering in winter",
-        "fertilization": "Apply fertilizers every 10-15 days in the growing seasons of spring and autumn, foliar fertilizer spray also do good for its growth , fertilize under 10 \u2103 (50 \u2109) is forbidden",
-        "pruning": "Remove old, diseased and dead leaves timely, remove peduncle after flowering"
+        "size": "średnica: 10 cm, wysokość: 15 cm",
+        "soil": "przepuszczalna, bardzo oddychająca gleba ze skorupą kokosa, korą albo mchem",
+        "sunlight": "lubi półcień, jesienią i zimą potrzebuje 2-3h dostępu do światła, gdy ma więcej światła liście stają się ciemnozielone",
+        "watering": "podlewaj obficie, gdy ziemia wyschnie, may spray to the ambient environment latem, zimą zmniejsz częstotliwość podlewania",
+        "fertilization": "stosuj nawóz raz na 10-15 dni w czasie wzrostu wiosną i jesienią, lubi oprysk nawozami dolistnymi",
+        "pruning": "od czasu do czasu usuwaj martwe tkanki, usuwaj szypułkę po kwitnięciu"
     },
     "parameter": {
         "max_light_mmol": 3400,

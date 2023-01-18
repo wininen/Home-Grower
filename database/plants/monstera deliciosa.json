@@ -1,21 +1,21 @@
 {
     "pid": "monstera deliciosa",
     "basic": {
-        "floral_language": "Monstera deliciosa\nFloriography: health, happiness and energy \nMonstera deliciosa is the evergreen foliage plant. It has strong stem, and the aerial root of brown color, which can absorb water and nutrients in the air. Leaves are light green, peculiar shape, looking like a turtle, and coupled with much on stem section, much like bamboo, so it is called bamboo of curvature. Monstera deliciosa is often put in the sitting room, the facade, the beautification adornment effect. \nMonstera deliciosa likes the semi-shade environment, and it is grown in scattered light. Flowers are yellow-white spathe, and are generally difficult to bloom in domestic growth.",
-        "origin": "Mexico",
-        "production": "China",
+        "floral_language": "Monstera deliciosa\nFloriography: health, happiness i energy \nMonstera deliciosa is the everzielony foliage plant. It has strong stem, i the aerial root of brązowy color, which can absorb water i nutrients in the air. Leaves are jasnozielony, peculiar shape, looking like a turtle, i coupled with much on stem section, much like bamboo, so it is called bamboo of curvature. Monstera deliciosa is often put in the sitting room, the facade, the beautification adornment effect. \nMonstera deliciosa likes the semi-shade environment, i it is grown in scatteczerwony light. kwiaty are żółty-biały spathe, i are generally difficult to bloom in domestic growth.",
+        "origin": "Meksyk",
+        "production": "Chiny",
         "category": "Araceae, Monstera",
-        "blooming": "Foliage plants, sometimes flowers in summer",
-        "color": "Leaf color emerald green , bract light yellow"
+        "blooming": "Foliage plants, czasami kwitnie latem",
+        "color": "kolor liści: emerald zielony, przylistek jasnożółty"
     },
     "display_pid": "Monstera deliciosa",
     "maintenance": {
-        "size": "Diameter \u2265 10 cm, height \u2265 30 cm",
-        "soil": "Peat mixed with coarse sand soil or hydroponics",
-        "sunlight": "Relatively resistant to shade, likes half shade environments, leaves are fresh and green with some sunlight in winter",
-        "watering": "Likes wet environments, spray water in the surrounding environment to keep air moist, reduce watering in winter",
-        "fertilization": "Dilute fertilizers following instructions, every 15 days apply fertilizers once in April to Septermber",
-        "pruning": "Remove dead and yellowish leaves timely"
+        "size": "średnica: 10 cm, wysokość: 30 cm",
+        "soil": "perlit zmieszany z ziemią z piaskiem albo hydroponics",
+        "sunlight": "dosyć odporna na brak słońca, lubi stanowiska zacienione, leaves are fresh i zielony with some sunlight in winter",
+        "watering": "lubi wilgotne środowisko, spray water in the surrounding environment to keep air moist, zimą zmniejsz częstotliwość podlewania",
+        "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta,raz na 15 dni stosuj nawóz once in kwiecień to Septermber",
+        "pruning": "od czasu do czasu usuwaj martwe tkanki"
     },
     "parameter": {
         "max_light_mmol": 3400,

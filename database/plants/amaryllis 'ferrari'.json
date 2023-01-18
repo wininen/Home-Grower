@@ -1,21 +1,21 @@
 {
     "pid": "amaryllis 'ferrari'",
     "basic": {
-        "floral_language": "Hippeastrum rutilum\nFloriography: hot, passionate, loyal\nHas beautiful green leaves, scape sprouted from the middle of the leaf blades, one or several huge flowers on the top of scape, exotic and like lilies with beautiful red, orange, pink, or complex color. Commonly used in interior decoration or flower beds.\nHippeastrum likes the sun with tolerance to half shade, blooms in spring or winter, available for viewing in 2-3 weeks. After flowering, cut the scape and leave the bulbs for sprouting in the next year, normally may bloom for years.",
-        "origin": "Brazil",
-        "production": "China",
+        "floral_language": "Hippeastrum rutilum\nFloriography: hot, passionate, loyal\nHas beautiful zielony leaves, scape sprouted from the middle of the liść: blades, one albo several huge kwiaty on the top of scape, exotic i like lilies with beautiful czerwony, pomarańczowy, różowy, albo complex color. Commonly used in interior decoration albo flower beds.\nHippeastrum likes the sun with tolerance to half shade, blooms in spring albo winter, available for viewing in 2-3 tygodnie. After flowering, cut the scape i leave the bulbs for sprouting in the next year, normally may bloom for years.",
+        "origin": "Brazylia",
+        "production": "Chiny",
         "category": "Amaryllidaceae, Hippeastrum",
-        "blooming": "Flowering period in winter and spring, viewing period 2-3 weeks",
-        "color": "Flower color red"
+        "blooming": "okres kwitnienia: zimą i wiosną, przez 2-3 tygodnie",
+        "color": "kolor kwiatów: czerwony"
     },
     "display_pid": "Amaryllis 'Ferrari'",
     "maintenance": {
-        "size": "Diameter \u2265 10 cm, height \u2265 15 cm",
-        "soil": "Peat or soil with specific nutrients",
-        "sunlight": "Likes sunshine, but avoid strong light, in summer put in places with bright scattered light, in winter full sun",
-        "watering": "Keep soil moist",
-        "fertilization": "Dilute fertilizers following instructions,  apply once every 10-15 days in spring and autumn",
-        "pruning": "Remove withered flowers, old, diseased, and dead leaves timely"
+        "size": "średnica: 10 cm, wysokość: 15 cm",
+        "soil": "perlit albo gleba ze specjalnymi wymaganiami",
+        "sunlight": "lubi światło słoneczne, unikaj silnego światła, latem najlepiej czuje się na bardzo jasnych stanowiskach, zimą też potrzebuje światła",
+        "watering": "utrzymuj ziemię wilgotną",
+        "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, stosuj raz na 10-15 dni in wiosną i jesienią",
+        "pruning": "usuwaj uschnięte kwiaty, od czasu do czasu usuwaj martwe tkanki"
     },
     "parameter": {
         "max_light_mmol": 4700,

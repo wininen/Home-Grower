@@ -2,20 +2,20 @@
     "pid": "aeonium haworthii",
     "basic": {
         "floral_language": "",
-        "origin": "Africa",
-        "production": "China",
+        "origin": "Afryka",
+        "production": "Chiny",
         "category": "Crassulaceae, Aeonium",
-        "blooming": "Succulent plants, sometimes flowers",
-        "color": "Leaf color yellow green , when sunny leaf margine turnning to red"
+        "blooming": "roślina kaktusowata, czasami kwitnie",
+        "color": "kolor liści: żółtozielony przylistek  gdy jest słonecznie brzeg liścia czerwienieje"
     },
     "display_pid": "Aeonium haworthii",
     "maintenance": {
-        "size": "Diameter \u2265 5 cm, height 5-20 cm",
-        "soil": "Peat and akadama mixed in 3:1 ratio",
-        "sunlight": "Likes sunshine, when in a short period of dormancy in summer, reduce water and shade properly",
-        "watering": "Do not water frequently, keep a dry environment, water every 10-15 days",
-        "fertilization": "Dilute fertilizers following instructions, apply once monthly",
-        "pruning": "Remove withered and dead leaves and excessive daughter plants"
+        "size": "średnica: 5 cm, wysokość: 5-20 cm",
+        "soil": "mieszanka torfu i perlitu w proporcji 3:1",
+        "sunlight": "lubi światło słoneczne, przechodzi krótki okres spoczynku latem",
+        "watering": "nie podlewaj często, lubi suche środowisko, podlewaj raz na 10-15 dni",
+        "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, stosuj raz w miesiącu",
+        "pruning": "od czasu do czasu usuwaj martwe tkanki oraz liście, które Ci się nie podobają"
     },
     "parameter": {
         "max_light_mmol": 6000,

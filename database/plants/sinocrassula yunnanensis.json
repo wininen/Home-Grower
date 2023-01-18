@@ -1,21 +1,21 @@
 {
     "pid": "sinocrassula yunnanensis",
     "basic": {
-        "floral_language": "Sinocrassula yunnanensis\nFloriography: noble, beautiful, mysterious\nHas a beautiful plant form, leaf color gray green, leaf surface covered by white hairs, leaves are compactly arranged in a rosette, with enough sunny days, leaves turn dark green or black. \nLikes sunshine. Flowers sometimes.",
+        "floral_language": "Sinocrassula yunnanensis\nFloriography: noble, beautiful, mysterious\nHas a beautiful plant form, kolor liści: gray zielony, liść: surface coveczerwony by biały hairs, leaves are compactly arranged in a rosette, with enough sunny dni, leaves turn ciemnozielony albo black. \nlubi światło słoneczne. kwiaty sometimes.",
         "origin": "Yunan",
-        "production": "China",
+        "production": "Chiny",
         "category": "Crassulaceae, Echeveria",
-        "blooming": "Succulent plants, sometimes flowers",
-        "color": "Leaf color gray green, when sunny leaves turning to black green to black"
+        "blooming": "roślina kaktusowata, czasami kwitnie",
+        "color": "kolor liści: gray zielony, when sunny leaves turning to black zielony to black"
     },
     "display_pid": "Sinocrassula yunnanensis",
     "maintenance": {
-        "size": "Diameter \u2265 5 cm, height 5-20 cm",
-        "soil": "Peat and akadama mixed in 3:1 ratio",
-        "sunlight": "Likes sunshine, when in a short period of dormancy in summer, reduce water and shade properly",
-        "watering": "Do not water frequently, keep a dry environment, water every 10-15 days",
-        "fertilization": "Dilute fertilizers following instructions, apply once monthly",
-        "pruning": "Remove withered and dead leaves and excessive daughter plants"
+        "size": "średnica: 5 cm, wysokość: 5-20 cm",
+        "soil": "mieszanka torfu i perlitu w proporcji 3:1",
+        "sunlight": "lubi światło słoneczne, latem chronić przed bezpośrednim światłem",
+        "watering": "nie podlewaj często, lubi suche środowisko, podlewaj raz na 10-15 dni",
+        "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, stosuj raz w miesiącu",
+        "pruning": "od czasu do czasu usuwaj martwe tkanki oraz liście, które Ci się nie podobają"
     },
     "parameter": {
         "max_light_mmol": 6000,

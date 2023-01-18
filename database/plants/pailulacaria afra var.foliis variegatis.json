@@ -1,21 +1,21 @@
 {
     "pid": "pailulacaria afra var.foliis variegatis",
     "basic": {
-        "floral_language": "Pailulacaria afra var.foliis-variegatis\nFloriography: beautiful, vigorous, delicate\nIs a special variety of Portulacaria afra, has an elegant plant form, fleshy thin leaves in nearly a heart shape, fresh green and marked by white or yellow patches, with abundant sunlight, stems turn purple red and leaf edges turn pink, grows fast and can be trimmed frequently for different shapes. \nLikes abundant sunlight, does not have an apparent dormant period. Flowers sometimes, light pink color.",
-        "origin": "South Africa",
-        "production": "China",
+        "floral_language": "Pailulacaria afra var.foliis-variegatis\nFloriography: beautiful, vigorous, delicate\nIs a special variety of Portulacaria afra, has an elegant plant form, fleshy thin leaves in nearly a heart shape, fresh zielony i marked by biały albo żółty patches, with abundant sunlight, stems turn fioletowy czerwony i liść: edges turn różowy, grows fast i can be trimmed frequently for different shapes. \nLikes abundant sunlight, does not have an apparent dormant period. kwiaty sometimes, light różowy color.",
+        "origin": "południe Afryki",
+        "production": "Chiny",
         "category": "Portulacaceae, Portulaca",
-        "blooming": "Succulent plants, sometimes flowers, pale pink",
-        "color": "Leaf color green, with white or yellow marks, with adequate light leaf edges turning to pink"
+        "blooming": "roślina kaktusowata, czasami kwitnie, pale różowy",
+        "color": "kolor liści: zielony, with biały albo żółty marks, z jasnymi krawędziami liści turning to różowy"
     },
     "display_pid": "Pailulacaria afra var.foliis variegatis",
     "maintenance": {
-        "size": "Diameter \u2265 5 cm, height \u2265 5 cm",
-        "soil": "Peat and akadama mixed in 3:1 ratio",
-        "sunlight": "Likes light, no apparent period of dormancy",
-        "watering": "Resistant to drought, water thoroughly when soil is dry, reduce water in summer",
-        "fertilization": "Dilute fertilizers following instructions,  apply once every 1-2 months in spring and autumn",
-        "pruning": "Remove dead and rotten part timely"
+        "size": "średnica: 5 cm, wysokość: 5 cm",
+        "soil": "mieszanka torfu i perlitu w proporcji 3:1",
+        "sunlight": "lubi światło, no apparent period of dormancy",
+        "watering": "odporna na susze, podlewaj obficie, gdy ziemia wyschnie",
+        "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, stosuj raz na 1-2 miesiące in wiosną i jesienią",
+        "pruning": "od czasu do czasu usuwaj martwe tkanki oraz liście, które Ci się nie podobają"
     },
     "parameter": {
         "max_light_mmol": 8000,

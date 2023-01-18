@@ -1,21 +1,21 @@
 {
     "pid": "calathea stromata",
     "basic": {
-        "floral_language": "Calathea stromata \nFloriography: beautiful, proud, classical\nNative to tropical Central and South America, and the West Indies, Calathea stromata has beautiful leaves and graceful plant shape. Long oval, thinly leathery leaves with wavy edges, often marked by stripes of various colors.\nCalathea stromata resists shades, suitable for a bright scattered light. Flowers in winter with white flowers.",
-        "origin": "Brazil",
-        "production": "China",
+        "floral_language": "Calathea stromata \nFloriography: beautiful, proud, classical\nNative to tropical Central i południe America, i the West Indies, Calathea stromata has beautiful leaves i graceful plant shape. Long oval, thinly leathery leaves with wavy edges, often marked by stripes of various colors.\nCalathea stromata resists shades, suitable for a jasne rozproszone światło. kwiaty in winter with biały kwiaty.",
+        "origin": "Brazylia",
+        "production": "Chiny",
         "category": "Marantaceae, Calathea",
-        "blooming": "Foliage plants, sometimes flowers in winter, white flowers",
-        "color": "Leaf color a mixture of green and dark green stripes"
+        "blooming": "Foliage plants, czasami kwitnie in winter, biały kwiaty",
+        "color": "kolor liści: a mixture of zielony i ciemnozielony stripes"
     },
     "display_pid": "Calathea stromata",
     "maintenance": {
-        "size": "Diameter \u2265 10 cm, height \u2265 15 cm",
-        "soil": "Peat mixed with coarse sand soil",
-        "sunlight": "Like half shade, can take 4-5h moderate light",
-        "watering": "Keep soil moist, water thoroughly when soil is dry, reduce water in winter",
-        "fertilization": "Apply low concentration fertilizers, apply 1-2 times monthly in spring and summer",
-        "pruning": "Remove dead and yellowish leaves timely"
+        "size": "średnica: 10 cm, wysokość: 15 cm",
+        "soil": "perlit zmieszany z ziemią z piaskiem",
+        "sunlight": "lubi półcień, może być w bezpośrednim słońcu przez 3-5h",
+        "watering": "utrzymuj ziemię wilgotną, podlewaj obficie, gdy ziemia wyschnie, zimą zredukuj podlewanie",
+        "fertilization": "stosuj nawozy o niskim stężeniu, stosuj 1-2 razy w miesiącu wiosną i latem",
+        "pruning": "od czasu do czasu usuwaj martwe tkanki"
     },
     "parameter": {
         "max_light_mmol": 3500,

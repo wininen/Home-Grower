@@ -2,20 +2,20 @@
     "pid": "rhipsalidopsis gaertneri",
     "basic": {
         "floral_language": "",
-        "origin": "Mexico",
-        "production": "China",
+        "origin": "Meksyk",
+        "production": "Chiny",
         "category": "Cactaceae",
-        "blooming": "Succulent plant\uff0cflowering period March-April",
-        "color": "Leaf color green and leaf margin is red"
+        "blooming": "Succulent plant\uff0cokres kwitnienia: March-kwiecień",
+        "color": "kolor liści: zielony i liść: margin is czerwony"
     },
     "display_pid": "Rhipsalidopsis gaertneri",
     "maintenance": {
-        "size": "Diameter\u226510cm\uff0cHeight\u226515cm",
-        "soil": "Peat or soil with specific nutrients",
-        "sunlight": "Enjoy mild sunlightresistant to half shade\uff0cavoid direct light during summer dormancy",
-        "watering": "Resistant to drought, water thoroughly when soil surface is dry",
-        "fertilization": "Dilute fertilizers following instructions, apply once monthly in spring and autumn",
-        "pruning": "Remove flower stem, diseased and rotten leaves timely"
+        "size": "średnica:10cm\uff0cwysokość:15cm",
+        "soil": "perlit albo gleba ze specjalnymi wymaganiami",
+        "sunlight": "Enjoy mild sunlightodporna na półcień\uff0cavoid direct light during summer dormancy",
+        "watering": "odporna na susze, podlewaj obficie, gdy powierzchnia gleby wyschnie",
+        "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, wiosną i jesienią stosować raz w miesiącu",
+        "pruning": "usuń łodygę kwiatu po przekwitnięciu, od czasu do czasu usuwaj martwe tkanki"
     },
     "parameter": {
         "max_light_mmol": 4700,

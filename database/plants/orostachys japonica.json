@@ -2,20 +2,20 @@
     "pid": "orostachys japonica",
     "basic": {
         "floral_language": "",
-        "origin": "China",
-        "production": "China",
+        "origin": "Chiny",
+        "production": "Chiny",
         "category": "Crassulaceae, Orostachys",
-        "blooming": "Succulent plants, sometimes flowers with a short period time",
-        "color": "Flower color white\uff0cleaf color green, and will turn red with much sunlight"
+        "blooming": "roślina kaktusowata, czasami kwitnie nie krótki okres czasu",
+        "color": "kolor kwiatów: biały\uff0ckolor liści: zielony, i will turn czerwony with much dostępu do światła"
     },
     "display_pid": "Orostachys Japonica",
     "maintenance": {
-        "size": "Diameter\u22653cm\uff0cHeight\u22655cm",
-        "soil": "Peat and akadama mixed in 3:1 ratio",
+        "size": "średnica:3cm\uff0cwysokość:5cm",
+        "soil": "mieszanka torfu i perlitu w proporcji 3:1",
         "sunlight": "Enjoy sufficient sunlight",
-        "watering": "Resistant to drought, water thoroughly when soil surface is dry",
-        "fertilization": "Dilute fertilizers following instructions, apply once monthly in spring and autumn",
-        "pruning": "Remove flower stem, diseased and rotten leaves timely"
+        "watering": "odporna na susze, podlewaj obficie, gdy powierzchnia gleby wyschnie",
+        "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, wiosną i jesienią stosować raz w miesiącu",
+        "pruning": "usuń łodygę kwiatu po przekwitnięciu, od czasu do czasu usuwaj martwe tkanki"
     },
     "parameter": {
         "max_light_mmol": 10500,

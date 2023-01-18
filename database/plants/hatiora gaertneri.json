@@ -1,21 +1,21 @@
 {
     "pid": "hatiora gaertneri",
     "basic": {
-        "floral_language": "Hatiora gaertneri\nFloriography: lucky, fine, tenacious.\nHatiora gaertneri is an epiphytic succulent plant. It grows a number of drooping branches. Each branch comprises of several connection branch sections. This plant usually grows on other trees or damp valleys.\nHatiora gaertneri prefers mild sunlight and is partial shade tolerant. It would go into a short dormancy in hot summer and should be removed to a cool and shaded place. Rose red or red flowers bloom in October to next February.",
-        "origin": "Brazil",
-        "production": "China",
+        "floral_language": "Hatiora gaertneri\nFloriography: lucky, fine, tenacious.\nHatiora gaertneri is an epiphytic succulent plant. It grows a number of drooping branches. Each branch comprises of several connection branch sections. This plant usually grows on other trees albo damp valleys.\nHatiora gaertneri prefers mild sunlight i is partial shade tolerant. It would go into a short dormancy in hot summer i should be removed to a cool i shaded place. Rose czerwony albo czerwony kwiaty bloom in październik to next February.",
+        "origin": "Brazylia",
+        "production": "Chiny",
         "category": "Cactaceae, Schlumbergera",
-        "blooming": "Succulent plants, sometimes flowers, rose red or red flowers",
-        "color": "Leaf color green"
+        "blooming": "roślina kaktusowata, czasami kwitnie, rose czerwony albo czerwony kwiaty",
+        "color": "kolor liści: zielony"
     },
     "display_pid": "Hatiora gaertneri",
     "maintenance": {
-        "size": "Diameter \u2265 10 cm, height \u2265 15 cm",
-        "soil": "Peat mixed with coarse sand soil",
-        "sunlight": "Half shade plant, like moderate light, properly shade during half dormancy in summer",
-        "watering": "Resistant to drought, water thoroughly when soil is dry, reduce water in summer and winter",
-        "fertilization": "Dilute fertilizers following instructions, apply 1-2 times monthly in spring and autumn, except flowering time and dormancy in summer",
-        "pruning": "Remove withered flowers and stem after flowering, except the 2-3 segments at the bottom of stem"
+        "size": "średnica: 10 cm, wysokość: 15 cm",
+        "soil": "perlit zmieszany z ziemią z piaskiem",
+        "sunlight": "Half shade plant, like moderate light during half dormancy latem",
+        "watering": "odporna na susze, podlewaj obficie, gdy ziemia wyschnie  i winter",
+        "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, stosuj 1-2 razy wiosną i jesienią, except flowering time i dormancy latem",
+        "pruning": "usuwaj uschnięte kwiaty i stem after flowering, except the 2-3 segments at the bottom of stem"
     },
     "parameter": {
         "max_light_mmol": 6600,

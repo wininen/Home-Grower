@@ -1,21 +1,21 @@
 {
     "pid": "echeveria elegans 'alba'",
     "basic": {
-        "floral_language": "Echeveria elegans 'Alba' \nFloriography: lovely, delicate, warm\nEcheveria elegans 'Alba' is a small Echeveria with elegant leaves, thick pale green leaves, spectacular, recess in the middle, spiny tip, tightly arranged like an open lotus flower. Leaf edges may be pinkish under full sunlight.\nEcheveria elegans 'Alba' likes sunlight, when being dormant under summer high temperatures, avoid direct sunlight for better care. Sometimes blooms with paly yellow flowers",
-        "origin": "Mexico",
-        "production": "China",
+        "floral_language": "Echeveria elegans 'Alba' \nFloriography: lovely, delicate, warm\nEcheveria elegans 'Alba' is a small Echeveria with elegant leaves, thick jasnozielony leaves, spectacular, recess in the middle, spiny tip, tightly arranged like an open lotus flower. liść: edges may be różowyish under full sunlight.\nEcheveria elegans 'Alba' likes sunlight, when being dormant under summer high temperatures, avoid direct sunlight for better care. Sometimes blooms with paly żółty kwiaty",
+        "origin": "Meksyk",
+        "production": "Chiny",
         "category": "Crassulaceae, Echeveria",
-        "blooming": "Succulent plants, flowering period in spring with light yellow flowers",
-        "color": "Leaf color light green, when sunny leaf edges turning to pink"
+        "blooming": "roślina kaktusowata, okres kwitnienia: in spring with jasnożółty kwiaty",
+        "color": "kolor liści: jasnozielony, when sunny liść: edges turning to różowy"
     },
     "display_pid": "Echeveria elegans 'Alba'",
     "maintenance": {
-        "size": "Diameter 3-15 cm, height 3-10 cm",
-        "soil": "Peat and akadama mixed in 3:1 ratio",
-        "sunlight": "Like sunshine, like adequate sunlight, dormant in summer under high temperatures, put in places with scattered light",
-        "watering": "Do not water frequently, keep a dry environment, stop watering when in summer dormancy",
-        "fertilization": "Dilute fertilizers following instructions, apply once monthly, except summer",
-        "pruning": "Remove dead and rotten part timely"
+        "size": "średnica: 3-15 cm, wysokość: 3-10 cm",
+        "soil": "mieszanka torfu i perlitu w proporcji 3:1",
+        "sunlight": "lubi stanowiska słoneczne, like adequate sunlight, dormant latem under high temperatures, przenieś na stanowisko bardziej zacienione",
+        "watering": "nie podlewaj często, lubi suche środowisko, stop watering when latem dormancy",
+        "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, stosuj raz w miesiącu, except summer",
+        "pruning": "od czasu do czasu usuwaj martwe tkanki oraz liście, które Ci się nie podobają"
     },
     "parameter": {
         "max_light_mmol": 10000,

@@ -1,21 +1,21 @@
 {
     "pid": "crassula marnieriana",
     "basic": {
-        "floral_language": "Crassula marnieriana\nFloriography: wealthy, lucky, warm.\nCrassula marnieriana is a relatively fast growing \"stacked\" Crassula. Short broad ovate opposing leaves are light green, thick, congested at the leaf tips. Leaf edges turn into red to dark red if well sunbathed. This form has leaf margins that often have reddish tinges and is quite showy.\nCrassula marnieriana is a full sun plant and partial shade tolerant. It will go through dormancy in summer and should be remove from direct sunlight to a place with scattered light. It blooms with inconspicuous pale yellow flowers in spring.",
-        "origin": "South Africa",
-        "production": "China",
+        "floral_language": "Crassula marnieriana\nFloriography: wealthy, lucky, warm.\nCrassula marnieriana is a relatively fast growing \"stacked\" Crassula. Short broad ovate opposing leaves are jasnozielony, thick, congested at the liść: tips. liść: edges turn into czerwony to dark czerwony if well sunbathed. This form has liść: margins that often have czerwonydish tinges i is quite showy.\nCrassula marnieriana is a full sun plant i partial shade tolerant. It will go through dormancy latem i should be remove from direct sunlight to a place with scatteczerwony light. It blooms with inconspicuous pale żółty kwiaty in spring.",
+        "origin": "południe Afryki",
+        "production": "Chiny",
         "category": "Crassulaceae, Crassula",
-        "blooming": "Succulent plants, often flowers in spring, white flowers",
-        "color": "Leaf color gray green, when sunny leaf edges turning to red"
+        "blooming": "roślina kaktusowata, often kwiaty in spring, biały kwiaty",
+        "color": "kolor liści: gray zielony, when sunny liść: edges turning to czerwony"
     },
     "display_pid": "Crassula marnieriana",
     "maintenance": {
-        "size": "Diameter 3-10 cm, height \u2265 10 cm",
-        "soil": "Peat and akadama mixed in 3:1 ratio",
-        "sunlight": "Like sunshine, resistant to half shade, short period of dormancy in summer, use half shade for better care",
-        "watering": "Do not water frequently, keep a dry environment, water every 7-10 days, reduce water in dormancy",
-        "fertilization": "Dilute fertilizers following instructions, apply once monthly in spring, autumn, and winter",
-        "pruning": "Remove dead and rotten part timely"
+        "size": "średnica: 3-10 cm, wysokość: 10 cm",
+        "soil": "mieszanka torfu i perlitu w proporcji 3:1",
+        "sunlight": "lubi stanowiska słoneczne, odporna na półcień, przechodzi krótki okres spoczynku latem",
+        "watering": "nie podlewaj często, lubi suche środowisko, podlewaj raz na 7-10 dni",
+        "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, stosuj raz w miesiącu in spring, autumn, i winter",
+        "pruning": "od czasu do czasu usuwaj martwe tkanki oraz liście, które Ci się nie podobają"
     },
     "parameter": {
         "max_light_mmol": 9000,

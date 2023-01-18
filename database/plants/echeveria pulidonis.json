@@ -1,21 +1,21 @@
 {
     "pid": "echeveria pulidonis",
     "basic": {
-        "floral_language": "Echeveria pulidonis\nFloriography: glamorous, gentle, pure\nEcheveria pulidonis has a beautiful lotus plant shape with fleshy leaves of gray-green to blue-green surface with a thin layer of white powder, spoon-shaped blade with tip. Leaf edges turn red under abundant light and a great diurnal temperature range, very glamorous. For its bright colors, often used in potted combo planting. Echeveria pulidonis likes light, avoid strong sunlight in summer noon time, has a short dormant period in winter. Sometimes blooms with yellow flowers.",
-        "origin": "Mexico",
-        "production": "China",
+        "floral_language": "Echeveria pulidonis\nFloriography: glamorous, gentle, pure\nEcheveria pulidonis has a beautiful lotus plant shape with fleshy leaves of gray-zielony to blue-zielony surface with a thin layer of biały powder, spoon-shaped blade with tip. liść: edges turn czerwony under abundant light i a great diurnal temperature range, very glamorous. For its bright colors, often used in potted combo planting. Echeveria pulidonis lubi światło, unikaj bezpośredniego silnego światła noon time, has a short dormant period in winter. Sometimes blooms with żółty kwiaty.",
+        "origin": "Meksyk",
+        "production": "Chiny",
         "category": "Crassulaceae, Echeveria",
-        "blooming": "Succulent plants, flowering period in spring with yellow flowers",
-        "color": "Leaf color gray green to blue green, when sunny leaf edges turning to red"
+        "blooming": "roślina kaktusowata, okres kwitnienia: in spring with żółty kwiaty",
+        "color": "kolor liści: gray zielony to blue zielony, when sunny liść: edges turning to czerwony"
     },
     "display_pid": "Echeveria pulidonis",
     "maintenance": {
-        "size": "Diameter \u2265 3 cm, height \u2265 10 cm",
-        "soil": "Peat and akadama mixed in 3:1 ratio",
-        "sunlight": "But avoid direct strong light at noon in summer, dormant in winter",
-        "watering": "Water thoroughly when soil is dry, stop watering in winter dormancy",
-        "fertilization": "Dilute fertilizers following instructions, dilute fertilizers following instructions,  in early summer, spring and autumn apply fertilizers once monthly",
-        "pruning": "Remove dead and rotten part timely"
+        "size": "średnica: 3 cm, wysokość: 10 cm",
+        "soil": "mieszanka torfu i perlitu w proporcji 3:1",
+        "sunlight": "But unikaj bezpośredniego i silnego światła at noon latem, dormant in winter",
+        "watering": "podlewaj obficie, gdy ziemia wyschnie, stop watering in winter dormancy",
+        "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, in early summer, wiosną i jesienią stosuj nawóz raz w miesiącu",
+        "pruning": "od czasu do czasu usuwaj martwe tkanki oraz liście, które Ci się nie podobają"
     },
     "parameter": {
         "max_light_mmol": 10000,

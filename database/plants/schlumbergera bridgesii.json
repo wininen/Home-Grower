@@ -2,20 +2,20 @@
     "pid": "schlumbergera bridgesii",
     "basic": {
         "floral_language": "",
-        "origin": "South America",
-        "production": "China",
+        "origin": "południe America",
+        "production": "Chiny",
         "category": "Cactaceae",
-        "blooming": "Succulent plants, sometimes flowers with a short period time\uff0cflower color rose red or red",
-        "color": "Leaf color green"
+        "blooming": "roślina kaktusowata, czasami kwitnie nie krótki okres czasu\uff0ckolor kwiatów: rose czerwony albo czerwony",
+        "color": "kolor liści: zielony"
     },
     "display_pid": "Schlumbergera bridgesii",
     "maintenance": {
-        "size": "Diameter\u226510cm\uff0cHeight\u226515cm",
-        "soil": "Peat or soil with specific nutrients",
-        "sunlight": "Like half shade environment, put in places with bright scattered light in summer",
-        "watering": "Resistant to drought, water thoroughly when soil surface is dry",
-        "fertilization": "Dilute fertilizers following instructions, apply once monthly in spring and autumn",
-        "pruning": "Remove flower stem, diseased and rotten leaves timely"
+        "size": "średnica:10cm\uff0cwysokość:15cm",
+        "soil": "perlit albo gleba ze specjalnymi wymaganiami",
+        "sunlight": "lubi półcień environment, najlepiej czuje się na bardzo jasnych stanowiskach latem",
+        "watering": "odporna na susze, podlewaj obficie, gdy powierzchnia gleby wyschnie",
+        "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, wiosną i jesienią stosować raz w miesiącu",
+        "pruning": "usuń łodygę kwiatu po przekwitnięciu, od czasu do czasu usuwaj martwe tkanki"
     },
     "parameter": {
         "max_light_mmol": 4500,

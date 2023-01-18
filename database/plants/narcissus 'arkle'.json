@@ -1,21 +1,21 @@
 {
     "pid": "narcissus 'arkle'",
     "basic": {
-        "floral_language": "Narcissus 'Dutch Master' \nFloriography: confident, pure, beautiful\nNarcissus 'Dutch Master' is extremely graceful, like a river fairy. Two types: China Narcissus and Daffodils. Daffodils has white flowers, yellow bowl-shaped paracorolla (inner corolla), rich scent. Flowers in winter. Daffodils have many varieties, with varied inner corolla shapes, lighter and elegant scent, bloom normally in April-May.\nDaffodils likes sunshine, also resistant to half shade, period of flower viewing 2-3 weeks. After flowering, leave the bulbs for sprouting in the coming year, may normally blossom for years.",
+        "floral_language": "Narcissus 'Dutch Master' \nFloriography: confident, pure, beautiful\nNarcissus 'Dutch Master' is extremely graceful, like a river fairy. Two types: Chiny Narcissus i Daffodils. Daffodils has biały kwiaty, żółty bowl-shaped paracorolla (inner corolla), rich scent. kwiaty in winter. Daffodils have many varieties, with varied inner corolla shapes, lighter i elegant scent, bloom normally in kwiecień-maj.\nDaffodils lubi światło słoneczne, also odporna na półcień, period of flower viewing 2-3 tygodnie. After flowering, leave the bulbs for sprouting in the coming year, may normally blossom for years.",
         "origin": "Europe",
         "production": "Yunnan",
         "category": "Amaryllidaceae, Narcissus",
-        "blooming": "Flowering period January-April, viewing period 1-2 weeks",
-        "color": "Flower color yellow"
+        "blooming": "okres kwitnienia: styczeń-kwiecień, widoczne przez 1-2 tygodnie",
+        "color": "kolor kwiatów: żółty"
     },
     "display_pid": "Narcissus 'Arkle'",
     "maintenance": {
-        "size": "Diameter \u2265 10 cm, height \u2265 15 cm",
-        "soil": "Peat or soil with specific nutrients",
-        "sunlight": "Put in sunny places, resistant to half shade, dormant in summer under high temperature",
-        "watering": "Water thoroughly only when soil is dry, reduce watering during flowering season, 1-2 times a week",
-        "fertilization": "Dilute fertilizers following instructions, apply 1-2 times monthly",
-        "pruning": "Remove the withered parts on the ground after flowering, leaving bulbs for germination in the next year"
+        "size": "średnica: 10 cm, wysokość: 15 cm",
+        "soil": "perlit albo gleba ze specjalnymi wymaganiami",
+        "sunlight": "trzymaj w słonecznym miejscu, odporna na półcień, dormant latem under high temperature",
+        "watering": "Water thoroughly only when soil is dry, czerwonyuce watering during flowering season, 1-2 times a week",
+        "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, stosuj 1-2 razy w miesiącu",
+        "pruning": "Remove the witheczerwony parts on the ground after flowering, leaving bulbs for germination in the next year"
     },
     "parameter": {
         "max_light_mmol": 4500,

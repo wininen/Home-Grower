@@ -1,21 +1,21 @@
 {
     "pid": "echeveria purpusorum",
     "basic": {
-        "floral_language": "Echeveria purpusorum\nFloriography: joyful, unity, beautiful\nEcheveria purpusorum has an elegant plant shape with hypertrophy leaves with tips and in gray green color and reddish-brown markings, leaves arranged in compact rosette, when sunny, leaf back and edge turn orange or red, like a blossoming lotus.\nEcheveria purpusorum likes sunny places, dormant in winter under low temperature. May bloom on a long stem among leaves with orange bell-shaped flowers.",
-        "origin": "Mexico",
-        "production": "China",
+        "floral_language": "Echeveria purpusorum\nFloriography: joyful, unity, beautiful\nEcheveria purpusorum has an elegant plant shape with hypertrophy leaves with tips i in gray zielony color i czerwonydish-brązowy markings, leaves arranged in compact rosette, when sunny, liść: back i edge turn pomarańczowy albo czerwony, like a blossoming lotus.\nEcheveria purpusorum likes sunny places, dormant in winter under low temperature. May bloom on a long stem among leaves with pomarańczowy bell-shaped kwiaty.",
+        "origin": "Meksyk",
+        "production": "Chiny",
         "category": "Crassulaceae, Echeveria",
-        "blooming": "Succulent plants, sometimes flowers, orange red flowers",
-        "color": "Leaf color gray green, with red brown marks, with adequate light leaf edges turn to orange yellow to red"
+        "blooming": "roślina kaktusowata, czasami kwitnie, pomarańczowe i czerwone kwiaty",
+        "color": "kolor liści: gray zielony, with czerwonobrązowy marks, z jasnymi krawędziami liści przechodzącymi w pomarańczowy żółty to czerwony"
     },
     "display_pid": "Echeveria purpusorum",
     "maintenance": {
-        "size": "Diameter 5-10 cm, height 5-15 cm",
-        "soil": "Peat and akadama mixed in 3:1 ratio",
-        "sunlight": "Like sunshine, resistant to half shade, in a state of dormancy under low temperature in winter",
-        "watering": "Do not water frequently, keep a dry environment, water every 7-10 days, water less frequently in winter dormancy",
-        "fertilization": "Dilute fertilizers following instructions, apply once monthly in spring and summer",
-        "pruning": "Remove dead and rotten part timely"
+        "size": "średnica: 5-10 cm, wysokość: 5-15 cm",
+        "soil": "mieszanka torfu i perlitu w proporcji 3:1",
+        "sunlight": "lubi stanowiska słoneczne, odporna na półcień, in a state of dormancy under low temperature in winter",
+        "watering": "nie podlewaj często, lubi suche środowisko, podlewaj raz na 7-10 dni, water less frequently in winter dormancy",
+        "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, stosuj raz w miesiącu wiosną i latem",
+        "pruning": "od czasu do czasu usuwaj martwe tkanki oraz liście, które Ci się nie podobają"
     },
     "parameter": {
         "max_light_mmol": 8300,

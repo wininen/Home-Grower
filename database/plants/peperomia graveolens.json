@@ -3,19 +3,19 @@
     "basic": {
         "floral_language": "",
         "origin": "West Indies",
-        "production": "China",
+        "production": "Chiny",
         "category": "Piperaceae, Peperomia",
-        "blooming": "Succulent plant, sometimes flowers with white inflorescence",
-        "color": "Back side leaf color red"
+        "blooming": "Succulent plant, czasami kwitnie with biały inflorescence",
+        "color": "Back side kolor liści: czerwony"
     },
     "display_pid": "Peperomia graveolens",
     "maintenance": {
-        "size": "Diameter \u2265 15 cm, height \u2265 25 cm",
-        "soil": "Peat or soil with specific nutrients",
-        "sunlight": "Put in places with bright scattered light",
-        "watering": "Water thoroughly after soil surface dries, avoid saturated water",
-        "fertilization": "Dilute fertilizers following instructions, apply 1-2 times monthly",
-        "pruning": "Remove aged tissues, dead and pest branches timely"
+        "size": "średnica: 15 cm, wysokość: 25 cm",
+        "soil": "perlit albo gleba ze specjalnymi wymaganiami",
+        "sunlight": "najlepiej czuje się na bardzo jasnych stanowiskach",
+        "watering": "podlewaj obficie po wyschnięciu gleby, unikaj wody wysokomineralizowanej",
+        "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, stosuj 1-2 razy w miesiącu",
+        "pruning": "od czasu do czasu usuwaj martwe tkanki"
     },
     "parameter": {
         "max_light_mmol": 4400,

@@ -1,20 +1,20 @@
 {
-    "pid": "allamanda cathartica 'hendersonii'",
+    "pid": "allamia cathartica 'hendersonii'",
     "basic": {
         "floral_language": "",
-        "origin": "Southern United States and Brazil",
-        "production": "Southern China",
-        "category": "Apocynaceae, Allamanda",
-        "blooming": "Flowering period May-August, fruiting period October-December",
-        "color": "Flower color golden yellow , fruit color green"
+        "origin": "Południe United States i Brazylia",
+        "production": "południe Chin",
+        "category": "Apocynaceae, Allamia",
+        "blooming": "okres kwitnienia: May-sierpień, okres owocowania: październik-grudzień",
+        "color": "kolor kwiatów: golden żółtyprzylistek  kolor owocu: zielony"
     },
-    "display_pid": "Allamanda cathartica 'Hendersonii'",
+    "display_pid": "Allamia cathartica 'Hendersonii'",
     "maintenance": {
-        "size": "Diameter \u2265 10 cm, height \u2265 15 cm",
-        "soil": "Peat or soil with specific amount of humus",
-        "sunlight": "Like sunshine, slightly resistant to half shade",
-        "watering": "Likes wet environments, water thoroughly when soil is dry, avoid saturated water",
-        "fertilization": "Dilute fertilizers following instructions, apply 1-2 times monthly",
+        "size": "średnica: 10 cm, wysokość: 15 cm",
+        "soil": "perlit albo soil with specific amount of humus",
+        "sunlight": "lubi stanowiska słoneczne, slightly odporna na półcień",
+        "watering": "lubi wilgotne środowisko, podlewaj obficie, gdy ziemia wyschnie, unikaj wody wysokomineralizowanej",
+        "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, stosuj 1-2 razy w miesiącu",
         "pruning": "Pruning accordingly for any favorate tree shapes"
     },
     "parameter": {

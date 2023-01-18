@@ -2,20 +2,20 @@
     "pid": "adromischus marianae",
     "basic": {
         "floral_language": "",
-        "origin": "South Africa",
-        "production": "Southern China",
+        "origin": "południe Afryki",
+        "production": "południe Chin",
         "category": "Crassulaceae, Adromischus",
-        "blooming": "Succulent plants, sometimes flowers",
-        "color": "Leaf color dark green, with red brown dots, flower color white"
+        "blooming": "roślina kaktusowata, czasami kwitnie",
+        "color": "kolor liści: ciemnozielony, z czerwonymi kropkami, kolor kwiatów: biały"
     },
     "display_pid": "Adromischus marianae",
     "maintenance": {
-        "size": "Diameter \u2265 10 cm, height 15-18 cm",
-        "soil": "Soil with loose texture or soil with specific nutrients",
-        "sunlight": "In summer shade according to the intensity of light,  in winter no shade when indoor",
-        "watering": "Water thoroughly after soil surface dries, avoid saturated water",
-        "fertilization": "Dilute fertilizers following instructions, apply 1-2 times monthly",
-        "pruning": "Remove aged tissues, dead and pest branches timely"
+        "size": "średnica: 10 cm, wysokość: 15-18 cm",
+        "soil": "przepuszczalna gleba albo gleba ze specjalnymi wymaganiami",
+        "sunlight": "potrzebuje światła, ale nie bezpośredniego",
+        "watering": "podlewaj obficie po wyschnięciu gleby, unikaj wody wysokomineralizowanej",
+        "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, stosuj 1-2 razy w miesiącu",
+        "pruning": "od czasu do czasu usuwaj martwe tkanki"
     },
     "parameter": {
         "max_light_mmol": 9000,

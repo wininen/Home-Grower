@@ -1,21 +1,21 @@
 {
-    "pid": "sinningia empress red picotee",
+    "pid": "sinningia empress czerwony picotee",
     "basic": {
         "floral_language": "",
-        "origin": "Brazil",
-        "production": "China",
+        "origin": "Brazylia",
+        "production": "Chiny",
         "category": "Gesneriaceae, Sinningia",
-        "blooming": "Flowering period in spring and autumn",
-        "color": "Flower color red"
+        "blooming": "okres kwitnienia: in wiosną i jesienią",
+        "color": "kolor kwiatów: czerwony"
     },
-    "display_pid": "Sinningia Empress Red Picotee",
+    "display_pid": "Sinningia Empress czerwony Picotee",
     "maintenance": {
-        "size": "Diameter \u2265 10 cm, height \u2265 15 cm",
-        "soil": "Slightly acidic soil with loose texture or soil with specific nutrients",
-        "sunlight": "Like half shade, grows in places with scattered light or shade properly, avoid direct light",
-        "watering": "Water thoroughly after soil surface dries, avoid saturated water",
-        "fertilization": "Dilute fertilizers following instructions, apply 1-2 times monthly",
-        "pruning": "Remove aged tissues, dead, rotten, diseased leaves timely"
+        "size": "średnica: 10 cm, wysokość: 15 cm",
+        "soil": "lekko kwaśne PH przepuszczalna gleba albo gleba ze specjalnymi wymaganiami",
+        "sunlight": "lubi półcień, grows in places with scatteczerwony light albo shade properly, avoid direct light",
+        "watering": "podlewaj obficie po wyschnięciu gleby, unikaj wody wysokomineralizowanej",
+        "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, stosuj 1-2 razy w miesiącu",
+        "pruning": "od czasu do czasu usuwaj martwe tkanki oraz liście, które Ci się nie podobają"
     },
     "parameter": {
         "max_light_mmol": 4000,

@@ -3,19 +3,19 @@
     "basic": {
         "floral_language": "",
         "origin": "Tropical Asia",
-        "production": "Southwest China and South China",
+        "production": "południewest Chiny i południe Chin",
         "category": "Orchidaceae, Paphiopedilum",
-        "blooming": "Flowering period year around",
-        "color": "Young stem dark green, slightly covered with white powder, turning to yellow when old"
+        "blooming": "okres kwitnienia: year around",
+        "color": "Young stem ciemnozielony, slightly coveczerwony with biały powder, turning to żółty when old"
     },
     "display_pid": "Paphiopedilum x",
     "maintenance": {
-        "size": "Diameter \u2265 10 cm, height \u2265 15 cm",
-        "soil": "Soil with loose texture or soil with specific nutrients",
-        "sunlight": "Likes half shade, grows in places with scattered light",
-        "watering": "Likes wet environments, water thoroughly when soil is dry, avoid saturated water",
-        "fertilization": "Dilute fertilizers following instructions, apply 1-2 times monthly",
-        "pruning": "Remove aged tissues, dead, rotten, diseased leaves timely"
+        "size": "średnica: 10 cm, wysokość: 15 cm",
+        "soil": "przepuszczalna gleba albo gleba ze specjalnymi wymaganiami",
+        "sunlight": "lubi półcień, grows in places with scatteczerwony light",
+        "watering": "lubi wilgotne środowisko, podlewaj obficie, gdy ziemia wyschnie, unikaj wody wysokomineralizowanej",
+        "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, stosuj 1-2 razy w miesiącu",
+        "pruning": "od czasu do czasu usuwaj martwe tkanki oraz liście, które Ci się nie podobają"
     },
     "parameter": {
         "max_light_mmol": 4000,

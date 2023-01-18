@@ -24,6 +24,7 @@ import {
 } from './AllPlants.styled';
 import {Modal, TextInput} from 'react-native-paper';
 import {db} from '../../../App.js';
+import {Translator, Translate} from 'react-auto-translate';
 
 const AllPlants = ({navigation}) => {
   const [result, setResult] = useState(null);
@@ -212,14 +213,19 @@ const AllPlants = ({navigation}) => {
   };
 
   const renderList = ({item, index}) => (
+    <Translator
+      from='en'
+      to='pl'
+      googleApiKey='API_KEY'>
     <PlantsElement
       style={styles.shadow}
       onPress={() => showDetails(index, item)}>
       <PlantsAfterElement>
         <StyledImage source={{uri: details.image[index]}} />
-        <Text style={styles.bold_black}>{item}</Text>
+        <Text style={styles.bold_black}><Translate>{item}</Translate></Text>
       </PlantsAfterElement>
     </PlantsElement>
+    </Translator>
   );
 
   const renderFooter = () => {
