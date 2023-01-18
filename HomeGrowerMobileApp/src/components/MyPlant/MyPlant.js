@@ -28,14 +28,7 @@ import config from '../../utils/config.js';
 import PlantsDataRow from './MyPlantsData.js';
 import {useNavigation} from '@react-navigation/native';
 
-import SQLite from 'react-native-sqlite-storage';
-SQLite.DEBUG(true);
-SQLite.enablePromise(false);
-
-let db = SQLite.openDatabase({
-  name: 'plantsSQLite.db',
-  createFromLocation: 1,
-});
+import {db} from '../../../App.js';
 
 const BleManagerModule = NativeModules.BleManager;
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
@@ -184,7 +177,7 @@ const MyPlant = props => {
     try {
       await db.transaction(txn => {
         txn.executeSql(
-          `DELETE FROM 'myplants' WHERE photo_path LIKE ?`,
+          `DELETE FROM 'myplants' WHERE plant_genus_id LIKE ?`,
           [name],
           (tx, res) => {
             console.log('Query completed');

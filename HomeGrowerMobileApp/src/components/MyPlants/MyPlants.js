@@ -23,16 +23,9 @@ import {
   ModalItem,
 } from '../AllPlants/AllPlants.styled';
 import {Modal} from 'react-native-paper';
-import SQLite from 'react-native-sqlite-storage';
-SQLite.DEBUG(true);
-SQLite.enablePromise(false);
+import {db} from '../../../App.js';
 
-let db = SQLite.openDatabase({
-  name: 'plantsSQLite.db',
-  createFromLocation: 1,
-});
-
-const MyPlants = ({navigation}) => {
+const MyPlants = ({route, navigation}) => {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(true);
   const [myPlants, setMyPlants] = useState({});
@@ -42,39 +35,56 @@ const MyPlants = ({navigation}) => {
 
   const isFocused = useIsFocused();
 
+  useEffect(() => {
+    if (
+      route.params?.name &&
+      route.params?.origin &&
+      route.params?.production &&
+      route.params?.category &&
+      route.params?.image
+    ) {
+      const {name, origin, production, category, image} = route.params;
+    }
+  }, []);
+
   const fetchPlants = async () => {
     try {
-      let photo_path = {photo_path: []};
+      let plants_id = {id: [], plant_genus_id: []};
       let another = {
-        my_plant_name: [],
-        plant_genus_id: [],
-        report_id: [],
+        origin: [],
+        production: [],
+        category: [],
+        image: [],
       };
       await db.transaction(txn => {
         txn.executeSql(
-          `SELECT photo_path, my_plant_name, plant_genus_id, report_id from 'myplants'`,
+          `SELECT s.id, s.plant_genus_id, b.origin, b.production, b.category, b.image FROM 'myplants' as s JOIN 'plants' as b ON s.plant_genus_id = b.id`,
           [],
           (tx, res) => {
             console.log('Query completed');
             const len = res.rows.length;
-            setChanges(len);
             for (let i = 0; i < len; i++) {
               Object.entries(res.rows.item(i)).forEach(([key, value]) => {
-                if (key == 'photo_path') {
+                if (key == 'id') {
                   // console.log(key, value);
-                  photo_path.photo_path.push(value);
-                } else if (key == 'my_plant_name') {
-                  another.my_plant_name.push(value);
+                  plants_id.id.push(value);
                 } else if (key == 'plant_genus_id') {
-                  another.plant_genus_id.push(value);
-                } else if (key == 'report_id') {
-                  another.report_id.push(value);
+                  plants_id.plant_genus_id.push(value);
+                } else if (key == 'origin') {
+                  another.origin.push(value);
+                } else if (key == 'production') {
+                  another.production.push(value);
+                } else if (key == 'category') {
+                  another.category.push(value);
+                } else if (key == 'image') {
+                  another.image.push(value);
                 }
               });
             }
             console.log('Everything about SQLite done');
-            setMyPlants(photo_path);
+            setMyPlants(plants_id);
             setDetails(another);
+            setChanges(len);
           },
         );
       });
@@ -88,16 +98,14 @@ const MyPlants = ({navigation}) => {
       style={styles.shadow}
       onPress={() =>
         navigation.navigate('ScrollableTabBar', {
-          planame: ['Pochodzenie:', details.my_plant_name[index]],
-          plagenus: ['Produkcja:', details.plant_genus_id[index]],
-          repoid: ['Kategoria:', details.report_id[index]],
+          planame: ['Pochodzenie:', details.origin[index]],
+          plagenus: ['Produkcja:', details.production[index]],
+          repoid: ['Kategoria:', details.category[index]],
           name: ['Nazwa:', item],
         })
       }>
       <PlantsAfterElement>
-        <StyledImage
-          source={require('../../assets/images/achimenes_spp.jpg')}
-        />
+        <StyledImage source={{uri: details.image[index]}} />
         <Text style={styles.bold_black}>{item}</Text>
       </PlantsAfterElement>
     </PlantsElement>
@@ -117,7 +125,7 @@ const MyPlants = ({navigation}) => {
           <ScrollView
             contentContainerStyle={styles.plantsList}
             keyboardShouldPersistTaps="handled">
-            <FlatList data={myPlants.photo_path} renderItem={renderList} />
+            <FlatList data={myPlants.plant_genus_id} renderItem={renderList} />
           </ScrollView>
         ) : (
           <Text style={styles.h2}>Nie masz jeszcze żadnych roślin</Text>
