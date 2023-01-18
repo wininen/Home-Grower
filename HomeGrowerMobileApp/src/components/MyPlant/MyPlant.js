@@ -62,8 +62,9 @@ const MyPlant = props => {
   const [modal, setModal] = useState(false);
   const [isPeripheral, setIsPeripheral] = useState(false);
   const [sensorListConnected, setSensorListConnected] = useState([]);
-  const plantId =
-    '45ce2ccc-941f-11ed-a1eb-0242ac12000245ce2ccc-941f-11ed-a1eb-0242ac120002';
+  // const plantId =
+  //   '45ce2ccc-941f-11ed-a1eb-0242ac12000245ce2ccc-941f-11ed-a1eb-0242ac120002';
+  const {planame, plagenus, repoid, name, plantId} = props.route.params;
   let peripheral = null;
 
   const getData = async () => {
@@ -297,10 +298,8 @@ const MyPlant = props => {
     }
   };
 
-  const {planame, plagenus, repoid, name} = props.route.params;
-
   useEffect(() => {
-    console.log(planame, plagenus, repoid, name);
+    console.log(planame, plagenus, repoid, name, plantId);
   }, []);
 
   useEffect(() => {
