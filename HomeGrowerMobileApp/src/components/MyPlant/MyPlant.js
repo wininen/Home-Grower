@@ -10,18 +10,34 @@ import {
   Button,
   Alert,
 } from 'react-native';
-import {ButtonPlant, styles, OuterContainer} from '../../Styles.js';
 import {
+  ButtonPlant,
+  styles,
+  OuterContainer,
+  ErrorMessageContainer,
+  ButtonContainer,
+} from '../../Styles.js';
+import {
+  ConnectToPlantButton,
   DataRow,
+  FirstRowButtonWrapper,
+  Icon,
   isValueInRangeStyle,
   NameRow,
   PropertiesContainer,
   PropertiesRow,
   Separator,
   SpecsContainer,
+  ScrollableList,
+  SensorsList,
 } from './MyPlants.styled.js';
+
+import {ConnectedSensor} from './MyPlantSensorScrollable';
+
 import {ModalButton, ModalItem, ModalList} from '../AllPlants/AllPlants.styled';
+import Entypo from 'react-native-vector-icons/Entypo';
 import BleManager from 'react-native-ble-manager';
+import {Modal} from 'react-native-paper';
 import {Buffer} from 'buffer';
 import storage from '../../utils/storage.js';
 import config from '../../utils/config.js';
@@ -34,22 +50,42 @@ const BleManagerModule = NativeModules.BleManager;
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 
 const MyPlant = props => {
+  const navigation = useNavigation();
   const [datas, setDatas] = useState([
     {id: 'temperature', title: 0},
     {id: 'light', title: 0},
     {id: 'moist', title: 0},
     {id: 'fertility', title: 0},
   ]);
-  const [flower_care, setFlowerCare] = useState([]);
-  const [sensorListAvailable, setSensorListAvailable] = useState([]);
+
+  const [active, setActive] = useState(false);
+  const [modal, setModal] = useState(false);
+  const [isPeripheral, setIsPeripheral] = useState(false);
   const [sensorListConnected, setSensorListConnected] = useState([]);
-  const peripheralsAvailable = new Map();
-  const peripheralsConnected = new Map();
-  const navigation = useNavigation();
+  let peripheral = null;
 
   const getData = async () => {
     const result = await storage.getAllSensorData();
     connect(result[0]);
+  };
+
+  const assignSensor = async () => {
+    const peripheralFound = findSensor();
+    if (peripheralFound == false) {
+      setActive(false);
+      setSensorListConnected(await storage.getAllSensorData());
+      console.log('czujniki');
+      console.log(await storage.getAllSensorData());
+      setModal(true);
+    } else {
+      setActive(true);
+    }
+    // // setIsPeripheral(true);
+    // peripheral = 'C4:7C:8D:6C:B4:5B';
+    // setActive(true);
+    // console.log(peripheral);
+    // // setIsPeripheral('C4:7C:8D:6C:B4:5B');
+    // console.log('si si');
   };
 
   const connect = async peripheral => {
@@ -59,10 +95,16 @@ const MyPlant = props => {
     console.log(peripheral);
     console.log('......');
 
-    console.log(sensorListConnected);
-    console.log(sensorListAvailable);
-    console.log(peripheralsAvailable);
-    console.log(peripheralsConnected);
+    const result = await storage.getAllSensorKeys();
+    console.log('*********');
+    console.log(peripheral.id);
+    console.log('*********');
+    console.log(result);
+    console.log('*********');
+    if (!result.includes(peripheral.id)) {
+      console.log('ERRORRRR');
+      return;
+    }
 
     // połącz się z czujnikiem
     await BleManager.connect(peripheral.id)
@@ -72,35 +114,6 @@ const MyPlant = props => {
       .catch(error => {
         console.log(error);
       });
-
-    // storage.remove(peripheral.id);
-    try {
-      storage.setObject(peripheral.id, peripheral);
-    } catch (e) {
-      console.log('Object already exists');
-    }
-
-    //Zaktualizuj mapy i usestate
-    for (let i = 0; i < sensorListAvailable.length; i++) {
-      peripheralsAvailable.set(
-        sensorListAvailable[i].id,
-        sensorListAvailable[i],
-      );
-    }
-    peripheralsAvailable.delete(peripheral.id);
-    setSensorListAvailable(Array.from(peripheralsAvailable.values()));
-
-    for (let i = 0; i < sensorListConnected.length; i++) {
-      peripheralsConnected.set(
-        sensorListConnected[i].id,
-        sensorListConnected[i],
-      );
-    }
-    peripheralsConnected.set(peripheral.id, peripheral);
-    setSensorListConnected(Array.from(peripheralsConnected.values()));
-
-    const result = await storage.getAllSensorData();
-    console.log(result);
 
     // odnajduje services i characteristics danego urządzenia
     // trzeba zawsze uruchomić najpierw przed uruchomieniem metod write, read i start notification
@@ -147,11 +160,11 @@ const MyPlant = props => {
   const handleUpdateValueForCharacteristic = async data => {
     const inputData = Buffer.from(data.value);
     //odkodowuje bity
-    temperature = inputData.readUint16LE(0) / 10;
-    light = inputData.readIntLE(3, 4);
+    let temperature = inputData.readUint16LE(0) / 10;
+    let light = inputData.readIntLE(3, 4);
     //light = inputData.readUInt32LE(3)
-    moist = inputData.readUInt8(7);
-    fertility = inputData.readUint16LE(8);
+    let moist = inputData.readUInt8(7);
+    let fertility = inputData.readUint16LE(8);
 
     const plant_data = {temperature, light, moist, fertility, date: new Date()};
     const plantsArr = await storage.getObject('flower_data');
@@ -171,6 +184,10 @@ const MyPlant = props => {
     console.log(
       `Recieved for characteristic! ${data.characteristic}  temperature: ${temperature}  light: ${light}   moist: ${moist}  fertility: ${fertility}`,
     );
+  };
+
+  const findSensor = async => {
+    return false;
   };
 
   const delPlant = async name => {
@@ -222,20 +239,33 @@ const MyPlant = props => {
   }, []);
 
   useEffect(() => {
-    async () => {
-      console.log('Helloooo');
-      const result = await storage.getAllSensorData();
-      connect(result[0]);
-    };
-
-    return () => {};
+    console.log('tu use eff');
+    // console.log(peripheral);
+    // if (peripheral != null) {
+    //   console.log('no no ');
+    //   setIsPeripheral(true);
+    //   setActive(true);
+    //   (async () => {
+    //     console.log('Helloooo');
+    //     const result = await storage.getAllSensorData();
+    //     connect(result[0]);
+    //   })();
+    // }
   }, []);
-
   return (
     <OuterContainer>
-      <ButtonPlant title="Pobierz dane" onPress={getData}>
-        <Text style={styles.body}> Pobierz dane </Text>
-      </ButtonPlant>
+      <FirstRowButtonWrapper>
+        <ButtonPlant title="Pobierz dane" onPress={getData}>
+          <Text style={styles.body}> Pobierz dane </Text>
+        </ButtonPlant>
+        <Icon onPress={() => assignSensor()}>
+          <Entypo
+            name="signal"
+            size={30}
+            style={{color: active ? '#A7C957' : '#BC4749'}}
+          />
+        </Icon>
+      </FirstRowButtonWrapper>
       <PropertiesContainer>
         <Separator />
         {datas.map(item => (
@@ -268,7 +298,98 @@ const MyPlant = props => {
           </ModalButton>
         </ModalList>
       </SpecsContainer>
-      {/* <FlatList
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modal}
+        onRequestClose={() => {
+          setModal(!modal);
+        }}>
+        <View style={styles.modalContainer}>
+          <View style={styles.modalSensorContent}>
+            <ScrollableList>
+              <SensorsList>
+                {sensorListConnected.map(item => (
+                  <ConnectedSensor
+                    key={item.id}
+                    item={item}
+                    connect={connect}
+                  />
+                ))}
+              </SensorsList>
+            </ScrollableList>
+            <ModalButton onPress={() => setModal(!modal)}>
+              <Text style={styles.body}>Wróć</Text>
+            </ModalButton>
+          </View>
+        </View>
+      </Modal>
+    </OuterContainer>
+  );
+};
+
+export default MyPlant;
+
+// <View>
+// {isPeripheral ? (
+//   <OuterContainer>
+//     <ButtonPlant title="Pobierz dane" onPress={getData}>
+//       <Text style={styles.body}> Pobierz dane </Text>
+//     </ButtonPlant>
+//     <PropertiesContainer>
+//       <Separator />
+//       {datas.map(item => (
+//         <PlantsDataRow
+//           title={item.id}
+//           value={item.title}
+//           parameters={0}
+//         />
+//       ))}
+//     </PropertiesContainer>
+//     <SpecsContainer>
+//       <ModalList>
+//         <ModalItem style={styles.h4}>{name[0]}</ModalItem>
+//         <ModalItem style={styles.h4_bold}>{name[1]}</ModalItem>
+//       </ModalList>
+//       <ModalList>
+//         <ModalItem style={styles.h4}>{planame[0]}</ModalItem>
+//         <ModalItem style={styles.h4_bold}>{planame[1]}</ModalItem>
+//       </ModalList>
+//       <ModalList>
+//         <ModalItem style={styles.h4}>{plagenus[0]}</ModalItem>
+//         <ModalItem style={styles.h4_bold}>{plagenus[1]}</ModalItem>
+//       </ModalList>
+//       <ModalList>
+//         <ModalItem style={styles.h4}>{repoid[0]}</ModalItem>
+//         <ModalItem style={styles.h4_bold}>{repoid[1]}</ModalItem>
+//       </ModalList>
+//       <ModalList>
+//         <ModalButton onPress={() => navigation.goBack()}>
+//           <Text style={styles.body}>Wróć</Text>
+//         </ModalButton>
+//         <ModalButton onPress={() => delPlant(name[1])}>
+//           <Text style={styles.body}>Usuń</Text>
+//         </ModalButton>
+//       </ModalList>
+//     </SpecsContainer>
+//   </OuterContainer>
+// ) : (
+//   <ErrorMessageContainer>
+//     <Text style={styles.errorMessage}>
+//       Nie masz podłączonego czujnika do tej rośliny
+//     </Text>
+//     <ButtonContainer>
+//       <ConnectToPlantButton onPress={() => assignSensor()}>
+//         <Text style={styles.body}>Przypisz czujnik</Text>
+//       </ConnectToPlantButton>
+//     </ButtonContainer>
+//   </ErrorMessageContainer>
+// )}
+// </View>
+// );
+// };
+{
+  /* <FlatList
           style={styles.data_table}
           numColumns={4}
           keyExtractor={item => item.id}
@@ -287,9 +408,5 @@ const MyPlant = props => {
               </View>
             </TouchableOpacity>
           )}
-        /> */}
-    </OuterContainer>
-  );
-};
-
-export default MyPlant;
+        /> */
+}

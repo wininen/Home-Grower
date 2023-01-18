@@ -1,3 +1,4 @@
+import {AuditOutlined} from '@ant-design/icons';
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
 import {StyleSheet} from 'react-native';
 import styled from 'styled-components/native';
@@ -114,6 +115,25 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingVertical: 10,
   },
+  modalSensorContent: {
+    margin: 15,
+    width: 330,
+    height: 400,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    paddingHorizontal: 50,
+    paddingVertical: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
   modalQRContent: {
     margin: 15,
     backgroundColor: 'white',
@@ -172,6 +192,12 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 30,
   },
+  errorMessage: {
+    fontSize: 30,
+    flex: 1,
+    textAlign: 'center',
+    textAlignVertical: 'center',
+  },
 });
 
 export const OuterContainer = styled.View`
@@ -213,4 +239,12 @@ export const ButtonPlant = styled.TouchableOpacity`
   margin: 50px auto;
   height: 40px;
   width: 150px;
+`;
+
+export const ErrorMessageContainer = styled.View`
+  height: 100%;
+  width: 100%;
+  background-color: #fff;
+  padding: 0;
+  margin: 0;
 `;

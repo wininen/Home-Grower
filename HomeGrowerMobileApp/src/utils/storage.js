@@ -66,7 +66,8 @@ const getAllSensorData = async () => {
     console.log('KEYS');
     console.log(keys);
     const filteredKeys = keys.filter(item => !irrelevantKeys.includes(item));
-    // console.log(filteredKeys);
+    console.log('filteredKeys');
+    console.log(filteredKeys);
     let result = await AsyncStorage.multiGet(filteredKeys);
     result = result.map(item => JSON.parse(item[1]));
 
@@ -78,6 +79,37 @@ const getAllSensorData = async () => {
   }
 };
 
-const storage = {set, setObject, get, getObject, remove, getAllSensorData};
+const getAllSensorKeys = async () => {
+  try {
+    const keys = await AsyncStorage.getAllKeys();
+    const irrelevantKeys = [
+      '@city_Key',
+      '@temperature_Key',
+      '@weather_Key',
+      'flower_data',
+      'username',
+      'isAppLaunchedForFirstTime',
+    ];
+    console.log('KEYS');
+    console.log(keys);
+    const filteredKeys = keys.filter(item => !irrelevantKeys.includes(item));
+    console.log('filteredKeys');
+    console.log(filteredKeys);
+    return filteredKeys;
+  } catch (e) {
+    console.warn('ERROR: Getting all data', e);
+    return false;
+  }
+};
+
+const storage = {
+  set,
+  setObject,
+  get,
+  getObject,
+  remove,
+  getAllSensorData,
+  getAllSensorKeys,
+};
 
 export default storage;

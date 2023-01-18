@@ -147,10 +147,10 @@ const Sensor = ({navigation}) => {
 
     console.log('\n');
     const fetchedData = [
-      {id: 'temperature', title: temperature},
-      {id: 'light', title: light},
-      {id: 'moist', title: moist},
-      {id: 'fertility', title: fertility},
+      {id: 'temperatura', title: temperature},
+      {id: 'światło', title: light},
+      {id: 'wilgotność', title: moist},
+      {id: 'żyzność', title: fertility},
     ];
     setDatas(fetchedData);
 
@@ -668,36 +668,13 @@ const Sensor = ({navigation}) => {
             </StyledButton>
           </ButtonContainer>
 
-          <ButtonContainer>
-            <StyledButton
-              onPress={stopBackgroundTask}
-              accessibilityLabel="Wyszukaj urządzenie"
-              style={{backgroundColor: active ? '#A7C957' : '#BC4749'}}>
-              <Text style={styles.body}>Czuwaj w tle</Text>
-            </StyledButton>
-          </ButtonContainer>
+          <StyledButton
+            onPress={stopBackgroundTask}
+            accessibilityLabel="Wyszukaj urządzenie"
+            style={{backgroundColor: active ? '#A7C957' : '#BC4749'}}>
+            <Text style={styles.body}>Czuwaj w tle</Text>
+          </StyledButton>
         </ButtonsWrapper>
-
-        {/* <FlatList
-          style={styles.data_table}
-          numColumns={4}
-          keyExtractor={item => item.id}
-          data={datas}
-          contentContainerStyle={{
-            marginTop: 20,
-            display: 'flex',
-            justifyContent: 'space-around',
-            flex: 1,
-          }}
-          renderItem={({item}) => (
-            <TouchableOpacity>
-              <View>
-                <Text style={styles.id}>{item.id}</Text>
-                <Text style={styles.item}>{item.title}</Text>
-              </View>
-            </TouchableOpacity>
-          )}
-        /> */}
       </OuterContainer>
     </Layout>
   );
