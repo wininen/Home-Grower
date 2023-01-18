@@ -62,6 +62,8 @@ const MyPlant = props => {
   const [modal, setModal] = useState(false);
   const [isPeripheral, setIsPeripheral] = useState(false);
   const [sensorListConnected, setSensorListConnected] = useState([]);
+  const plantId =
+    '45ce2ccc-941f-11ed-a1eb-0242ac12000245ce2ccc-941f-11ed-a1eb-0242ac120002';
   let peripheral = null;
 
   const getData = async () => {
@@ -115,6 +117,80 @@ const MyPlant = props => {
         console.log(error);
       });
 
+    peripheral = peripheral;
+    setModal(false);
+    setActive(true);
+    // odnajduje services i characteristics danego urządzenia
+    // trzeba zawsze uruchomić najpierw przed uruchomieniem metod write, read i start notification
+    await BleManager.retrieveServices(peripheral.id)
+      .then(peripheralData => {
+        console.log('Retrieved peripheral services');
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+    // wpijemy wartość [0xa0, 0x1f] do characteristics "charwrite" żeby uruchomić odczytywanie w czasie rzeczywistym
+    await BleManager.write(
+      peripheral.id,
+      config.service,
+      config.characteristicToWrite,
+      config.byteRealTimeData,
+    )
+      .then(() => {
+        console.log('Enabled real-time data!');
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+    //Start the notification on the specified characteristic, you need to call retrieveServices method before.
+    //The buffer will collect a number or messages from the server and then emit once the buffer count it reached.
+    //Helpful to reducing the number or js bridge crossings when a characteristic is sending a lot of messages. Returns a Promise objec
+
+    await BleManager.startNotification(
+      peripheral.id,
+      config.service,
+      config.characteristic,
+    )
+      .then(() => {
+        console.log('started notifications of:  ' + peripheral.id);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    return;
+  };
+
+  const assignSensorConnection = async peripheral => {
+    console.log('trying to connect:');
+    console.log(peripheral.id);
+    console.log('data');
+    console.log(peripheral);
+    console.log('......');
+
+    const result = await storage.getAllSensorKeys();
+    console.log('*********');
+    console.log(peripheral.id);
+    console.log('*********');
+    console.log(result);
+    console.log('*********');
+    if (!result.includes(peripheral.id)) {
+      console.log('ERRORRRR');
+      return;
+    }
+
+    // połącz się z czujnikiem
+    await BleManager.connect(peripheral.id)
+      .then(() => {
+        console.log('Connected to ' + peripheral.id);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    setModal(false);
+    setActive(true);
+    await pushSensorConnection(peripheral.id);
     // odnajduje services i characteristics danego urządzenia
     // trzeba zawsze uruchomić najpierw przed uruchomieniem metod write, read i start notification
     await BleManager.retrieveServices(peripheral.id)
@@ -187,7 +263,14 @@ const MyPlant = props => {
   };
 
   const findSensor = async => {
+    console.log(
+      'Tutaj wrzucamy zwracamy id naszego sensora jeśli połączenie z czujnikiem istnieje',
+    );
     return false;
+  };
+
+  const pushSensorConnection = async peripheralId => {
+    console.log('Tutaj wrzucamy nasz sensor i id roslinki do tabeli połączeń');
   };
 
   const delPlant = async name => {
@@ -313,7 +396,7 @@ const MyPlant = props => {
                   <ConnectedSensor
                     key={item.id}
                     item={item}
-                    connect={connect}
+                    connect={assignSensorConnection}
                   />
                 ))}
               </SensorsList>
