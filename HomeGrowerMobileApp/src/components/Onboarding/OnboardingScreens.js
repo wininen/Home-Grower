@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
+import GeneratorQr from '../Scanner/GeneratorQr';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 const {width, height} = Dimensions.get('window');
 
@@ -84,6 +85,7 @@ const OnboardingScreen = ({navigation}) => {
   };
 
   const appLaunchedForTheFirstTime = () => {
+    GeneratorQr.CreateUsernameUUID();
     AsyncStorage.setItem('@isAppLaunchedForFirstTime', 'false');
   };
 
