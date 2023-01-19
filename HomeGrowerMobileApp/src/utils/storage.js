@@ -3,11 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const get = async key => {
   try {
     const value = await AsyncStorage.getItem(key);
-    console.log('Tu value');
-    console.log(value);
-    console.log('Tu value');
     if (value === null) console.log('data not saved previously');
-    console.log('data not saved previously');
     return value;
   } catch (e) {
     console.warn('ERROR reading values', e);
@@ -18,9 +14,6 @@ const get = async key => {
 const getObject = async key => {
   try {
     const value = await AsyncStorage.getItem(key);
-    console.log('object value');
-    console.log(JSON.parse(value));
-    console.log('object value');
     if (value === null) console.log('data not saved previously');
     return JSON.parse(value);
   } catch (e) {
@@ -160,16 +153,16 @@ const getAllAvailableSensors = async () => {
     let result = await AsyncStorage.multiGet(sensorsAvailable);
     result = result.map(item => JSON.parse(item[1]));
 
-    console.log('filteredPlantsKeys');
-    console.log(filteredPlantsKeys);
-    console.log('filteredSensorsKeys');
-    console.log(filteredSensorsKeys);
-    console.log('sensorsNotAvailable');
-    console.log(sensorsNotAvailable);
-    console.log('sensorsAvailable');
-    console.log(sensorsAvailable);
-    console.log('result');
-    console.log(result);
+    // console.log('filteredPlantsKeys');
+    // console.log(filteredPlantsKeys);
+    // console.log('filteredSensorsKeys');
+    // console.log(filteredSensorsKeys);
+    // console.log('sensorsNotAvailable');
+    // console.log(sensorsNotAvailable);
+    // console.log('sensorsAvailable');
+    // console.log(sensorsAvailable);
+    // console.log('result');
+    // console.log(result);
 
     return result;
   } catch (e) {
