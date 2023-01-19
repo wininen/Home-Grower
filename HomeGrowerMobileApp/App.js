@@ -28,10 +28,10 @@ const App = () => {
 
   const firstRun = async () => {
     try {
-      const appData = await AsyncStorage.getItem('isAppLaunchedForFirstTime');
+      const appData = await AsyncStorage.getItem('@isAppLaunchedForFirstTime');
       if (appData == null) {
         setIsAppLaunchedForFirstTime(true);
-        AsyncStorage.setItem('isAppLaunchedForFirstTime', 'false');
+        AsyncStorage.setItem('@isAppLaunchedForFirstTime', 'false');
       } else {
         setIsAppLaunchedForFirstTime(false);
       }

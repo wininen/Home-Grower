@@ -141,9 +141,10 @@ const Sensor = ({navigation}) => {
     fertility = inputData.readUint16LE(8);
 
     const plant_data = {temperature, light, moist, fertility, date: new Date()};
-    const plantsArr = await storage.getObject('flower_data');
-    if (plantsArr !== null) plantsArr.push(plant_data);
-    storage.setObject('flower_data', plantsArr);
+    // await AsyncStorage.removeItem('flower_data');
+    // const plantsArr = await storage.getObject('@flower_data');
+    // if (plantsArr !== null) plantsArr.push(plant_data);
+    // storage.setObject('@flower_data', plantsArr);
 
     console.log('\n');
     const fetchedData = [

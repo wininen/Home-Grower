@@ -61,11 +61,16 @@ const getAllSensorData = async () => {
       '@weather_Key',
       'flower_data',
       'username',
-      'isAppLaunchedForFirstTime',
+      '@isAppLaunchedForFirstTime',
+      '@forecast_Key',
     ];
     console.log('KEYS');
     console.log(keys);
-    const filteredKeys = keys.filter(item => !irrelevantKeys.includes(item));
+    const filteredKeysPom = keys.filter(item => item[0] != '@');
+    const filteredKeys = filteredKeysPom.filter(
+      item => !irrelevantKeys.includes(item),
+    );
+    // const filteredKeys = keys.filter(item => !irrelevantKeys.includes(item));
     console.log('filteredKeys');
     console.log(filteredKeys);
     let result = await AsyncStorage.multiGet(filteredKeys);
@@ -87,12 +92,16 @@ const getAllSensorKeys = async () => {
       '@temperature_Key',
       '@weather_Key',
       'flower_data',
-      'username',
-      'isAppLaunchedForFirstTime',
+      '@username',
+      '@forecast_Key',
+      '@isAppLaunchedForFirstTime',
     ];
     console.log('KEYS');
     console.log(keys);
-    const filteredKeys = keys.filter(item => !irrelevantKeys.includes(item));
+    const filteredKeysPom = keys.filter(item => item[0] != '@');
+    const filteredKeys = filteredKeysPom.filter(
+      item => !irrelevantKeys.includes(item),
+    );
     console.log('filteredKeys');
     console.log(filteredKeys);
     return filteredKeys;

@@ -74,7 +74,10 @@ const MyPlant = props => {
   };
 
   const assignSensor = async () => {
-    const peripheralFound = findSensor();
+    const peripheralFound = await findSensor();
+    console.log('tutututu');
+    console.log(peripheralFound);
+    console.log('asigning!!!');
     if (peripheralFound == false) {
       setActive(false);
       setSensorListConnected(await storage.getAllSensorData());
@@ -242,9 +245,9 @@ const MyPlant = props => {
     let fertility = inputData.readUint16LE(8);
 
     const plant_data = {temperature, light, moist, fertility, date: new Date()};
-    const plantsArr = await storage.getObject('flower_data');
-    if (plantsArr !== null) plantsArr.push(plant_data);
-    storage.setObject('flower_data', plantsArr);
+    // const plantsArr = await storage.getObject('@flower_data');
+    // if (plantsArr !== null) plantsArr.push(plant_data);
+    // storage.setObject('@flower_data', plantsArr);
 
     console.log('\n');
     const fetchedData = [
@@ -261,15 +264,27 @@ const MyPlant = props => {
     );
   };
 
-  const findSensor = async => {
+  const findSensor = async () => {
     console.log(
       'Tutaj wrzucamy zwracamy id naszego sensora jeśli połączenie z czujnikiem istnieje',
     );
-    return false;
+    const key = '@' + plantId[1];
+    console.log(key);
+    const result = await storage.get(key);
+    console.log(result);
+    if (result == null) {
+      return false;
+    } else {
+      return result;
+    }
   };
 
   const pushSensorConnection = async peripheralId => {
     console.log('Tutaj wrzucamy nasz sensor i id roslinki do tabeli połączeń');
+    const key = '@' + plantId[1];
+    const peripheral = await storage.getObject(peripheralId);
+    console.log(key, peripheral);
+    await storage.set(key, peripheralId);
   };
 
   const disconnectSensor = async => {
@@ -325,17 +340,18 @@ const MyPlant = props => {
 
   useEffect(() => {
     console.log('tu use eff');
-    // console.log(peripheral);
-    // if (peripheral != null) {
-    //   console.log('no no ');
-    //   setIsPeripheral(true);
-    //   setActive(true);
-    //   (async () => {
-    //     console.log('Helloooo');
-    //     const result = await storage.getAllSensorData();
-    //     connect(result[0]);
-    //   })();
-    // }
+    (async () => {
+      const peripheralId = await findSensor();
+      console.log(peripheralId);
+      if (peripheralId != false) {
+        setActive(true);
+
+        console.log('Helloooo');
+        const peripheral = await storage.getObject(peripheralId);
+        console.log(peripheral);
+        connect(peripheral);
+      }
+    })();
   }, []);
   return (
     <OuterContainer>
