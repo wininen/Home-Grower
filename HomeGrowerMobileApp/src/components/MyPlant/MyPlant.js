@@ -466,6 +466,7 @@ const MyPlant = props => {
         }}>
         <View style={styles.modalContainer}>
           <View style={styles.modalSensorContent}>
+            <Text style={styles.AvailableSensorsText}>Dostępne czujniki:</Text>
             <ScrollableList>
               <SensorsList>
                 {sensorListConnected.map(item => (

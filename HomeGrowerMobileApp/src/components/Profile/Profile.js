@@ -132,20 +132,6 @@ const Profile = ({navigation, route}) => {
           <Separator></Separator>
           <ProfileRow>
             <LeftRow>
-              <Entypo
-                name="language"
-                size={40}
-                style={{color: 'black', paddingRight: 15}}
-              />
-              <Text style={styles.h4}>Zmień język</Text>
-            </LeftRow>
-            <RightRow>
-              <Text style={styles.h4_but_green}>Polski</Text>
-            </RightRow>
-          </ProfileRow>
-          <Separator></Separator>
-          <ProfileRow>
-            <LeftRow>
               <FontAwesome5
                 name="temperature-high"
                 size={40}
