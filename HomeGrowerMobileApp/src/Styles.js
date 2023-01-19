@@ -214,6 +214,11 @@ export const styles = StyleSheet.create({
     marginLeft: 10,
     color: '#FFF',
   },
+  AvailableSensorsText: {
+    marginTop: 10,
+    fontSize: 18,
+    fontWeight: '700',
+  },
 });
 
 export const OuterContainer = styled.View`
