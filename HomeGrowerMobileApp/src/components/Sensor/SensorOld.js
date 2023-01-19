@@ -208,6 +208,16 @@ const Sensor = ({navigation}) => {
       await getBluetoothScanPermission();
     }
 
+    BleManager.enableBluetooth()
+      .then(() => {
+        // Success code
+        console.log('The bluetooth is already enabled or the user confirm');
+      })
+      .catch(error => {
+        // Failure code
+        console.log('The user refuse to enable bluetooth');
+      });
+
     await BleManager.scan([], 3)
       .then(() => {
         console.log('Scanning...');
@@ -394,7 +404,7 @@ const Sensor = ({navigation}) => {
 
         peripheralsConnected.delete(peripheral.id);
         setSensorListConnected(Array.from(peripheralsConnected.values()));
-
+        storage.deleteConnectionPlantSensor(peripheral.id);
         storage.remove(peripheral.id);
       })
       .catch(error => {

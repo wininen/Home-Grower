@@ -52,7 +52,7 @@ const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 
 const MyPlant = props => {
   const navigation = useNavigation();
-  const [datas, setDatas] = useState([
+  const [datasPlant, setDatasPlant] = useState([
     {id: 'temperature', title: 0},
     {id: 'light', title: 0},
     {id: 'moist', title: 0},
@@ -248,7 +248,7 @@ const MyPlant = props => {
       {id: 'moist', title: moist},
       {id: 'fertility', title: fertility},
     ];
-    setDatas(fetchedData);
+    setDatasPlant(fetchedData);
 
     //console.log(datas+"\n")
     console.log(
@@ -261,7 +261,7 @@ const MyPlant = props => {
       'Tutaj wrzucamy zwracamy id naszego sensora jeśli połączenie z czujnikiem istnieje',
     );
     const key = '!' + plantId[1];
-    console.log(key);
+    // console.log(key);
     const result = await storage.get(key);
     console.log(result);
     if (result == null) {

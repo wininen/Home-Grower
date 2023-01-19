@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   Dimensions,
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const {width, height} = Dimensions.get('window');
 
 const COLORS = {primary: '#2FA84E', white: '#fff', dark: '#000'};
@@ -82,6 +83,10 @@ const OnboardingScreen = ({navigation}) => {
     setCurrentSlideIndex(lastSlideIndex);
   };
 
+  const appLaunchedForTheFirstTime = () => {
+    AsyncStorage.setItem('@isAppLaunchedForFirstTime', 'false');
+  };
+
   const Footer = () => {
     return (
       <View
@@ -139,7 +144,10 @@ const OnboardingScreen = ({navigation}) => {
               <View style={{width: 15}} />
               <TouchableOpacity
                 activeOpacity={0.8}
-                onPress={() => navigation.replace('Home')}
+                onPress={() => {
+                  appLaunchedForTheFirstTime();
+                  navigation.replace('Home');
+                }}
                 style={styles.btn}>
                 <Text
                   style={{
