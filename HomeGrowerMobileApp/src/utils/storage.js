@@ -171,6 +171,30 @@ const getAllAvailableSensors = async () => {
   }
 };
 
+const deleteConnectionPlantSensor = async peripheralId => {
+  try {
+    const keys = await AsyncStorage.getAllKeys();
+
+    const filteredPlantsKeys = keys.filter(item => item[0] == '!');
+
+    const PlantSensor = await AsyncStorage.multiGet(filteredPlantsKeys);
+    let result = PlantSensor.filter(item => item[1] == peripheralId);
+    console.log('filteredPlantsKeys');
+    console.log(filteredPlantsKeys);
+    console.log('PlantSensor');
+    console.log(PlantSensor);
+    console.log('result');
+    console.log(result);
+
+    if (result.length > 0) {
+      remove(result[0][0]);
+    }
+  } catch (e) {
+    console.warn('ERROR: Delleting connection', e);
+    return false;
+  }
+};
+
 const storage = {
   set,
   setObject,
@@ -180,6 +204,7 @@ const storage = {
   getAllSensorData,
   getAllSensorKeys,
   getAllAvailableSensors,
+  deleteConnectionPlantSensor,
 };
 
 export default storage;
