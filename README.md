@@ -19,15 +19,15 @@
 
 ## Wymagania niefunkcjonalne aby kontynuować pracę z projektem
 
-- Urządzenie z Android 11+
-- Sensor Xiaomi Flower Care / VegTrug Grow Care Home (i inne warianty)
+- Urządzenie z Android 11+,
+- Sensor Xiaomi Flower Care / VegTrug Grow Care Home (i inne warianty).
 
 ## Stack technologiczny projeku
 
-- React Native 70.6
-- SQLite
-- Android SDK 30
-- Biblioteki do React Native wymienione w sekcji poniżej
+- React Native 70.6,
+- SQLite,
+- Android SDK 30,
+- Biblioteki do React Native wymienione w sekcji poniżej.
 
 ## Moduły aplikacji
 
@@ -38,7 +38,7 @@
 
 ---
 
-## Konfifuracja środowisk
+## Konfifuracja środowisk:
 
 <details>
   <summary>Windows</summary>
@@ -47,11 +47,11 @@
 
 ### 2. Ustaw zmienne środowiskowe dla Javy
 
-Upewnij się, że masz ustawioną JAVA_HOME w swoich zmiennych środowiskowych.
+Upewnij się, że masz ustawioną JAVA_HOME w swoich zmiennych środowiskowych:
 
-1. Wyszukaj **Zmienne środowiskowe** w menu Windowsa i wybierz **Edytuj zmienne środowiskowe systemu**
-2. Znajdź i kliknij przycisk **zmienne środowiskowe...**
-3. W **Zmienne systemowe** dodaj **JAVA_HOME** ze ściażką Javy (w naszym przypadku było to _C:\Program Files\Java\jre1.8.0_331_)
+1. Wyszukaj **Zmienne środowiskowe** w menu Windowsa i wybierz **Edytuj zmienne środowiskowe systemu**.
+2. Znajdź i kliknij przycisk **zmienne środowiskowe...**.
+3. W **Zmienne systemowe** dodaj **JAVA_HOME** ze ściażką Javy (w naszym przypadku było to _C:\Program Files\Java\jre1.8.0_331_).
 
 ### 3. Zainstaluj Android Studio
 
@@ -71,9 +71,9 @@ W sekcji "SDK Platforms" wybierz SDK dla Androida 11 (30 API SDK). Jest to minim
 
 ### 5. Ustaw zmienne środowiskowe dla Androida
 
-1. Wyszukaj **"Zmienne środowiskowe"** w menu Windowsa i wybierz **"Edytuj zmienne środowiskowe systemu"**
-2. Znajdź i kliknij przycisk **"zmienne środowiskowe..."**
-3. W **"Zmienne systemowe"** dodaj
+1. Wyszukaj **"Zmienne środowiskowe"** w menu Windowsa i wybierz **"Edytuj zmienne środowiskowe systemu"**.
+2. Znajdź i kliknij przycisk **"zmienne środowiskowe..."**.
+3. W **"Zmienne systemowe"** dodaj:
 
 - "**ANDROID_HOME**" (ścieżka w naszym przypadku: _C:\Users\MyUsername\AppData\Local\Android\Sdk_)
 - "**PLATFORM_TOOLS**" (ścieżka w naszym przypadku: _C:\Users\MyUsername\AppData\Local\Android\Sdk\platform-tools_)
@@ -88,7 +88,7 @@ Wzorując się na oficjalnej dokumentacji [React Native](https://reactnative.dev
 
 ### 1. Zainstaluj Node & Watchman
 
-React team recommend installing Node and Watchman using Homebrew. Run the following commands in a Terminal after installing Homebrew:
+Zespół Reacta zaleca instalację Node i Watchmana przy użyciu [HomeBrew](https://brew.sh) . Uruchom następujące polecenia w terminalu po zainstalowaniu [HomeBrew](https://brew.sh):
 
 ```
 brew install node
@@ -97,8 +97,8 @@ brew install watchman
 
 ### 2. Zainstaluj Java Development Kit
 
-Nasz pracujący na macOS członek zespołu zainstalował OpenJDK nazwane Azul Zulu
-Our macOS based contributor Aleks installed OpenJDK distribution called Azul Zulu using Homebrew. Run the following commands in a Terminal after installing Homebrew:
+Nasz pracujący na macOS członek zespołu zainstalował OpenJDK nazwane Azul Zulu.
+W tym celu po zainstalowaniu na komputerze managera pakietów [HomeBrew](https://brew.sh) należy w konsoli wpisać:
 
 ```
 brew tap homebrew/cask-versions
@@ -147,14 +147,14 @@ source ~/.zprofile
 
 ## Rozpoczęcie pracy nad projektem
 
-W celu rozpoczęcia pracy nad projektem znajdując się w folderze **HomeGrowerMobileApp** wpisz w konsoli
+W celu rozpoczęcia pracy nad projektem znajdując się w folderze **HomeGrowerMobileApp** wpisz w konsoli:
 
 ```
 yarn
 ```
 
 Dzięki temu wszystkie pakiety które są potrzebne do uruchomienia aplikacji zostaną zainstalowane w folderze **node_modules**.
-Poniżej znajduje się lista używanych w projekcie pakietów. Ich edycja bądź aktualizacja możliwa jest w pliku **package.json** w folderze **HomeGrowerMobileApp**
+Poniżej znajduje się lista używanych w projekcie pakietów. Ich edycja bądź aktualizacja możliwa jest w pliku **package.json** w folderze **HomeGrowerMobileApp**.
 
 ```typescript
   "dependencies": {
@@ -196,20 +196,20 @@ Poniżej znajduje się lista używanych w projekcie pakietów. Ich edycja bądź
 
 ## Wyszukanie telefonu w konsoli
 
-Możesz sprawdzić czy twój komputer widzi używane przez ciebie urządzenie. Wystarczy wpisać w konsoli
+Możesz sprawdzić czy twój komputer widzi używane przez ciebie urządzenie. Wystarczy wpisać w konsoli:
 
 ```
 adb devices
 ```
 
-Poprawnie podłączone urządzenie powinno się pokazać w konsoli jako
+Poprawnie podłączone urządzenie powinno się pokazać w konsoli jako:
 
 ```
 List of devices attached
 nazwa_mojego_urządzenia     device
 ```
 
-W przypadku braku posiadania telefonu z systemem Android można użyć emulotora. W tym celu odsyłamy do dokumentacji [React Native](https://reactnative.dev/docs/environment-setup) oraz [Android Studio](https://developer.android.com/studio/run/emulator)
+W przypadku braku posiadania telefonu z systemem Android można użyć emulotora. W tym celu odsyłamy do dokumentacji [React Native](https://reactnative.dev/docs/environment-setup) oraz [Android Studio](https://developer.android.com/studio/run/emulator).
 </br></br>
 
 ## Przygotowanie telefonu
@@ -220,37 +220,37 @@ Ważnym jest, aby w ustawieniach systemu Android włączyć ustawienia deweloper
 
 ## Uruchomienie projektu
 
-W celu uruchomienia projektu znajdując się w folderze **HomeGrowerMobileApp** wpisz w konsoli
+W celu uruchomienia projektu znajdując się w folderze **HomeGrowerMobileApp** wpisz w konsoli:
 
 ```
 npx react-native run-android
 ```
 
-Po tej komendzie powinno się uruchomić środowisko Metro do zarządzania develpmentem aplikacji React Native oraz aplikacja na telefonie.
+Po tej komendzie powinno się uruchomić środowisko Metro do zarządzania developmentem aplikacji React Native oraz aplikacja na telefonie.
 
 ---
 
 ## Kontynuacja pracy nad projektem
 
-Nasz projekt znajduje się pod licencją **GNU General Public License v3.0** dzięki czemu każdy może kontynuować pracę nad naszym projektem, nawet w momencie gdy nasz zespół porzuci jego wspieranie. W tym celu przedstawiamy poniżej przydatne informacje do prowadzenia dalszej przygody z **HomeGrowerMobileApp**
+Nasz projekt znajduje się pod licencją **GNU General Public License v3.0** dzięki czemu każdy może kontynuować pracę nad naszym projektem, nawet w momencie gdy nasz zespół porzuci jego wspieranie. W tym celu przedstawiamy poniżej przydatne informacje do prowadzenia dalszej przygody z **HomeGrowerMobileApp**.
 </br>
 </br>
 
 ### Biblioteka Bluetooth Low Energy dla React Native
 
-Używamy zewnętrznej biblioteki w celu połączenia się z sensorami. Szczegóły biblioteki, wraz z opisami technologii Bluetooth Low Energy znajdują się [tutaj](https://github.com/innoveit/react-native-ble-manager) (dokumentacja dostępna w języku angielskim)
+Używamy zewnętrznej biblioteki w celu połączenia się z sensorami. Szczegóły biblioteki, wraz z opisami technologii Bluetooth Low Energy znajdują się [tutaj](https://github.com/innoveit/react-native-ble-manager) (dokumentacja dostępna w języku angielskim).
 
 ### Baza danych
 
-Opis poszczególnych tabeli oraz funkcjonowania bazy danych znajduje się w pliku [info](database/SQLite/info)
+Opis poszczególnych tabeli oraz funkcjonowania bazy danych znajduje się w pliku [info](database/SQLite/info).
 
 ### Identyfikacja użytkownika
 
-Postanowiliśmy, że jedyną daną jaką będziemy przechowywać na temat użytkownika to unikalny kod UUID który generuje się przy pierwszym uruchomieniu aplikacji. Jego reprezentacją jest kod QR generowany w pliku ekranu [profilu](HomeGrowerMobileApp/src/components/Profile/Profile.js)
+Postanowiliśmy, że jedyną daną jaką będziemy przechowywać na temat użytkownika to unikalny kod UUID który generuje się przy pierwszym uruchomieniu aplikacji. Jego reprezentacją jest kod QR generowany w pliku ekranu [profilu](HomeGrowerMobileApp/src/components/Profile/Profile.js).
 
 ### Działanie sensora
 
-Działanie sensora jest zaimplementowane w pliku [Sensor.js](HomeGrowerMobileApp/src/Sensor.js). Kod jest okraszony stosownymi komentarzami w języku polskim pomagającym zrozumieć działanie komunikacji aplikacja - czujnik. Szczegóły można znaleźć we wspomnianej wcześniej [Bibliotece Bluetooth Low Energy dla React Native](https://github.com/innoveit/react-native-ble-manager)
+Działanie sensora jest zaimplementowane w pliku [Sensor.js](HomeGrowerMobileApp/src/Sensor.js). Kod jest okraszony stosownymi komentarzami w języku polskim pomagającym zrozumieć działanie komunikacji aplikacja - czujnik. Szczegóły można znaleźć we wspomnianej wcześniej [Bibliotece Bluetooth Low Energy dla React Native](https://github.com/innoveit/react-native-ble-manager).
 
 ## Rozwiązywanie błędów
 
@@ -264,7 +264,7 @@ chmod 755 android/gradlew
 
 ### brak widoczności urządzenia
 
-W konsoli należy wpisać
+W konsoli należy wpisać:
 
 ```
 adb reverse tcp:8081 tcp:8081
