@@ -5,6 +5,7 @@ import {
   NativeModules,
   NativeEventEmitter,
   ToastAndroid,
+  Linking,
 } from 'react-native';
 import BleManager from 'react-native-ble-manager';
 import {Buffer} from 'buffer';
@@ -42,6 +43,7 @@ const options = {
     type: 'mipmap',
   },
   color: '#ff00ff',
+  linkingURI: 'homegrowerbackroundtask://goback',
   parameters: {
     delay: 60000,
   },
@@ -107,11 +109,25 @@ const Sensor = ({navigation}) => {
   };
 
   // funkcja obsługująca wyszukiwanie urządzeń
-  const handleDiscoverPeripheral = peripheral => {
+  const handleDiscoverPeripheral = async peripheral => {
     if (peripheral.name == 'Flower care') {
-      if (flower_care.length == 0) {
-        peripheralsAvailable.set(peripheral.id, peripheral);
-        console.log('set');
+      console.log('hallooooo');
+      peripheralsAvailable.set(peripheral.id, peripheral);
+      console.log('set');
+      console.log('*************');
+      const sensorList = await storage.getAllSensorData();
+      // console.log(sensorListConnected);
+      console.log(peripheral.id);
+      let connected = false;
+      for (let i = 0; i < sensorList.length; i++) {
+        console.log(sensorList[i].id);
+        if (peripheral.id == sensorList[i].id) {
+          connected = true;
+          break;
+        }
+      }
+      if (!connected) {
+        console.log('*************');
         console.log(peripheralsAvailable);
         setFlowerCare(peripheral);
         setSensorListAvailable(Array.from(peripheralsAvailable.values()));
@@ -161,6 +177,12 @@ const Sensor = ({navigation}) => {
     );
   };
 
+  function handleOpenURL(evt) {
+    // Will be called when the notification is pressed
+    console.log(evt.url);
+    // do something
+  }
+
   //bleManagerEmmiter obsługuje eventy
   useEffect(() => {
     BleManager.start({forceLegacy: true});
@@ -184,6 +206,8 @@ const Sensor = ({navigation}) => {
       'BleManagerDisconnectPeripheral',
       handleDisconnectedPeripheral,
     );
+
+    const linking_event = Linking.addEventListener('url', handleOpenURL);
     //bleManagerEmitter.addListener('BleManagerDisconnectPeripheral', handleDisconnectedPeripheral );
     return () => {
       //eventy do usunięcia
@@ -375,7 +399,7 @@ const Sensor = ({navigation}) => {
       .then(() => {
         console.log('Connected to ' + peripheral.id);
         ToastAndroid.showWithGravity(
-          'Retrived connection with' + peripheral.id,
+          'Ponownie połączone z urządzeniem ' + peripheral.id,
           ToastAndroid.SHORT,
           ToastAndroid.BOTTOM,
         );
@@ -393,6 +417,11 @@ const Sensor = ({navigation}) => {
     BleManager.disconnect(peripheral.id)
       .then(() => {
         console.log('Disconnected');
+        ToastAndroid.showWithGravity(
+          'Rozłączono z czujnikiem',
+          ToastAndroid.SHORT,
+          ToastAndroid.BOTTOM,
+        );
 
         //Zaktualizuj mapy i usestate
         for (let i = 0; i < sensorListConnected.length; i++) {
@@ -643,7 +672,7 @@ const Sensor = ({navigation}) => {
     <Layout>
       <OuterContainer>
         <SensorsContainer>
-          <Text style={styles.sensorTitle}> Connected </Text>
+          <Text style={styles.sensorTitle}> Połączone </Text>
           <ScrollableList>
             <SensorsList>
               {sensorListConnected.map(item => (
@@ -660,7 +689,7 @@ const Sensor = ({navigation}) => {
         </SensorsContainer>
 
         <SensorsContainer>
-          <Text style={styles.sensorTitle}> Available </Text>
+          <Text style={styles.sensorTitle}> Dostępne </Text>
           <ScrollableList>
             <SensorsList>
               {sensorListAvailable.map(item => (

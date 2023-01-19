@@ -4,7 +4,7 @@ export const PlantsContainer = styled.View`
   flex: 1;
   background-color: #fff;
   padding: 0;
-  margin: 0;
+  margin: 10px 0 0 0;
 `;
 
 export const PlantsElement = styled.TouchableOpacity`

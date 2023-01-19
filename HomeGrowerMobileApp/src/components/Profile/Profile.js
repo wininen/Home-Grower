@@ -23,6 +23,12 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Layout from '../Layout/Layout';
 import GeneratorQr from '../Scanner/GeneratorQr';
 
+const profileImages = {
+  profile: require('../../assets/icons/profile/profile.png'),
+  celsjus: require('../../assets/icons/profile/celsjus.png'),
+  farenheit: require('../../assets/icons/profile/farenheit.png'),
+};
+
 const Profile = ({navigation, route}) => {
   const [modal, setModal] = useState(false);
   const [qrCodeValue, setQrCodeValue] = useState(null);
@@ -30,9 +36,7 @@ const Profile = ({navigation, route}) => {
   console.log('Routeeeeee');
   console.log(qrCode);
 
-  const [unit, setUnit] = useState(
-    require('../../assets/icons/profile/celsjus.png'),
-  );
+  const [unit, setUnit] = useState(profileImages.celsjus);
 
   const readUnitFromStorage = async () => {
     try {
@@ -43,13 +47,13 @@ const Profile = ({navigation, route}) => {
         console.log('Retrieved unit choice from Cache');
       }
       if (jsonUnit != undefined) {
-        if (jsonUnit == require('../../assets/icons/profile/celsjus.png')) {
-          setUnit(require('../../assets/icons/profile/celsjus.png'));
+        if (jsonUnit == profileImages.celsjus) {
+          setUnit(profileImages.celsjus);
         } else {
-          setUnit(require('../../assets/icons/profile/farenheit.png'));
+          setUnit(profileImages.farenheit);
         }
       } else {
-        setUnit(require('../../assets/icons/profile/celsjus.png'));
+        setUnit(profileImages.celsjus);
       }
     } catch (err) {
       console.log(err);
@@ -69,12 +73,12 @@ const Profile = ({navigation, route}) => {
   const changeUnit = async () => {
     try {
       const currentUnit = JSON.stringify(unit);
-      if (currentUnit == require('../../assets/icons/profile/celsjus.png')) {
-        writeUnitToStorage(require('../../assets/icons/profile/farenheit.png'));
-        setUnit(require('../../assets/icons/profile/farenheit.png'));
+      if (currentUnit == profileImages.celsjus) {
+        writeUnitToStorage(profileImages.farenheit);
+        setUnit(profileImages.farenheit);
       } else {
-        writeUnitToStorage(require('../../assets/icons/profile/celsjus.png'));
-        setUnit(require('../../assets/icons/profile/celsjus.png'));
+        writeUnitToStorage(profileImages.celsjus);
+        setUnit(profileImages.celsjus);
       }
     } catch (err) {
       console.log(err);
@@ -94,7 +98,7 @@ const Profile = ({navigation, route}) => {
     <Layout>
       <OuterContainer>
         <ProfileName>
-          <Image source={require('../../assets/icons/profile/profile.png')} />
+          <Image source={profileImages.profile} />
           <Text style={styles.h4}>Nazwa użytkownika</Text>
         </ProfileName>
         <ProfileOptions>
@@ -123,20 +127,6 @@ const Profile = ({navigation, route}) => {
             </LeftRow>
             <RightRow>
               <Text style={styles.h4_but_green}>Napisz</Text>
-            </RightRow>
-          </ProfileRow>
-          <Separator></Separator>
-          <ProfileRow>
-            <LeftRow>
-              <Entypo
-                name="language"
-                size={40}
-                style={{color: 'black', paddingRight: 15}}
-              />
-              <Text style={styles.h4}>Zmień język</Text>
-            </LeftRow>
-            <RightRow>
-              <Text style={styles.h4_but_green}>Polski</Text>
             </RightRow>
           </ProfileRow>
           <Separator></Separator>

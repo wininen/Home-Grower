@@ -20,112 +20,126 @@ const AllPlants = ({navigation}) => {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(true);
   const [name, setName] = useState({});
+  const [nameCopy, setNameCopy] = useState({});
   const [details, setDetails] = useState({});
-  const [offset, setOffset] = useState(0);
-  const [dbCopy, setDbCopy] = useState({});
+  const [offset, setOffset] = useState(20);
+  const [where, setWhere] = useState(null);
+
   const [write, setWrite] = useState('');
+  const [counter, setCounter] = useState(0);
 
   const fetchPlants = async () => {
     try {
-      let id = {id: []};
-      let another = {
-        floral_language: [],
-        origin: [],
-        production: [],
-        category: [],
-        blooming: [],
-        color: [],
-        display_pid: [],
-        size: [],
-        soil: [],
-        sunlight: [],
-        watering: [],
-        fertilization: [],
-        pruning: [],
-        max_light_lux: [],
-        min_light_lux: [],
-        max_temp: [],
-        min_temp: [],
-        max_env_humid: [],
-        min_env_humid: [],
-        max_soil_moist: [],
-        min_soil_moist: [],
-        max_soil_ec: [],
-        min_soil_ec: [],
-        image: [],
-      };
-      await db.transaction(txn => {
-        txn.executeSql(
-          `SELECT id, origin, production, category, image from 'plants' LIMIT ?,20`,
-          [offset],
-          (tx, res) => {
-            console.log('Query completed');
-            const len = res.rows.length;
-            console.log(len);
-            for (let i = 0; i < len; i++) {
-              Object.entries(res.rows.item(i)).forEach(([key, value]) => {
-                if (key == 'id') {
-                  id.id.push(value);
-                } else if (key == 'floral_language') {
-                  another.floral_language.push(value);
-                } else if (key == 'origin') {
-                  another.origin.push(value);
-                } else if (key == 'production') {
-                  another.production.push(value);
-                } else if (key == 'category') {
-                  another.category.push(value);
-                } else if (key == 'blooming') {
-                  another.blooming.push(value);
-                } else if (key == 'color') {
-                  another.color.push(value);
-                } else if (key == 'display_pid') {
-                  another.display_pid.push(value);
-                } else if (key == 'size') {
-                  another.size.push(value);
-                } else if (key == 'soil') {
-                  another.soil.push(value);
-                } else if (key == 'sunlight') {
-                  another.sunlight.push(value);
-                } else if (key == 'watering') {
-                  another.watering.push(value);
-                } else if (key == 'fertilization') {
-                  another.fertilization.push(value);
-                } else if (key == 'pruning') {
-                  another.pruning.push(value);
-                } else if (key == 'max_light_lux') {
-                  another.max_light_lux.push(value);
-                } else if (key == 'min_light_lux') {
-                  another.min_light_lux.push(value);
-                } else if (key == 'max_temp') {
-                  another.max_temp.push(value);
-                } else if (key == 'min_temp') {
-                  another.min_temp.push(value);
-                } else if (key == 'max_env_humid') {
-                  another.max_env_humid.push(value);
-                } else if (key == 'min_env_humid') {
-                  another.min_env_humid.push(value);
-                } else if (key == 'max_soil_moist') {
-                  another.max_soil_moist.push(value);
-                } else if (key == 'min_soil_moist') {
-                  another.min_soil_moist.push(value);
-                } else if (key == 'max_soil_ec') {
-                  another.max_soil_ec.push(value);
-                } else if (key == 'min_soil_ec') {
-                  another.min_soil_ec.push(value);
-                } else if (key == 'image') {
-                  another.image.push(value);
-                }
-              });
-            }
-            console.log('Everything about SQLite done');
-            setOffset(offset + 20);
-            setName(id);
-            setDbCopy(id);
-            setDetails(another);
-            setLoading(false);
-          },
-        );
-      });
+      if (counter == 0) {
+        let id = {id: []};
+        let another = {
+          floral_language: [],
+          origin: [],
+          production: [],
+          category: [],
+          blooming: [],
+          color: [],
+          display_pid: [],
+          size: [],
+          soil: [],
+          sunlight: [],
+          watering: [],
+          fertilization: [],
+          pruning: [],
+          max_light_lux: [],
+          min_light_lux: [],
+          max_temp: [],
+          min_temp: [],
+          max_env_humid: [],
+          min_env_humid: [],
+          max_soil_moist: [],
+          min_soil_moist: [],
+          max_soil_ec: [],
+          min_soil_ec: [],
+          image: [],
+        };
+        await db.transaction(txn => {
+          txn.executeSql(
+            `SELECT id, origin, production, category, image from 'plants'`,
+            [],
+            (tx, res) => {
+              console.log('Query completed');
+              const len = res.rows.length;
+              console.log(len);
+              for (let i = 0; i < len; i++) {
+                Object.entries(res.rows.item(i)).forEach(([key, value]) => {
+                  if (key == 'id') {
+                    id.id.push(value);
+                  } else if (key == 'floral_language') {
+                    another.floral_language.push(value);
+                  } else if (key == 'origin') {
+                    another.origin.push(value);
+                  } else if (key == 'production') {
+                    another.production.push(value);
+                  } else if (key == 'category') {
+                    another.category.push(value);
+                  } else if (key == 'blooming') {
+                    another.blooming.push(value);
+                  } else if (key == 'color') {
+                    another.color.push(value);
+                  } else if (key == 'display_pid') {
+                    another.display_pid.push(value);
+                  } else if (key == 'size') {
+                    another.size.push(value);
+                  } else if (key == 'soil') {
+                    another.soil.push(value);
+                  } else if (key == 'sunlight') {
+                    another.sunlight.push(value);
+                  } else if (key == 'watering') {
+                    another.watering.push(value);
+                  } else if (key == 'fertilization') {
+                    another.fertilization.push(value);
+                  } else if (key == 'pruning') {
+                    another.pruning.push(value);
+                  } else if (key == 'max_light_lux') {
+                    another.max_light_lux.push(value);
+                  } else if (key == 'min_light_lux') {
+                    another.min_light_lux.push(value);
+                  } else if (key == 'max_temp') {
+                    another.max_temp.push(value);
+                  } else if (key == 'min_temp') {
+                    another.min_temp.push(value);
+                  } else if (key == 'max_env_humid') {
+                    another.max_env_humid.push(value);
+                  } else if (key == 'min_env_humid') {
+                    another.min_env_humid.push(value);
+                  } else if (key == 'max_soil_moist') {
+                    another.max_soil_moist.push(value);
+                  } else if (key == 'min_soil_moist') {
+                    another.min_soil_moist.push(value);
+                  } else if (key == 'max_soil_ec') {
+                    another.max_soil_ec.push(value);
+                  } else if (key == 'min_soil_ec') {
+                    another.min_soil_ec.push(value);
+                  } else if (key == 'image') {
+                    another.image.push(value);
+                  }
+                });
+              }
+              console.log('Everything about SQLite done');
+              setName(id);
+              setDetails(another);
+              setNameCopy(id.id.slice(0, offset));
+              setOffset(offset + 20);
+              setCounter(1);
+              setLoading(false);
+            },
+          );
+        });
+      } else {
+        if (where == null) {
+          setNameCopy(name.id.slice(0, offset));
+          setOffset(offset + 20);
+        } else {
+          setNameCopy(name.id.slice(where, where + offset));
+          setWhere(where + offset);
+        }
+      }
     } catch (e) {
       console.log('ERROR' + e);
     }
@@ -205,9 +219,9 @@ const AllPlants = ({navigation}) => {
   const renderList = ({item, index}) => (
     <PlantsElement
       style={styles.shadow}
-      onPress={() => showDetails(index, item)}>
+      onPress={() => showDetails(name.id.indexOf(item), item)}>
       <PlantsAfterElement>
-        <StyledImage source={{uri: details.image[index]}} />
+        <StyledImage source={{uri: details.image[name.id.indexOf(item)]}} />
         <Text style={styles.bold_black}>{item}</Text>
       </PlantsAfterElement>
     </PlantsElement>
@@ -228,15 +242,23 @@ const AllPlants = ({navigation}) => {
 
   const searchBar = text => {
     if (text) {
-      const filteredData = dbCopy.id.filter(item => {
-        const itemData = item.id ? item.id.toLowerCase() : ''.toLowerCase();
-        const textData = text.toLowerCase();
-        return itemData.indexOf(textData) > -1;
+      console.log(text);
+      const filteredData = name.id.filter(item => {
+        const itemData = item ? item.toUpperCase() : ''.toUpperCase();
+        console.log(itemData);
+        const textData = text.toUpperCase();
+        console.log(textData);
+        if (textData == itemData.substring(0, textData.length)) {
+          return itemData.indexOf(textData) > -1;
+        }
       });
-      setName(filteredData);
+      console.log(name.id.indexOf(filteredData[filteredData.length - 1]));
+      setWhere(name.id.indexOf(filteredData[filteredData.length - 1]));
+      setNameCopy(filteredData.slice(0, 20));
+      console.log(text);
       setWrite(text);
     } else {
-      setName(dbCopy);
+      setNameCopy(name.id.slice(0, 20));
       setWrite(text);
     }
   };
@@ -253,13 +275,18 @@ const AllPlants = ({navigation}) => {
         ) : (
           <PlantsContainer style={styles.plantsList}>
             <TextInput
-              style={{height: 60, borderColor: '#000', borderWidth: 1}}
+              style={{
+                height: 60,
+                width: 200,
+                borderColor: '#000',
+                borderWidth: 1,
+              }}
               placeholder="Wyszukaj roślinę..."
               onChangeText={text => searchBar(text)}
-              value={write}
+              value={setWrite}
             />
             <FlatList
-              data={name.id}
+              data={nameCopy}
               renderItem={renderList}
               alwaysBounceVertical={true}
               ListFooterComponent={renderFooter}

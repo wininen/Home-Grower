@@ -21,13 +21,13 @@ export const styles = StyleSheet.create({
     fontSize: 32,
     lineHeight: 36,
     fontWeight: '700',
-    color: '#000',
+    color: '#fff',
   },
   h3: {
     fontSize: 18,
     lineHeight: 22,
     fontWeight: '700',
-    color: '#000',
+    color: '#fff',
   },
   h4: {
     fontSize: 14,
@@ -213,6 +213,11 @@ export const styles = StyleSheet.create({
   weatherText: {
     marginLeft: 10,
     color: '#FFF',
+  },
+  AvailableSensorsText: {
+    marginTop: 10,
+    fontSize: 18,
+    fontWeight: '700',
   },
 });
 
