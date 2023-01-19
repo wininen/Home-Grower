@@ -1,4 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import React, {useState, useEffect} from 'react';
 import {
   Text,
@@ -25,11 +27,13 @@ import {
   ForecastTr,
   InputBox,
 } from './Forecast.styled';
-
+import {WeatherForNextDay} from './weatherForNextDay';
 import {ModalList, ModalButton} from '../MyPlants/MyPlants.styled';
 
 import Geolocation from 'react-native-geolocation-service';
 import Layout from '../Layout/Layout';
+
+import styled from 'styled-components/native';
 
 import {useIsFocused} from '@react-navigation/native';
 
@@ -991,95 +995,52 @@ const Forecast = ({navigation}) => {
     <Layout>
       <OuterContainer>
         <ImageBackground
-          source={require('../../assets/images/forecast_background.jpg')}
+          source={require('../../assets/images/weatherBackground.jpg')}
           resizeMode="cover"
           style={styles.bgImage}>
           {!loading ? (
             <ForecastView>
               <ForecastOptions>
                 <TouchableOpacity onPress={() => useLocalisation()}>
-                  <Image
-                    source={require('../../assets/icons/forecast/location.png')}
-                    style={styles.gapForMenu}
+                  <FontAwesome
+                    name="refresh"
+                    size={20}
+                    style={{color: 'white', paddingRight: 15}}
                   />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => setModal(!modal)}>
-                  <Image
-                    source={require('../../assets/icons/forecast/edit_location.png')}
+                  <FontAwesome5
+                    name="search-location"
+                    size={20}
+                    style={{color: 'white', paddingRight: 15}}
                   />
                 </TouchableOpacity>
               </ForecastOptions>
               <ForecastMain>
-                <Text style={styles.h2}>{city}</Text>
+                <Text style={styles.h2Weather}>{city}</Text>
                 <Image source={weather[0]} />
-                <Text style={styles.h2}>{weather[1]}</Text>
-                <Text style={styles.h3}>{weather[2]}</Text>
-                <Text style={styles.h3}>
-                  Min. {weather[3]} Max. {weather[4]}
+                <Text style={styles.h2Weather}>
+                  {Math.round(parseFloat(weather[1]))}°C
+                </Text>
+                <Text style={styles.h3Weather}>{weather[2]}</Text>
+                <Text style={styles.h3Weather}>
+                  Min. {Math.round(parseFloat(weather[3]))}°C Max.{' '}
+                  {Math.round(parseFloat(weather[4]))}°C
                 </Text>
                 <ForecastTable>
-                  <ForecastTr>
-                    <Image
-                      source={require('../../assets/icons/forecast/calendar_month.png')}
+                  {/* 
+                  Change here, now row for next days are in new
+                  component called weatherForNextDay.js
+                   */}
+                  {forecast.map(item => (
+                    <WeatherForNextDay
+                      key={item}
+                      item={item}
+                      week={week}
+                      id={forecast.indexOf(item)}
+                      forecast={forecast}
                     />
-                    <Text style={styles.h4}>PROGNOZA 5-DNIOWA</Text>
-                  </ForecastTr>
-                  <Separator></Separator>
-                  <ForecastTr>
-                    <Text style={styles.h5}>{week[0]}</Text>
-                    <Image source={forecast[0][0]} />
-
-                    <ForecastTd>
-                      <Text style={styles.h6}>
-                        Min. {forecast[0][1]} Max. {forecast[0][2]}
-                      </Text>
-                      <Text style={styles.h6}>{forecast[0][3]}</Text>
-                    </ForecastTd>
-                  </ForecastTr>
-                  <ForecastTr>
-                    <Text style={styles.h5}>{week[1]}</Text>
-
-                    <Image source={forecast[1][0]} />
-                    <ForecastTd>
-                      <Text style={styles.h6}>
-                        Min. {forecast[1][1]} Max. {forecast[1][2]}
-                      </Text>
-                      <Text style={styles.h6}>{forecast[1][3]}</Text>
-                    </ForecastTd>
-                  </ForecastTr>
-                  <ForecastTr>
-                    <Text style={styles.h5}>{week[2]}</Text>
-                    <Image source={forecast[2][0]} />
-
-                    <ForecastTd>
-                      <Text style={styles.h6}>
-                        Min. {forecast[2][1]} Max. {forecast[2][2]}
-                      </Text>
-                      <Text style={styles.h6}>{forecast[2][3]}</Text>
-                    </ForecastTd>
-                  </ForecastTr>
-                  <ForecastTr>
-                    <Text style={styles.h5}>{week[3]}</Text>
-
-                    <Image source={forecast[3][0]} />
-                    <ForecastTd>
-                      <Text style={styles.h6}>
-                        Min. {forecast[3][1]} Max. {forecast[3][2]}
-                      </Text>
-                      <Text style={styles.h6}>{forecast[3][3]}</Text>
-                    </ForecastTd>
-                  </ForecastTr>
-                  <ForecastTr>
-                    <Text style={styles.h5}>{week[4]}</Text>
-                    <Image source={forecast[4][0]} />
-
-                    <ForecastTd>
-                      <Text style={styles.h6}>
-                        Min. {forecast[4][1]} Max. {forecast[4][2]}
-                      </Text>
-                      <Text style={styles.h6}>{forecast[4][3]}</Text>
-                    </ForecastTd>
-                  </ForecastTr>
+                  ))}
                 </ForecastTable>
                 {modal && (
                   <Modal
