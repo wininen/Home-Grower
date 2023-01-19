@@ -20,7 +20,6 @@ import {
   OuterContainer,
   ForecastView,
   ForecastMain,
-  Separator,
   ForecastOptions,
   ForecastTable,
   ForecastTd,
@@ -47,7 +46,7 @@ const weatherImages = {
   snow: 'http://openweathermap.org/img/wn/13d@2x.png',
   cloud: 'http://openweathermap.org/img/wn/03d@2x.png',
   moon: 'http://openweathermap.org/img/wn/01n@2x.png',
-  bgphoto: require('../../assets/images/forecast_background.jpg'),
+  bgImage: require('../../assets/images/weatherBackground.jpg'),
 };
 
 const Forecast = ({navigation}) => {
@@ -928,7 +927,7 @@ const Forecast = ({navigation}) => {
     <Layout>
       <OuterContainer>
         <ImageBackground
-          source={require('../../assets/images/weatherBackground.jpg')}
+          source={weatherImages.bgImage}
           resizeMode="cover"
           style={styles.bgImage}>
           {!loading ? (
@@ -973,79 +972,7 @@ const Forecast = ({navigation}) => {
                       id={forecast.indexOf(item)}
                       forecast={forecast}
                     />
-                    <Text style={styles.h4}>PROGNOZA 5-DNIOWA</Text>
-                  </ForecastTr>
-                  <Separator></Separator>
-                  <ForecastTr>
-                    <Text style={styles.h5}>{week[0]}</Text>
-                    <Image
-                      source={{uri: `${forecast[0][0]}`}}
-                      style={{width: 48, height: 24}}
-                    />
-
-                    <ForecastTd>
-                      <Text style={styles.h6}>
-                        Min. {forecast[0][1]} Max. {forecast[0][2]}
-                      </Text>
-                      <Text style={styles.h6}>{forecast[0][3]}</Text>
-                    </ForecastTd>
-                  </ForecastTr>
-                  <ForecastTr>
-                    <Text style={styles.h5}>{week[1]}</Text>
-
-                    <Image
-                      source={{uri: `${forecast[1][0]}`}}
-                      style={{width: 48, height: 24}}
-                    />
-                    <ForecastTd>
-                      <Text style={styles.h6}>
-                        Min. {forecast[1][1]} Max. {forecast[1][2]}
-                      </Text>
-                      <Text style={styles.h6}>{forecast[1][3]}</Text>
-                    </ForecastTd>
-                  </ForecastTr>
-                  <ForecastTr>
-                    <Text style={styles.h5}>{week[2]}</Text>
-                    <Image
-                      source={{uri: `${forecast[2][0]}`}}
-                      style={{width: 48, height: 24}}
-                    />
-
-                    <ForecastTd>
-                      <Text style={styles.h6}>
-                        Min. {forecast[2][1]} Max. {forecast[2][2]}
-                      </Text>
-                      <Text style={styles.h6}>{forecast[2][3]}</Text>
-                    </ForecastTd>
-                  </ForecastTr>
-                  <ForecastTr>
-                    <Text style={styles.h5}>{week[3]}</Text>
-
-                    <Image
-                      source={{uri: `${forecast[3][0]}`}}
-                      style={{width: 48, height: 24}}
-                    />
-                    <ForecastTd>
-                      <Text style={styles.h6}>
-                        Min. {forecast[3][1]} Max. {forecast[3][2]}
-                      </Text>
-                      <Text style={styles.h6}>{forecast[3][3]}</Text>
-                    </ForecastTd>
-                  </ForecastTr>
-                  <ForecastTr>
-                    <Text style={styles.h5}>{week[4]}</Text>
-                    <Image
-                      source={{uri: `${forecast[4][0]}`}}
-                      style={{width: 48, height: 24}}
-                    />
-
-                    <ForecastTd>
-                      <Text style={styles.h6}>
-                        Min. {forecast[4][1]} Max. {forecast[4][2]}
-                      </Text>
-                      <Text style={styles.h6}>{forecast[4][3]}</Text>
-                    </ForecastTd>
-                  </ForecastTr>
+                  ))}
                 </ForecastTable>
                 {modal && (
                   <Modal

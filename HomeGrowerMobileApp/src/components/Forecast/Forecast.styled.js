@@ -26,12 +26,12 @@ export const ForecastMain = styled.View`
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  padding: 30px 0;
+  padding: 20px 0;
 `;
 
 export const ForecastTable = styled.View`
   padding: 5px 0;
-  margin-top: 15%;
+  margin-top: 12%;
   width: 100%;
   display: flex;
   flex-direction: column;
