@@ -68,7 +68,9 @@ const getAllSensorData = async () => {
     ];
     console.log('KEYS');
     console.log(keys);
-    const filteredKeysPom = keys.filter(item => item[0] != '@');
+    const filteredKeysPom = keys.filter(
+      item => item[0] != '@' && item[0] != '!',
+    );
     const filteredKeys = filteredKeysPom.filter(
       item => !irrelevantKeys.includes(item),
     );
@@ -102,13 +104,67 @@ const getAllSensorKeys = async () => {
     ];
     console.log('KEYS');
     console.log(keys);
-    const filteredKeysPom = keys.filter(item => item[0] != '@');
+    const filteredKeysPom = keys.filter(
+      item => item[0] != '@' && item[0] != '!',
+    );
     const filteredKeys = filteredKeysPom.filter(
       item => !irrelevantKeys.includes(item),
     );
     console.log('filteredKeys');
     console.log(filteredKeys);
     return filteredKeys;
+  } catch (e) {
+    console.warn('ERROR: Getting all data', e);
+    return false;
+  }
+};
+
+const getAllAvailableSensors = async () => {
+  try {
+    const keys = await AsyncStorage.getAllKeys();
+    const irrelevantKeys = [
+      '@city_Key',
+      '@temperature_Key',
+      '@weather_Key',
+      'flower_data',
+      '@username',
+      'username',
+      '@forecast_Key',
+      '@isAppLaunchedForFirstTime',
+      'isAppLaunchedForFirstTime',
+    ];
+    console.log('KEYS');
+    console.log(keys);
+    const filteredSensorsPom = keys.filter(
+      item => item[0] != '@' && item[0] != '!',
+    );
+    const filteredSensorsKeys = filteredSensorsPom.filter(
+      item => !irrelevantKeys.includes(item),
+    );
+
+    const filteredPlantsKeys = keys.filter(item => item[0] == '!');
+    let sensorsNotAvailable = await AsyncStorage.multiGet(filteredPlantsKeys);
+    sensorsNotAvailable = sensorsNotAvailable.map(item => item[1]);
+
+    const sensorsAvailable = filteredSensorsKeys.filter(
+      item => !sensorsNotAvailable.includes(item),
+    );
+
+    let result = await AsyncStorage.multiGet(sensorsAvailable);
+    result = result.map(item => JSON.parse(item[1]));
+
+    // console.log('filteredPlantsKeys');
+    // console.log(filteredPlantsKeys);
+    // console.log('filteredSensorsKeys');
+    // console.log(filteredSensorsKeys);
+    // console.log('sensorsNotAvailable');
+    // console.log(sensorsNotAvailable);
+    // console.log('sensorsAvailable');
+    // console.log(sensorsAvailable);
+    // console.log('result');
+    // console.log(result);
+
+    return result;
   } catch (e) {
     console.warn('ERROR: Getting all data', e);
     return false;
@@ -123,6 +179,7 @@ const storage = {
   remove,
   getAllSensorData,
   getAllSensorKeys,
+  getAllAvailableSensors,
 };
 
 export default storage;
