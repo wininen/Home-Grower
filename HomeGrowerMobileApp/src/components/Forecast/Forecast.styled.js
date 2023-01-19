@@ -32,8 +32,7 @@ export const ForecastMain = styled.View`
 export const ForecastTable = styled.View`
   padding: 5px 0;
   margin-top: 15%;
-  width: 75%;
-  background: rgba(33, 33, 33, 0.12);
+  width: 100%;
   display: flex;
   flex-direction: column;
 `;

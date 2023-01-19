@@ -198,6 +198,22 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     textAlignVertical: 'center',
   },
+  h2Weather: {
+    fontSize: 32,
+    lineHeight: 36,
+    fontWeight: '700',
+    color: '#FFF',
+  },
+  h3Weather: {
+    fontSize: 18,
+    lineHeight: 22,
+    fontWeight: '700',
+    color: '#FFF',
+  },
+  weatherText: {
+    marginLeft: 10,
+    color: '#FFF',
+  },
 });
 
 export const OuterContainer = styled.View`
