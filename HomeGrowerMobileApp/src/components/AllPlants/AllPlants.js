@@ -275,7 +275,12 @@ const AllPlants = ({navigation}) => {
         ) : (
           <PlantsContainer style={styles.plantsList}>
             <TextInput
-              style={{height: 60, borderColor: '#000', borderWidth: 1}}
+              style={{
+                height: 60,
+                width: 200,
+                borderColor: '#000',
+                borderWidth: 1,
+              }}
               placeholder="Wyszukaj roślinę..."
               onChangeText={text => searchBar(text)}
               value={setWrite}
