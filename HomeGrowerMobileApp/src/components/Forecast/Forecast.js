@@ -160,7 +160,6 @@ const Forecast = ({navigation}) => {
 
   const convertToFarenheit = async jsonValue => {
     if (jsonValue[1].length != 4) {
-      console.log(jsonValue[1].length);
       let afterConvertValue = [null, null, null, null, null];
       afterConvertValue[0] = jsonValue[0];
       afterConvertValue[1] =
@@ -181,7 +180,6 @@ const Forecast = ({navigation}) => {
         ).toFixed(2) + '°F';
       return afterConvertValue;
     } else {
-      console.log(jsonValue[1].length);
       let afterConvertValue = [null, null, null, null, null];
       afterConvertValue[0] = [
         jsonValue[0][0],
@@ -462,16 +460,6 @@ const Forecast = ({navigation}) => {
         )
           .then(res => res.json())
           .then(res => {
-            console.log(
-              res['weather'][0].main,
-              res['main'].temp,
-              '°C',
-              res['main'].temp_min,
-              '°C',
-              res['main'].temp_max,
-              '°C',
-              res['weather'][0].icon,
-            );
             switchWeather(res['weather'][0].main);
             savedWeather([
               weatherIcon,
@@ -499,15 +487,6 @@ const Forecast = ({navigation}) => {
         )
           .then(res => res.json())
           .then(res => {
-            console.log(
-              res['weather'][0].main,
-              res['main'].temp,
-              '°F',
-              res['main'].temp_min,
-              '°F',
-              res['main'].temp_max,
-              '°F',
-            );
             switchWeather(res['weather'][0].main);
             savedWeather([
               weatherIcon,
@@ -588,7 +567,6 @@ const Forecast = ({navigation}) => {
       )
         .then(res => res.json())
         .then(res => {
-          console.log(res[0].name);
           savedCity(res[0].name);
           setCity(res[0].name);
         })
@@ -699,7 +677,6 @@ const Forecast = ({navigation}) => {
         )
           .then(res => res.json())
           .then(res => {
-            console.log(res.list[0].weather[0].main);
             switchForecast([
               res.list[0].weather[0].main,
               res.list[1].weather[0].main,
@@ -846,7 +823,6 @@ const Forecast = ({navigation}) => {
             useForecast(position.coords.latitude, position.coords.longitude);
             useCity(position.coords.latitude, position.coords.longitude);
             useWeather(position.coords.latitude, position.coords.longitude);
-            console.log(position.coords.latitude, position.coords.longitude);
           },
           err => console.log(err),
           {enableHighAccuracy: false},
@@ -888,7 +864,6 @@ const Forecast = ({navigation}) => {
 
   const useOwnCity = async () => {
     try {
-      console.log(inputCity);
       fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${inputCity}&appid=${API_KEY}`,
       )
@@ -960,10 +935,6 @@ const Forecast = ({navigation}) => {
                   Min. {weather[3]} Max. {weather[4]}
                 </Text>
                 <ForecastTable>
-                  {/* 
-                  Change here, now row for next days are in new
-                  component called weatherForNextDay.js
-                   */}
                   {forecast.map(item => (
                     <WeatherForNextDay
                       key={item}
