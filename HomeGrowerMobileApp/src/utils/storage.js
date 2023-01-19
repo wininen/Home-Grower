@@ -63,6 +63,7 @@ const getAllSensorData = async () => {
       'username',
       '@isAppLaunchedForFirstTime',
       '@forecast_Key',
+      'isAppLaunchedForFirstTime',
     ];
     console.log('KEYS');
     console.log(keys);
@@ -95,6 +96,7 @@ const getAllSensorKeys = async () => {
       '@username',
       '@forecast_Key',
       '@isAppLaunchedForFirstTime',
+      'isAppLaunchedForFirstTime',
     ];
     console.log('KEYS');
     console.log(keys);
