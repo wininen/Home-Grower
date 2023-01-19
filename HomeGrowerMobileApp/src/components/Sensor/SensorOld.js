@@ -109,11 +109,25 @@ const Sensor = ({navigation}) => {
   };
 
   // funkcja obsługująca wyszukiwanie urządzeń
-  const handleDiscoverPeripheral = peripheral => {
+  const handleDiscoverPeripheral = async peripheral => {
     if (peripheral.name == 'Flower care') {
-      if (flower_care.length == 0) {
-        peripheralsAvailable.set(peripheral.id, peripheral);
-        console.log('set');
+      console.log('hallooooo');
+      peripheralsAvailable.set(peripheral.id, peripheral);
+      console.log('set');
+      console.log('*************');
+      const sensorList = await storage.getAllSensorData();
+      // console.log(sensorListConnected);
+      console.log(peripheral.id);
+      let connected = false;
+      for (let i = 0; i < sensorList.length; i++) {
+        console.log(sensorList[i].id);
+        if (peripheral.id == sensorList[i].id) {
+          connected = true;
+          break;
+        }
+      }
+      if (!connected) {
+        console.log('*************');
         console.log(peripheralsAvailable);
         setFlowerCare(peripheral);
         setSensorListAvailable(Array.from(peripheralsAvailable.values()));
