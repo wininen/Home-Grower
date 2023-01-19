@@ -1,16 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {
-  Text,
-  TouchableOpacity,
-  Image,
-  ScrollView,
-  View,
-  FlatList,
-  Alert,
-} from 'react-native';
+import {Text, TouchableOpacity, Image, FlatList} from 'react-native';
 import Layout from '../Layout/Layout.js';
-import {StyledButton, styles} from '../../Styles.js';
+import {styles} from '../../Styles.js';
 import {useIsFocused} from '@react-navigation/native';
+import LoadingView from '../ActivityIndicator/ActivityIndicator.js';
 
 import {
   PlantsContainer,
@@ -18,15 +11,10 @@ import {
   StyledImage,
   PlantsAfterElement,
   ButtonBox,
-  ModalButton,
-  ModalList,
-  ModalItem,
 } from '../AllPlants/AllPlants.styled';
-import {Modal} from 'react-native-paper';
 import {db} from '../../../App.js';
 
 const MyPlants = ({route, navigation}) => {
-  const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(true);
   const [myPlants, setMyPlants] = useState({});
   const [details, setDetails] = useState({});
@@ -67,7 +55,6 @@ const MyPlants = ({route, navigation}) => {
             for (let i = 0; i < len; i++) {
               Object.entries(res.rows.item(i)).forEach(([key, value]) => {
                 if (key == 'id') {
-                  // console.log(key, value);
                   plants_id.id.push(value);
                   another.plantId.push(value);
                 } else if (key == 'plant_genus_id') {
@@ -123,13 +110,15 @@ const MyPlants = ({route, navigation}) => {
     <Layout>
       <PlantsContainer>
         {loading ? (
-          <Text style={styles.h2}>Loading...</Text>
+          <LoadingView></LoadingView>
         ) : changes != 0 ? (
-          <ScrollView
-            contentContainerStyle={styles.plantsList}
-            keyboardShouldPersistTaps="handled">
-            <FlatList data={myPlants.plant_genus_id} renderItem={renderList} />
-          </ScrollView>
+          <PlantsContainer style={styles.plantsList}>
+            <FlatList
+              data={myPlants.plant_genus_id}
+              renderItem={renderList}
+              showsVerticalScrollIndicator={false}
+            />
+          </PlantsContainer>
         ) : (
           <Text style={styles.h2}>Nie masz jeszcze żadnych roślin</Text>
         )}

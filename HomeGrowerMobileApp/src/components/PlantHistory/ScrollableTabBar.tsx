@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {
   TabView,
   TabBar,
@@ -36,34 +36,14 @@ const ScrollableTabBar = ({route}) => {
     />
   );
 
-  // const LiveData = ({route}: any) => (
-  //   <View style={{flex: 1}}>
-  //     <TouchableOpacity onPress={() => {}}>
-  //       <Text>{JSON.stringify(route.params)}</Text>
-  //     </TouchableOpacity>
-  //   </View>
-  // );
-
   const renderScene = SceneMap({
     livedata: LiveData,
     planthistory: PlantHistory,
   });
 
-  //tutaj Gabrielu nwm jak to rozwiązać
-  //dokumentacja: https://github.com/react-navigation/react-navigation/tree/main/packages/react-native-tab-view
-  // const renderScene = ({route}) => {
-  //   switch (route.key) {
-  //     case 'livedata':
-  //       return <MusicRoute foo={this.props.foo} />;
-  //     case 'planthistory':
-  //       return <AlbumsRoute jumpTo={jumpTo} />;
-  //   }
-  // };
-
   return (
     <Layout>
       <TabView
-        // lazy
         navigationState={{
           index,
           routes,
