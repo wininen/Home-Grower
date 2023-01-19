@@ -1,23 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import {
-  Text,
-  TouchableOpacity,
-  Image,
-  ScrollView,
-  View,
-  FlatList,
-  Alert,
-  ActivityIndicator,
-} from 'react-native';
+import {Text, View, FlatList, Alert, ActivityIndicator} from 'react-native';
 import Layout from '../Layout/Layout.js';
 import {styles, StyledButton} from '../../Styles.js';
+import LoadingView from '../ActivityIndicator/ActivityIndicator.js';
 
 import {
   PlantsContainer,
   PlantsElement,
   StyledImage,
   PlantsAfterElement,
-  ButtonBox,
   ModalButton,
   ModalList,
   ModalItem,
@@ -258,7 +249,7 @@ const AllPlants = ({navigation}) => {
     <Layout>
       <PlantsContainer>
         {loading ? (
-          <Text style={styles.h2}>Loading...</Text>
+          <LoadingView></LoadingView>
         ) : (
           <PlantsContainer style={styles.plantsList}>
             <TextInput
