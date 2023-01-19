@@ -10,6 +10,7 @@ const PlantHistory = props => {
   const [report, setReport] = useState({});
   const {planame, plagenus, repoid, name} = props.route.params;
   const [loading, setLoading] = useState(true);
+  const [lenRow, setLenRow] = useState(null);
   const fetchReports = async name => {
     try {
       let reportData = {
@@ -33,32 +34,47 @@ const PlantHistory = props => {
             const len = res.rows.length;
             console.log(len);
             for (let i = 0; i < len; i++) {
+              console.log(res.rows.item(i));
               Object.entries(res.rows.item(i)).forEach(([key, value]) => {
-                if (key == 'id') {
-                  reportData.id.push(value);
-                } else if (key == 'my_plant_id') {
-                  reportData.my_plant_id.push(value);
-                } else if (key == 'plant_genus_id') {
-                  reportData.plant_genus_id.push(value);
-                } else if (key == 'timestamp') {
-                  reportData.timestamp.push(value);
-                } else if (key == 'light') {
-                  reportData.light.push(value);
-                } else if (key == 'env_humid') {
-                  reportData.env_humid.push(value);
-                } else if (key == 'soil_moist') {
-                  reportData.soil_moist.push(value);
-                } else if (key == 'soil_ec') {
-                  reportData.soil_ec.push(value);
-                } else if (key == 'temp') {
-                  reportData.temp.push(value);
-                } else if (key == 'device_id') {
-                  reportData.device_id.push(value);
+                switch (key) {
+                  case 'id':
+                    reportData.id.push(value);
+                    break;
+                  case 'my_plant_id':
+                    reportData.my_plant_id.push(value);
+                    break;
+                  case 'plant_genus_id':
+                    reportData.plant_genus_id.push(value);
+                    break;
+                  case 'timestamp':
+                    reportData.timestamp.push(value);
+                    break;
+                  case 'light':
+                    reportData.light.push(value);
+                    break;
+                  case 'env_humid':
+                    reportData.env_humid.push(value);
+                    break;
+                  case 'soil_moist':
+                    reportData.soil_moist.push(value);
+                    break;
+                  case 'soil_ec':
+                    reportData.soil_ec.push(value);
+                    break;
+                  case 'temp':
+                    reportData.temp.push(value);
+                    break;
+                  case 'device_id':
+                    reportData.device_id.push(value);
+                    break;
                 }
               });
             }
             console.log('Everything about SQLite done');
+            console.log(Object.values(reportData.soil_moist).length);
             setReport(reportData);
+            setLenRow(len);
+            setLoading(false);
           },
         );
       });
@@ -71,9 +87,6 @@ const PlantHistory = props => {
     backgroundColor: '#2FA84E',
     backgroundGradientFrom: '#009f5e',
     backgroundGradientTo: '#2fa84e',
-    propsForLabels: {
-      paddingLeft: 20,
-    },
     textsize: 1,
     decimalPlaces: 2, // optional, defaults to 2dp
     color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
@@ -103,199 +116,231 @@ const PlantHistory = props => {
         </HistoryElement>
         <HistoryElement>
           <Text>Nawodnienie</Text>
-          <LineChart
-            data={
-              loading && report.soil_moist == undefined
-                ? {
-                    labels: [report.timestamp],
-                    datasets: [
-                      {
-                        data: [
-                          Math.random() * 100,
-                          Math.random() * 100,
-                          Math.random() * 100,
-                          Math.random() * 100,
-                          Math.random() * 100,
-                          Math.random() * 100,
-                        ],
-                      },
+          {loading ? (
+            <LineChart
+              data={{
+                labels: ['—', '—', '—', '—', '—', '—'],
+                datasets: [
+                  {
+                    data: [
+                      Math.random() * 100,
+                      Math.random() * 100,
+                      Math.random() * 100,
+                      Math.random() * 100,
+                      Math.random() * 100,
+                      Math.random() * 100,
                     ],
-                  }
-                : {
-                    labels: [report.timestamp],
-                    datasets: [
-                      {
-                        data: [
-                          report.soil_moist[0],
-                          report.soil_moist[1],
-                          Math.random() * 100,
-                          Math.random() * 100,
-                          Math.random() * 100,
-                          Math.random() * 100,
-                        ],
-                      },
-                    ],
-                  }
-            }
-            width={Dimensions.get('window').width * 0.95} // from react-native
-            height={220}
-            yAxisLabel=""
-            yAxisSuffix=""
-            yAxisInterval={1} // optional, defaults to 1
-            chartConfig={chartPropersties}
-            bezier
-            style={{
-              marginVertical: 8,
-              borderRadius: 20,
-            }}
-          />
+                  },
+                ],
+              }}
+              width={Dimensions.get('window').width * 0.95} // from react-native
+              height={220}
+              yAxisLabel=""
+              yAxisSuffix=""
+              yAxisInterval={1} // optional, defaults to 1
+              chartConfig={chartPropersties}
+              bezier
+              style={{
+                marginVertical: 8,
+                borderRadius: 20,
+              }}
+            />
+          ) : lenRow == 0 ? (
+            <Text>Jajco</Text>
+          ) : (
+            <LineChart
+              data={{
+                labels: Object.values(report.timestamp),
+                datasets: [
+                  {
+                    data: Object.values(report.soil_moist),
+                  },
+                ],
+              }}
+              width={Dimensions.get('window').width * 0.95} // from react-native
+              height={220}
+              yAxisLabel=""
+              yAxisSuffix=""
+              yAxisInterval={1} // optional, defaults to 1
+              chartConfig={chartPropersties}
+              bezier
+              style={{
+                marginVertical: 8,
+                borderRadius: 20,
+              }}
+            />
+          )}
         </HistoryElement>
         <HistoryElement>
           <Text>Żyzność</Text>
-          <LineChart
-            data={
-              loading && report.soil_ec == undefined
-                ? {
-                    labels: [report.timestamp],
-                    datasets: [
-                      {
-                        data: [
-                          Math.random() * 100,
-                          Math.random() * 100,
-                          Math.random() * 100,
-                          Math.random() * 100,
-                          Math.random() * 100,
-                          Math.random() * 100,
-                        ],
-                      },
+          {loading ? (
+            <LineChart
+              data={{
+                labels: ['—', '—', '—', '—', '—', '—'],
+                datasets: [
+                  {
+                    data: [
+                      Math.random() * 100,
+                      Math.random() * 100,
+                      Math.random() * 100,
+                      Math.random() * 100,
+                      Math.random() * 100,
+                      Math.random() * 100,
                     ],
-                  }
-                : {
-                    labels: [report.timestamp],
-                    datasets: [
-                      {
-                        data: [
-                          report.soil_ec[0],
-                          report.soil_ec[1],
-                          Math.random() * 100,
-                          Math.random() * 100,
-                          Math.random() * 100,
-                          Math.random() * 100,
-                        ],
-                      },
-                    ],
-                  }
-            }
-            width={Dimensions.get('window').width * 0.95} // from react-native
-            height={220}
-            yAxisLabel=""
-            yAxisSuffix=""
-            yAxisInterval={1} // optional, defaults to 1
-            chartConfig={chartPropersties}
-            bezier
-            style={{
-              marginVertical: 8,
-              borderRadius: 20,
-            }}
-          />
+                  },
+                ],
+              }}
+              width={Dimensions.get('window').width * 0.95} // from react-native
+              height={220}
+              yAxisLabel=""
+              yAxisSuffix=""
+              yAxisInterval={1} // optional, defaults to 1
+              chartConfig={chartPropersties}
+              bezier
+              style={{
+                marginVertical: 8,
+                borderRadius: 20,
+              }}
+            />
+          ) : lenRow == 0 ? (
+            <Text>Jajco</Text>
+          ) : (
+            <LineChart
+              data={{
+                labels: Object.values(report.timestamp),
+                datasets: [
+                  {
+                    data: Object.values(report.soil_ec),
+                  },
+                ],
+              }}
+              width={Dimensions.get('window').width * 0.95} // from react-native
+              height={220}
+              yAxisLabel=""
+              yAxisSuffix=""
+              yAxisInterval={1} // optional, defaults to 1
+              chartConfig={chartPropersties}
+              bezier
+              style={{
+                marginVertical: 8,
+                borderRadius: 20,
+              }}
+            />
+          )}
         </HistoryElement>
         <HistoryElement>
           <Text>Temperatura</Text>
-          <LineChart
-            data={
-              loading && report.temp == undefined
-                ? {
-                    labels: [report.timestamp],
-                    datasets: [
-                      {
-                        data: [
-                          Math.random() * 100,
-                          Math.random() * 100,
-                          Math.random() * 100,
-                          Math.random() * 100,
-                          Math.random() * 100,
-                          Math.random() * 100,
-                        ],
-                      },
+          {loading ? (
+            <LineChart
+              data={{
+                labels: ['—', '—', '—', '—', '—', '—'],
+                datasets: [
+                  {
+                    data: [
+                      Math.random() * 100,
+                      Math.random() * 100,
+                      Math.random() * 100,
+                      Math.random() * 100,
+                      Math.random() * 100,
+                      Math.random() * 100,
                     ],
-                  }
-                : {
-                    labels: [report.timestamp],
-                    datasets: [
-                      {
-                        data: [
-                          report.temp[0],
-                          report.temp[1],
-                          Math.random() * 100,
-                          Math.random() * 100,
-                          Math.random() * 100,
-                          Math.random() * 100,
-                        ],
-                      },
-                    ],
-                  }
-            }
-            width={Dimensions.get('window').width * 0.95} // from react-native
-            height={220}
-            yAxisLabel=""
-            yAxisSuffix=""
-            yAxisInterval={1} // optional, defaults to 1
-            chartConfig={chartPropersties}
-            bezier
-            style={{
-              marginVertical: 8,
-              borderRadius: 20,
-            }}
-          />
+                  },
+                ],
+              }}
+              width={Dimensions.get('window').width * 0.95} // from react-native
+              height={220}
+              yAxisLabel=""
+              yAxisSuffix=""
+              yAxisInterval={1} // optional, defaults to 1
+              chartConfig={chartPropersties}
+              bezier
+              style={{
+                marginVertical: 8,
+                borderRadius: 20,
+              }}
+            />
+          ) : lenRow == 0 ? (
+            <Text>Jajco</Text>
+          ) : (
+            <LineChart
+              data={{
+                labels: Object.values(report.timestamp),
+                datasets: [
+                  {
+                    data: Object.values(report.temp),
+                  },
+                ],
+              }}
+              width={Dimensions.get('window').width * 0.95} // from react-native
+              height={220}
+              yAxisLabel=""
+              yAxisSuffix=""
+              yAxisInterval={1} // optional, defaults to 1
+              chartConfig={chartPropersties}
+              bezier
+              style={{
+                marginVertical: 8,
+                borderRadius: 20,
+              }}
+            />
+          )}
         </HistoryElement>
         <HistoryElement>
           <Text>Nasłonecznienie</Text>
-          <LineChart
-            data={
-              loading && report.light == undefined
-                ? {
-                    labels: [report.timestamp],
-                    datasets: [
-                      {
-                        data: [
-                          Math.random() * 100,
-                          Math.random() * 100,
-                          Math.random() * 100,
-                          Math.random() * 100,
-                          Math.random() * 100,
-                          Math.random() * 100,
-                        ],
-                      },
+          {loading ? (
+            <LineChart
+              data={{
+                labels: ['—', '—', '—', '—', '—', '—'],
+                datasets: [
+                  {
+                    data: [
+                      Math.random() * 100,
+                      Math.random() * 100,
+                      Math.random() * 100,
+                      Math.random() * 100,
+                      Math.random() * 100,
+                      Math.random() * 100,
                     ],
-                  }
-                : {
-                    labels: [report.timestamp],
-                    datasets: [
-                      {
-                        data: [
-                          report.light[0],
-                          report.light[1],
-                          Math.random() * 100,
-                          Math.random() * 100,
-                          Math.random() * 100,
-                          Math.random() * 100,
-                        ],
-                      },
-                    ],
-                  }
-            }
-            width={Dimensions.get('window').width * 0.95} // from react-native
-            height={220}
-            yAxisLabel=""
-            yAxisSuffix=""
-            yAxisInterval={1} // optional, defaults to 1
-            chartConfig={chartPropersties}
-            bezier
-            style={{
-              marginVertical: 8,
-              borderRadius: 20,
-            }}
-          />
+                  },
+                ],
+              }}
+              width={Dimensions.get('window').width * 0.95} // from react-native
+              height={220}
+              yAxisLabel=""
+              yAxisSuffix=""
+              yAxisInterval={1} // optional, defaults to 1
+              chartConfig={chartPropersties}
+              bezier
+              style={{
+                marginVertical: 8,
+                borderRadius: 20,
+              }}
+            />
+          ) : lenRow == 0 ? (
+            <Text>Jajco</Text>
+          ) : (
+            <LineChart
+              data={{
+                labels: Object.values(report.timestamp),
+                datasets: [
+                  {
+                    data: Object.values(report.light),
+                  },
+                ],
+              }}
+              width={Dimensions.get('window').width * 0.95} // from react-native
+              height={220}
+              yAxisLabel=""
+              yAxisSuffix=""
+              yAxisInterval={1} // optional, defaults to 1
+              chartConfig={chartPropersties}
+              bezier
+              style={{
+                marginVertical: 8,
+                borderRadius: 20,
+              }}
+            />
+          )}
         </HistoryElement>
       </ScrollView>
     </HistoryContainer>
