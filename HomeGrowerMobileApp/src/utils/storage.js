@@ -171,6 +171,43 @@ const getAllAvailableSensors = async () => {
   }
 };
 
+const deleteConnectionPlantSensor = async peripheralId => {
+  try {
+    const keys = await AsyncStorage.getAllKeys();
+
+    const filteredPlantsKeys = keys.filter(item => item[0] == '!');
+
+    const PlantSensor = await AsyncStorage.multiGet(filteredPlantsKeys);
+    let result = PlantSensor.filter(item => item[1] == peripheralId);
+    console.log('filteredPlantsKeys');
+    console.log(filteredPlantsKeys);
+    console.log('PlantSensor');
+    console.log(PlantSensor);
+    console.log('result');
+    console.log(result[0][1]);
+
+    remove(result[0][0]);
+    // let result = await AsyncStorage.multiGet(sensorsAvailable);
+    // result = result.map(item => JSON.parse(item[1]));
+
+    // console.log('filteredPlantsKeys');
+    // console.log(filteredPlantsKeys);
+    // console.log('filteredSensorsKeys');
+    // console.log(filteredSensorsKeys);
+    // console.log('sensorsNotAvailable');
+    // console.log(sensorsNotAvailable);
+    // console.log('sensorsAvailable');
+    // console.log(sensorsAvailable);
+    // console.log('result');
+    // console.log(result);
+
+    return result;
+  } catch (e) {
+    console.warn('ERROR: Getting all data', e);
+    return false;
+  }
+};
+
 const storage = {
   set,
   setObject,
@@ -180,6 +217,7 @@ const storage = {
   getAllSensorData,
   getAllSensorKeys,
   getAllAvailableSensors,
+  deleteConnectionPlantSensor,
 };
 
 export default storage;
