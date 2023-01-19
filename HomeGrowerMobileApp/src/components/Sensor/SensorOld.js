@@ -5,6 +5,7 @@ import {
   NativeModules,
   NativeEventEmitter,
   ToastAndroid,
+  Linking,
 } from 'react-native';
 import BleManager from 'react-native-ble-manager';
 import {Buffer} from 'buffer';
@@ -42,6 +43,7 @@ const options = {
     type: 'mipmap',
   },
   color: '#ff00ff',
+  linkingURI: 'homegrowerbackroundtask://goback',
   parameters: {
     delay: 60000,
   },
@@ -161,6 +163,12 @@ const Sensor = ({navigation}) => {
     );
   };
 
+  function handleOpenURL(evt) {
+    // Will be called when the notification is pressed
+    console.log(evt.url);
+    // do something
+  }
+
   //bleManagerEmmiter obsługuje eventy
   useEffect(() => {
     BleManager.start({forceLegacy: true});
@@ -184,6 +192,8 @@ const Sensor = ({navigation}) => {
       'BleManagerDisconnectPeripheral',
       handleDisconnectedPeripheral,
     );
+
+    const linking_event = Linking.addEventListener('url', handleOpenURL);
     //bleManagerEmitter.addListener('BleManagerDisconnectPeripheral', handleDisconnectedPeripheral );
     return () => {
       //eventy do usunięcia
