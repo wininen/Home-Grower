@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text, TouchableOpacity} from 'react-native';
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 import {styles} from '../../Styles';
 
 export const WeatherForNextDay = ({item, week, id, forecast}) => {
@@ -11,23 +11,42 @@ export const WeatherForNextDay = ({item, week, id, forecast}) => {
         <WeekDay>{week[id]}</WeekDay>
       </DateContainer>
       <IconTempView>
-        <WeatherIcon source={forecast[id][0]} />
+        <WeatherIcon source={{uri: `${forecast[id][0]}`}} />
         <Text style={styles.weatherText}>{forecast[id][3]}</Text>
       </IconTempView>
-      <DegreeView>
-        <Degree>
-          <Text>Max.</Text>
-          <Text style={styles.weatherText}>
-            {Math.round(parseFloat(forecast[id][1]))} °C
-          </Text>
-        </Degree>
-        <Degree>
-          <Text>Min.</Text>
-          <Text style={styles.weatherText}>
-            {Math.round(parseFloat(forecast[id][2]))} °C
-          </Text>
-        </Degree>
-      </DegreeView>
+      {forecast[id][1].substring(forecast[id][1].length - 2) == '°F' ? (
+        <DegreeView>
+          <Degree>
+            <Text>Max.</Text>
+
+            <Text style={styles.weatherText}>
+              {Math.round(parseFloat(forecast[id][1]))} °F
+            </Text>
+          </Degree>
+          <Degree>
+            <Text>Min.</Text>
+            <Text style={styles.weatherText}>
+              {Math.round(parseFloat(forecast[id][2]))} °F
+            </Text>
+          </Degree>
+        </DegreeView>
+      ) : (
+        <DegreeView>
+          <Degree>
+            <Text>Max.</Text>
+
+            <Text style={styles.weatherText}>
+              {Math.round(parseFloat(forecast[id][2]))} °C
+            </Text>
+          </Degree>
+          <Degree>
+            <Text>Min.</Text>
+            <Text style={styles.weatherText}>
+              {Math.round(parseFloat(forecast[id][2]))} °C
+            </Text>
+          </Degree>
+        </DegreeView>
+      )}
     </DayContainer>
   );
 };
@@ -70,8 +89,8 @@ const IconTempView = styled.View`
 `;
 
 const WeatherIcon = styled.Image`
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 20px;
   color: white;
 `;
 

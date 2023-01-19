@@ -20,7 +20,6 @@ import {
   OuterContainer,
   ForecastView,
   ForecastMain,
-  Separator,
   ForecastOptions,
   ForecastTable,
   ForecastTd,
@@ -40,28 +39,20 @@ import {useIsFocused} from '@react-navigation/native';
 const API_KEY = '9d3b0897994554a14149d179a9a65217';
 
 const weatherImages = {
-  mist: require('../../assets/icons/forecast/mist_main.png'),
-  sun: require('../../assets/icons/forecast/sun_main.png'),
-  rain: require('../../assets/icons/forecast/rainy_main.png'),
-  storm: require('../../assets/icons/forecast/storm_main.png'),
-  snow: require('../../assets/icons/forecast/snow_main.png'),
-  cloud: require('../../assets/icons/forecast/cloudy_main.png'),
-  moon: require('../../assets/icons/forecast/moon_main.png'),
-};
-
-const forecastImages = {
-  mist: require('../../assets/icons/forecast/mist.png'),
-  sun: require('../../assets/icons/forecast/sun.png'),
-  rain: require('../../assets/icons/forecast/rainy.png'),
-  storm: require('../../assets/icons/forecast/storm.png'),
-  snow: require('../../assets/icons/forecast/snow.png'),
-  cloud: require('../../assets/icons/forecast/cloudy.png'),
+  mist: 'http://openweathermap.org/img/wn/50d@2x.png',
+  sun: 'http://openweathermap.org/img/wn/01d@2x.png',
+  rain: 'http://openweathermap.org/img/wn/10d@2x.png',
+  storm: 'http://openweathermap.org/img/wn/11d@2x.png',
+  snow: 'http://openweathermap.org/img/wn/13d@2x.png',
+  cloud: 'http://openweathermap.org/img/wn/03d@2x.png',
+  moon: 'http://openweathermap.org/img/wn/01n@2x.png',
+  bgImage: require('../../assets/images/weatherBackground.jpg'),
 };
 
 const Forecast = ({navigation}) => {
   const [city, setCity] = useState('—');
   const [weather, setWeather] = useState([
-    require('../../assets/icons/forecast/sun_main.png'),
+    weatherImages.sun,
     '—°C',
     'Słońce',
     '—°C',
@@ -71,11 +62,11 @@ const Forecast = ({navigation}) => {
   const [inputCity, setInputCity] = useState(null);
   const [modal, setModal] = useState(false);
   const [forecast, setForecast] = useState([
-    [require('../../assets/icons/forecast/sun.png'), '—°C', '—°C', '—'],
-    [require('../../assets/icons/forecast/storm.png'), '—°C', '—°C', '—'],
-    [require('../../assets/icons/forecast/cloudy.png'), '—°C', '—°C', '—'],
-    [require('../../assets/icons/forecast/mist.png'), '—°C', '—°C', '—'],
-    [require('../../assets/icons/forecast/rainy.png'), '—°C', '—°C', '—'],
+    [weatherImages.sun, '—°C', '—°C', '—'],
+    [weatherImages.storm, '—°C', '—°C', '—'],
+    [weatherImages.cloud, '—°C', '—°C', '—'],
+    [weatherImages.mist, '—°C', '—°C', '—'],
+    [weatherImages.rain, '—°C', '—°C', '—'],
   ]);
   const [loading, setLoading] = useState(true);
   const isFocused = useIsFocused();
@@ -334,89 +325,29 @@ const Forecast = ({navigation}) => {
       } else {
         if (jsonUnit == require('../../assets/icons/profile/celsjus.png')) {
           setForecast([
-            [require('../../assets/icons/forecast/sun.png'), '—°C', '—°C', '—'],
-            [
-              require('../../assets/icons/forecast/storm.png'),
-              '—°C',
-              '—°C',
-              '—',
-            ],
-            [
-              require('../../assets/icons/forecast/cloudy.png'),
-              '—°C',
-              '—°C',
-              '—',
-            ],
-            [
-              require('../../assets/icons/forecast/mist.png'),
-              '—°C',
-              '—°C',
-              '—',
-            ],
-            [
-              require('../../assets/icons/forecast/rainy.png'),
-              '—°C',
-              '—°C',
-              '—',
-            ],
+            [weatherImages.sun, '—°C', '—°C', '—'],
+            [weatherImages.storm, '—°C', '—°C', '—'],
+            [weatherImages.cloud, '—°C', '—°C', '—'],
+            [weatherImages.mist, '—°C', '—°C', '—'],
+            [weatherImages.rain, '—°C', '—°C', '—'],
           ]);
         } else if (
           jsonUnit == require('../../assets/icons/profile/farenheit.png')
         ) {
           setForecast([
-            [require('../../assets/icons/forecast/sun.png'), '—°F', '—°F', '—'],
-            [
-              require('../../assets/icons/forecast/storm.png'),
-              '—°F',
-              '—°F',
-              '—',
-            ],
-            [
-              require('../../assets/icons/forecast/cloudy.png'),
-              '—°F',
-              '—°F',
-              '—',
-            ],
-            [
-              require('../../assets/icons/forecast/mist.png'),
-              '—°F',
-              '—°F',
-              '—',
-            ],
-            [
-              require('../../assets/icons/forecast/rainy.png'),
-              '—°F',
-              '—°F',
-              '—',
-            ],
+            [weatherImages.sun, '—°F', '—°F', '—'],
+            [weatherImages.storm, '—°F', '—°F', '—'],
+            [weatherImages.cloud, '—°F', '—°F', '—'],
+            [weatherImages.mist, '—°F', '—°F', '—'],
+            [weatherImages.rain, '—°F', '—°F', '—'],
           ]);
         } else {
           setForecast([
-            [require('../../assets/icons/forecast/sun.png'), '—°C', '—°C', '—'],
-            [
-              require('../../assets/icons/forecast/storm.png'),
-              '—°C',
-              '—°C',
-              '—',
-            ],
-            [
-              require('../../assets/icons/forecast/cloudy.png'),
-              '—°C',
-              '—°C',
-              '—',
-            ],
-            [
-              require('../../assets/icons/forecast/mist.png'),
-              '—°C',
-              '—°C',
-              '—',
-            ],
-            [
-              require('../../assets/icons/forecast/rainy.png'),
-              '—°C',
-              '—°C',
-              '—',
-            ],
+            [weatherImages.sun, '—°C', '—°C', '—'],
+            [weatherImages.storm, '—°C', '—°C', '—'],
+            [weatherImages.cloud, '—°C', '—°C', '—'],
+            [weatherImages.mist, '—°C', '—°C', '—'],
+            [weatherImages.rain, '—°C', '—°C', '—'],
           ]);
         }
       }
@@ -539,6 +470,7 @@ const Forecast = ({navigation}) => {
               '°C',
               res['main'].temp_max,
               '°C',
+              res['weather'][0].icon,
             );
             switchWeather(res['weather'][0].main);
             savedWeather([
@@ -853,35 +785,35 @@ const Forecast = ({navigation}) => {
         for (let i = 0; i < param.length; i++) {
           switch (param[i]) {
             case 'Mist':
-              forecastIcon.push(forecastImages.mist);
+              forecastIcon.push(weatherImages.mist);
               polishName.push('Mgła');
               break;
             case 'Rain':
-              forecastIcon.push(forecastImages.rain);
+              forecastIcon.push(weatherImages.rain);
               polishName.push('Deszcz');
               break;
             case 'Sun':
-              forecastIcon.push(forecastImages.sun);
+              forecastIcon.push(weatherImages.sun);
               polishName.push('Słońce');
               break;
             case 'Drizzle':
-              forecastIcon.push(forecastImages.rain);
+              forecastIcon.push(weatherImages.rain);
               polishName.push('Mżawka');
               break;
             case 'Snow':
-              forecastIcon.push(forecastImages.snow);
+              forecastIcon.push(weatherImages.snow);
               polishName.push('Śnieg');
               break;
             case 'Clouds':
-              forecastIcon.push(forecastImages.cloud);
+              forecastIcon.push(weatherImages.cloud);
               polishName.push('Chmury');
               break;
             case 'Haze':
-              forecastIcon.push(forecastImages.mist);
+              forecastIcon.push(weatherImages.mist);
               polishName.push('Lekka mgła');
               break;
             case 'Clear':
-              forecastIcon.push(forecastImages.sun);
+              forecastIcon.push(weatherImages.sun);
               polishName.push('Czyste niebo');
               break;
           }
@@ -995,7 +927,7 @@ const Forecast = ({navigation}) => {
     <Layout>
       <OuterContainer>
         <ImageBackground
-          source={require('../../assets/images/weatherBackground.jpg')}
+          source={weatherImages.bgImage}
           resizeMode="cover"
           style={styles.bgImage}>
           {!loading ? (
@@ -1017,15 +949,15 @@ const Forecast = ({navigation}) => {
                 </TouchableOpacity>
               </ForecastOptions>
               <ForecastMain>
-                <Text style={styles.h2Weather}>{city}</Text>
-                <Image source={weather[0]} />
-                <Text style={styles.h2Weather}>
-                  {Math.round(parseFloat(weather[1]))}°C
-                </Text>
-                <Text style={styles.h3Weather}>{weather[2]}</Text>
-                <Text style={styles.h3Weather}>
-                  Min. {Math.round(parseFloat(weather[3]))}°C Max.{' '}
-                  {Math.round(parseFloat(weather[4]))}°C
+                <Text style={styles.h2}>{city}</Text>
+                <Image
+                  source={{uri: `${weather[0]}`}}
+                  style={{width: 64, height: 48}}
+                />
+                <Text style={styles.h2}>{weather[1]}</Text>
+                <Text style={styles.h3}>{weather[2]}</Text>
+                <Text style={styles.h3}>
+                  Min. {weather[3]} Max. {weather[4]}
                 </Text>
                 <ForecastTable>
                   {/* 
