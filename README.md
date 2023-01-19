@@ -27,7 +27,7 @@
 - React Native 70.6
 - SQLite
 - Android SDK 30
-- Biblioteki do React Native wymienione w seksji poniżej
+- Biblioteki do React Native wymienione w sekcji poniżej
 
 ## Moduły aplikacji
 
@@ -53,7 +53,7 @@ Upewnij się, że masz ustawioną JAVA_HOME w swoich zmiennych środowiskowych.
 2. Znajdź i kliknij przycisk **zmienne środowiskowe...**
 3. W **Zmienne systemowe** dodaj **JAVA_HOME** ze ściażką Javy (w naszym przypadku było to _C:\Program Files\Java\jre1.8.0_331_)
 
-### 3. Zainstalować Android Studio
+### 3. Zainstaluj Android Studio
 
 Pobierz i zainstaluj [Android Studio](https://developer.android.com/studio/index.html). Podczas procesu instalacji upewnij się, że wszystkie poniższe checkboxy są zaznaczone:
 
@@ -61,7 +61,7 @@ Pobierz i zainstaluj [Android Studio](https://developer.android.com/studio/index
 - [x] Android SDK Platform
 - [x] Android Virtual Device
 
-### 4. Zainstalować odpowiednie SDK
+### 4. Zainstaluj odpowiednie SDK
 
 ```
 Android Studio->Preferences->Appeareance & Behavior->System Settings->Android SDK
@@ -69,7 +69,7 @@ Android Studio->Preferences->Appeareance & Behavior->System Settings->Android SD
 
 W sekcji "SDK Platforms" wybierz SDK dla Androida 11 (30 API SDK). Jest to minimalna wersja wspierana przez naszą aplikację.
 
-### 5. Zmienne środowiskowe dla Androida
+### 5. Ustaw zmienne środowiskowe dla Androida
 
 1. Wyszukaj **"Zmienne środowiskowe"** w menu Windowsa i wybierz **"Edytuj zmienne środowiskowe systemu"**
 2. Znajdź i kliknij przycisk **"zmienne środowiskowe..."**
@@ -86,7 +86,7 @@ W sekcji "SDK Platforms" wybierz SDK dla Androida 11 (30 API SDK). Jest to minim
 
 Wzorując się na oficjalnej dokumentacji [React Native](https://reactnative.dev/docs/environment-setup) aby kontynuować pracę nad naszym projektem trzeba:
 
-### 1. Zainstalować Node & Watchman
+### 1. Zainstaluj Node & Watchman
 
 React team recommend installing Node and Watchman using Homebrew. Run the following commands in a Terminal after installing Homebrew:
 
@@ -95,7 +95,7 @@ brew install node
 brew install watchman
 ```
 
-### 2. Zainstalować Java Development Kit
+### 2. Zainstaluj Java Development Kit
 
 Nasz pracujący na macOS członek zespołu zainstalował OpenJDK nazwane Azul Zulu
 Our macOS based contributor Aleks installed OpenJDK distribution called Azul Zulu using Homebrew. Run the following commands in a Terminal after installing Homebrew:
@@ -105,7 +105,7 @@ brew tap homebrew/cask-versions
 brew install --cask zulu11
 ```
 
-### 3. Zainstalować Android Studio
+### 3. Zainstaluj Android Studio
 
 Pobierz i zainstaluj [Android Studio](https://developer.android.com/studio/index.html). Podczas procesu instalacji upewnij się, że wszystkie poniższe checkboxy są zaznaczone:
 
@@ -113,7 +113,7 @@ Pobierz i zainstaluj [Android Studio](https://developer.android.com/studio/index
 - [x] Android SDK Platform
 - [x] Android Virtual Device
 
-### 4. Zainstalować odpowiednie SDK
+### 4. Zainstaluj odpowiednie SDK
 
 ```
 Android Studio->Preferences->Appeareance & Behavior->System Settings->Android SDK
@@ -140,9 +140,6 @@ source ~/.zprofile
 
 ### 6. Upewnij się, że masz na systemie zainstalowany system zarządzania pakietami [Yarn](https://yarnpkg.com)
 
-### Load the config into your current shell
-
-> source $HOME/.bash_profile
 
 </details>
 
