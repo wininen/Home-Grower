@@ -385,7 +385,7 @@ const Sensor = ({navigation}) => {
       .then(() => {
         console.log('Connected to ' + peripheral.id);
         ToastAndroid.showWithGravity(
-          'Retrived connection with' + peripheral.id,
+          'Ponownie połączone z urządzeniem ' + peripheral.id,
           ToastAndroid.SHORT,
           ToastAndroid.BOTTOM,
         );
@@ -403,6 +403,11 @@ const Sensor = ({navigation}) => {
     BleManager.disconnect(peripheral.id)
       .then(() => {
         console.log('Disconnected');
+        ToastAndroid.showWithGravity(
+          'Rozłączono z czujnikiem',
+          ToastAndroid.SHORT,
+          ToastAndroid.BOTTOM,
+        );
 
         //Zaktualizuj mapy i usestate
         for (let i = 0; i < sensorListConnected.length; i++) {
@@ -653,7 +658,7 @@ const Sensor = ({navigation}) => {
     <Layout>
       <OuterContainer>
         <SensorsContainer>
-          <Text style={styles.sensorTitle}> Connected </Text>
+          <Text style={styles.sensorTitle}> Połączone </Text>
           <ScrollableList>
             <SensorsList>
               {sensorListConnected.map(item => (
@@ -670,7 +675,7 @@ const Sensor = ({navigation}) => {
         </SensorsContainer>
 
         <SensorsContainer>
-          <Text style={styles.sensorTitle}> Available </Text>
+          <Text style={styles.sensorTitle}> Dostępne </Text>
           <ScrollableList>
             <SensorsList>
               {sensorListAvailable.map(item => (
