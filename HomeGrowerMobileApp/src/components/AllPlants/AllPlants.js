@@ -1,23 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import {
-  Text,
-  TouchableOpacity,
-  Image,
-  ScrollView,
-  View,
-  FlatList,
-  Alert,
-  ActivityIndicator,
-} from 'react-native';
+import {Text, View, FlatList, Alert, ActivityIndicator} from 'react-native';
 import Layout from '../Layout/Layout.js';
 import {styles, StyledButton} from '../../Styles.js';
+import LoadingView from '../ActivityIndicator/ActivityIndicator.js';
 
 import {
   PlantsContainer,
   PlantsElement,
   StyledImage,
   PlantsAfterElement,
-  ButtonBox,
   ModalButton,
   ModalList,
   ModalItem,
@@ -280,11 +271,9 @@ const AllPlants = ({navigation}) => {
     <Layout>
       <PlantsContainer>
         {loading ? (
-          <Text style={styles.h2}>Loading...</Text>
+          <LoadingView></LoadingView>
         ) : (
-          <ScrollView
-            contentContainerStyle={styles.plantsList}
-            keyboardShouldPersistTaps="handled">
+          <PlantsContainer style={styles.plantsList}>
             <TextInput
               style={{height: 60, borderColor: '#000', borderWidth: 1}}
               placeholder="Wyszukaj roślinę..."
@@ -296,8 +285,9 @@ const AllPlants = ({navigation}) => {
               renderItem={renderList}
               alwaysBounceVertical={true}
               ListFooterComponent={renderFooter}
+              showsVerticalScrollIndicator={false}
             />
-          </ScrollView>
+          </PlantsContainer>
         )}
         {result != null && (
           <Modal

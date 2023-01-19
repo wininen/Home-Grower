@@ -141,9 +141,10 @@ const Sensor = ({navigation}) => {
     fertility = inputData.readUint16LE(8);
 
     const plant_data = {temperature, light, moist, fertility, date: new Date()};
-    const plantsArr = await storage.getObject('flower_data');
-    if (plantsArr !== null) plantsArr.push(plant_data);
-    storage.setObject('flower_data', plantsArr);
+    // await AsyncStorage.removeItem('flower_data');
+    // const plantsArr = await storage.getObject('@flower_data');
+    // if (plantsArr !== null) plantsArr.push(plant_data);
+    // storage.setObject('@flower_data', plantsArr);
 
     console.log('\n');
     const fetchedData = [
@@ -206,6 +207,16 @@ const Sensor = ({navigation}) => {
       console.log('check location access permission');
       await getBluetoothScanPermission();
     }
+
+    BleManager.enableBluetooth()
+      .then(() => {
+        // Success code
+        console.log('The bluetooth is already enabled or the user confirm');
+      })
+      .catch(error => {
+        // Failure code
+        console.log('The user refuse to enable bluetooth');
+      });
 
     await BleManager.scan([], 3)
       .then(() => {
@@ -393,7 +404,7 @@ const Sensor = ({navigation}) => {
 
         peripheralsConnected.delete(peripheral.id);
         setSensorListConnected(Array.from(peripheralsConnected.values()));
-
+        storage.deleteConnectionPlantSensor(peripheral.id);
         storage.remove(peripheral.id);
       })
       .catch(error => {
@@ -667,7 +678,6 @@ const Sensor = ({navigation}) => {
               <Text style={styles.body}>Wyszukaj urządzenie</Text>
             </StyledButton>
           </ButtonContainer>
-
           <ButtonContainer>
             <StyledButton
               onPress={stopBackgroundTask}
@@ -677,27 +687,6 @@ const Sensor = ({navigation}) => {
             </StyledButton>
           </ButtonContainer>
         </ButtonsWrapper>
-
-        {/* <FlatList
-          style={styles.data_table}
-          numColumns={4}
-          keyExtractor={item => item.id}
-          data={datas}
-          contentContainerStyle={{
-            marginTop: 20,
-            display: 'flex',
-            justifyContent: 'space-around',
-            flex: 1,
-          }}
-          renderItem={({item}) => (
-            <TouchableOpacity>
-              <View>
-                <Text style={styles.id}>{item.id}</Text>
-                <Text style={styles.item}>{item.title}</Text>
-              </View>
-            </TouchableOpacity>
-          )}
-        /> */}
       </OuterContainer>
     </Layout>
   );

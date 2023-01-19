@@ -1,4 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import React, {useState, useEffect} from 'react';
 import {
   Text,
@@ -25,11 +27,13 @@ import {
   ForecastTr,
   InputBox,
 } from './Forecast.styled';
-
+import {WeatherForNextDay} from './weatherForNextDay';
 import {ModalList, ModalButton} from '../MyPlants/MyPlants.styled';
 
 import Geolocation from 'react-native-geolocation-service';
 import Layout from '../Layout/Layout';
+
+import styled from 'styled-components/native';
 
 import {useIsFocused} from '@react-navigation/native';
 
@@ -924,21 +928,24 @@ const Forecast = ({navigation}) => {
     <Layout>
       <OuterContainer>
         <ImageBackground
-          source={weatherImages.bgphoto}
+          source={require('../../assets/images/weatherBackground.jpg')}
           resizeMode="cover"
           style={styles.bgImage}>
           {!loading ? (
             <ForecastView>
               <ForecastOptions>
                 <TouchableOpacity onPress={() => useLocalisation()}>
-                  <Image
-                    source={require('../../assets/icons/forecast/location.png')}
-                    style={styles.gapForMenu}
+                  <FontAwesome
+                    name="refresh"
+                    size={20}
+                    style={{color: 'white', paddingRight: 15}}
                   />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => setModal(!modal)}>
-                  <Image
-                    source={require('../../assets/icons/forecast/edit_location.png')}
+                  <FontAwesome5
+                    name="search-location"
+                    size={20}
+                    style={{color: 'white', paddingRight: 15}}
                   />
                 </TouchableOpacity>
               </ForecastOptions>
@@ -954,9 +961,17 @@ const Forecast = ({navigation}) => {
                   Min. {weather[3]} Max. {weather[4]}
                 </Text>
                 <ForecastTable>
-                  <ForecastTr>
-                    <Image
-                      source={require('../../assets/icons/forecast/calendar_month.png')}
+                  {/* 
+                  Change here, now row for next days are in new
+                  component called weatherForNextDay.js
+                   */}
+                  {forecast.map(item => (
+                    <WeatherForNextDay
+                      key={item}
+                      item={item}
+                      week={week}
+                      id={forecast.indexOf(item)}
+                      forecast={forecast}
                     />
                     <Text style={styles.h4}>PROGNOZA 5-DNIOWA</Text>
                   </ForecastTr>

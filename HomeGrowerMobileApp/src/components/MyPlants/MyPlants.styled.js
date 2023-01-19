@@ -50,3 +50,11 @@ export const ModalList = styled.TouchableOpacity`
   height: 60px;
   width: 150px;
 `;
+
+export const FlatList = styled.View`
+  align-items: center;
+  flex: 1;
+  background-color: #fff;
+  padding: 0;
+  margin: 0;
+`;
