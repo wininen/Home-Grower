@@ -63,8 +63,8 @@ export const ConnectToPlantButton = styled.TouchableOpacity`
 export const FirstRowButtonWrapper = styled.View`
   /* padding-right: 50px;
   padding-left: 50px; */
-  margin-left: 50px;
-  margin-right: 50px;
+  margin-left: 20px;
+  margin-right: 20px;
   align-items: center;
   flex-direction: row;
   /* justify-content: flex-start; */

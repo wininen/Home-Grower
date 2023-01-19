@@ -33,7 +33,7 @@ import {
 } from './MyPlants.styled.js';
 
 import {ConnectedSensor} from './MyPlantSensorScrollable';
-
+import QRCode from 'react-native-qrcode-svg';
 import {ModalButton, ModalItem, ModalList} from '../AllPlants/AllPlants.styled';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -61,11 +61,13 @@ const MyPlant = props => {
 
   const [active, setActive] = useState(false);
   const [modal, setModal] = useState(false);
+  const [modalQr, setModalQr] = useState(false);
   const [isPeripheral, setIsPeripheral] = useState(false);
   const [sensorListConnected, setSensorListConnected] = useState([]);
   // const plantId =
   //   '45ce2ccc-941f-11ed-a1eb-0242ac12000245ce2ccc-941f-11ed-a1eb-0242ac120002';
   const {planame, plagenus, repoid, name, plantId} = props.route.params;
+  const qrCodeValue = plantId[1];
   let peripheral = null;
 
   const getData = async () => {
@@ -363,6 +365,9 @@ const MyPlant = props => {
         <ButtonPlant title="Pobierz dane" onPress={getData}>
           <Text style={styles.body}> Pobierz dane </Text>
         </ButtonPlant>
+        <Icon onPress={() => setModalQr(!modalQr)}>
+          <AntDesign name="qrcode" size={30} style={{color: 'black'}} />
+        </Icon>
         <Icon onPress={() => assignSensor()}>
           <Entypo
             name="signal"
@@ -429,6 +434,23 @@ const MyPlant = props => {
               </SensorsList>
             </ScrollableList>
             <ModalButton onPress={() => setModal(!modal)}>
+              <Text style={styles.body}>Wróć</Text>
+            </ModalButton>
+          </View>
+        </View>
+      </Modal>
+
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modalQr}
+        onRequestClose={() => {
+          setModalQr(!modalQr);
+        }}>
+        <View style={styles.modalContainer}>
+          <View style={styles.modalQRContent}>
+            <QRCode value={qrCodeValue} size={200} />
+            <ModalButton onPress={() => setModalQr(!modalQr)}>
               <Text style={styles.body}>Wróć</Text>
             </ModalButton>
           </View>
