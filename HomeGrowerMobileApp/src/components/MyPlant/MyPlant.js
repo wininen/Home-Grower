@@ -383,9 +383,53 @@ const MyPlant = props => {
       </FirstRowButtonWrapper>
       <PropertiesContainer>
         <Separator />
-        {datas.map(item => (
+        {/* {datas.map(item => (
           <PlantsDataRow title={item.id} value={item.title} parameters={0} />
-        ))}
+        ))} */}
+        <PropertiesRow>
+          <NameRow>
+            <Text> Temperatura </Text>
+          </NameRow>
+          <DataRow>
+            <Text style={isValueInRangeStyle(20, 25, datas[0].title)}>
+              {datas[0].title}
+            </Text>
+          </DataRow>
+        </PropertiesRow>
+        <Separator />
+        <PropertiesRow>
+          <NameRow>
+            <Text> Nasłonecznienie </Text>
+          </NameRow>
+          <DataRow>
+            <Text style={isValueInRangeStyle(20, 25, datas[1].title)}>
+              {datas[1].title}
+            </Text>
+          </DataRow>
+        </PropertiesRow>
+        <Separator />
+        <PropertiesRow>
+          <NameRow>
+            <Text> Wilgotność gleby </Text>
+          </NameRow>
+          <DataRow>
+            <Text style={isValueInRangeStyle(20, 25, datas[2].title)}>
+              {datas[2].title}
+            </Text>
+          </DataRow>
+        </PropertiesRow>
+        <Separator />
+        <PropertiesRow>
+          <NameRow>
+            <Text> Żyzność gleby </Text>
+          </NameRow>
+          <DataRow>
+            <Text style={isValueInRangeStyle(20, 25, datas[3].title)}>
+              {datas[3].title}
+            </Text>
+          </DataRow>
+        </PropertiesRow>
+        <Separator />
       </PropertiesContainer>
       <SpecsContainer>
         <ModalList>
