@@ -36,6 +36,7 @@ import {ConnectedSensor} from './MyPlantSensorScrollable';
 
 import {ModalButton, ModalItem, ModalList} from '../AllPlants/AllPlants.styled';
 import Entypo from 'react-native-vector-icons/Entypo';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 import BleManager from 'react-native-ble-manager';
 import {Modal} from 'react-native-paper';
 import {Buffer} from 'buffer';
@@ -271,6 +272,11 @@ const MyPlant = props => {
     console.log('Tutaj wrzucamy nasz sensor i id roslinki do tabeli połączeń');
   };
 
+  const disconnectSensor = async => {
+    console.log('Tutaj odłączamy sensor od rosliny');
+    setActive(false);
+  };
+
   const delPlant = async name => {
     try {
       await db.transaction(txn => {
@@ -344,6 +350,11 @@ const MyPlant = props => {
             style={{color: active ? '#A7C957' : '#BC4749'}}
           />
         </Icon>
+        {active && (
+          <Icon onPress={() => disconnectSensor()}>
+            <AntDesign name="disconnect" size={30} style={{color: '#BC4749'}} />
+          </Icon>
+        )}
       </FirstRowButtonWrapper>
       <PropertiesContainer>
         <Separator />

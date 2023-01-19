@@ -74,6 +74,7 @@ export const FirstRowButtonWrapper = styled.View`
 export const Icon = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
+  padding: 10px;
 `;
 
 export const ScrollableList = styled.ScrollView`
