@@ -75,7 +75,6 @@ const MyPlant = props => {
 
   const assignSensor = async () => {
     const peripheralFound = await findSensor();
-    console.log('tutututu');
     console.log(peripheralFound);
     console.log('asigning!!!');
     if (peripheralFound == false) {
@@ -87,12 +86,6 @@ const MyPlant = props => {
     } else {
       setActive(true);
     }
-    // // setIsPeripheral(true);
-    // peripheral = 'C4:7C:8D:6C:B4:5B';
-    // setActive(true);
-    // console.log(peripheral);
-    // // setIsPeripheral('C4:7C:8D:6C:B4:5B');
-    // console.log('si si');
   };
 
   const connect = async peripheral => {
@@ -193,8 +186,7 @@ const MyPlant = props => {
     setModal(false);
     setActive(true);
     await pushSensorConnection(peripheral.id);
-    // odnajduje services i characteristics danego urządzenia
-    // trzeba zawsze uruchomić najpierw przed uruchomieniem metod write, read i start notification
+
     await BleManager.retrieveServices(peripheral.id)
       .then(peripheralData => {
         console.log('Retrieved peripheral services');
@@ -203,7 +195,6 @@ const MyPlant = props => {
         console.log(error);
       });
 
-    // wpijemy wartość [0xa0, 0x1f] do characteristics "charwrite" żeby uruchomić odczytywanie w czasie rzeczywistym
     await BleManager.write(
       peripheral.id,
       config.service,
@@ -216,10 +207,6 @@ const MyPlant = props => {
       .catch(error => {
         console.log(error);
       });
-
-    //Start the notification on the specified characteristic, you need to call retrieveServices method before.
-    //The buffer will collect a number or messages from the server and then emit once the buffer count it reached.
-    //Helpful to reducing the number or js bridge crossings when a characteristic is sending a lot of messages. Returns a Promise objec
 
     await BleManager.startNotification(
       peripheral.id,
@@ -287,8 +274,22 @@ const MyPlant = props => {
     await storage.set(key, peripheralId);
   };
 
-  const disconnectSensor = async => {
+  const disconnectSensor = async () => {
     console.log('Tutaj odłączamy sensor od rosliny');
+    const key = '@' + plantId[1];
+    console.log('hhhhhh');
+    const peripheralId = await storage.get(key);
+    console.log('hhhhhh');
+    const peripheral = await storage.getObject(peripheralId);
+    console.log('hhhhhh');
+    await BleManager.disconnect(peripheral.id)
+      .then(() => {
+        console.log('Disconnected');
+        storage.remove(key);
+      })
+      .catch(error => {
+        console.log(error);
+      });
     setActive(false);
   };
 
