@@ -18,6 +18,7 @@ import {
   StyledImage,
   PlantsAfterElement,
   ButtonBox,
+  ListContainer,
   ModalButton,
   ModalList,
   ModalItem,
@@ -125,11 +126,13 @@ const MyPlants = ({route, navigation}) => {
         {loading ? (
           <Text style={styles.h2}>Loading...</Text>
         ) : changes != 0 ? (
-          <ScrollView
-            contentContainerStyle={styles.plantsList}
-            keyboardShouldPersistTaps="handled">
-            <FlatList data={myPlants.plant_genus_id} renderItem={renderList} />
-          </ScrollView>
+          <PlantsContainer style={styles.plantsList}>
+            <FlatList
+              data={myPlants.plant_genus_id}
+              renderItem={renderList}
+              showsVerticalScrollIndicator={false}
+            />
+          </PlantsContainer>
         ) : (
           <Text style={styles.h2}>Nie masz jeszcze żadnych roślin</Text>
         )}

@@ -260,9 +260,7 @@ const AllPlants = ({navigation}) => {
         {loading ? (
           <Text style={styles.h2}>Loading...</Text>
         ) : (
-          <ScrollView
-            contentContainerStyle={styles.plantsList}
-            keyboardShouldPersistTaps="handled">
+          <PlantsContainer style={styles.plantsList}>
             <TextInput
               style={{height: 60, borderColor: '#000', borderWidth: 1}}
               placeholder="Wyszukaj roślinę..."
@@ -274,8 +272,9 @@ const AllPlants = ({navigation}) => {
               renderItem={renderList}
               alwaysBounceVertical={true}
               ListFooterComponent={renderFooter}
+              showsVerticalScrollIndicator={false}
             />
-          </ScrollView>
+          </PlantsContainer>
         )}
         {result != null && (
           <Modal
