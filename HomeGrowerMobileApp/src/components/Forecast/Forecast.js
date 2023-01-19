@@ -10,7 +10,6 @@ import {
   Alert,
   Modal,
   TextInput,
-  KeyboardAvoidingView,
 } from 'react-native';
 
 import {styles} from '../../Styles';
@@ -32,6 +31,8 @@ import {ModalList, ModalButton} from '../MyPlants/MyPlants.styled';
 import Geolocation from 'react-native-geolocation-service';
 import Layout from '../Layout/Layout';
 
+import {useIsFocused} from '@react-navigation/native';
+
 const API_KEY = '9d3b0897994554a14149d179a9a65217';
 
 const weatherImages = {
@@ -44,49 +45,211 @@ const weatherImages = {
   moon: require('../../assets/icons/forecast/moon_main.png'),
 };
 
+const forecastImages = {
+  mist: require('../../assets/icons/forecast/mist.png'),
+  sun: require('../../assets/icons/forecast/sun.png'),
+  rain: require('../../assets/icons/forecast/rainy.png'),
+  storm: require('../../assets/icons/forecast/storm.png'),
+  snow: require('../../assets/icons/forecast/snow.png'),
+  cloud: require('../../assets/icons/forecast/cloudy.png'),
+};
+
 const Forecast = ({navigation}) => {
+  const [city, setCity] = useState('—');
+  const [weather, setWeather] = useState([
+    require('../../assets/icons/forecast/sun_main.png'),
+    '—°C',
+    'Słońce',
+    '—°C',
+    '—°C',
+  ]);
+  const [week, setWeek] = useState([]);
+  const [inputCity, setInputCity] = useState(null);
+  const [modal, setModal] = useState(false);
+  const [forecast, setForecast] = useState([
+    [require('../../assets/icons/forecast/sun.png'), '—°C', '—°C', '—'],
+    [require('../../assets/icons/forecast/storm.png'), '—°C', '—°C', '—'],
+    [require('../../assets/icons/forecast/cloudy.png'), '—°C', '—°C', '—'],
+    [require('../../assets/icons/forecast/mist.png'), '—°C', '—°C', '—'],
+    [require('../../assets/icons/forecast/rainy.png'), '—°C', '—°C', '—'],
+  ]);
+  const [loading, setLoading] = useState(true);
+  const isFocused = useIsFocused();
+
   const convertToCelsjus = async jsonValue => {
-    let afterConvertValue = [null, null, null, null, null];
-    afterConvertValue[0] = jsonValue[0];
-    afterConvertValue[1] =
-      (
-        (jsonValue[1].substring(0, jsonValue[1].length - 2) - 32) *
-        (5 / 9)
-      ).toFixed(2) + '°C';
-    afterConvertValue[2] = jsonValue[2];
-    afterConvertValue[3] =
-      (
-        (jsonValue[3].substring(0, jsonValue[3].length - 2) - 32) *
-        (5 / 9)
-      ).toFixed(2) + '°C';
-    afterConvertValue[4] =
-      (
-        (jsonValue[4].substring(0, jsonValue[4].length - 2) - 32) *
-        (5 / 9)
-      ).toFixed(2) + '°C';
-    return afterConvertValue;
+    if (jsonValue[1].length != 4) {
+      let afterConvertValue = [null, null, null, null, null];
+      afterConvertValue[0] = jsonValue[0];
+      afterConvertValue[1] =
+        (
+          (jsonValue[1].substring(0, jsonValue[1].length - 2) - 32) *
+          (5 / 9)
+        ).toFixed(2) + '°C';
+      afterConvertValue[2] = jsonValue[2];
+      afterConvertValue[3] =
+        (
+          (jsonValue[3].substring(0, jsonValue[3].length - 2) - 32) *
+          (5 / 9)
+        ).toFixed(2) + '°C';
+      afterConvertValue[4] =
+        (
+          (jsonValue[4].substring(0, jsonValue[4].length - 2) - 32) *
+          (5 / 9)
+        ).toFixed(2) + '°C';
+      return afterConvertValue;
+    } else {
+      let afterConvertValue = [null, null, null, null, null];
+      afterConvertValue[0] = [
+        jsonValue[0][0],
+        (
+          (jsonValue[0][1].substring(0, jsonValue[0][1].length - 2) - 32) *
+          (5 / 9)
+        ).toFixed(2) + '°C',
+        (
+          (jsonValue[0][2].substring(0, jsonValue[0][2].length - 2) - 32) *
+          (5 / 9)
+        ).toFixed(2) + '°C',
+        jsonValue[0][3],
+      ];
+      afterConvertValue[1] = [
+        jsonValue[1][0],
+        (
+          (jsonValue[1][1].substring(0, jsonValue[1][1].length - 2) - 32) *
+          (5 / 9)
+        ).toFixed(2) + '°C',
+        (
+          (jsonValue[1][2].substring(0, jsonValue[1][2].length - 2) - 32) *
+          (5 / 9)
+        ).toFixed(2) + '°C',
+        jsonValue[1][3],
+      ];
+      afterConvertValue[2] = [
+        jsonValue[2][0],
+        (
+          (jsonValue[2][1].substring(0, jsonValue[2][1].length - 2) - 32) *
+          (5 / 9)
+        ).toFixed(2) + '°C',
+        (
+          (jsonValue[2][2].substring(0, jsonValue[2][2].length - 2) - 32) *
+          (5 / 9)
+        ).toFixed(2) + '°C',
+        jsonValue[2][3],
+      ];
+      afterConvertValue[3] = [
+        jsonValue[3][0],
+        (
+          (jsonValue[3][1].substring(0, jsonValue[3][1].length - 2) - 32) *
+          (5 / 9)
+        ).toFixed(2) + '°C',
+        (
+          (jsonValue[3][2].substring(0, jsonValue[3][2].length - 2) - 32) *
+          (5 / 9)
+        ).toFixed(2) + '°C',
+        jsonValue[3][3],
+      ];
+      afterConvertValue[4] = [
+        jsonValue[4][0],
+        (
+          (jsonValue[4][1].substring(0, jsonValue[4][1].length - 2) - 32) *
+          (5 / 9)
+        ).toFixed(2) + '°C',
+        (
+          (jsonValue[4][2].substring(0, jsonValue[4][2].length - 2) - 32) *
+          (5 / 9)
+        ).toFixed(2) + '°C',
+        jsonValue[4][3],
+      ];
+      return afterConvertValue;
+    }
   };
 
   const convertToFarenheit = async jsonValue => {
-    let afterConvertValue = [null, null, null, null, null];
-    afterConvertValue[0] = jsonValue[0];
-    afterConvertValue[1] =
-      (
-        jsonValue[1].substring(0, jsonValue[1].length - 2) * (9 / 5) +
-        32
-      ).toFixed(2) + '°F';
-    afterConvertValue[2] = jsonValue[2];
-    afterConvertValue[3] =
-      (
-        jsonValue[3].substring(0, jsonValue[3].length - 2) * (9 / 5) +
-        32
-      ).toFixed(2) + '°F';
-    afterConvertValue[4] =
-      (
-        jsonValue[4].substring(0, jsonValue[4].length - 2) * (9 / 5) +
-        32
-      ).toFixed(2) + '°F';
-    return afterConvertValue;
+    if (jsonValue[1].length != 4) {
+      console.log(jsonValue[1].length);
+      let afterConvertValue = [null, null, null, null, null];
+      afterConvertValue[0] = jsonValue[0];
+      afterConvertValue[1] =
+        (
+          jsonValue[1].substring(0, jsonValue[1].length - 2) * (9 / 5) +
+          32
+        ).toFixed(2) + '°F';
+      afterConvertValue[2] = jsonValue[2];
+      afterConvertValue[3] =
+        (
+          jsonValue[3].substring(0, jsonValue[3].length - 2) * (9 / 5) +
+          32
+        ).toFixed(2) + '°F';
+      afterConvertValue[4] =
+        (
+          jsonValue[4].substring(0, jsonValue[4].length - 2) * (9 / 5) +
+          32
+        ).toFixed(2) + '°F';
+      return afterConvertValue;
+    } else {
+      console.log(jsonValue[1].length);
+      let afterConvertValue = [null, null, null, null, null];
+      afterConvertValue[0] = [
+        jsonValue[0][0],
+        (
+          jsonValue[0][1].substring(0, jsonValue[0][1].length - 2) * (9 / 5) +
+          32
+        ).toFixed(2) + '°F',
+        (
+          jsonValue[0][2].substring(0, jsonValue[0][2].length - 2) * (9 / 5) +
+          32
+        ).toFixed(2) + '°F',
+        jsonValue[0][3],
+      ];
+      afterConvertValue[1] = [
+        jsonValue[1][0],
+        (
+          jsonValue[1][1].substring(0, jsonValue[1][1].length - 2) * (9 / 5) +
+          32
+        ).toFixed(2) + '°F',
+        (
+          jsonValue[1][2].substring(0, jsonValue[1][2].length - 2) * (9 / 5) +
+          32
+        ).toFixed(2) + '°F',
+        jsonValue[1][3],
+      ];
+      afterConvertValue[2] = [
+        jsonValue[2][0],
+        (
+          jsonValue[2][1].substring(0, jsonValue[2][1].length - 2) * (9 / 5) +
+          32
+        ).toFixed(2) + '°F',
+        (
+          jsonValue[2][2].substring(0, jsonValue[2][2].length - 2) * (9 / 5) +
+          32
+        ).toFixed(2) + '°F',
+        jsonValue[2][3],
+      ];
+      afterConvertValue[3] = [
+        jsonValue[3][0],
+        (
+          jsonValue[3][1].substring(0, jsonValue[3][1].length - 2) * (9 / 5) +
+          32
+        ).toFixed(2) + '°F',
+        (
+          jsonValue[3][2].substring(0, jsonValue[3][2].length - 2) * (9 / 5) +
+          32
+        ).toFixed(2) + '°F',
+        jsonValue[3][3],
+      ];
+      afterConvertValue[4] = [
+        jsonValue[4][0],
+        (
+          jsonValue[4][1].substring(0, jsonValue[4][1].length - 2) * (9 / 5) +
+          32
+        ).toFixed(2) + '°F',
+        (
+          jsonValue[4][2].substring(0, jsonValue[4][2].length - 2) * (9 / 5) +
+          32
+        ).toFixed(2) + '°F',
+        jsonValue[4][3],
+      ];
+      return afterConvertValue;
+    }
   };
 
   const savedWeather = async value => {
@@ -95,6 +258,164 @@ const Forecast = ({navigation}) => {
       await AsyncStorage.setItem('@weather_Key', jsonValue);
       console.log('Weather Persisted in Cache');
       return jsonValue != null ? setWeather(JSON.parse(jsonValue)) : null;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const savedForecast = async tab => {
+    try {
+      const jsonValue = JSON.stringify(tab);
+      await AsyncStorage.setItem('@forecast_Key', jsonValue);
+      console.log('Forecast Persisted in Cache');
+      return jsonValue != null ? setForecast(JSON.parse(jsonValue)) : null;
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const getForecast = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem('@forecast_Key');
+      const jsonUnit = await AsyncStorage.getItem('@temperature_Key');
+      if (jsonValue == undefined) {
+        console.log('No Forecast Data in Cache');
+      } else {
+        console.log('Retrieved Forecast from Cache');
+      }
+      if (jsonUnit == undefined) {
+        console.log('No Unit in Cache');
+      } else {
+        console.log('Retrieved Unit from Cache');
+      }
+      if (jsonValue != undefined) {
+        if (jsonUnit != undefined) {
+          if (jsonUnit == require('../../assets/icons/profile/celsjus.png')) {
+            if (
+              JSON.parse(jsonValue)[0][1].substring(
+                JSON.parse(jsonValue)[0][1].length - 2,
+              ) == '°C'
+            ) {
+              setForecast(JSON.parse(jsonValue));
+            } else {
+              let newJsonValue = await convertToCelsjus(JSON.parse(jsonValue));
+              setForecast(newJsonValue);
+            }
+          } else {
+            if (
+              JSON.parse(jsonValue)[0][1].substring(
+                JSON.parse(jsonValue)[0][1].length - 2,
+              ) == '°F'
+            ) {
+              setForecast(JSON.parse(jsonValue));
+            } else {
+              let newJsonValue = await convertToFarenheit(
+                JSON.parse(jsonValue),
+              );
+              setForecast(newJsonValue);
+            }
+          }
+        } else {
+          if (
+            JSON.parse(jsonValue)[0][1].substring(
+              JSON.parse(jsonValue)[0][1].length - 2,
+            ) == '°F'
+          ) {
+            let newJsonValue = await convertToCelsjus(JSON.parse(jsonValue));
+            setForecast(newJsonValue);
+          } else {
+            setForecast(JSON.parse(jsonValue));
+          }
+        }
+      } else {
+        if (jsonUnit == require('../../assets/icons/profile/celsjus.png')) {
+          setForecast([
+            [require('../../assets/icons/forecast/sun.png'), '—°C', '—°C', '—'],
+            [
+              require('../../assets/icons/forecast/storm.png'),
+              '—°C',
+              '—°C',
+              '—',
+            ],
+            [
+              require('../../assets/icons/forecast/cloudy.png'),
+              '—°C',
+              '—°C',
+              '—',
+            ],
+            [
+              require('../../assets/icons/forecast/mist.png'),
+              '—°C',
+              '—°C',
+              '—',
+            ],
+            [
+              require('../../assets/icons/forecast/rainy.png'),
+              '—°C',
+              '—°C',
+              '—',
+            ],
+          ]);
+        } else if (
+          jsonUnit == require('../../assets/icons/profile/farenheit.png')
+        ) {
+          setForecast([
+            [require('../../assets/icons/forecast/sun.png'), '—°F', '—°F', '—'],
+            [
+              require('../../assets/icons/forecast/storm.png'),
+              '—°F',
+              '—°F',
+              '—',
+            ],
+            [
+              require('../../assets/icons/forecast/cloudy.png'),
+              '—°F',
+              '—°F',
+              '—',
+            ],
+            [
+              require('../../assets/icons/forecast/mist.png'),
+              '—°F',
+              '—°F',
+              '—',
+            ],
+            [
+              require('../../assets/icons/forecast/rainy.png'),
+              '—°F',
+              '—°F',
+              '—',
+            ],
+          ]);
+        } else {
+          setForecast([
+            [require('../../assets/icons/forecast/sun.png'), '—°C', '—°C', '—'],
+            [
+              require('../../assets/icons/forecast/storm.png'),
+              '—°C',
+              '—°C',
+              '—',
+            ],
+            [
+              require('../../assets/icons/forecast/cloudy.png'),
+              '—°C',
+              '—°C',
+              '—',
+            ],
+            [
+              require('../../assets/icons/forecast/mist.png'),
+              '—°C',
+              '—°C',
+              '—',
+            ],
+            [
+              require('../../assets/icons/forecast/rainy.png'),
+              '—°C',
+              '—°C',
+              '—',
+            ],
+          ]);
+        }
+      }
     } catch (err) {
       console.log(err);
     }
@@ -155,19 +476,13 @@ const Forecast = ({navigation}) => {
         }
       } else {
         if (jsonUnit == require('../../assets/icons/profile/celsjus.png')) {
-          setWeather([weatherImages.sun, '23°C', 'Słońce', '22.6°C', '23.3°C']);
+          setWeather([weatherImages.sun, '—°C', 'Słońce', '—°C', '—°C']);
         } else if (
           jsonUnit == require('../../assets/icons/profile/farenheit.png')
         ) {
-          setWeather([
-            weatherImages.sun,
-            '73.4°F',
-            'Słońce',
-            '72.68°F',
-            '73.94°F',
-          ]);
+          setWeather([weatherImages.sun, '—°F', 'Słońce', '—°F', '—°F']);
         } else {
-          setWeather([weatherImages.sun, '23°C', 'Słońce', '22.6°C', '23.3°C']);
+          setWeather([weatherImages.sun, '—°C', 'Słońce', '—°C', '—°C']);
         }
       }
     } catch (err) {
@@ -192,21 +507,12 @@ const Forecast = ({navigation}) => {
       jsonValue == undefined
         ? console.log('No City in Cache')
         : console.log('Retrieved City from Cache');
-      return jsonValue != null
-        ? setCity(JSON.parse(jsonValue))
-        : setCity('Warszawa');
+      return jsonValue != null ? setCity(JSON.parse(jsonValue)) : setCity('—');
     } catch (err) {
       console.log(err);
     }
   };
 
-  const [weather, setWeather] = useState([
-    require('../../assets/icons/forecast/sun_main.png'),
-    '23°C',
-    'Słońce',
-    '22.6C',
-    '23.3°C',
-  ]);
   const useWeather = async (lat, lon) => {
     let weatherIcon;
     let polishName;
@@ -339,7 +645,6 @@ const Forecast = ({navigation}) => {
     fetchAPI(lat, lon);
   };
 
-  const [city, setCity] = useState('Warszawa');
   const useCity = async (lat, lon) => {
     const fetchAPI = async (lat, lon) => {
       fetch(
@@ -356,6 +661,230 @@ const Forecast = ({navigation}) => {
           const data = getCity();
           setCity(data);
         });
+    };
+
+    fetchAPI(lat, lon);
+  };
+
+  const useForecast = async (lat, lon) => {
+    let polishName = [];
+    let forecastIcon = [];
+    const jsonUnit = await AsyncStorage.getItem('@temperature_Key');
+    const fetchAPI = async (lat, lon) => {
+      if (
+        jsonUnit == undefined ||
+        jsonUnit == require('../../assets/icons/profile/celsjus.png')
+      ) {
+        fetch(
+          `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`,
+        )
+          .then(res => res.json())
+          .then(res => {
+            switchForecast([
+              res.list[0].weather[0].main,
+              res.list[1].weather[0].main,
+              res.list[2].weather[0].main,
+              res.list[3].weather[0].main,
+              res.list[4].weather[0].main,
+            ]);
+            savedForecast([
+              [
+                forecastIcon[0],
+                res.list[0].main.temp_min + '°C',
+                res.list[0].main.temp_max + '°C',
+                polishName[0],
+              ],
+              [
+                forecastIcon[1],
+                res.list[1].main.temp_min + '°C',
+                res.list[1].main.temp_max + '°C',
+                polishName[1],
+              ],
+              [
+                forecastIcon[2],
+                res.list[2].main.temp_min + '°C',
+                res.list[2].main.temp_max + '°C',
+                polishName[2],
+              ],
+              [
+                forecastIcon[3],
+                res.list[3].main.temp_min + '°C',
+                res.list[3].main.temp_max + '°C',
+                polishName[3],
+              ],
+              [
+                forecastIcon[4],
+                res.list[4].main.temp_min + '°C',
+                res.list[4].main.temp_max + '°C',
+                polishName[4],
+              ],
+            ]);
+            setForecast([
+              [
+                forecastIcon[0],
+                res.list[0].main.temp_min + '°C',
+                res.list[0].main.temp_max + '°C',
+                polishName[0],
+              ],
+              [
+                forecastIcon[1],
+                res.list[1].main.temp_min + '°C',
+                res.list[1].main.temp_max + '°C',
+                polishName[1],
+              ],
+              [
+                forecastIcon[2],
+                res.list[2].main.temp_min + '°C',
+                res.list[2].main.temp_max + '°C',
+                polishName[2],
+              ],
+              [
+                forecastIcon[3],
+                res.list[3].main.temp_min + '°C',
+                res.list[3].main.temp_max + '°C',
+                polishName[3],
+              ],
+              [
+                forecastIcon[4],
+                res.list[4].main.temp_min + '°C',
+                res.list[4].main.temp_max + '°C',
+                polishName[4],
+              ],
+            ]);
+          })
+          .catch(err => {
+            console.log(err);
+            const data = getForecast();
+            setForecast(data);
+          });
+      } else {
+        fetch(
+          `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=imperial`,
+        )
+          .then(res => res.json())
+          .then(res => {
+            console.log(res.list[0].weather[0].main);
+            switchForecast([
+              res.list[0].weather[0].main,
+              res.list[1].weather[0].main,
+              res.list[2].weather[0].main,
+              res.list[3].weather[0].main,
+              res.list[4].weather[0].main,
+            ]);
+            savedForecast([
+              [
+                forecastIcon[0],
+                res.list[0].main.temp_min + '°F',
+                res.list[0].main.temp_max + '°F',
+                polishName[0],
+              ],
+              [
+                forecastIcon[1],
+                res.list[1].main.temp_min + '°F',
+                res.list[1].main.temp_max + '°F',
+                polishName[1],
+              ],
+              [
+                forecastIcon[2],
+                res.list[2].main.temp_min + '°F',
+                res.list[2].main.temp_max + '°F',
+                polishName[2],
+              ],
+              [
+                forecastIcon[3],
+                res.list[3].main.temp_min + '°F',
+                res.list[3].main.temp_max + '°F',
+                polishName[3],
+              ],
+              [
+                forecastIcon[4],
+                res.list[4].main.temp_min + '°F',
+                res.list[4].main.temp_max + '°F',
+                polishName[4],
+              ],
+            ]);
+            setForecast([
+              [
+                forecastIcon[0],
+                res.list[0].main.temp_min + '°F',
+                res.list[0].main.temp_max + '°F',
+                polishName[0],
+              ],
+              [
+                forecastIcon[1],
+                res.list[1].main.temp_min + '°F',
+                res.list[1].main.temp_max + '°F',
+                polishName[1],
+              ],
+              [
+                forecastIcon[2],
+                res.list[2].main.temp_min + '°F',
+                res.list[2].main.temp_max + '°F',
+                polishName[2],
+              ],
+              [
+                forecastIcon[3],
+                res.list[3].main.temp_min + '°F',
+                res.list[3].main.temp_max + '°F',
+                polishName[3],
+              ],
+              [
+                forecastIcon[4],
+                res.list[4].main.temp_min + '°F',
+                res.list[4].main.temp_max + '°F',
+                polishName[4],
+              ],
+            ]);
+          })
+          .catch(err => {
+            console.log(err);
+            const data = getForecast();
+            setForecast(data);
+          });
+      }
+    };
+
+    const switchForecast = async param => {
+      try {
+        for (let i = 0; i < param.length; i++) {
+          switch (param[i]) {
+            case 'Mist':
+              forecastIcon.push(forecastImages.mist);
+              polishName.push('Mgła');
+              break;
+            case 'Rain':
+              forecastIcon.push(forecastImages.rain);
+              polishName.push('Deszcz');
+              break;
+            case 'Sun':
+              forecastIcon.push(forecastImages.sun);
+              polishName.push('Słońce');
+              break;
+            case 'Drizzle':
+              forecastIcon.push(forecastImages.rain);
+              polishName.push('Mżawka');
+              break;
+            case 'Snow':
+              forecastIcon.push(forecastImages.snow);
+              polishName.push('Śnieg');
+              break;
+            case 'Clouds':
+              forecastIcon.push(forecastImages.cloud);
+              polishName.push('Chmury');
+              break;
+            case 'Haze':
+              forecastIcon.push(forecastImages.mist);
+              polishName.push('Lekka mgła');
+              break;
+            case 'Clear':
+              forecastIcon.push(forecastImages.sun);
+              polishName.push('Czyste niebo');
+              break;
+          }
+        }
+      } catch (err) {
+        console.log(err);
+      }
     };
 
     fetchAPI(lat, lon);
@@ -378,6 +907,7 @@ const Forecast = ({navigation}) => {
         console.log('Acquired access');
         Geolocation.getCurrentPosition(
           position => {
+            useForecast(position.coords.latitude, position.coords.longitude);
             useCity(position.coords.latitude, position.coords.longitude);
             useWeather(position.coords.latitude, position.coords.longitude);
             console.log(position.coords.latitude, position.coords.longitude);
@@ -393,7 +923,6 @@ const Forecast = ({navigation}) => {
     }
   };
 
-  const [week, setWeek] = useState([]);
   const next7days = async () => {
     try {
       let today = new Date();
@@ -421,8 +950,6 @@ const Forecast = ({navigation}) => {
     }
   };
 
-  const [inputCity, setInputCity] = useState(null);
-  const [modal, setModal] = useState(false);
   const useOwnCity = async () => {
     try {
       console.log(inputCity);
@@ -431,13 +958,17 @@ const Forecast = ({navigation}) => {
       )
         .then(res => res.json())
         .then(res => {
-          console.log(res);
+          useForecast(res.coord.lat, res.coord.lon);
           useWeather(res.coord.lat, res.coord.lon);
           savedCity(res.name);
           setCity(res.name);
         })
         .catch(err => {
           console.log(err);
+          Alert.alert(
+            'Miasto o takiej nazwie nie istnieje!',
+            'Sprawdź czy nie zrobiłeś literówki i wprowadź rejon ponownie',
+          );
         });
     } catch (err) {
       Alert.alert(
@@ -449,10 +980,12 @@ const Forecast = ({navigation}) => {
   };
 
   useEffect(() => {
+    getForecast();
     getWeather();
     getCity();
     next7days();
-  }, []);
+    setLoading(false);
+  }, [isFocused]);
 
   return (
     <Layout>
@@ -461,148 +994,130 @@ const Forecast = ({navigation}) => {
           source={require('../../assets/images/forecast_background.jpg')}
           resizeMode="cover"
           style={styles.bgImage}>
-          <ForecastView>
-            <ForecastOptions>
-              <TouchableOpacity onPress={() => useLocalisation()}>
-                <Image
-                  source={require('../../assets/icons/forecast/location.png')}
-                  style={styles.gapForMenu}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => setModal(!modal)}>
-                <Image
-                  source={require('../../assets/icons/forecast/edit_location.png')}
-                />
-              </TouchableOpacity>
-            </ForecastOptions>
-            <ForecastMain>
-              <Text style={styles.h2}>{city}</Text>
-              <Image source={weather[0]} />
-              <Text style={styles.h2}>{weather[1]}</Text>
-              <Text style={styles.h3}>{weather[2]}</Text>
-              <Text style={styles.h3}>
-                Min. {weather[3]} Max. {weather[4]}
-              </Text>
-              <ForecastTable>
-                <ForecastTr>
+          {!loading ? (
+            <ForecastView>
+              <ForecastOptions>
+                <TouchableOpacity onPress={() => useLocalisation()}>
                   <Image
-                    source={require('../../assets/icons/forecast/calendar_month.png')}
+                    source={require('../../assets/icons/forecast/location.png')}
+                    style={styles.gapForMenu}
                   />
-                  <Text style={styles.h4}>PROGNOZA (7 DNI)</Text>
-                </ForecastTr>
-                <Separator></Separator>
-                <ForecastTr>
-                  <Text style={styles.h5}>{week[0]}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => setModal(!modal)}>
                   <Image
-                    source={require('../../assets/icons/forecast/sun.png')}
+                    source={require('../../assets/icons/forecast/edit_location.png')}
                   />
+                </TouchableOpacity>
+              </ForecastOptions>
+              <ForecastMain>
+                <Text style={styles.h2}>{city}</Text>
+                <Image source={weather[0]} />
+                <Text style={styles.h2}>{weather[1]}</Text>
+                <Text style={styles.h3}>{weather[2]}</Text>
+                <Text style={styles.h3}>
+                  Min. {weather[3]} Max. {weather[4]}
+                </Text>
+                <ForecastTable>
+                  <ForecastTr>
+                    <Image
+                      source={require('../../assets/icons/forecast/calendar_month.png')}
+                    />
+                    <Text style={styles.h4}>PROGNOZA 5-DNIOWA</Text>
+                  </ForecastTr>
+                  <Separator></Separator>
+                  <ForecastTr>
+                    <Text style={styles.h5}>{week[0]}</Text>
+                    <Image source={forecast[0][0]} />
 
-                  <ForecastTd>
-                    <Text style={styles.h6}>Min. 12° Max. 24°</Text>
-                    <Text style={styles.h6}>Słońce</Text>
-                  </ForecastTd>
-                </ForecastTr>
-                <ForecastTr>
-                  <Text style={styles.h5}>{week[1]}</Text>
+                    <ForecastTd>
+                      <Text style={styles.h6}>
+                        Min. {forecast[0][1]} Max. {forecast[0][2]}
+                      </Text>
+                      <Text style={styles.h6}>{forecast[0][3]}</Text>
+                    </ForecastTd>
+                  </ForecastTr>
+                  <ForecastTr>
+                    <Text style={styles.h5}>{week[1]}</Text>
 
-                  <Image
-                    source={require('../../assets/icons/forecast/cloudy.png')}
-                  />
-                  <ForecastTd>
-                    <Text style={styles.h6}>Min. 16° Max. 25°</Text>
-                    <Text style={styles.h6}>Chmury</Text>
-                  </ForecastTd>
-                </ForecastTr>
-                <ForecastTr>
-                  <Text style={styles.h5}>{week[2]}</Text>
-                  <Image
-                    source={require('../../assets/icons/forecast/sun.png')}
-                  />
+                    <Image source={forecast[1][0]} />
+                    <ForecastTd>
+                      <Text style={styles.h6}>
+                        Min. {forecast[1][1]} Max. {forecast[1][2]}
+                      </Text>
+                      <Text style={styles.h6}>{forecast[1][3]}</Text>
+                    </ForecastTd>
+                  </ForecastTr>
+                  <ForecastTr>
+                    <Text style={styles.h5}>{week[2]}</Text>
+                    <Image source={forecast[2][0]} />
 
-                  <ForecastTd>
-                    <Text style={styles.h6}>Min. 22° Max. 32°</Text>
-                    <Text style={styles.h6}>Słońce</Text>
-                  </ForecastTd>
-                </ForecastTr>
-                <ForecastTr>
-                  <Text style={styles.h5}>{week[3]}</Text>
+                    <ForecastTd>
+                      <Text style={styles.h6}>
+                        Min. {forecast[2][1]} Max. {forecast[2][2]}
+                      </Text>
+                      <Text style={styles.h6}>{forecast[2][3]}</Text>
+                    </ForecastTd>
+                  </ForecastTr>
+                  <ForecastTr>
+                    <Text style={styles.h5}>{week[3]}</Text>
 
-                  <Image
-                    source={require('../../assets/icons/forecast/sun.png')}
-                  />
-                  <ForecastTd>
-                    <Text style={styles.h6}>Min. 23° Max. 36°</Text>
-                    <Text style={styles.h6}>Słońce</Text>
-                  </ForecastTd>
-                </ForecastTr>
-                <ForecastTr>
-                  <Text style={styles.h5}>{week[4]}</Text>
-                  <Image
-                    source={require('../../assets/icons/forecast/storm.png')}
-                  />
+                    <Image source={forecast[3][0]} />
+                    <ForecastTd>
+                      <Text style={styles.h6}>
+                        Min. {forecast[3][1]} Max. {forecast[3][2]}
+                      </Text>
+                      <Text style={styles.h6}>{forecast[3][3]}</Text>
+                    </ForecastTd>
+                  </ForecastTr>
+                  <ForecastTr>
+                    <Text style={styles.h5}>{week[4]}</Text>
+                    <Image source={forecast[4][0]} />
 
-                  <ForecastTd>
-                    <Text style={styles.h6}>Min. 21° Max. 30°</Text>
-                    <Text style={styles.h6}>Burza</Text>
-                  </ForecastTd>
-                </ForecastTr>
-                <ForecastTr>
-                  <Text style={styles.h5}>{week[5]}</Text>
-
-                  <Image
-                    source={require('../../assets/icons/forecast/rainy.png')}
-                  />
-                  <ForecastTd>
-                    <Text style={styles.h6}>Min. 16° Max. 29°</Text>
-                    <Text style={styles.h6}>Deszcz</Text>
-                  </ForecastTd>
-                </ForecastTr>
-                <ForecastTr>
-                  <Text style={styles.h5}>{week[6]}</Text>
-
-                  <Image
-                    source={require('../../assets/icons/forecast/cloudy.png')}
-                  />
-                  <ForecastTd>
-                    <Text style={styles.h6}>Min. 19° Max. 30°</Text>
-                    <Text style={styles.h6}>Chmury</Text>
-                  </ForecastTd>
-                </ForecastTr>
-              </ForecastTable>
-              {modal && (
-                <Modal
-                  animationType="fade"
-                  transparent={true}
-                  visible={modal}
-                  onRequestClose={() => {
-                    setModal(!modal);
-                  }}>
-                  <View style={styles.modalContainer}>
-                    <View style={styles.modalCityContent}>
-                      <ForecastTr>
-                        <Text style={styles.h4_bold}>Wpisz miasto</Text>
-                      </ForecastTr>
-                      <InputBox>
-                        <TextInput
-                          style={styles.h4}
-                          onChangeText={setInputCity}
-                          placeholder="Warszawa"
-                        />
-                      </InputBox>
-                      <ForecastTr>
-                        <ModalButton onPress={() => setModal(!modal)}>
-                          <Text style={styles.body}>Wróć</Text>
-                        </ModalButton>
-                        <ModalButton onPress={() => useOwnCity()}>
-                          <Text style={styles.body}>Wybierz</Text>
-                        </ModalButton>
-                      </ForecastTr>
+                    <ForecastTd>
+                      <Text style={styles.h6}>
+                        Min. {forecast[4][1]} Max. {forecast[4][2]}
+                      </Text>
+                      <Text style={styles.h6}>{forecast[4][3]}</Text>
+                    </ForecastTd>
+                  </ForecastTr>
+                </ForecastTable>
+                {modal && (
+                  <Modal
+                    animationType="fade"
+                    transparent={true}
+                    visible={modal}
+                    onRequestClose={() => {
+                      setModal(!modal);
+                    }}>
+                    <View style={styles.modalContainer}>
+                      <View style={styles.modalCityContent}>
+                        <ForecastTr>
+                          <Text style={styles.h4_bold}>Wpisz miasto</Text>
+                        </ForecastTr>
+                        <InputBox>
+                          <TextInput
+                            style={styles.h4}
+                            onChangeText={setInputCity}
+                            placeholder="Warszawa"
+                          />
+                        </InputBox>
+                        <ForecastTr>
+                          <ModalButton onPress={() => setModal(!modal)}>
+                            <Text style={styles.body}>Wróć</Text>
+                          </ModalButton>
+                          <ModalButton onPress={() => useOwnCity()}>
+                            <Text style={styles.body}>Wybierz</Text>
+                          </ModalButton>
+                        </ForecastTr>
+                      </View>
                     </View>
-                  </View>
-                </Modal>
-              )}
-            </ForecastMain>
-          </ForecastView>
+                  </Modal>
+                )}
+              </ForecastMain>
+            </ForecastView>
+          ) : (
+            <Text>Poczekaj, aktualizujemy dla ciebie pogodę</Text>
+          )}
         </ImageBackground>
       </OuterContainer>
     </Layout>

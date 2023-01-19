@@ -11,6 +11,14 @@ import OnboardingScreen from './src/components/Onboarding/OnboardingScreens.js';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import MyPlant from './src/components/MyPlant/MyPlant.js';
 import ScrollableTabBar from './src/components/PlantHistory/ScrollableTabBar.tsx';
+import SQLite from 'react-native-sqlite-storage';
+SQLite.DEBUG(true);
+SQLite.enablePromise(false);
+
+export const db = SQLite.openDatabase({
+  name: 'plantsSQLite.db',
+  createFromLocation: 1,
+});
 
 const Main = createNativeStackNavigator();
 

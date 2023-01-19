@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   TabView,
   TabBar,
@@ -17,8 +17,8 @@ type State = NavigationState<{
 }>;
 
 const ScrollableTabBar = ({route}) => {
-  const [index, onIndexChange] = React.useState(1);
-  const [routes] = React.useState([
+  const [index, onIndexChange] = useState(1);
+  const [routes] = useState([
     {key: 'livedata', title: 'Bieżące odczyty', params: route.params},
     {key: 'planthistory', title: 'Wykresy historyczne', params: route.params},
   ]);
