@@ -184,9 +184,11 @@ const deleteConnectionPlantSensor = async peripheralId => {
     console.log('PlantSensor');
     console.log(PlantSensor);
     console.log('result');
-    console.log(result[0][1]);
+    console.log(result);
 
-    remove(result[0][0]);
+    if (result.length > 0) {
+      remove(result[0][0]);
+    }
   } catch (e) {
     console.warn('ERROR: Delleting connection', e);
     return false;
