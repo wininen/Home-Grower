@@ -55,6 +55,7 @@ const MyPlants = ({route, navigation}) => {
         production: [],
         category: [],
         image: [],
+        plantId: [],
       };
       await db.transaction(txn => {
         txn.executeSql(
@@ -68,6 +69,7 @@ const MyPlants = ({route, navigation}) => {
                 if (key == 'id') {
                   // console.log(key, value);
                   plants_id.id.push(value);
+                  another.plantId.push(value);
                 } else if (key == 'plant_genus_id') {
                   plants_id.plant_genus_id.push(value);
                 } else if (key == 'origin') {
@@ -102,6 +104,7 @@ const MyPlants = ({route, navigation}) => {
           plagenus: ['Produkcja:', details.production[index]],
           repoid: ['Kategoria:', details.category[index]],
           name: ['Nazwa:', item],
+          plantId: ['Id:', details.plantId[index]],
         })
       }>
       <PlantsAfterElement>
