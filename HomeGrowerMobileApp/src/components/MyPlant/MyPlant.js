@@ -79,7 +79,10 @@ const MyPlant = props => {
     console.log('asigning!!!');
     if (peripheralFound == false) {
       setActive(false);
-      setSensorListConnected(await storage.getAllSensorData());
+      const sensors = await storage.getAllAvailableSensors();
+      console.log('AVAILABLE SENSORS ');
+      console.log(sensors);
+      setSensorListConnected(await storage.getAllAvailableSensors());
       console.log('czujniki');
       console.log(await storage.getAllSensorData());
       setModal(true);
@@ -255,7 +258,7 @@ const MyPlant = props => {
     console.log(
       'Tutaj wrzucamy zwracamy id naszego sensora jeśli połączenie z czujnikiem istnieje',
     );
-    const key = '@' + plantId[1];
+    const key = '!' + plantId[1];
     console.log(key);
     const result = await storage.get(key);
     console.log(result);
@@ -268,7 +271,7 @@ const MyPlant = props => {
 
   const pushSensorConnection = async peripheralId => {
     console.log('Tutaj wrzucamy nasz sensor i id roslinki do tabeli połączeń');
-    const key = '@' + plantId[1];
+    const key = '!' + plantId[1];
     const peripheral = await storage.getObject(peripheralId);
     console.log(key, peripheral);
     await storage.set(key, peripheralId);
@@ -276,7 +279,7 @@ const MyPlant = props => {
 
   const disconnectSensor = async () => {
     console.log('Tutaj odłączamy sensor od rosliny');
-    const key = '@' + plantId[1];
+    const key = '!' + plantId[1];
     console.log('hhhhhh');
     const peripheralId = await storage.get(key);
     console.log('hhhhhh');
