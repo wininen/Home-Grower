@@ -6,13 +6,13 @@
         "production": "Chiny",
         "category": "Crassulaceae, Echeveria",
         "blooming": "roślina kaktusowata, czasami kwitnie nie krótki okres czasu",
-        "color": "kolor liści: blue zielony\uff0ci will turn różowyprzy dłuższej ekspozycji na światło"
+        "color": "kolor liści:niebieski zielony\uff0ci will turn różowyprzy dłuższej ekspozycji na światło"
     },
     "display_pid": "Echeveria simulans Ascension",
     "maintenance": {
         "size": "średnica: 3-10cm\uff0cwysokość: 5-15cm",
         "soil": "mieszanka torfu i perlitu w proporcji 3:1",
-        "sunlight": "lubi światło, odporna na półcień\uff0ctemporary dormancy latem, lubi wilgoć half shade",
+        "sunlight": "lubi światło, odporna na półcień\uff0ctemporary dormancy latem, lubi wilgoć półcień",
         "watering": "podlewaj obficie, gdy powierzchnia gleby wyschnie",
         "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, wiosną i jesienią stosować raz w miesiącu",
         "pruning": "usuń łodygę kwiatu po przekwitnięciu, od czasu do czasu usuwaj martwe tkanki"

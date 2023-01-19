@@ -6,16 +6,16 @@
         "production": "Yunnan",
         "category": "Crassulaceae, Kalanchoe",
         "blooming": "okres kwitnienia: styczeń-sierpień, widoczne przez 3-4 tygodnie",
-        "color": "kolor kwiatów: czerwony, różowy, żółty, pomarańczowy, pure biały"
+        "color": "kolor kwiatów: czerwony, różowy, żółty, pomarańczowy, biały"
     },
     "display_pid": "Kalanchoe blossfeldiana",
     "maintenance": {
         "size": "średnica: 10 cm, wysokość: 10-50 cm",
         "soil": "80% perlit + 20% perlite",
         "sunlight": "lubi światło słoneczne, nie lubi bardzo silnego światła, potrzebuje about 4-6 hours sunlight every day",
-        "watering": "odporna na susze, water thoroughly every 4-5 dni latem, water thoroughly every 8-10 dni in winter",
+        "watering": "odporna na susze, podlewaj obficie co4-5 dni latem, podlewaj obficie co8-10 dni in winter",
         "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, stosuj 1-2 razy w miesiącu",
-        "pruning": "Remove diseased, żółtying i dropping leaves, pinching 1-2 times, germinate more branched"
+        "pruning": "od czasu do czasu usuwaj martwe tkanki oraz liście"
     },
     "parameter": {
         "max_light_mmol": 6400,

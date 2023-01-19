@@ -5,14 +5,14 @@
         "origin": "Chiny",
         "production": "południe Chin",
         "category": "Apocynaceae, Amsonia",
-        "blooming": "okres kwitnienia: June",
-        "color": "kolor kwiatów: blue"
+        "blooming": "okres kwitnienia: czerwiec",
+        "color": "kolor kwiatów:niebieski"
     },
     "display_pid": "Amsonia x",
     "maintenance": {
         "size": "średnica: 10 cm, wysokość: 15-18 cm",
         "soil": "przepuszczalna gleba albo gleba ze specjalnymi wymaganiami",
-        "sunlight": "Resistant to shade, przenieś na stanowisko bardziej zacienione",
+        "sunlight": "przenieś na stanowisko bardziej zacienione",
         "watering": "podlewaj obficie po wyschnięciu gleby, unikaj wody wysokomineralizowanej",
         "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, stosuj 1-2 razy w miesiącu",
         "pruning": "od czasu do czasu usuwaj martwe tkanki"

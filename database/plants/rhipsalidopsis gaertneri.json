@@ -5,14 +5,14 @@
         "origin": "Meksyk",
         "production": "Chiny",
         "category": "Cactaceae",
-        "blooming": "Succulent plant\uff0cokres kwitnienia: March-kwiecień",
-        "color": "kolor liści: zielony i liść: margin is czerwony"
+        "blooming": "Succulent plant, okres kwitnienia: March-kwiecień",
+        "color": "kolor liści: zielony liść: brzeg jest czerwony"
     },
     "display_pid": "Rhipsalidopsis gaertneri",
     "maintenance": {
-        "size": "średnica:10cm\uff0cwysokość:15cm",
+        "size": "średnica:10cm, wysokość:15cm",
         "soil": "perlit albo gleba ze specjalnymi wymaganiami",
-        "sunlight": "Enjoy mild sunlightodporna na półcień\uff0cavoid direct light during summer dormancy",
+        "sunlight": "lubi półcień i rozproszone światło, unikaj wystawienia na bezpośrednie słońce",
         "watering": "odporna na susze, podlewaj obficie, gdy powierzchnia gleby wyschnie",
         "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, wiosną i jesienią stosować raz w miesiącu",
         "pruning": "usuń łodygę kwiatu po przekwitnięciu, od czasu do czasu usuwaj martwe tkanki"

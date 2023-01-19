@@ -5,12 +5,12 @@
         "origin": "południe Afryki",
         "production": "Chiny",
         "category": "Scilloideae, Albuca",
-        "blooming": "roślina kaktusowata, czasami kwitnie nie krótki okres czasu\uff0c\u82b1\u9ec4\u8272",
-        "color": "kolor liści: zielony\uff0cwill open flower with sufficient sunlight"
+        "blooming": "roślina kaktusowata, czasami kwitnie przez krótki okres czasu",
+        "color": "kolor liści: zielony, dzięki dostępowi do dużej ilości światła zakwitnie"
     },
     "display_pid": "Albuca namaquensis",
     "maintenance": {
-        "size": "średnica: 3-10cm\uff0cwysokość: 5-35cm",
+        "size": "średnica: 3-10cm, wysokość: 5-35cm",
         "soil": "mieszanka torfu i perlitu w proporcji 3:1",
         "sunlight": "Like sunlight, avoid strong direct light latem dormancy",
         "watering": "podlewaj obficie, gdy powierzchnia gleby wyschnie",

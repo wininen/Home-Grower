@@ -5,14 +5,14 @@
         "origin": "East Afryka",
         "production": "Chiny",
         "category": "Gesneriaceae, Saintpaulia",
-        "blooming": "okres kwitnienia: year around",
+        "blooming": "okres kwitnienia: cały rok",
         "color": "kolor kwiatów: fioletowy, biały, różowy"
     },
     "display_pid": "Saintpaulia ionantha",
     "maintenance": {
         "size": "średnica: 10 cm, wysokość: 10 cm",
-        "soil": "Likes loose i breathable soil, perlit with some perlite",
-        "sunlight": "Like adequate sunlight in winter, najlepiej czuje się na bardzo jasnych stanowiskach latem",
+        "soil": "lubi przepuszczalne podłoże",
+        "sunlight": "lubi rozproszone światło zimą, najlepiej czuje się na bardzo jasnych stanowiskach latem",
         "watering": "podlewaj obficie, gdy ziemia wyschnie",
         "fertilization": "potrzebuje wysokiej wartości właściwości odżywczych gleby, pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, stosuj 1-2 razy w miesiącu",
         "pruning": "od czasu do czasu usuwaj martwe tkanki"

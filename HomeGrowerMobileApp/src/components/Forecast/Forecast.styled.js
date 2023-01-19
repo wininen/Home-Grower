@@ -26,13 +26,13 @@ export const ForecastMain = styled.View`
   align-items: center;
   flex-direction: column;
   justify-content: center;
+  padding: 20px 0;
 `;
 
 export const ForecastTable = styled.View`
   padding: 5px 0;
   margin-top: 12%;
-  width: 70%;
-  background: rgba(33, 33, 33, 0.12);
+  width: 100%;
   display: flex;
   flex-direction: column;
 `;
@@ -40,7 +40,7 @@ export const ForecastTable = styled.View`
 export const ForecastTr = styled.View`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   margin: 10px 20px;
   align-items: center;
 `;

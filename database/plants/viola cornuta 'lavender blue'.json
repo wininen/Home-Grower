@@ -1,14 +1,14 @@
 {
-    "pid": "viola cornuta 'lavender blue'",
+    "pid": "viola cornuta 'lavenderniebieski'",
     "basic": {
         "floral_language": "",
         "origin": " północern Europe",
         "production": "Chiny",
         "category": "Violaceae, Viola",
-        "blooming": "okres kwitnienia: year around",
-        "color": "kolor kwiatów: blue i fioletowy"
+        "blooming": "okres kwitnienia: cały rok",
+        "color": "kolor kwiatów:niebieski i fioletowy"
     },
-    "display_pid": "Viola cornuta 'Lavender Blue'",
+    "display_pid": "Viola cornuta 'Lavenderniebieski'",
     "maintenance": {
         "size": "średnica: 10 cm, wysokość: 15 cm",
         "soil": "przepuszczalna gleba albo gleba ze specjalnymi wymaganiami",

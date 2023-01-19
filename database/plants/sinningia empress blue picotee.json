@@ -1,18 +1,18 @@
 {
-    "pid": "sinningia empress blue picotee",
+    "pid": "sinningia empressniebieski picotee",
     "basic": {
         "floral_language": "",
         "origin": "Brazylia",
         "production": "Chiny",
         "category": "Gesneriaceae, Sinningia",
         "blooming": "okres kwitnienia: in wiosną i jesienią",
-        "color": "kolor kwiatów: blue"
+        "color": "kolor kwiatów:niebieski"
     },
-    "display_pid": "Sinningia Empress Blue Picotee",
+    "display_pid": "Sinningia Empressniebieski Picotee",
     "maintenance": {
         "size": "średnica: 10 cm, wysokość: 15 cm",
         "soil": "lekko kwaśne PH przepuszczalna gleba albo gleba ze specjalnymi wymaganiami",
-        "sunlight": "lubi półcień, grows in places with scatteczerwony light albo shade properly, avoid direct light",
+        "sunlight": "lubi półcień, unikaj bezpośredniego światła",
         "watering": "podlewaj obficie po wyschnięciu gleby, unikaj wody wysokomineralizowanej",
         "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, stosuj 1-2 razy w miesiącu",
         "pruning": "od czasu do czasu usuwaj martwe tkanki oraz liście, które Ci się nie podobają"

@@ -1,19 +1,19 @@
 {
     "pid": "phalaenopsis",
     "basic": {
-        "floral_language": "Phalaenopsis\nFloriography: elegant, quiet, wise\nPhalaenopsis amabilis has beautiful kwiaty like butterflies in serene tropical rainforests, one of the three national kwiaty in Indonesia.\nPhalaenopsis amabilis has a graceful looking with various kolor kwiatów:s, biały aerial roots surround leaves i butterfly-like kwiaty.\nPhalaenopsis amabilis blooms normally in styczeń-February for more than 1-2 miesiące. With modern regulation techniques, Phalaenopsis amabilis can flower year around.",
+        "floral_language": "Phalaenopsis\nFloriography: elegant, quiet, wise\nPhalaenopsis amabilis has beautiful kwiaty like butterflies in serene tropical rainforests, one of the three national kwiaty in Indonesia.\nPhalaenopsis amabilis has a graceful looking with various kolor kwiatów:s, biały aerial roots surround leaves i butterfly-like kwiaty.\nPhalaenopsis amabilis blooms normally in styczeń-February for more than 1-2 miesiące. With modern regulation techniques, Phalaenopsis amabilis can flower cały rok.",
         "origin": "Holli",
         "production": "Yunnan",
         "category": "Orchidaceae, Phalaenopsis",
         "blooming": "okres kwitnienia: styczeń-lipiec, widoczne przez up to 1-2 miesiące",
-        "color": "kolor kwiatów: light fioletowyprzylistek  różowy, żółty, pure biały"
+        "color": "kolor kwiatów: light fioletowyprzylistek  różowy, żółty, biały"
     },
     "display_pid": "Phalaenopsis",
     "maintenance": {
         "size": "średnica: 10 cm, wysokość: 16-30 cm",
         "soil": "In mech torfowy, wymieniaj raz w roku",
         "sunlight": "Before flowering put under gentle sunlight, unikaj bezpośredniego i silnego światła, when flowering przenieś na stanowisko bardziej zacienione",
-        "watering": "Water thoroughly every 5-7 dni, may water by put the soil in water, may spray water in the air latem",
+        "watering": "podlewaj obficie co5-7 dni, may water by put the soil in water, may spray water in the air latem",
         "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, stosuj 1-2 razy w miesiącu, z wyjątkiem czasu kwitnięcia",
         "pruning": "usuwaj uschnięte kwiaty i diseased leaves; usuwaj szypułkę po kwitnięciu, except the 2-3 segments at the bottom of peduncle, about 10cm"
     },

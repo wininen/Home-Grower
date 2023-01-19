@@ -49,6 +49,45 @@ export const SpecsContainer = styled.View`
   padding: 10px;
 `;
 
+export const ConnectToPlantButton = styled.TouchableOpacity`
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  background-color: #2fa84e;
+  border-radius: 25px;
+  height: 40px;
+  width: 150px;
+  margin: 0 auto;
+`;
+
+export const FirstRowButtonWrapper = styled.View`
+  /* padding-right: 50px;
+  padding-left: 50px; */
+  margin-left: 20px;
+  margin-right: 20px;
+  align-items: center;
+  flex-direction: row;
+  /* justify-content: flex-start; */
+  justify-content: space-between;
+`;
+
+export const Icon = styled.TouchableOpacity`
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+`;
+
+export const ScrollableList = styled.ScrollView`
+  flex: 1;
+`;
+
+export const SensorsList = styled.View`
+  flex: 1;
+  display: flex;
+  height: 300px;
+  width: 200px;
+`;
+
 export const isValueInRangeStyle = function (leftBorder, rightBorder, value) {
   if (value >= leftBorder && value <= rightBorder) {
     return {
