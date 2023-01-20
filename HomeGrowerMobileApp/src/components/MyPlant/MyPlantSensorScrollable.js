@@ -1,6 +1,6 @@
 import React from 'react';
 import {Text, TouchableOpacity} from 'react-native';
-import {SensorButton, SensorRow, Icon} from './MyPlantSensorScrollable.styled';
+import {SensorButton, SensorRow} from './MyPlantSensorScrollable.styled';
 
 export const ConnectedSensor = ({item, connect}) => {
   const {id} = item;
