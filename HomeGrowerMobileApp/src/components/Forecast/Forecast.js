@@ -47,6 +47,7 @@ const weatherImages = {
   snow: 'http://openweathermap.org/img/wn/13d@2x.png',
   cloud: 'http://openweathermap.org/img/wn/03d@2x.png',
   moon: 'http://openweathermap.org/img/wn/01n@2x.png',
+  fog: 'http://openweathermap.org/img/wn/50d@2x.png',
   bgImage: require('../../assets/images/weatherBackground.jpg'),
 };
 
@@ -161,7 +162,6 @@ const Forecast = ({navigation}) => {
 
   const convertToFarenheit = async jsonValue => {
     if (jsonValue[1].length != 4) {
-      console.log(jsonValue[1].length);
       let afterConvertValue = [null, null, null, null, null];
       afterConvertValue[0] = jsonValue[0];
       afterConvertValue[1] =
@@ -182,7 +182,6 @@ const Forecast = ({navigation}) => {
         ).toFixed(2) + '°F';
       return afterConvertValue;
     } else {
-      console.log(jsonValue[1].length);
       let afterConvertValue = [null, null, null, null, null];
       afterConvertValue[0] = [
         jsonValue[0][0],
@@ -463,16 +462,7 @@ const Forecast = ({navigation}) => {
         )
           .then(res => res.json())
           .then(res => {
-            console.log(
-              res['weather'][0].main,
-              res['main'].temp,
-              '°C',
-              res['main'].temp_min,
-              '°C',
-              res['main'].temp_max,
-              '°C',
-              res['weather'][0].icon,
-            );
+            console.log(res['weather'][0].main);
             switchWeather(res['weather'][0].main);
             savedWeather([
               weatherIcon,
@@ -500,15 +490,6 @@ const Forecast = ({navigation}) => {
         )
           .then(res => res.json())
           .then(res => {
-            console.log(
-              res['weather'][0].main,
-              res['main'].temp,
-              '°F',
-              res['main'].temp_min,
-              '°F',
-              res['main'].temp_max,
-              '°F',
-            );
             switchWeather(res['weather'][0].main);
             savedWeather([
               weatherIcon,
@@ -539,7 +520,7 @@ const Forecast = ({navigation}) => {
         switch (param) {
           case 'Mist':
             weatherIcon = weatherImages.mist;
-            polishName = 'Mgła';
+            polishName = 'Lekka mgła';
             break;
           case 'Rain':
             weatherIcon = weatherImages.rain;
@@ -563,7 +544,11 @@ const Forecast = ({navigation}) => {
             break;
           case 'Haze':
             weatherIcon = weatherImages.mist;
-            polishName = 'Lekka mgła';
+            polishName = 'Mgła';
+            break;
+          case 'Fog':
+            weatherIcon = weatherImages.mist;
+            polishName = 'Gęsta mgła';
             break;
           case 'Clear':
             if (time > 17 || time < 5) {
@@ -589,7 +574,6 @@ const Forecast = ({navigation}) => {
       )
         .then(res => res.json())
         .then(res => {
-          console.log(res[0].name);
           savedCity(res[0].name);
           setCity(res[0].name);
         })
@@ -700,7 +684,6 @@ const Forecast = ({navigation}) => {
         )
           .then(res => res.json())
           .then(res => {
-            console.log(res.list[0].weather[0].main);
             switchForecast([
               res.list[0].weather[0].main,
               res.list[1].weather[0].main,
@@ -787,7 +770,7 @@ const Forecast = ({navigation}) => {
           switch (param[i]) {
             case 'Mist':
               forecastIcon.push(weatherImages.mist);
-              polishName.push('Mgła');
+              polishName.push('Lekka mgła');
               break;
             case 'Rain':
               forecastIcon.push(weatherImages.rain);
@@ -811,8 +794,11 @@ const Forecast = ({navigation}) => {
               break;
             case 'Haze':
               forecastIcon.push(weatherImages.mist);
-              polishName.push('Lekka mgła');
+              polishName.push('Mgła');
               break;
+            case 'Fog':
+              forecastIcon.push(weatherImages.fog);
+              polishName.push('Gęsta mgła');
             case 'Clear':
               forecastIcon.push(weatherImages.sun);
               polishName.push('Czyste niebo');
@@ -847,7 +833,6 @@ const Forecast = ({navigation}) => {
             useForecast(position.coords.latitude, position.coords.longitude);
             useCity(position.coords.latitude, position.coords.longitude);
             useWeather(position.coords.latitude, position.coords.longitude);
-            console.log(position.coords.latitude, position.coords.longitude);
           },
           err => console.log(err),
           {enableHighAccuracy: false},
@@ -889,7 +874,6 @@ const Forecast = ({navigation}) => {
 
   const useOwnCity = async () => {
     try {
-      console.log(inputCity);
       fetch(
         `https://api.openweathermap.org/data/2.5/weather?q=${inputCity}&appid=${API_KEY}`,
       )
@@ -961,10 +945,6 @@ const Forecast = ({navigation}) => {
                   Min. {weather[3]} Max. {weather[4]}
                 </Text>
                 <ForecastTable>
-                  {/* 
-                  Change here, now row for next days are in new
-                  component called weatherForNextDay.js
-                   */}
                   {forecast.map(item => (
                     <WeatherForNextDay
                       key={item}

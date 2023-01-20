@@ -1,5 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {Text, View, FlatList, Alert, ActivityIndicator} from 'react-native';
+import {
+  Text,
+  View,
+  FlatList,
+  Alert,
+  ActivityIndicator,
+  TextInput,
+} from 'react-native';
 import Layout from '../Layout/Layout.js';
 import {styles, StyledButton} from '../../Styles.js';
 import LoadingView from '../ActivityIndicator/ActivityIndicator.js';
@@ -12,9 +19,12 @@ import {
   ModalButton,
   ModalList,
   ModalItem,
+  ModalInput,
 } from './AllPlants.styled';
-import {Modal, TextInput} from 'react-native-paper';
+import {InputBox} from '../Forecast/Forecast.styled';
+import {Modal} from 'react-native-paper';
 import {db} from '../../../App.js';
+import GeneratorQr from '../Scanner/GeneratorQr';
 
 const AllPlants = ({navigation}) => {
   const [result, setResult] = useState(null);
@@ -24,6 +34,7 @@ const AllPlants = ({navigation}) => {
   const [details, setDetails] = useState({});
   const [offset, setOffset] = useState(20);
   const [where, setWhere] = useState(null);
+  const [givenName, setGivenName] = useState(null);
 
   const [write, setWrite] = useState('');
   const [counter, setCounter] = useState(0);
@@ -33,91 +44,32 @@ const AllPlants = ({navigation}) => {
       if (counter == 0) {
         let id = {id: []};
         let another = {
-          floral_language: [],
           origin: [],
-          production: [],
           category: [],
-          blooming: [],
-          color: [],
-          display_pid: [],
-          size: [],
-          soil: [],
-          sunlight: [],
-          watering: [],
-          fertilization: [],
-          pruning: [],
-          max_light_lux: [],
-          min_light_lux: [],
-          max_temp: [],
-          min_temp: [],
-          max_env_humid: [],
-          min_env_humid: [],
-          max_soil_moist: [],
-          min_soil_moist: [],
-          max_soil_ec: [],
-          min_soil_ec: [],
           image: [],
         };
         await db.transaction(txn => {
           txn.executeSql(
-            `SELECT id, origin, production, category, image from 'plants'`,
+            `SELECT id, origin, category, image from 'plants'`,
             [],
             (tx, res) => {
               console.log('Query completed');
               const len = res.rows.length;
-              console.log(len);
               for (let i = 0; i < len; i++) {
                 Object.entries(res.rows.item(i)).forEach(([key, value]) => {
-                  if (key == 'id') {
-                    id.id.push(value);
-                  } else if (key == 'floral_language') {
-                    another.floral_language.push(value);
-                  } else if (key == 'origin') {
-                    another.origin.push(value);
-                  } else if (key == 'production') {
-                    another.production.push(value);
-                  } else if (key == 'category') {
-                    another.category.push(value);
-                  } else if (key == 'blooming') {
-                    another.blooming.push(value);
-                  } else if (key == 'color') {
-                    another.color.push(value);
-                  } else if (key == 'display_pid') {
-                    another.display_pid.push(value);
-                  } else if (key == 'size') {
-                    another.size.push(value);
-                  } else if (key == 'soil') {
-                    another.soil.push(value);
-                  } else if (key == 'sunlight') {
-                    another.sunlight.push(value);
-                  } else if (key == 'watering') {
-                    another.watering.push(value);
-                  } else if (key == 'fertilization') {
-                    another.fertilization.push(value);
-                  } else if (key == 'pruning') {
-                    another.pruning.push(value);
-                  } else if (key == 'max_light_lux') {
-                    another.max_light_lux.push(value);
-                  } else if (key == 'min_light_lux') {
-                    another.min_light_lux.push(value);
-                  } else if (key == 'max_temp') {
-                    another.max_temp.push(value);
-                  } else if (key == 'min_temp') {
-                    another.min_temp.push(value);
-                  } else if (key == 'max_env_humid') {
-                    another.max_env_humid.push(value);
-                  } else if (key == 'min_env_humid') {
-                    another.min_env_humid.push(value);
-                  } else if (key == 'max_soil_moist') {
-                    another.max_soil_moist.push(value);
-                  } else if (key == 'min_soil_moist') {
-                    another.min_soil_moist.push(value);
-                  } else if (key == 'max_soil_ec') {
-                    another.max_soil_ec.push(value);
-                  } else if (key == 'min_soil_ec') {
-                    another.min_soil_ec.push(value);
-                  } else if (key == 'image') {
-                    another.image.push(value);
+                  switch (key) {
+                    case 'id':
+                      id.id.push(value);
+                      break;
+                    case 'origin':
+                      another.origin.push(value);
+                      break;
+                    case 'category':
+                      another.category.push(value);
+                      break;
+                    case 'image':
+                      another.image.push(value);
+                      break;
                   }
                 });
               }
@@ -156,44 +108,54 @@ const AllPlants = ({navigation}) => {
     return randomString;
   };
 
-  const addPlant = async (name, origin, production, category, image) => {
+  const addPlant = async name => {
     try {
+      const myString = await GeneratorQr.returnUsername();
+      const plant_id = generateRandomString(36);
       await db.transaction(txn => {
-        txn.executeSql(
-          `SELECT 1 FROM 'myplants' WHERE plant_genus_id = ?`,
-          [name],
-          (tx, resp) => {
-            if (resp.rows.length == 1) {
-              Alert.alert('Podana roślina znajduje się już w twoich roślinach');
-            } else {
-              txn.executeSql(
-                `INSERT INTO 'myplants' (id, plant_genus_id) VALUES(?,?)`,
-                [generateRandomString(36), name],
-                (tx, res) => {
-                  console.log('Query completed');
-                  const len = res.rowsAffected;
-                  if (len == 1) {
-                    console.log('Everything about SQLite done');
-                  } else {
-                    console.log('Something went wrong');
-                  }
-                },
-              );
-              Alert.alert('Sukces!', 'Pomyślnie dodano roślinę', [
-                {
-                  onPress: () =>
-                    navigation.goBack('MyPlants', {
-                      name: name,
-                      origin: origin,
-                      production: production,
-                      category: category,
-                      image: image,
-                    }),
-                },
-              ]);
-            }
-          },
-        );
+        if (givenName.length > 4 || givenName != null) {
+          txn.executeSql(
+            `INSERT INTO 'myplants' (id, plant_genus_id) VALUES(?,?)`,
+            [plant_id, name],
+            (tx, res) => {
+              console.log(myString);
+              console.log('Query completed');
+              const len = res.rowsAffected;
+              if (len == 1) {
+                console.log('Everything about SQLite done');
+              } else {
+                console.log('Something went wrong');
+              }
+            },
+          );
+          txn.executeSql(
+            `INSERT INTO 'myplantuser' (myplant_id, user_id, plant_name) VALUES (?,?,?)`,
+            [plant_id, myString, givenName],
+            (tx, res) => {
+              console.log('Query completed');
+              const len = res.rowsAffected;
+              if (len == 1) {
+                console.log('Everything about SQLite done');
+              } else {
+                console.log('Something went wrong');
+              }
+            },
+          );
+          Alert.alert('Sukces!', 'Pomyślnie dodano roślinę', [
+            {
+              onPress: () =>
+                navigation.goBack('MyPlants', {
+                  name: name,
+                  givenName: givenName,
+                }),
+            },
+          ]);
+        } else {
+          Alert.alert(
+            'Spróbuj jeszcze raz',
+            'Nazwa rośliny powinna mieć co najmniej długość 5 znaków',
+          );
+        }
       });
     } catch (err) {
       console.log('Error: ' + err);
@@ -204,13 +166,11 @@ const AllPlants = ({navigation}) => {
 
   const showDetails = async (index, item) => {
     let orig = await details.origin[index];
-    let prod = await details.production[index];
     let cat = await details.category[index];
     let name = await item;
     setResult([
       ['Nazwa:', name],
       ['Pochodzenie:', orig],
-      ['Produkcja:', prod],
       ['Kategoria:', cat],
     ]);
     setModal(!modal);
@@ -242,20 +202,15 @@ const AllPlants = ({navigation}) => {
 
   const searchBar = text => {
     if (text) {
-      console.log(text);
       const filteredData = name.id.filter(item => {
         const itemData = item ? item.toUpperCase() : ''.toUpperCase();
-        console.log(itemData);
         const textData = text.toUpperCase();
-        console.log(textData);
         if (textData == itemData.substring(0, textData.length)) {
           return itemData.indexOf(textData) > -1;
         }
       });
-      console.log(name.id.indexOf(filteredData[filteredData.length - 1]));
       setWhere(name.id.indexOf(filteredData[filteredData.length - 1]));
       setNameCopy(filteredData.slice(0, 20));
-      console.log(text);
       setWrite(text);
     } else {
       setNameCopy(name.id.slice(0, 20));
@@ -274,17 +229,14 @@ const AllPlants = ({navigation}) => {
           <LoadingView></LoadingView>
         ) : (
           <PlantsContainer style={styles.plantsList}>
-            <TextInput
-              style={{
-                height: 60,
-                width: 200,
-                borderColor: '#000',
-                borderWidth: 1,
-              }}
-              placeholder="Wyszukaj roślinę..."
-              onChangeText={text => searchBar(text)}
-              value={setWrite}
-            />
+            <InputBox>
+              <TextInput
+                style={styles.h4}
+                onChangeText={text => searchBar(text)}
+                placeholder="Wyszukaj roślinę..."
+                value={setWrite}
+              />
+            </InputBox>
             <FlatList
               data={nameCopy}
               renderItem={renderList}
@@ -312,23 +264,20 @@ const AllPlants = ({navigation}) => {
                   <ModalItem style={styles.h4}>{result[2][0]}</ModalItem>
                   <ModalItem style={styles.h4_bold}>{result[2][1]}</ModalItem>
                 </ModalList>
-                <ModalList>
-                  <ModalItem style={styles.h4}>{result[3][0]}</ModalItem>
-                  <ModalItem style={styles.h4_bold}>{result[3][1]}</ModalItem>
-                </ModalList>
+                <ModalInput>
+                  <InputBox>
+                    <TextInput
+                      style={styles.h4}
+                      onChangeText={setGivenName}
+                      placeholder="Nazwa rośliny..."
+                    />
+                  </InputBox>
+                </ModalInput>
                 <ModalList>
                   <ModalButton onPress={() => setModal(!modal)}>
                     <Text style={styles.body}>Wróć</Text>
                   </ModalButton>
-                  <ModalButton
-                    onPress={() =>
-                      addPlant(
-                        result[0][1],
-                        result[1][1],
-                        result[2][1],
-                        result[3][1],
-                      )
-                    }>
+                  <ModalButton onPress={() => addPlant(result[0][1])}>
                     <Text style={styles.body}>Dodaj</Text>
                   </ModalButton>
                 </ModalList>

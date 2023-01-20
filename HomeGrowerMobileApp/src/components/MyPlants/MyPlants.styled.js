@@ -3,12 +3,12 @@ import styled from 'styled-components/native';
 export const PlantsContainer = styled.View`
   flex: 1;
   background-color: #fff;
-  padding: 0;
+  padding: 10px 0 0 0;
   margin: 0;
 `;
 
 export const PlantsElement = styled.TouchableOpacity`
-  background-color: rgba(47, 168, 78, 0.8);
+  background-color: rgba(47, 168, 78, 1);
 `;
 
 export const StyledImage = styled.Image`
@@ -21,6 +21,11 @@ export const StyledImage = styled.Image`
 export const PlantsAfterElement = styled.View`
   flex-direction: row;
   align-items: center;
+`;
+
+export const PlantsBox = styled.View`
+  flex-direction: column;
+  width: 180px;
 `;
 
 export const ButtonBox = styled.View`
@@ -48,7 +53,7 @@ export const ModalList = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   height: 60px;
-  width: 150px;
+  width: 200px;
 `;
 
 export const FlatList = styled.View`

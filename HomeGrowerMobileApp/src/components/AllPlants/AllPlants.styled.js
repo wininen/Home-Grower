@@ -3,8 +3,8 @@ import styled from 'styled-components/native';
 export const PlantsContainer = styled.View`
   flex: 1;
   background-color: #fff;
-  padding: 0;
-  margin: 10px 0 0 0;
+  padding: 10px 0 0 0;
+  margin: 0;
 `;
 
 export const PlantsElement = styled.TouchableOpacity`
@@ -50,6 +50,15 @@ export const ModalList = styled.TouchableOpacity`
   flex-direction: row;
   width: 200px;
   height: 30px;
+  margin-bottom: 5px;
+`;
+
+export const ModalInput = styled.TouchableOpacity`
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 200px;
+  height: 60px;
   margin-bottom: 5px;
 `;
 
