@@ -43,14 +43,14 @@ export const ProfileOptions = styled.View`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 30px 0;
+  padding: 20px 0;
 `;
 
 export const ProfileRow = styled.View`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 10px 20px;
+  padding: 30px 20px;
   justify-content: space-between;
 `;
 

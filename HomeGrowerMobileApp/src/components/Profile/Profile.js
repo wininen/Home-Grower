@@ -102,7 +102,8 @@ const Profile = ({navigation, route}) => {
           <Text style={styles.h4}>Nazwa użytkownika</Text>
         </ProfileName>
         <ProfileOptions>
-          <ProfileRow>
+        <Separator />
+          {/* <ProfileRow>
             <LeftRow>
               <AntDesign
                 name="edit"
@@ -115,8 +116,8 @@ const Profile = ({navigation, route}) => {
               <Text style={styles.h4_but_green}>Edytuj</Text>
             </RightRow>
           </ProfileRow>
-          <Separator></Separator>
-          <ProfileRow>
+          <Separator></Separator> */}
+          {/* <ProfileRow>
             <LeftRow>
               <Entypo
                 name="new-message"
@@ -128,8 +129,8 @@ const Profile = ({navigation, route}) => {
             <RightRow>
               <Text style={styles.h4_but_green}>Napisz</Text>
             </RightRow>
-          </ProfileRow>
-          <Separator></Separator>
+          </ProfileRow> */}
+          {/* <Separator></Separator> */}
           <ProfileRow>
             <LeftRow>
               <FontAwesome5
@@ -159,7 +160,7 @@ const Profile = ({navigation, route}) => {
               <Text style={styles.h4_but_green}>Historia</Text>
             </RightRow>
           </ProfileRow> */}
-          <Separator></Separator>
+          {/* <Separator></Separator>
           <ProfileRow>
             <LeftRow>
               <AntDesign
@@ -172,7 +173,7 @@ const Profile = ({navigation, route}) => {
             <RightRow>
               <Text style={styles.h4_but_green}>Oceń</Text>
             </RightRow>
-          </ProfileRow>
+          </ProfileRow> */}
           <Separator />
           <ProfileRow>
             <LeftRow>
@@ -205,6 +206,7 @@ const Profile = ({navigation, route}) => {
               </TouchableOpacity>
             </RightRow>
           </ProfileRow>
+          <Separator />
         </ProfileOptions>
 
         <Modal
