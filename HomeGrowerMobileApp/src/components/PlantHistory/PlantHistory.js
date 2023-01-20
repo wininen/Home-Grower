@@ -146,7 +146,7 @@ const PlantHistory = props => {
               }}
             />
           ) : lenRow == 0 ? (
-            <Text>Jajco</Text>
+            <LoadingView></LoadingView>
           ) : (
             <LineChart
               data={{
@@ -203,7 +203,7 @@ const PlantHistory = props => {
               }}
             />
           ) : lenRow == 0 ? (
-            <Text>Jajco</Text>
+            <LoadingView></LoadingView>
           ) : (
             <LineChart
               data={{
@@ -260,7 +260,7 @@ const PlantHistory = props => {
               }}
             />
           ) : lenRow == 0 ? (
-            <Text>Jajco</Text>
+            <LoadingView></LoadingView>
           ) : (
             <LineChart
               data={{
@@ -317,7 +317,7 @@ const PlantHistory = props => {
               }}
             />
           ) : lenRow == 0 ? (
-            <Text>Jajco</Text>
+            <LoadingView></LoadingView>
           ) : (
             <LineChart
               data={{

@@ -25,7 +25,7 @@ export const PlantsAfterElement = styled.View`
 
 export const PlantsBox = styled.View`
   flex-direction: column;
-  width: 170;
+  width: 180px;
 `;
 
 export const ButtonBox = styled.View`
