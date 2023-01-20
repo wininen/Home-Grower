@@ -24,7 +24,7 @@ import {
 import {InputBox} from '../Forecast/Forecast.styled';
 import {Modal} from 'react-native-paper';
 import {db} from '../../../App.js';
-import {CreateUUID} from '../Scanner/GeneratorQr';
+import GeneratorQr from '../Scanner/GeneratorQr';
 
 const AllPlants = ({navigation}) => {
   const [result, setResult] = useState(null);
@@ -110,7 +110,7 @@ const AllPlants = ({navigation}) => {
 
   const addPlant = async name => {
     try {
-      const myString = CreateUUID;
+      const myString = await GeneratorQr.returnUsername();
       const plant_id = generateRandomString(36);
       await db.transaction(txn => {
         if (givenName.length > 4 || givenName != null) {
@@ -118,6 +118,7 @@ const AllPlants = ({navigation}) => {
             `INSERT INTO 'myplants' (id, plant_genus_id) VALUES(?,?)`,
             [plant_id, name],
             (tx, res) => {
+              console.log(myString);
               console.log('Query completed');
               const len = res.rowsAffected;
               if (len == 1) {

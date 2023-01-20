@@ -8,7 +8,7 @@ export const PlantsContainer = styled.View`
 `;
 
 export const PlantsElement = styled.TouchableOpacity`
-  background-color: rgba(47, 168, 78, 0.8);
+  background-color: rgba(47, 168, 78, 1);
 `;
 
 export const StyledImage = styled.Image`
@@ -25,6 +25,7 @@ export const PlantsAfterElement = styled.View`
 
 export const PlantsBox = styled.View`
   flex-direction: column;
+  width: 170px;
 `;
 
 export const ButtonBox = styled.View`
@@ -52,7 +53,7 @@ export const ModalList = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   height: 60px;
-  width: 150px;
+  width: 200px;
 `;
 
 export const FlatList = styled.View`
