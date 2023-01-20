@@ -3,6 +3,7 @@ import {useIsFocused} from '@react-navigation/native';
 import {Image, Dimensions, ScrollView, Text} from 'react-native';
 import {LineChart} from 'react-native-chart-kit';
 import {HistoryContainer, HistoryElement} from './PlantHistory.styled';
+import LoadingView from '../ActivityIndicator/ActivityIndicator.js';
 import {db} from '../../../App';
 
 const PlantHistory = props => {
