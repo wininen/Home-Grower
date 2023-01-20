@@ -25,6 +25,7 @@ import {
   ScrollableList,
   SensorsList,
 } from './MyPlants.styled.js';
+import {SensorButton, SensorRow} from './MyPlantSensorScrollable.styled';
 
 import {ConnectedSensor} from './MyPlantSensorScrollable';
 import QRCode from 'react-native-qrcode-svg';
@@ -56,7 +57,8 @@ const MyPlant = props => {
   const [active, setActive] = useState(false);
   const [modal, setModal] = useState(false);
   const [modalQr, setModalQr] = useState(false);
-  const [isPeripheral, setIsPeripheral] = useState(false);
+  const [modalSensor, setModalSensor] = useState(false);
+  const [peripheralConnected, setPeripheralConnected] = useState(null);
   const [sensorListConnected, setSensorListConnected] = useState([]);
   // const plantId =
   //   '45ce2ccc-941f-11ed-a1eb-0242ac12000245ce2ccc-941f-11ed-a1eb-0242ac120002';
@@ -76,7 +78,6 @@ const MyPlant = props => {
     max_soil_moist,
   } = props.route.params;
   const qrCodeValue = plantId[1];
-  let peripheral = null;
 
   const getData = async () => {
     const result = await storage.getAllSensorData();
@@ -98,6 +99,7 @@ const MyPlant = props => {
       setModal(true);
     } else {
       setActive(true);
+      setModalSensor(!modalSensor);
     }
   };
 
@@ -118,6 +120,7 @@ const MyPlant = props => {
       console.log('ERRORRRR');
       return;
     }
+    setPeripheralConnected(peripheral.id);
 
     // połącz się z czujnikiem
     await BleManager.connect(peripheral.id)
@@ -198,6 +201,7 @@ const MyPlant = props => {
       });
     setModal(false);
     setActive(true);
+    setPeripheralConnected(peripheral.id);
     await pushSensorConnection(peripheral.id);
 
     await BleManager.retrieveServices(peripheral.id)
@@ -490,6 +494,7 @@ const MyPlant = props => {
         }}>
         <View style={styles.modalContainer}>
           <View style={styles.modalSensorContent}>
+            <Text style={styles.AvailableSensorsText}>Dostępne czujniki:</Text>
             <ScrollableList>
               <SensorsList>
                 {sensorListConnected.map(item => (
@@ -519,6 +524,31 @@ const MyPlant = props => {
           <View style={styles.modalQRContent}>
             <QRCode value={qrCodeValue} size={200} />
             <ModalButton onPress={() => setModalQr(!modalQr)}>
+              <Text style={styles.body}>Wróć</Text>
+            </ModalButton>
+          </View>
+        </View>
+      </Modal>
+
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modalSensor}
+        onRequestClose={() => {
+          setModalSensor(!modalSensor);
+        }}>
+        <View style={styles.modalContainer}>
+          <View style={styles.modalSensorConnectedContent}>
+            <Text style={styles.AvailableSensorsText}>Czujnik</Text>
+
+            <SensorsList>
+              <SensorRow>
+                <SensorButton>
+                  <Text>{peripheralConnected}</Text>
+                </SensorButton>
+              </SensorRow>
+            </SensorsList>
+            <ModalButton onPress={() => setModalSensor(!modalSensor)}>
               <Text style={styles.body}>Wróć</Text>
             </ModalButton>
           </View>

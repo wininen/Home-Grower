@@ -11,7 +11,7 @@ export const OuterContainer = styled.View`
 export const ForecastView = styled.SafeAreaView`
   z-index: 1000;
   margin: 0;
-  padding: 20px;
+  padding: 40px 20px 20px 20px;
 `;
 
 export const ForecastOptions = styled.View`

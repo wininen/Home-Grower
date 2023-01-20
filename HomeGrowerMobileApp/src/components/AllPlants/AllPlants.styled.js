@@ -8,7 +8,7 @@ export const PlantsContainer = styled.View`
 `;
 
 export const PlantsElement = styled.TouchableOpacity`
-  background-color: rgba(47, 168, 78, 0.8);
+  background-color: rgba(47, 168, 78, 1);
 `;
 
 export const StyledImage = styled.Image`
