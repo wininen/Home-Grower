@@ -3,9 +3,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const get = async key => {
   try {
     const value = await AsyncStorage.getItem(key);
-    if (value === null)
-      //console.warn('data not saved previously');
-      return value;
+    if (value === null) console.log('data not saved previously');
+    return value;
   } catch (e) {
     console.warn('ERROR reading values', e);
     return null;
@@ -15,9 +14,8 @@ const get = async key => {
 const getObject = async key => {
   try {
     const value = await AsyncStorage.getItem(key);
-    if (value === null)
-      //console.warn('data not saved previously');
-      return JSON.parse(value);
+    if (value === null) console.log('data not saved previously');
+    return JSON.parse(value);
   } catch (e) {
     console.warn('ERROR: reading values', e);
     return null;
