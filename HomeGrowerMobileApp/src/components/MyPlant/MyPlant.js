@@ -80,8 +80,14 @@ const MyPlant = props => {
   const qrCodeValue = plantId[1];
 
   const getData = async () => {
-    const result = await storage.getAllSensorData();
-    connect(result[0]);
+    // const result = await storage.getAllSensorData();
+    // connect(result[0]);
+    const peripheralId = await findSensor();
+    console.log(peripheralId);
+    if (peripheralId != false) {
+      const peripheral = await storage.getObject(peripheralId);
+      connect(peripheral);
+    }
   };
 
   const assignSensor = async () => {
