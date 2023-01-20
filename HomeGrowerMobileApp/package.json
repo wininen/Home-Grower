@@ -23,7 +23,6 @@
     "buffer": "^6.0.3",
     "prettier": "2.8.3",
     "react": "18.1.0",
-    "react-auto-translate": "^0.0.6",
     "react-dom": "18.1.0",
     "react-native": "0.70.6",
     "react-native-background-actions": "^3.0.0",
