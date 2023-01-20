@@ -150,11 +150,11 @@ const Sensor = ({navigation}) => {
   const handleUpdateValueForCharacteristic = async data => {
     const inputData = Buffer.from(data.value);
     //odkodowuje bity
-    temperature = inputData.readUint16LE(0) / 10;
-    light = inputData.readIntLE(3, 4);
+    let temperature = inputData.readUint16LE(0) / 10;
+    let light = inputData.readIntLE(3, 4);
     //light = inputData.readUInt32LE(3)
-    moist = inputData.readUInt8(7);
-    fertility = inputData.readUint16LE(8);
+    let moist = inputData.readUInt8(7);
+    let fertility = inputData.readUint16LE(8);
 
     const plant_data = {temperature, light, moist, fertility, date: new Date()};
     // await AsyncStorage.removeItem('flower_data');
@@ -693,7 +693,12 @@ const Sensor = ({navigation}) => {
           <ScrollableList>
             <SensorsList>
               {sensorListAvailable.map(item => (
-                <AvailableSensor key={item.id} item={item} connect={connect} />
+                <AvailableSensor
+                  key={item.id}
+                  item={item}
+                  connect={connect}
+                  turnOnDiode={turnOnDiode}
+                />
               ))}
             </SensorsList>
           </ScrollableList>
