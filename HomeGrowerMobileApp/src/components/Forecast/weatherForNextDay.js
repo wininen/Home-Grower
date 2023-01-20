@@ -19,56 +19,56 @@ export const WeatherForNextDay = ({item, week, id, forecast}) => {
       {forecast[id][1].substring(forecast[id][1].length - 3) == '—°C' ? (
         <DegreeView>
           <Degree>
-            <Text>Max.</Text>
+            <Text>Max. </Text>
 
             <Text style={styles.weatherText}>{forecast[id][1]}</Text>
           </Degree>
           <Degree>
-            <Text>Min.</Text>
+            <Text>Min. </Text>
             <Text style={styles.weatherText}>{forecast[id][2]}</Text>
           </Degree>
         </DegreeView>
       ) : forecast[id][1].substring(forecast[id][1].length - 3) == '—°F' ? (
         <DegreeView>
           <Degree>
-            <Text>Max.</Text>
+            <Text>Max. </Text>
 
             <Text style={styles.weatherText}>{forecast[id][1]}</Text>
           </Degree>
           <Degree>
-            <Text>Min.</Text>
+            <Text>Min. </Text>
             <Text style={styles.weatherText}>{forecast[id][2]}</Text>
           </Degree>
         </DegreeView>
       ) : forecast[id][1].substring(forecast[id][1].length - 2) == '°F' ? (
         <DegreeView>
           <Degree>
-            <Text>Max.</Text>
+            <Text>Max. </Text>
 
             <Text style={styles.weatherText}>
-              {Math.round(parseFloat(forecast[id][1]))} °F
+              {Math.round(parseFloat(forecast[id][1]))}°F
             </Text>
           </Degree>
           <Degree>
-            <Text>Min.</Text>
+            <Text>Min. </Text>
             <Text style={styles.weatherText}>
-              {Math.round(parseFloat(forecast[id][2]))} °F
+              {Math.round(parseFloat(forecast[id][2]))}°F
             </Text>
           </Degree>
         </DegreeView>
       ) : (
         <DegreeView>
           <Degree>
-            <Text>Max.</Text>
+            <Text>Max. </Text>
 
             <Text style={styles.weatherText}>
-              {Math.round(parseFloat(forecast[id][2]))} °C
+              {Math.round(parseFloat(forecast[id][2]))}°C
             </Text>
           </Degree>
           <Degree>
-            <Text>Min.</Text>
+            <Text>Min. </Text>
             <Text style={styles.weatherText}>
-              {Math.round(parseFloat(forecast[id][2]))} °C
+              {Math.round(parseFloat(forecast[id][2]))}°C
             </Text>
           </Degree>
         </DegreeView>

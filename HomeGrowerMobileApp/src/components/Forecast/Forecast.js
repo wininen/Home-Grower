@@ -47,6 +47,7 @@ const weatherImages = {
   snow: 'http://openweathermap.org/img/wn/13d@2x.png',
   cloud: 'http://openweathermap.org/img/wn/03d@2x.png',
   moon: 'http://openweathermap.org/img/wn/01n@2x.png',
+  fog: 'http://openweathermap.org/img/wn/50d@2x.png',
   bgImage: require('../../assets/images/weatherBackground.jpg'),
 };
 
@@ -461,6 +462,7 @@ const Forecast = ({navigation}) => {
         )
           .then(res => res.json())
           .then(res => {
+            console.log(res['weather'][0].main);
             switchWeather(res['weather'][0].main);
             savedWeather([
               weatherIcon,
@@ -518,7 +520,7 @@ const Forecast = ({navigation}) => {
         switch (param) {
           case 'Mist':
             weatherIcon = weatherImages.mist;
-            polishName = 'Mgła';
+            polishName = 'Lekka mgła';
             break;
           case 'Rain':
             weatherIcon = weatherImages.rain;
@@ -542,7 +544,11 @@ const Forecast = ({navigation}) => {
             break;
           case 'Haze':
             weatherIcon = weatherImages.mist;
-            polishName = 'Lekka mgła';
+            polishName = 'Mgła';
+            break;
+          case 'Fog':
+            weatherIcon = weatherImages.mist;
+            polishName = 'Gęsta mgła';
             break;
           case 'Clear':
             if (time > 17 || time < 5) {
@@ -764,7 +770,7 @@ const Forecast = ({navigation}) => {
           switch (param[i]) {
             case 'Mist':
               forecastIcon.push(weatherImages.mist);
-              polishName.push('Mgła');
+              polishName.push('Lekka mgła');
               break;
             case 'Rain':
               forecastIcon.push(weatherImages.rain);
@@ -788,8 +794,11 @@ const Forecast = ({navigation}) => {
               break;
             case 'Haze':
               forecastIcon.push(weatherImages.mist);
-              polishName.push('Lekka mgła');
+              polishName.push('Mgła');
               break;
+            case 'Fog':
+              forecastIcon.push(weatherImages.fog);
+              polishName.push('Gęsta mgła');
             case 'Clear':
               forecastIcon.push(weatherImages.sun);
               polishName.push('Czyste niebo');

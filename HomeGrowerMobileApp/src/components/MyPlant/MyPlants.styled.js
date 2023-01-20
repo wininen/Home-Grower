@@ -12,7 +12,7 @@ export const PropertiesRow = styled.View`
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 20px 20px;
+  padding: 30px 20px;
   justify-content: space-between;
 `;
 
