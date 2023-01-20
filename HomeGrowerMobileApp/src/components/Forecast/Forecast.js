@@ -961,6 +961,7 @@ const Forecast = ({navigation}) => {
                   Min. {weather[3]} Max. {weather[4]}
                 </Text>
                 <ForecastTable>
+                  <ScrollView style={styles.scrollView}>
                   {/* 
                   Change here, now row for next days are in new
                   component called weatherForNextDay.js
@@ -974,6 +975,7 @@ const Forecast = ({navigation}) => {
                       forecast={forecast}
                     />
                   ))}
+                  </ScrollView>
                 </ForecastTable>
                 {modal && (
                   <Modal

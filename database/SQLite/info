@@ -29,7 +29,7 @@ min_soil_ec     INT,    -- odpowiadający parameter.min_soil_ec
 image           BLOB,   -- no datatype specified, format "data:image/jpeg;base64,/..."
 
 
-MY_PLANTS
+MYPLANTS
 tylko zbiór roślin, które "subskrybuję"
 id              PRIMARY KEY TEXT UNIQUE,      UUID1
 plant_genus_id  TEXT, FOREIGN KEY REFERENCES plants(id)

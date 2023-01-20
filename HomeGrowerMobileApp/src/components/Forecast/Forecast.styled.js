@@ -11,7 +11,7 @@ export const OuterContainer = styled.View`
 export const ForecastView = styled.SafeAreaView`
   z-index: 1000;
   margin: 0;
-  padding: 20% 20px 20px 20px;
+  padding: 10% 20px 10% 20px;
 `;
 
 export const ForecastOptions = styled.View`
@@ -27,12 +27,14 @@ export const ForecastMain = styled.View`
   flex-direction: column;
   justify-content: center;
   padding: 20px 0;
+  max-height: 90%;
 `;
 
 export const ForecastTable = styled.View`
   padding: 5px 0;
   margin-top: 12%;
   width: 100%;
+  max-height: 95%;
   display: flex;
   flex-direction: column;
 `;
