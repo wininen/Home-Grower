@@ -15,7 +15,6 @@ import {
 } from './AllPlants.styled';
 import {Modal, TextInput} from 'react-native-paper';
 import {db} from '../../../App.js';
-import {Translator, Translate} from 'react-auto-translate';
 
 const AllPlants = ({navigation}) => {
   const [result, setResult] = useState(null);
@@ -122,7 +121,7 @@ const AllPlants = ({navigation}) => {
                   }
                 });
               }
-              console.log('Everything about SQLite done');
+              // console.log('Everything about SQLite done');
               setName(id);
               setDetails(another);
               setNameCopy(id.id.slice(0, offset));
@@ -218,24 +217,14 @@ const AllPlants = ({navigation}) => {
   };
 
   const renderList = ({item, index}) => (
-    <Translator
-      from='en'
-      to='pl'
-      googleApiKey='API_KEY'>
     <PlantsElement
       style={styles.shadow}
       onPress={() => showDetails(name.id.indexOf(item), item)}>
       <PlantsAfterElement>
-<<<<<<< HEAD
-        <StyledImage source={{uri: details.image[index]}} />
-        <Text style={styles.bold_black}><Translate>{item}</Translate></Text>
-=======
         <StyledImage source={{uri: details.image[name.id.indexOf(item)]}} />
         <Text style={styles.bold_black}>{item}</Text>
->>>>>>> eb0a2ff483e5c772a5173a03bc2362aa9edced1e
       </PlantsAfterElement>
     </PlantsElement>
-    </Translator>
   );
 
   const renderFooter = () => {

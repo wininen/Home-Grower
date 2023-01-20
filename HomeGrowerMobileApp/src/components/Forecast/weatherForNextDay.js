@@ -18,10 +18,7 @@ export const WeatherForNextDay = ({item, week, id, forecast}) => {
         <DegreeView>
           <Degree>
             <Text>Max.</Text>
-
-            <Text style={styles.weatherText}>
-              {Math.round(parseFloat(forecast[id][1]))} °F
-            </Text>
+            {Math.round(parseFloat(forecast[id][1]))} °F
           </Degree>
           <Degree>
             <Text>Min.</Text>

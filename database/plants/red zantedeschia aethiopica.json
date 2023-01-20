@@ -13,9 +13,9 @@
         "size": "średnica: 10 cm, wysokość: 16-20 cm",
         "soil": "perlit i perlite mixed",
         "sunlight": "trzymaj w słonecznym miejscu, but avoid strong sunlight at noon, less kwiaty with less sunlight",
-        "watering": "Water thoroughly after soil dries, spray water in the air when relative humidity lower than 30%",
+        "watering": "podlewaj obficie po wyschnięciu, utrzymuj powietrza na poziomie powyżej 30%",
         "fertilization": "pamiętaj o rozcieńczeniu nawozu zgodnie z instrukcją producenta, stosuj 1-2 razy w miesiącu, except latem",
-        "pruning": "After kwiaty fade put in a shaded place, when leaves turn żółty, remove the witheczerwony part on the ground, leave tubers for germination next year"
+        "pruning": "po przekwitnięciu kwiatów przenieś do zacienionego miejsca, usuń łodygę kwiatu po przekwitnięciu, od czasu do czasu usuwaj martwe tkanki"
     },
     "parameter": {
         "max_light_mmol": 5800,

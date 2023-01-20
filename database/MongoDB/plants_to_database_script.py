@@ -8,10 +8,10 @@ def main():
     all_plants = []
 
     # przechodzenie po plikach json
-    for file in glob.glob("../../plants/*.json"):
+    for file in glob.glob("../plants/*.json"):
         with open(file) as f:
             plant = json.load(f)
-        # plant.pop('image')
+        plant.pop('image')
 
         all_plants.append(plant)
 

@@ -21,6 +21,7 @@ def main(conn: sqlite3.Connection):
 
     # przechodzenie po plikach json
     for file in glob.glob("../plants/*.json"):
+        print(file)
         with open(file) as f:
             file_contents = f.read()
 

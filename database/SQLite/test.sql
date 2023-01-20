@@ -1,0 +1,2 @@
+SELECT origin
+FROM plants;

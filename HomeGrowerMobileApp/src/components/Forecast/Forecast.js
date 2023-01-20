@@ -12,6 +12,7 @@ import {
   Alert,
   Modal,
   TextInput,
+  ScrollView,
 } from 'react-native';
 
 import {styles} from '../../Styles';
@@ -991,7 +992,7 @@ const Forecast = ({navigation}) => {
                           <TextInput
                             style={styles.h4}
                             onChangeText={setInputCity}
-                            placeholder="Warszawa"
+                            placeholder="Poznań"
                           />
                         </InputBox>
                         <ForecastTr>
@@ -1009,7 +1010,7 @@ const Forecast = ({navigation}) => {
               </ForecastMain>
             </ForecastView>
           ) : (
-            <Text>Poczekaj, aktualizujemy dla ciebie pogodę</Text>
+            <Text>Już aktualizujemy dla Ciebie pogodę!</Text>
           )}
         </ImageBackground>
       </OuterContainer>
