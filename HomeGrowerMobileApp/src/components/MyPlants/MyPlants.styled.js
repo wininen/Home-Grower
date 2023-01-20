@@ -53,7 +53,7 @@ export const ModalList = styled.TouchableOpacity`
   align-items: center;
   justify-content: center;
   height: 60px;
-  width: 150px;
+  width: 200px;
 `;
 
 export const FlatList = styled.View`
