@@ -419,7 +419,12 @@ const MyPlant = props => {
             <Text> Temperatura </Text>
           </NameRow>
           <DataRow>
-            <Text style={isValueInRangeStyle(20, 25, datasPlant[0].title)}>
+            <Text
+              style={isValueInRangeStyle(
+                min_temp[1],
+                max_temp[1],
+                datasPlant[0].title,
+              )}>
               {datasPlant[0].title}
             </Text>
           </DataRow>
@@ -430,7 +435,12 @@ const MyPlant = props => {
             <Text> Nasłonecznienie </Text>
           </NameRow>
           <DataRow>
-            <Text style={isValueInRangeStyle(20, 25, datasPlant[1].title)}>
+            <Text
+              style={isValueInRangeStyle(
+                min_light_lux[1],
+                max_light_lux[1],
+                datasPlant[1].title,
+              )}>
               {datasPlant[1].title}
             </Text>
           </DataRow>
@@ -441,7 +451,12 @@ const MyPlant = props => {
             <Text> Wilgotność gleby </Text>
           </NameRow>
           <DataRow>
-            <Text style={isValueInRangeStyle(20, 25, datasPlant[2].title)}>
+            <Text
+              style={isValueInRangeStyle(
+                min_soil_moist[1],
+                max_soil_moist[1],
+                datasPlant[2].title,
+              )}>
               {datasPlant[2].title}
             </Text>
           </DataRow>
@@ -452,7 +467,12 @@ const MyPlant = props => {
             <Text> Żyzność gleby </Text>
           </NameRow>
           <DataRow>
-            <Text style={isValueInRangeStyle(20, 25, datasPlant[3].title)}>
+            <Text
+              style={isValueInRangeStyle(
+                min_soil_ec[1],
+                max_soil_ec[1],
+                datasPlant[3].title,
+              )}>
               {datasPlant[3].title}
             </Text>
           </DataRow>

@@ -112,7 +112,7 @@ const Sensor = ({navigation}) => {
   const handleDiscoverPeripheral = async peripheral => {
     if (peripheral.name == 'Flower care') {
       console.log('hallooooo');
-      peripheralsAvailable.set(peripheral.id, peripheral);
+
       console.log('set');
       console.log('*************');
       const sensorList = await storage.getAllSensorData();
@@ -128,6 +128,7 @@ const Sensor = ({navigation}) => {
       }
       if (!connected) {
         console.log('*************');
+        peripheralsAvailable.set(peripheral.id, peripheral);
         console.log(peripheralsAvailable);
         setFlowerCare(peripheral);
         setSensorListAvailable(Array.from(peripheralsAvailable.values()));
