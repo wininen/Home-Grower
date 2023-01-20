@@ -52,7 +52,6 @@ const MyPlant = props => {
     {id: 'moist', title: 0},
     {id: 'fertility', title: 0},
   ]);
-  const path = require('path');
 
   const [active, setActive] = useState(false);
   const [modal, setModal] = useState(false);
