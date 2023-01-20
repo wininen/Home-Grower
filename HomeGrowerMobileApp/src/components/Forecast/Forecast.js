@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import LoadingView from '../ActivityIndicator/ActivityIndicator';
 import React, {useState, useEffect} from 'react';
 import {
   Text,
@@ -1009,7 +1010,7 @@ const Forecast = ({navigation}) => {
               </ForecastMain>
             </ForecastView>
           ) : (
-            <Text>Poczekaj, aktualizujemy dla ciebie pogodę</Text>
+            <LoadingView></LoadingView>
           )}
         </ImageBackground>
       </OuterContainer>
