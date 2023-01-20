@@ -10,13 +10,7 @@ import {
   Button,
   Alert,
 } from 'react-native';
-import {
-  ButtonPlant,
-  styles,
-  OuterContainer,
-  ErrorMessageContainer,
-  ButtonContainer,
-} from '../../Styles.js';
+import {ButtonPlant, styles, OuterContainer} from '../../Styles.js';
 import {
   ConnectToPlantButton,
   DataRow,
@@ -58,6 +52,7 @@ const MyPlant = props => {
     {id: 'moist', title: 0},
     {id: 'fertility', title: 0},
   ]);
+  const path = require('path');
 
   const [active, setActive] = useState(false);
   const [modal, setModal] = useState(false);
@@ -66,7 +61,21 @@ const MyPlant = props => {
   const [sensorListConnected, setSensorListConnected] = useState([]);
   // const plantId =
   //   '45ce2ccc-941f-11ed-a1eb-0242ac12000245ce2ccc-941f-11ed-a1eb-0242ac120002';
-  const {planame, plagenus, repoid, name, plantId} = props.route.params;
+  const {
+    planame,
+    repoid,
+    name,
+    givenName,
+    plantId,
+    min_light_lux,
+    max_light_lux,
+    min_temp,
+    max_temp,
+    min_soil_ec,
+    max_soil_ec,
+    min_soil_moist,
+    max_soil_moist,
+  } = props.route.params;
   const qrCodeValue = plantId[1];
   let peripheral = null;
 
@@ -302,7 +311,9 @@ const MyPlant = props => {
     try {
       await db.transaction(txn => {
         txn.executeSql(
-          `DELETE FROM 'myplants' WHERE plant_genus_id LIKE ?`,
+          `DELETE FROM myplants
+          WHERE id IN (
+            SELECT id FROM myplants a JOIN myplantuser b ON (a.id=b.myplant_id) WHERE b.plant_name = ?)`,
           [name],
           (tx, res) => {
             console.log('Query completed');
@@ -326,7 +337,21 @@ const MyPlant = props => {
   };
 
   useEffect(() => {
-    console.log(planame, plagenus, repoid, name, plantId);
+    console.log(
+      planame,
+      repoid,
+      name,
+      givenName,
+      plantId,
+      min_light_lux,
+      max_light_lux,
+      min_temp,
+      max_temp,
+      min_soil_ec,
+      max_soil_ec,
+      min_soil_moist,
+      max_soil_moist,
+    );
   }, []);
 
   useEffect(() => {
@@ -433,16 +458,16 @@ const MyPlant = props => {
       </PropertiesContainer>
       <SpecsContainer>
         <ModalList>
+          <ModalItem style={styles.h4}>{givenName[0]}</ModalItem>
+          <ModalItem style={styles.h4_bold}>{givenName[1]}</ModalItem>
+        </ModalList>
+        <ModalList>
           <ModalItem style={styles.h4}>{name[0]}</ModalItem>
           <ModalItem style={styles.h4_bold}>{name[1]}</ModalItem>
         </ModalList>
         <ModalList>
           <ModalItem style={styles.h4}>{planame[0]}</ModalItem>
           <ModalItem style={styles.h4_bold}>{planame[1]}</ModalItem>
-        </ModalList>
-        <ModalList>
-          <ModalItem style={styles.h4}>{plagenus[0]}</ModalItem>
-          <ModalItem style={styles.h4_bold}>{plagenus[1]}</ModalItem>
         </ModalList>
         <ModalList>
           <ModalItem style={styles.h4}>{repoid[0]}</ModalItem>
@@ -452,7 +477,7 @@ const MyPlant = props => {
           <ModalButton onPress={() => navigation.goBack()}>
             <Text style={styles.body}>Wróć</Text>
           </ModalButton>
-          <ModalButton onPress={() => delPlant(name[1])}>
+          <ModalButton onPress={() => delPlant(givenName[1])}>
             <Text style={styles.body}>Usuń</Text>
           </ModalButton>
         </ModalList>

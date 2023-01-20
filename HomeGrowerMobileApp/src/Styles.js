@@ -96,7 +96,7 @@ export const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    paddingVertical: 20,
+    paddingVertical: 10,
   },
   shadow: {
     borderWidth: 1,
@@ -169,7 +169,7 @@ export const styles = StyleSheet.create({
     backgroundColor: 'white',
     flexDirection: 'column',
     borderRadius: 20,
-    paddingVertical: 80,
+    paddingVertical: 100,
     paddingHorizontal: 50,
     alignItems: 'center',
     justifyContent: 'center',
