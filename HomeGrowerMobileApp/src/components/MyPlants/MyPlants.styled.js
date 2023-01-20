@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 export const PlantsContainer = styled.View`
   flex: 1;
   background-color: #fff;
-  padding: 0;
+  padding: 10px 0 0 0;
   margin: 0;
 `;
 
@@ -21,6 +21,10 @@ export const StyledImage = styled.Image`
 export const PlantsAfterElement = styled.View`
   flex-direction: row;
   align-items: center;
+`;
+
+export const PlantsBox = styled.View`
+  flex-direction: column;
 `;
 
 export const ButtonBox = styled.View`
