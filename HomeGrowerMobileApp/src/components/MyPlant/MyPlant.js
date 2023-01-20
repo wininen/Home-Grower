@@ -1,16 +1,31 @@
 import React, {useEffect, useState} from 'react';
 import {
   Text,
+  TouchableOpacity,
   View,
+  FlatList,
+  Platform,
   NativeModules,
   NativeEventEmitter,
+  Button,
   Alert,
 } from 'react-native';
-import {ButtonPlant, styles, OuterContainer} from '../../Styles.js';
 import {
+  ButtonPlant,
+  styles,
+  OuterContainer,
+  ErrorMessageContainer,
+  ButtonContainer,
+} from '../../Styles.js';
+import {
+  ConnectToPlantButton,
+  DataRow,
   FirstRowButtonWrapper,
   Icon,
+  isValueInRangeStyle,
+  NameRow,
   PropertiesContainer,
+  PropertiesRow,
   Separator,
   SpecsContainer,
   ScrollableList,
@@ -29,6 +44,7 @@ import storage from '../../utils/storage.js';
 import config from '../../utils/config.js';
 import PlantsDataRow from './MyPlantsData.js';
 import {useNavigation} from '@react-navigation/native';
+
 import {db} from '../../../App.js';
 
 const BleManagerModule = NativeModules.BleManager;
