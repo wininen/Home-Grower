@@ -48,7 +48,7 @@ export const ModalList = styled.TouchableOpacity`
   align-items: center;
   justify-content: space-between;
   flex-direction: row;
-  width: 200px;
+  width: 220px;
   height: 30px;
   margin-bottom: 5px;
 `;
