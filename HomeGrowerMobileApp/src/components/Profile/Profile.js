@@ -99,7 +99,7 @@ const Profile = ({navigation, route}) => {
       <OuterContainer>
         <ProfileName>
           <Image source={profileImages.profile} />
-          <Text style={styles.h4}>Nazwa użytkownika</Text>
+          <Text style={styles.h4}>Home Grower</Text>
         </ProfileName>
         <ProfileOptions>
           <ProfileRow>
