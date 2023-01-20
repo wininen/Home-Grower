@@ -13,6 +13,19 @@ export const styles = StyleSheet.create({
     flexWrap: 'wrap',
     fontWeight: 'bold',
   },
+  plant_bold_black: {
+    flex: 1,
+    flexWrap: 'wrap',
+    fontWeight: 'bold',
+    fontSize: 14,
+    paddingTop: 2,
+  },
+  plant_black: {
+    flex: 1,
+    flexWrap: 'wrap',
+    fontSize: 14,
+    paddingTop: 2,
+  },
   bold_white: {
     fontWeight: 'bold',
     color: 'white',

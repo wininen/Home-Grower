@@ -159,8 +159,10 @@ const MyPlants = ({route, navigation}) => {
       <PlantsAfterElement>
         <StyledImage source={{uri: details.image[index]}} />
         <PlantsBox>
-          <Text style={styles.bold_black}>{item}</Text>
-          <Text style={styles.bold_black}>{myPlants.plant_name[index]}</Text>
+          <Text style={styles.plant_bold_black}>
+            {myPlants.plant_name[index]}
+          </Text>
+          <Text style={styles.plant_black}>{item}</Text>
         </PlantsBox>
       </PlantsAfterElement>
     </PlantsElement>
